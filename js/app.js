@@ -353,7 +353,7 @@ async function renderHdbProject(id) {
             <tbody>
               ${pageTx.map(x => `
                 <tr>
-                  <td class="text-muted">${x.month || '-'}</td>
+                  <td class="text-muted">${x.fmtDate || x.contractDate || '-'}</td>
                   <td>${x.flatType || '-'}</td>
                   <td>${x.floorAreaSqf || '-'}</td>
                   <td class="${x.pricePsf > st.avgPsf ? 'text-red' : 'text-green'}">$${fmtNum(x.pricePsf)}</td>
@@ -410,7 +410,7 @@ async function renderHdbProject(id) {
     `;
 
     // Render chart
-    const sorted = [...tx].filter(x => x.month).sort((a, b) => a.month.localeCompare(b.month));
+    const sorted = [...tx].filter(x => x.sortDate).sort((a, b) => a.sortDate.localeCompare(b.sortDate));
     renderHdbChart(sorted);
   } catch (e) {
     document.getElementById('main').innerHTML = `<div class="error">⚠️ ${e.message}</div>`;
@@ -418,10 +418,10 @@ async function renderHdbProject(id) {
 }
 
 function renderHdbChart(transactions) {
-  // Group by month
+  // Group by month — use sortDate (yyyy-mm) for proper ordering
   const byMonth = {};
   transactions.forEach(t => {
-    const m = t.month || '';
+    const m = t.sortDate || '';
     if (!m) return;
     if (!byMonth[m]) byMonth[m] = { prices: [], psfs: [], count: 0 };
     byMonth[m].prices.push(t.resalePrice);

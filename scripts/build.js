@@ -28,8 +28,9 @@ function fmtDate(d) {
   if (!d || d.length < 4) return d || '';
   const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const mm = parseInt(d.substring(0,2), 10);
-  const yy = d.substring(2,4);
-  return `${months[mm-1] || d.substring(0,2)} 20${yy}`;
+  const yy = parseInt(d.substring(2,4), 10);
+  const prefix = yy > 50 ? '19' : '20';
+  return `${months[mm-1] || d.substring(0,2)} ${prefix}${String(yy).padStart(2, '0')}`;
 }
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -176,7 +177,10 @@ async function main() {
       flatTypes: p.flatTypes, flatModels: p.flatModels,
       stats: p.stats,
       transactions: p.transactions.slice(-500).map(t => ({
-        month: t.month, flatType: t.flatType, storeyRange: t.storeyRange,
+        contractDate: t.month ? t.month.substring(5,7) + t.month.substring(2,4) : '',
+        fmtDate: t.month ? fmtDate(t.month.substring(5,7) + t.month.substring(2,4)) : '',
+        sortDate: t.month ? t.month.substring(0,7) : '',
+        flatType: t.flatType, storeyRange: t.storeyRange,
         floorAreaSqf: t.floorAreaSqf, pricePsf: t.pricePsf,
         resalePrice: t.resalePrice, flatModel: t.flatModel,
         remainingLease: t.remainingLease, leaseCommenceDate: t.leaseCommenceDate
