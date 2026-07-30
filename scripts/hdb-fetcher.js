@@ -191,7 +191,7 @@ export function processHdbData(records) {
 
   const result = [];
   for (const b of blockMap.values()) {
-    b.transactions.sort((a, m) => a.month.localeCompare(m.month));
+    b.transactions.sort((a, m) => m.month.localeCompare(a.month)); // newest first
     const tx = b.transactions;
     const psfArr = tx.map(t => t.pricePsf).filter(p => p > 0);
     const years = [...new Set(tx.map(t => t.month?.substring(0, 4)).filter(Boolean))].sort();
