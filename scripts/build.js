@@ -17,7 +17,7 @@ import { fileURLToPath } from 'url';
 import { getToken, fetchAllTransactions, fetchTransactions, fetchRentals, processTransactions, processRentals } from './ura-fetcher.js';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const DATA = join(__dirname, '..', 'site', 'data');
+const DATA = join(__dirname, '..', 'data');
 const PROJ_DIR = join(DATA, 'projects');
 
 const D = {
