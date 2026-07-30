@@ -520,7 +520,6 @@ function searchProjects(q) {
       <div class="sr-meta">${isHDB ? p.town : 'D' + p.district} · $${fmtNum(p.avgPsf) || '-'} psf · ${fmtNum(p.totalTxns)} txns ${p.years?.length ? '· ' + p.years[0] + '-' + p.years[p.years.length-1] : ''}</div>
     </div>`;
   }).join('');
-  `).join('');
 }
 
 function highlight(text, query) {
