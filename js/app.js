@@ -90,7 +90,10 @@ function renderDashboard() {
     </div>
     <div id="search-results" class="search-results"></div>
 
-    <div class="section-title">Districts Overview</div>
+    <div class="section-title">
+      Districts Overview
+      <a href="#" onclick="navigate('/map');return false" class="map-link">🗺️ Open Map View</a>
+    </div>
     <div class="district-row">
       ${dists.filter(d => d.projectCount > 0).map(d => `
         <div class="district-card" onclick="navigate('/district/${d.district}')">
@@ -439,7 +442,15 @@ function renderFullMap() {
   projectsIndex.forEach(p => {
     if (!p.coord) return;
     const m = L.marker([p.coord.lat, p.coord.lng]);
-    m.bindPopup(`<b>${p.name}</b><br>D${p.district || '?'} · Avg $${p.avgPsf || '-'} psf<br>${p.totalTxns} transactions`);
+    const pid = p.id;
+    m.bindPopup(`
+      <div style="min-width:180px">
+        <b>${p.name}</b><br>
+        <span style="color:#94a3b8">D${p.district || '?'} · Avg $${p.avgPsf || '-'} psf · ${p.totalTxns} txns</span><br>
+        <a href="#/project/${pid}" style="color:#fbbf24;font-size:12px;margin-top:6px;display:inline-block">→ View Details</a>
+      </div>
+    `);
+    m.on('click', () => { navigate('/project/' + pid); });
     markers.addLayer(m);
     count++;
   });

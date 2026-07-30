@@ -43,6 +43,8 @@ footer{padding:24px 0;text-align:center;color:var(--text3);font-size:12px;border
 
 /* Section titles */
 .section-title{font-size:17px;font-weight:600;color:var(--gold);margin:28px 0 14px;display:flex;align-items:center;gap:8px}
+.map-link{font-size:12px;font-weight:400;color:var(--text2);text-decoration:none;margin-left:auto;padding:4px 10px;border-radius:6px;background:var(--bg2);transition:all .15s}
+.map-link:hover{color:var(--gold);background:var(--bg-hover)}
 
 /* Cards */
 .card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
