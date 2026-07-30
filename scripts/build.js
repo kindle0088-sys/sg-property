@@ -127,7 +127,7 @@ async function main() {
       fmtLastDate: fmtDate(p.stats.dateRange.max),
       sortFirstDate: toSortableDate(p.stats.dateRange.min),
       sortLastDate: toSortableDate(p.stats.dateRange.max),
-      transactions: p.transactions.slice(0, 500).map(t => ({
+      transactions: p.transactions.map(t => ({
         propertyType: t.propertyType, district: t.district,
         typeOfSale: t.typeOfSale, price: t.price, areaSqf: Math.round(t.areaSqf),
         pricePsf: t.pricePsf, floorRange: t.floorRange,
