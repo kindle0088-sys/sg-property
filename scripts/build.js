@@ -55,6 +55,14 @@ const SECT = { 1:'CCR',2:'CCR',3:'RCR',4:'CCR',5:'CCR',6:'CCR',7:'CCR',8:'RCR',9
 
 function mkdir(p) { if (!existsSync(p)) mkdirSync(p, { recursive: true }); }
 
+// Compute average PSF from transactions filtered by date >= cutoff
+function computeAvg1y(txns, dateField, cutoff) {
+  if (!cutoff) return 0;
+  const filtered = txns.filter(t => t[dateField] && t[dateField] >= cutoff);
+  const psfs = filtered.map(t => t.pricePsf).filter(Boolean);
+  return psfs.length ? Math.round(psfs.reduce((a, b) => a + b, 0) / psfs.length) : 0;
+}
+
 async function main() {
   const t0 = Date.now();
   const demo = process.argv.includes('--demo');
@@ -108,6 +116,44 @@ async function main() {
   console.log(`  ${hdbProjects.length} HDB blocks, ${hdbTxns} cached / ${hdbTotalTxns} total transactions`);
   console.log(`  HDB data: ${hdbRaw.length.toLocaleString()} raw records spanning ${hdbProjects[0]?.stats.years[0] || '?'}-${hdbProjects[0]?.stats.years[hdbProjects[0]?.stats.years.length-1] || '?'} to today`);
 
+  // 4c. Compute 1-year averages
+  const hdbTxnCount = hdbProjects.reduce((s, p) => s + p.transactions.length, 0);
+  const uraTxns = projects.reduce((s, p) => s + p.transactions.length, 0);
+
+  // Latest date across URA (mmyy format - need sortable comparison for cross-year)
+  let latestSort = '', latestMmyy = '';
+  for (const p of projects) {
+    for (const t of p.transactions) {
+      if (t.contractDate) {
+        const s = toSortableDate(t.contractDate);
+        if (s > latestSort) { latestSort = s; latestMmyy = t.contractDate; }
+      }
+    }
+  }
+  // Latest date across HDB (yyyy-mm format)
+  let latestHdb = '';
+  for (const p of hdbProjects) {
+    for (const t of p.transactions) {
+      if (t.month && t.month > latestHdb) latestHdb = t.month;
+    }
+  }
+
+  if (latestMmyy) {
+    const ld = new Date(2000 + parseInt(latestMmyy.substring(2)), parseInt(latestMmyy.substring(0,2)) - 1);
+    const cd = new Date(ld); cd.setMonth(cd.getMonth() - 12);
+    var CUTOFF_MMYY = String(cd.getMonth() + 1).padStart(2,'0') + String(cd.getFullYear()).slice(-2);
+  }
+  if (latestHdb) {
+    const ld = new Date(parseInt(latestHdb.substring(0,4)), parseInt(latestHdb.substring(5,7)) - 1);
+    const cd = new Date(ld); cd.setMonth(cd.getMonth() - 12);
+    var CUTOFF_HDB = cd.getFullYear() + '-' + String(cd.getMonth() + 1).padStart(2,'0');
+  }
+  console.log(`  Avg 1y cutoff: URA=${CUTOFF_MMYY} HDB=${CUTOFF_HDB}`);
+
+  // Inject avgPsf1y into project stats objects for downstream aggregations
+  for (const p of projects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY);
+  for (const p of hdbProjects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
+
   // 5. Generate output
   console.log('\n5/5 Generating files...');
 
@@ -116,7 +162,8 @@ async function main() {
     id: p.id, name: p.name, street: p.street,
     district: p.stats.districts[0] || null,
     marketSegment: p.marketSegment,
-    avgPsf: p.stats.avgPsf, minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
+    avgPsf: p.stats.avgPsf, avgPsf1y: computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY),
+    minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
     totalTxns: p.stats.totalTransactions,
     dateRange: p.stats.dateRange,
     coord: p.coord,
@@ -130,10 +177,11 @@ async function main() {
   // 5b. Per-project
   let n = 0;
   for (const p of projects) {
+    const avg1y = computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY);
     writeJSON(join(PROJ_DIR, `${p.id}.json`), {
       id: p.id, name: p.name, street: p.street,
       marketSegment: p.marketSegment, coord: p.coord,
-      stats: p.stats,
+      stats: { ...p.stats, avgPsf1y: avg1y },
       fmtFirstDate: fmtDate(p.stats.dateRange.min),
       fmtLastDate: fmtDate(p.stats.dateRange.max),
       sortFirstDate: toSortableDate(p.stats.dateRange.min),
@@ -156,7 +204,9 @@ async function main() {
   // 5c. HDB project index
   const hdbIdx = hdbProjects.map(p => ({
     id: p.id, name: p.name, town: p.town, type: 'HDB', coord: null,
-    avgPsf: p.stats.avgPsf, minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
+    avgPsf: p.stats.avgPsf,
+    avgPsf1y: computeAvg1y(p.transactions, 'month', CUTOFF_HDB),
+    minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
     totalTxns: p.stats.totalTransactions,
     dateRange: p.stats.dateRange,
     years: p.stats.years,
@@ -171,11 +221,12 @@ async function main() {
   mkdir(HDB_DIR);
   let m = 0;
   for (const p of hdbProjects) {
+    const avg1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
     writeJSON(join(HDB_DIR, `${p.id}.json`), {
       id: p.id, name: p.name, type: 'HDB',
       town: p.town, street: p.street, block: p.block,
       flatTypes: p.flatTypes, flatModels: p.flatModels,
-      stats: p.stats,
+      stats: { ...p.stats, avgPsf1y: avg1y },
       transactions: p.transactions.slice(-500).map(t => ({
         contractDate: t.month ? t.month.substring(5,7) + t.month.substring(2,4) : '',
         fmtDate: t.month ? fmtDate(t.month.substring(5,7) + t.month.substring(2,4)) : '',
@@ -199,13 +250,13 @@ async function main() {
   console.log(`  property-index.json (${combinedIdx.length})`);
 
   // 5f. Districts (URA only, HDB by town instead)
-  const dists = buildDistricts(projects, rentals);
+  const dists = buildDistricts(projects, rentals, CUTOFF_MMYY);
   writeJSON(join(DATA, 'districts.json'), dists);
   console.log(`  districts.json (${dists.length})`);
 
   // 5g. HDB Towns summary
   console.log('  Building HDB towns...');
-  const hdbTowns = buildHdbTowns(hdbProjects);
+  const hdbTowns = buildHdbTowns(hdbProjects, CUTOFF_HDB);
   writeJSON(join(DATA, 'hdb-towns.json'), hdbTowns);
   console.log(`  hdb-towns.json (${Object.keys(hdbTowns).length} towns)`);
 
@@ -238,11 +289,11 @@ function writeJSON(path, data) {
   writeFileSync(path, JSON.stringify(data), 'utf-8');
 }
 
-function buildDistricts(projects, rentals) {
+function buildDistricts(projects, rentals, cutoff) {
   const map = {};
   for (let d = 1; d <= 28; d++) {
     map[d] = { district: d, name: D[d] || `D${d}`, sector: SECT[d] || 'OCR',
-      projectCount: 0, totalTransactions: 0, psfArr: [],
+      projectCount: 0, totalTransactions: 0, psfArr: [], psfArr1y: [],
       byYear: {}, rental: null };
   }
   for (const p of projects) {
@@ -251,7 +302,10 @@ function buildDistricts(projects, rentals) {
     map[d].projectCount++;
     map[d].totalTransactions += p.stats.totalTransactions;
     for (const t of p.transactions) {
-      if (t.pricePsf > 0) map[d].psfArr.push(t.pricePsf);
+      if (t.pricePsf > 0) {
+        map[d].psfArr.push(t.pricePsf);
+        if (cutoff && t.contractDate >= cutoff) map[d].psfArr1y.push(t.pricePsf);
+      }
       const yr = t.contractDate?.substring(0, 4);
       if (yr) {
         if (!map[d].byYear[yr]) map[d].byYear[yr] = { count: 0, sum: 0 };
@@ -300,6 +354,7 @@ function buildDistricts(projects, rentals) {
       district: d.district, name: d.name, sector: d.sector,
       projectCount: d.projectCount, totalTransactions: d.totalTransactions,
       avgPsf: arr.length ? Math.round(arr.reduce((a, b) => a + b, 0) / arr.length) : 0,
+      avgPsf1y: d.psfArr1y.length ? Math.round(d.psfArr1y.reduce((a, b) => a + b, 0) / d.psfArr1y.length) : 0,
       medianPsf: sorted.length ? sorted[Math.floor(sorted.length / 2)] : 0,
       minPsf: sorted[0] || 0, maxPsf: sorted[sorted.length - 1] || 0,
       byYear: years,
@@ -308,13 +363,13 @@ function buildDistricts(projects, rentals) {
   });
 }
 
-function buildHdbTowns(hdbProjects) {
+function buildHdbTowns(hdbProjects, cutoff) {
   const towns = {};
   for (const p of hdbProjects) {
     const t = p.town || 'Unknown';
     if (!towns[t]) towns[t] = {
       blocks: 0, totalTransactions: 0,
-      psfArr: [], years: new Set(), flatTypes: new Set(),
+      psfArr: [], psfArr1y: [], years: new Set(), flatTypes: new Set(),
       byYear: {}
     };
     const town = towns[t];
@@ -323,13 +378,13 @@ function buildHdbTowns(hdbProjects) {
     if (p.stats.avgPsf > 0) town.psfArr.push(p.stats.avgPsf);
     (p.stats.years || []).forEach(y => town.years.add(y));
     (p.flatTypes || []).forEach(f => town.flatTypes.add(f));
-    // Aggregate by year from per-block data
     for (const tx of p.transactions) {
       const yr = tx.month ? tx.month.substring(0, 4) : null;
       if (yr && tx.pricePsf > 0) {
         if (!town.byYear[yr]) town.byYear[yr] = { count: 0, sum: 0 };
         town.byYear[yr].count++;
         town.byYear[yr].sum += tx.pricePsf;
+        if (cutoff && tx.month >= cutoff) town.psfArr1y.push(tx.pricePsf);
       }
     }
   }
@@ -344,6 +399,7 @@ function buildHdbTowns(hdbProjects) {
       blocks: d.blocks,
       totalTransactions: d.totalTransactions,
       avgPsf: d.psfArr.length ? Math.round(d.psfArr.reduce((a, b) => a + b, 0) / d.psfArr.length) : 0,
+      avgPsf1y: d.psfArr1y.length ? Math.round(d.psfArr1y.reduce((a, b) => a + b, 0) / d.psfArr1y.length) : 0,
       minPsf: sortedPsf.length ? sortedPsf[0] : 0,
       maxPsf: sortedPsf.length ? sortedPsf[sortedPsf.length - 1] : 0,
       years: yrs,
@@ -357,16 +413,25 @@ function buildHdbTowns(hdbProjects) {
 function buildSummary(projects, districts, hdbProjects) {
   const segs = { CCR: [], RCR: [], OCR: [] };
   const segCnt = { CCR: 0, RCR: 0, OCR: 0 };
+  const segs1y = { CCR: [], RCR: [], OCR: [] };
   for (const p of projects) {
     const s = p.marketSegment || 'OCR';
     if (segs[s]) { segs[s].push(p.stats.avgPsf); segCnt[s]++; }
+    if (segs1y[s]) segs1y[s].push(p.stats.avgPsf1y || 0);
   }
   const bySeg = {};
   for (const s of Object.keys(segs)) {
     bySeg[s] = { avgPsf: segs[s].length ? Math.round(segs[s].reduce((a, b) => a + b, 0) / segs[s].length) : 0, count: segCnt[s] };
   }
+  const bySeg1y = {};
+  for (const s of Object.keys(segs1y)) {
+    const a = segs1y[s].filter(Boolean);
+    bySeg1y[s] = a.length ? Math.round(a.reduce((a, b) => a + b, 0) / a.length) : 0;
+  }
   const allPsf = projects.map(p => p.stats.avgPsf).filter(Boolean);
+  const allPsf1y = projects.map(p => p.stats.avgPsf1y || 0).filter(Boolean);
   const hdbPsf = hdbProjects ? hdbProjects.map(p => p.stats.avgPsf).filter(Boolean) : [];
+  const hdbPsf1y = hdbProjects ? hdbProjects.map(p => p.stats.avgPsf1y || 0).filter(Boolean) : [];
   const hdbTxns = hdbProjects ? hdbProjects.reduce((s, p) => s + p.stats.totalTransactions, 0) : 0;
   const hdbTowns = hdbProjects ? [...new Set(hdbProjects.map(p => p.town).filter(Boolean))].length : 0;
   return {
@@ -374,10 +439,13 @@ function buildSummary(projects, districts, hdbProjects) {
     totalProjects: projects.length,
     totalTransactions: projects.reduce((s, p) => s + p.stats.totalTransactions, 0),
     overallAvgPsf: allPsf.length ? Math.round(allPsf.reduce((a, b) => a + b, 0) / allPsf.length) : 0,
+    overallAvgPsf1y: allPsf1y.length ? Math.round(allPsf1y.reduce((a, b) => a + b, 0) / allPsf1y.length) : 0,
     bySegment: bySeg,
+    bySegment1y: bySeg1y,
     hdbBlocks: hdbProjects ? hdbProjects.length : 0,
     hdbTransactions: hdbTxns,
     hdbAvgPsf: hdbPsf.length ? Math.round(hdbPsf.reduce((a, b) => a + b, 0) / hdbPsf.length) : 0,
+    hdbAvgPsf1y: hdbPsf1y.length ? Math.round(hdbPsf1y.reduce((a, b) => a + b, 0) / hdbPsf1y.length) : 0,
     hdbTowns: hdbTowns
   };
 }

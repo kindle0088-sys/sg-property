@@ -57,7 +57,7 @@ function renderPrivateDashboard() {
 
   // Top gainers/losers - projects sorted by avg psf change (approximate from district data)
   const topByVol = [...dists].sort((a, b) => b.totalTransactions - a.totalTransactions).slice(0, 5);
-  const topByPsf = [...dists].filter(d => d.avgPsf > 0).sort((a, b) => b.avgPsf - a.avgPsf).slice(0, 5);
+  const topByPsf = [...dists].filter(d => (d.avgPsf1y || d.avgPsf) > 0).sort((a, b) => (b.avgPsf1y || b.avgPsf) - (a.avgPsf1y || a.avgPsf)).slice(0, 5);
 
   document.getElementById('main').innerHTML = `
     <div class="hero">
@@ -68,7 +68,7 @@ function renderPrivateDashboard() {
         <div class="kpi"><div class="val">${fmtNum(hdbCount)}</div><div class="lbl">HDB Blocks</div></div>
         <div class="kpi"><div class="val">${fmtNum(sm.totalTransactions)}</div><div class="lbl">Private Txns</div></div>
         <div class="kpi"><div class="val">${fmtNum(hdbTxns)}</div><div class="lbl">HDB Txns</div></div>
-        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf)}</div><div class="lbl">Private Avg PSF</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf1y || sm.overallAvgPsf)}</div><div class="lbl">1yr Avg PSF</div></div>
         <div class="kpi"><div class="val">${activeDists.length}</div><div class="lbl">Districts</div></div>
       </div>
     </div>
@@ -115,7 +115,7 @@ function renderPrivateDashboard() {
               <tr onclick="navigate('/district/${d.district}')" style="cursor:pointer">
                 <td class="text-gold">D${d.district}</td>
                 <td>${d.name}</td>
-                <td class="text-blue">$${fmtNum(d.avgPsf)}</td>
+                <td class="text-blue">$${showPsf(d)}</td>
                 <td>${fmtNum(d.totalTransactions)}</td>
               </tr>
             `).join('')}
@@ -148,7 +148,7 @@ function renderOverview() {
   const hdbCount = hdbIndex.length;
   const hdbTxns = hdbIndex.reduce((s, p) => s + (p.totalTxns || 0), 0);
   const hdbTownsArr = Object.keys(hdbTownsData);
-  const hdbAvg = sm.hdbAvgPsf || 0;
+  const hdbAvg = sm.hdbAvgPsf1y || sm.hdbAvgPsf || 0;
   const dists = districtsData.filter(d => d.projectCount > 0);
 
   document.getElementById('main').innerHTML = `
@@ -160,7 +160,7 @@ function renderOverview() {
         <div class="kpi"><div class="val">${fmtNum(hdbCount)}</div><div class="lbl">HDB Blocks</div></div>
         <div class="kpi"><div class="val">${fmtNum(sm.totalTransactions)}</div><div class="lbl">Private Txns</div></div>
         <div class="kpi"><div class="val">${fmtNum(hdbTxns)}</div><div class="lbl">HDB Txns</div></div>
-        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf)}</div><div class="lbl">Private Avg PSF</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf1y || sm.overallAvgPsf)}</div><div class="lbl">1yr Avg PSF</div></div>
         <div class="kpi"><div class="val">$${fmtNum(hdbAvg)}</div><div class="lbl">HDB Avg PSF</div></div>
         <div class="kpi"><div class="val">${dists.length}</div><div class="lbl">Districts</div></div>
         <div class="kpi"><div class="val">${hdbTownsArr.length}</div><div class="lbl">Towns</div></div>
@@ -205,7 +205,7 @@ function renderHdbDashboard() {
   const townEntries = Object.entries(towns);
   const hdbCount = hdbIndex.length;
   const hdbTxns = hdbIndex.reduce((s, p) => s + (p.totalTxns || 0), 0);
-  const hdbAvg = sm.hdbAvgPsf || 0;
+  const hdbAvg = sm.hdbAvgPsf1y || sm.hdbAvgPsf || 0;
 
   // Town-level aggregates
   const sortedTowns = [...townEntries].sort((a, b) => b[1].totalTransactions - a[1].totalTransactions);
@@ -236,7 +236,7 @@ function renderHdbDashboard() {
           <div class="t-header">
             <span class="t-name">${name}</span>
           </div>
-          <div class="t-psf">$${fmtNum(t.avgPsf)}</div>
+          <div class="t-psf">$${fmtNum(t.avgPsf1y || t.avgPsf)}</div>
           <div class="t-detail">
             <span>${fmtNum(t.blocks)} blocks</span>
             <span>${fmtNum(t.totalTransactions)} txns</span>
@@ -258,7 +258,7 @@ function renderHdbDashboard() {
               <tr onclick="navigate('/town/${name.toLowerCase().replace(/\\s+/g, '-')}')" style="cursor:pointer">
                 <td class="text-gold">${name}</td>
                 <td>${fmtNum(t.blocks)}</td>
-                <td class="text-blue">$${fmtNum(t.avgPsf)}</td>
+                <td class="text-blue">$${fmtNum(t.avgPsf1y || t.avgPsf)}</td>
                 <td>${fmtNum(t.totalTransactions)}</td>
               </tr>
             `).join('')}
@@ -270,10 +270,10 @@ function renderHdbDashboard() {
         <div class="table-wrap">
           <table>
             <tr><th>Town</th><th>Avg PSF</th><th>Blocks</th><th>Transactions</th></tr>
-            ${[...townEntries].sort((a, b) => b[1].avgPsf - a[1].avgPsf).slice(0, 10).map(([name, t]) => `
+            ${[...townEntries].sort((a, b) => (b[1].avgPsf1y || b[1].avgPsf) - (a[1].avgPsf1y || a[1].avgPsf)).slice(0, 10).map(([name, t]) => `
               <tr onclick="navigate('/town/${name.toLowerCase().replace(/\\s+/g, '-')}')" style="cursor:pointer">
                 <td class="text-gold">${name}</td>
-                <td class="text-blue">$${fmtNum(t.avgPsf)}</td>
+                <td class="text-blue">$${fmtNum(t.avgPsf1y || t.avgPsf)}</td>
                 <td>${fmtNum(t.blocks)}</td>
                 <td>${fmtNum(t.totalTransactions)}</td>
               </tr>
@@ -305,7 +305,7 @@ function renderTown(townSlug) {
       <div class="sub">${fmtNum(data.blocks)} blocks · ${fmtNum(data.totalTransactions)} transactions · ${data.years[0] || '?'} - ${data.years[data.years.length-1] || '?'}</div>
       <div class="project-meta">
         <div class="pm"><div class="pv">${fmtNum(data.blocks)}</div><div class="pl">Blocks</div></div>
-        <div class="pm"><div class="pv">$${fmtNum(data.avgPsf)}</div><div class="pl">Avg PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.avgPsf1y || data.avgPsf)}</div><div class="pl">1yr Avg PSF</div></div>
         <div class="pm"><div class="pv">$${fmtNum(data.minPsf)}</div><div class="pl">Min PSF</div></div>
         <div class="pm"><div class="pv">$${fmtNum(data.maxPsf)}</div><div class="pl">Max PSF</div></div>
         <div class="pm"><div class="pv">${fmtNum(data.totalTransactions)}</div><div class="pl">Total Txns</div></div>
@@ -320,9 +320,9 @@ function renderTown(townSlug) {
       ${blocks.sort((a, b) => b.totalTxns - a.totalTxns).map(p => `
         <div class="card" onclick="navigate('/project/${p.id}')">
           <h3>${p.name}</h3>
-          <div class="meta">${p.street || ''} ${p.avgPsf ? '· avg $' + fmtNum(p.avgPsf) + ' psf' : ''}</div>
+          <div class="meta">${p.street || ''} ${p.avgPsf ? '· 1yr $' + showPsf(p) + ' psf' : ''}</div>
           <div class="stat">
-            <span>PSF: <span class="stat-gold">$${fmtNum(p.avgPsf) || '-'}</span></span>
+            <span>PSF: <span class="stat-gold">$${showPsf(p)}</span></span>
             <span>Txns: <span class="stat-gold">${fmtNum(p.totalTxns)}</span></span>
             <span>${p.years?.[0] || ''} - ${p.years?.[p.years.length-1] || ''}</span>
           </div>
@@ -361,7 +361,7 @@ async function renderProject(id) {
       <h1>${p.name}</h1>
       <div class="sub">${p.street}${p.marketSegment ? ' · ' + p.marketSegment : ''}</div>
       <div class="project-meta">
-        <div class="pm"><div class="pv">$${fmtNum(p.stats.avgPsf)}</div><div class="pl">Avg PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(p.stats.avgPsf1y || p.stats.avgPsf)}</div><div class="pl">1yr Avg PSF</div></div>
         <div class="pm"><div class="pv">$${fmtNum(p.stats.minPsf)}</div><div class="pl">Min PSF</div></div>
         <div class="pm"><div class="pv">$${fmtNum(p.stats.maxPsf)}</div><div class="pl">Max PSF</div></div>
         <div class="pm"><div class="pv">${fmtNum(p.stats.totalTransactions)}</div><div class="pl">Transactions</div></div>
@@ -445,7 +445,7 @@ function renderDistrict(d) {
       <div class="sub">${data.sector} · ${data.projectCount} projects · ${fmtNum(data.totalTransactions)} transactions</div>
       <div class="project-meta">
         <div class="pm"><div class="pv">$${fmtNum(data.medianPsf)}</div><div class="pl">Median PSF</div></div>
-        <div class="pm"><div class="pv">$${fmtNum(data.avgPsf)}</div><div class="pl">Avg PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.avgPsf1y || data.avgPsf)}</div><div class="pl">1yr Avg PSF</div></div>
         <div class="pm"><div class="pv">$${fmtNum(data.minPsf)}</div><div class="pl">Min PSF</div></div>
         <div class="pm"><div class="pv">$${fmtNum(data.maxPsf)}</div><div class="pl">Max PSF</div></div>
         ${data.rental ? `<div class="pm"><div class="pv">$${fmtNum(data.rental.median)}</div><div class="pl">Rental Median</div></div>` : ''}
@@ -457,9 +457,9 @@ function renderDistrict(d) {
       ${projects.sort((a, b) => b.totalTxns - a.totalTxns).map(p => `
         <div class="card" onclick="navigate('/project/${p.id}')">
           <h3>${p.name}</h3>
-          <div class="meta">${p.street || ''} ${p.avgPsf ? '· avg $' + fmtNum(p.avgPsf) + ' psf' : ''}</div>
+          <div class="meta">${p.street || ''} ${p.avgPsf ? '· 1yr $' + showPsf(p) + ' psf' : ''}</div>
           <div class="stat">
-            <span>PSF: <span class="stat-gold">$${fmtNum(p.avgPsf) || '-'}</span></span>
+            <span>PSF: <span class="stat-gold">$${showPsf(p)}</span></span>
             <span>Txns: <span class="stat-gold">${p.totalTxns}</span></span>
             <span>${p.years?.[0] || ''} - ${p.years?.[p.years.length-1] || ''}</span>
           </div>
@@ -562,7 +562,7 @@ async function renderHdbProject(id) {
         <div class="sub">${data.town} · ${data.street} · Block ${data.block} · ${st.years[0] || '?'} - ${st.years[st.years.length-1] || '?'}</div>
         <div class="project-meta">
           <div class="pm"><div class="pv">${fmtNum(st.totalTransactions)}</div><div class="pl">Total Transactions</div></div>
-          <div class="pm"><div class="pv">$${fmtNum(st.avgPsf)}</div><div class="pl">Avg PSF</div></div>
+          <div class="pm"><div class="pv">$${fmtNum(st.avgPsf1y || st.avgPsf)}</div><div class="pl">1yr Avg PSF</div></div>
           <div class="pm"><div class="pv">$${fmtNum(st.minPsf)}</div><div class="pl">Min PSF</div></div>
           <div class="pm"><div class="pv">$${fmtNum(st.maxPsf)}</div><div class="pl">Max PSF</div></div>
           <div class="pm"><div class="pv">${fmtPrice(st.minPrice)}</div><div class="pl">Min Price</div></div>
@@ -697,7 +697,7 @@ function searchProjects(q) {
     return `
     <div class="search-result-item" onclick="navigate('/project/${p.id}')">
       <div class="sr-name">${isHDB ? '<span class="tag-hdb">HDB</span> ' : ''}${highlight(p.name, ql)}</div>
-      <div class="sr-meta">${isHDB ? p.town : 'D' + p.district} · $${fmtNum(p.avgPsf) || '-'} psf · ${fmtNum(p.totalTxns)} txns ${p.years?.length ? '· ' + p.years[0] + '-' + p.years[p.years.length-1] : ''}</div>
+      <div class="sr-meta">${isHDB ? p.town : 'D' + p.district} · $${showPsf(p)} psf · ${fmtNum(p.totalTxns)} txns ${p.years?.length ? '· ' + p.years[0] + '-' + p.years[p.years.length-1] : ''}</div>
     </div>`;
   }).join('');
 }
@@ -707,6 +707,19 @@ function highlight(text, query) {
   const idx = text.toLowerCase().indexOf(query);
   if (idx === -1) return text;
   return text.slice(0, idx) + '<strong style="color:var(--gold)">' + text.slice(idx, idx + query.length) + '</strong>' + text.slice(idx + query.length);
+}
+
+// ── 1-year PSF helpers ──
+function showPsf(p) {
+  const v = p.avgPsf1y || p.avgPsf || 0;
+  return fmtNum(v);
+}
+function psfTrend(p) {
+  if (!p.avgPsf1y || !p.avgPsf || p.avgPsf === 0) return '';
+  const diff = (p.avgPsf1y - p.avgPsf) / p.avgPsf * 100;
+  const sign = diff > 0.5 ? '▲' : diff < -0.5 ? '▼' : '—';
+  const cls = diff > 0.5 ? 'text-green' : diff < -0.5 ? 'text-red' : 'text-muted';
+  return ` <span class="${cls}" style="font-size:11px">${sign}${Math.round(Math.abs(diff))}%</span>`;
 }
 
 // ── Navigation ──
@@ -906,7 +919,7 @@ function renderFullMap() {
     m.bindPopup(`
       <div style="min-width:180px">
         <b>${p.name}</b><br>
-        <span style="color:#94a3b8">D${p.district || '?'} · Avg $${fmtNum(p.avgPsf) || '-'} psf · ${p.totalTxns} txns</span><br>
+        <span style="color:#94a3b8">D${p.district || '?'} · 1yr $${showPsf(p)} psf · ${p.totalTxns} txns</span><br>
         <a href="#/project/${pid}" style="color:#fbbf24;font-size:12px;margin-top:6px;display:inline-block">→ View Details</a>
       </div>
     `);
