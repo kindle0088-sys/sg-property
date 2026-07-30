@@ -5,7 +5,7 @@ let projectsIndex = [];
 let districtsData = [];
 let marketSummary = null;
 let hdbIndex = [];
-let propertyFilter = 'All'; // All, Private, HDB
+let hdbTownsData = {};
 
 // ── Page router (hashchange handler) ──
 function router() {
@@ -15,26 +15,17 @@ function router() {
 
 // ── Load data ──
 async function loadData() {
-  const [idx, dists, summ] = await Promise.all([
+  const [idx, dists, summ, hdbTowns] = await Promise.all([
     fetchJSON('property-index.json'),
     fetchJSON('districts.json'),
-    fetchJSON('market-summary.json')
+    fetchJSON('market-summary.json'),
+    fetchJSON('hdb-towns.json').catch(() => ({}))
   ]);
   projectsIndex = idx;
   districtsData = dists;
   marketSummary = summ;
+  hdbTownsData = hdbTowns;
   hdbIndex = idx.filter(p => p.type === 'HDB');
-}
-
-function getIndex() {
-  if (propertyFilter === 'All') return projectsIndex;
-  return projectsIndex.filter(p => (p.type || 'Private') === propertyFilter);
-}
-
-function setFilter(type) {
-  propertyFilter = type;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === type));
-  searchProjects(document.getElementById('search-input')?.value || '');
 }
 
 async function fetchJSON(file) {
@@ -56,8 +47,8 @@ function showLoading() {
     `<div class="loading"><div class="spinner"></div>Loading...</div>`;
 }
 
-// ── Dashboard view ──
-function renderDashboard() {
+// ── Private Dashboard view ──
+function renderPrivateDashboard() {
   const dists = districtsData;
   const sm = marketSummary;
   const hdbCount = hdbIndex.length;
@@ -71,7 +62,7 @@ function renderDashboard() {
   document.getElementById('main').innerHTML = `
     <div class="hero">
       <h1>Singapore Property Dashboard</h1>
-      <p>URA private condos + HDB resale transactions</p>
+      <p>URA private condos &amp; landed properties · ${sm.totalProjects} projects · ${fmtNum(sm.totalTransactions)} transactions</p>
       <div class="kpi-row">
         <div class="kpi"><div class="val">${sm.totalProjects}</div><div class="lbl">Private Projects</div></div>
         <div class="kpi"><div class="val">${fmtNum(hdbCount)}</div><div class="lbl">HDB Blocks</div></div>
@@ -151,6 +142,196 @@ function renderDashboard() {
   `;
 }
 
+// ── Overview (compact landing) ──
+function renderOverview() {
+  const sm = marketSummary;
+  const hdbCount = hdbIndex.length;
+  const hdbTxns = hdbIndex.reduce((s, p) => s + (p.totalTxns || 0), 0);
+  const hdbTownsArr = Object.keys(hdbTownsData);
+  const hdbAvg = sm.hdbAvgPsf || 0;
+  const dists = districtsData.filter(d => d.projectCount > 0);
+
+  document.getElementById('main').innerHTML = `
+    <div class="hero">
+      <h1>Singapore Property Dashboard</h1>
+      <p>Private properties (URA) + HDB resale (data.gov.sg)</p>
+      <div class="kpi-row">
+        <div class="kpi"><div class="val">${sm.totalProjects}</div><div class="lbl">Private Projects</div></div>
+        <div class="kpi"><div class="val">${fmtNum(hdbCount)}</div><div class="lbl">HDB Blocks</div></div>
+        <div class="kpi"><div class="val">${fmtNum(sm.totalTransactions)}</div><div class="lbl">Private Txns</div></div>
+        <div class="kpi"><div class="val">${fmtNum(hdbTxns)}</div><div class="lbl">HDB Txns</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf)}</div><div class="lbl">Private Avg PSF</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(hdbAvg)}</div><div class="lbl">HDB Avg PSF</div></div>
+        <div class="kpi"><div class="val">${dists.length}</div><div class="lbl">Districts</div></div>
+        <div class="kpi"><div class="val">${hdbTownsArr.length}</div><div class="lbl">Towns</div></div>
+      </div>
+    </div>
+
+    <div class="section-title">Search All Projects</div>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search by project name, street, or town..." oninput="searchProjects(this.value)">
+    </div>
+    <div id="search-results" class="search-results"></div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:28px">
+      <div class="overview-card" onclick="navigate('/private')" style="cursor:pointer">
+        <div class="overview-icon" style="background:linear-gradient(135deg,#1e3a5f,#0f1f3a)">🏢</div>
+        <h2>Private Properties</h2>
+        <div class="ov-stat"><span class="ov-label">Projects</span><span class="ov-val">${sm.totalProjects}</span></div>
+        <div class="ov-stat"><span class="ov-label">Transactions</span><span class="ov-val">${fmtNum(sm.totalTransactions)}</span></div>
+        <div class="ov-stat"><span class="ov-label">Avg PSF</span><span class="ov-val">$${fmtNum(sm.overallAvgPsf)}</span></div>
+        <div class="ov-stat"><span class="ov-label">Data Span</span><span class="ov-val">5 years (URA API)</span></div>
+        <div class="ov-stat"><span class="ov-label">Districts</span><span class="ov-val">${dists.length} (D01-D28)</span></div>
+        <div class="overview-btn" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">Explore Private &rarr;</div>
+      </div>
+      <div class="overview-card" onclick="navigate('/hdb')" style="cursor:pointer">
+        <div class="overview-icon" style="background:linear-gradient(135deg,#1a3a2a,#0f281a)">🏘️</div>
+        <h2>HDB Resale</h2>
+        <div class="ov-stat"><span class="ov-label">Blocks</span><span class="ov-val">${fmtNum(hdbCount)}</span></div>
+        <div class="ov-stat"><span class="ov-label">Transactions</span><span class="ov-val">${fmtNum(hdbTxns)}</span></div>
+        <div class="ov-stat"><span class="ov-label">Avg PSF</span><span class="ov-val">$${fmtNum(hdbAvg)}</span></div>
+        <div class="ov-stat"><span class="ov-label">Data Span</span><span class="ov-val">35 years (1990-2026)</span></div>
+        <div class="ov-stat"><span class="ov-label">Towns</span><span class="ov-val">${hdbTownsArr.length}</span></div>
+        <div class="overview-btn" style="background:linear-gradient(135deg,#22c55e,#15803d)">Explore HDB &rarr;</div>
+      </div>
+    </div>
+  `;
+}
+
+// ── HDB Dashboard view ──
+function renderHdbDashboard() {
+  const sm = marketSummary;
+  const towns = hdbTownsData;
+  const townEntries = Object.entries(towns);
+  const hdbCount = hdbIndex.length;
+  const hdbTxns = hdbIndex.reduce((s, p) => s + (p.totalTxns || 0), 0);
+  const hdbAvg = sm.hdbAvgPsf || 0;
+
+  // Town-level aggregates
+  const sortedTowns = [...townEntries].sort((a, b) => b[1].totalTransactions - a[1].totalTransactions);
+
+  document.getElementById('main').innerHTML = `
+    <div class="hero">
+      <h1>HDB Resale Market</h1>
+      <p>data.gov.sg · ${townEntries.length} towns · ${fmtNum(hdbCount)} blocks · ${fmtNum(hdbTxns)} transactions</p>
+      <div class="kpi-row">
+        <div class="kpi"><div class="val">${townEntries.length}</div><div class="lbl">Towns</div></div>
+        <div class="kpi"><div class="val">${fmtNum(hdbCount)}</div><div class="lbl">Blocks</div></div>
+        <div class="kpi"><div class="val">${fmtNum(hdbTxns)}</div><div class="lbl">Transactions</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(hdbAvg)}</div><div class="lbl">Avg PSF</div></div>
+        <div class="kpi"><div class="val">1990 - 2026</div><div class="lbl">Data Span</div></div>
+      </div>
+    </div>
+
+    <div class="section-title">Search HDB Blocks</div>
+    <div class="search-bar">
+      <input type="text" id="search-input" placeholder="Search by block name, street, or town..." oninput="searchProjects(this.value)">
+    </div>
+    <div id="search-results" class="search-results"></div>
+
+    <div class="section-title">Towns Overview</div>
+    <div class="town-row">
+      ${sortedTowns.map(([name, t]) => `
+        <div class="town-card" onclick="navigate('/town/${name.toLowerCase().replace(/\\s+/g, '-')}')">
+          <div class="t-header">
+            <span class="t-name">${name}</span>
+          </div>
+          <div class="t-psf">$${fmtNum(t.avgPsf)}</div>
+          <div class="t-detail">
+            <span>${fmtNum(t.blocks)} blocks</span>
+            <span>${fmtNum(t.totalTransactions)} txns</span>
+          </div>
+          <div class="t-flats">
+            ${t.flatTypes.slice(0, 4).map(f => `<span class="tag-tiny">${f}</span>`).join('')}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
+      <div>
+        <div class="section-title">Top by Transaction Volume</div>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Town</th><th>Blocks</th><th>Avg PSF</th><th>Transactions</th></tr>
+            ${sortedTowns.slice(0, 10).map(([name, t]) => `
+              <tr onclick="navigate('/town/${name.toLowerCase().replace(/\\s+/g, '-')}')" style="cursor:pointer">
+                <td class="text-gold">${name}</td>
+                <td>${fmtNum(t.blocks)}</td>
+                <td class="text-blue">$${fmtNum(t.avgPsf)}</td>
+                <td>${fmtNum(t.totalTransactions)}</td>
+              </tr>
+            `).join('')}
+          </table>
+        </div>
+      </div>
+      <div>
+        <div class="section-title">Top by Avg PSF</div>
+        <div class="table-wrap">
+          <table>
+            <tr><th>Town</th><th>Avg PSF</th><th>Blocks</th><th>Transactions</th></tr>
+            ${[...townEntries].sort((a, b) => b[1].avgPsf - a[1].avgPsf).slice(0, 10).map(([name, t]) => `
+              <tr onclick="navigate('/town/${name.toLowerCase().replace(/\\s+/g, '-')}')" style="cursor:pointer">
+                <td class="text-gold">${name}</td>
+                <td class="text-blue">$${fmtNum(t.avgPsf)}</td>
+                <td>${fmtNum(t.blocks)}</td>
+                <td>${fmtNum(t.totalTransactions)}</td>
+              </tr>
+            `).join('')}
+          </table>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ── Town detail view ──
+function renderTown(townSlug) {
+  // Find town from slug (lowercase, hyphens)
+  const townName = Object.keys(hdbTownsData).find(
+    k => k.toLowerCase().replace(/\\s+/g, '-') === townSlug
+  );
+  if (!townName) {
+    document.getElementById('main').innerHTML = `<div class="error">⚠️ Town "${townSlug}" not found</div>`;
+    return;
+  }
+  const data = hdbTownsData[townName];
+  const blocks = hdbIndex.filter(p => p.town === townName);
+
+  document.getElementById('main').innerHTML = `
+    <div class="project-hero">
+      <a href="javascript:void(0)" onclick="navigate('/hdb')" style="font-size:13px">&larr; Back to HDB</a>
+      <h1>${townName}</h1>
+      <div class="sub">${fmtNum(data.blocks)} blocks · ${fmtNum(data.totalTransactions)} transactions · ${data.years[0] || '?'} - ${data.years[data.years.length-1] || '?'}</div>
+      <div class="project-meta">
+        <div class="pm"><div class="pv">${fmtNum(data.blocks)}</div><div class="pl">Blocks</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.avgPsf)}</div><div class="pl">Avg PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.minPsf)}</div><div class="pl">Min PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.maxPsf)}</div><div class="pl">Max PSF</div></div>
+        <div class="pm"><div class="pv">${fmtNum(data.totalTransactions)}</div><div class="pl">Total Txns</div></div>
+      </div>
+      <div class="flat-tags">
+        ${data.flatTypes.map(f => `<span class="tag">${f}</span>`).join(' ')}
+      </div>
+    </div>
+
+    <div class="section-title">Blocks in ${townName} (${blocks.length})</div>
+    <div class="card-grid">
+      ${blocks.sort((a, b) => b.totalTxns - a.totalTxns).map(p => `
+        <div class="card" onclick="navigate('/project/${p.id}')">
+          <h3>${p.name}</h3>
+          <div class="meta">${p.street || ''} ${p.avgPsf ? '· avg $' + fmtNum(p.avgPsf) + ' psf' : ''}</div>
+          <div class="stat">
+            <span>PSF: <span class="stat-gold">$${fmtNum(p.avgPsf) || '-'}</span></span>
+            <span>Txns: <span class="stat-gold">${fmtNum(p.totalTxns)}</span></span>
+            <span>${p.years?.[0] || ''} - ${p.years?.[p.years.length-1] || ''}</span>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
 // ── Project detail view ──
 async function renderProject(id) {
   const p = await fetchProject(id);
@@ -176,7 +357,7 @@ async function renderProject(id) {
 
   document.getElementById('main').innerHTML = `
     <div class="project-hero">
-      <a href="javascript:void(0)" onclick="navigate('/')" style="font-size:13px">&larr; Back to Dashboard</a>
+      <a href="javascript:void(0)" onclick="navigate('/private')" style="font-size:13px">&larr; Back to Private</a>
       <h1>${p.name}</h1>
       <div class="sub">${p.street}${p.marketSegment ? ' · ' + p.marketSegment : ''}</div>
       <div class="project-meta">
@@ -259,7 +440,7 @@ function renderDistrict(d) {
 
   document.getElementById('main').innerHTML = `
     <div class="project-hero">
-      <a href="javascript:void(0)" onclick="navigate('/')" style="font-size:13px">&larr; Back to Dashboard</a>
+      <a href="javascript:void(0)" onclick="navigate('/private')" style="font-size:13px">&larr; Back to Private</a>
       <h1>D${data.district} — ${data.name}</h1>
       <div class="sub">${data.sector} · ${data.projectCount} projects · ${fmtNum(data.totalTransactions)} transactions</div>
       <div class="project-meta">
@@ -292,7 +473,7 @@ function renderDistrict(d) {
 function renderMapView() {
   document.getElementById('main').innerHTML = `
     <div class="project-hero">
-      <a href="#" onclick="navigate('/');return false" style="font-size:13px">&larr; Back to Dashboard</a>
+      <a href="#" onclick="navigate('/private');return false" style="font-size:13px">&larr; Back to Private</a>
       <h1>Project Map</h1>
       <div class="sub" id="map-subtitle">${projectsIndex.filter(p=>p.coord).length} projects with coordinates</div>
     </div>
@@ -376,7 +557,7 @@ async function renderHdbProject(id) {
 
     document.getElementById('main').innerHTML = `
       <div class="project-hero">
-        <a href="#" onclick="navigate('/');return false" style="font-size:13px">&larr; Back to Dashboard</a>
+        <a href="#" onclick="navigate('/hdb')" style="font-size:13px">&larr; Back to HDB</a>
         <h1><span class="tag-hdb" style="font-size:14px;vertical-align:middle;margin-right:8px">HDB</span>${data.name}</h1>
         <div class="sub">${data.town} · ${data.street} · Block ${data.block} · ${st.years[0] || '?'} - ${st.years[st.years.length-1] || '?'}</div>
         <div class="project-meta">
@@ -502,8 +683,7 @@ function searchProjects(q) {
   const ql = (q || '').toLowerCase().trim();
   if (!ql) { el.innerHTML = ''; return; }
 
-  const filtered = getIndex();
-  const results = filtered
+  const results = projectsIndex
     .filter(p => p.name?.toLowerCase().includes(ql) || (p.street || p.town || '').toLowerCase().includes(ql))
     .slice(0, 20);
 
@@ -556,16 +736,30 @@ async function routeTo(path) {
       }
     }
 
+    // Update nav active state
+    document.querySelectorAll('nav a').forEach(a => a.classList.remove('nav-active'));
+    const pages = { overview:0, private:1, hdb:2, map:3 };
+    const navIdx = pages[p];
+    if (navIdx !== undefined) {
+      document.querySelectorAll('nav a')[navIdx]?.classList.add('nav-active');
+    }
+
     if (p === 'project' && r[0]) {
       const isHdb = r[0].startsWith('hdb-');
       if (isHdb) await renderHdbProject(r[0]);
       else await renderProject(r[0]);
     } else if (p === 'district' && r[0]) {
       renderDistrict(r[0]);
+    } else if (p === 'town' && r[0]) {
+      renderTown(r[0]);
     } else if (p === 'map') {
       renderMapView();
+    } else if (p === 'private') {
+      renderPrivateDashboard();
+    } else if (p === 'hdb') {
+      renderHdbDashboard();
     } else {
-      renderDashboard();
+      renderOverview();
     }
   } catch (err) {
     console.error('Route error:', err);

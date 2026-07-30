@@ -1,1 +1,1 @@
-{"buildTime":"2026-07-30T15:19:46.454Z","totalProjects":2977,"totalTransactions":135996,"overallAvgPsf":1696,"bySegment":{"CCR":{"avgPsf":2170,"count":788},"RCR":{"avgPsf":1648,"count":962},"OCR":{"avgPsf":1429,"count":1227}}}
+{"buildTime":"2026-07-30T15:46:21.264Z","totalProjects":2977,"totalTransactions":135996,"overallAvgPsf":1696,"bySegment":{"CCR":{"avgPsf":2170,"count":788},"RCR":{"avgPsf":1648,"count":962},"OCR":{"avgPsf":1429,"count":1227}},"hdbBlocks":9290,"hdbTransactions":561068,"hdbAvgPsf":394,"hdbTowns":27}
