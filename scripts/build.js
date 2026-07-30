@@ -56,9 +56,17 @@ const SECT = { 1:'CCR',2:'CCR',3:'RCR',4:'CCR',5:'CCR',6:'CCR',7:'CCR',8:'RCR',9
 function mkdir(p) { if (!existsSync(p)) mkdirSync(p, { recursive: true }); }
 
 // Compute average PSF from transactions filtered by date >= cutoff
+// Handles both mmyy (URA) and yyyy-mm (HDB) date formats
 function computeAvg1y(txns, dateField, cutoff) {
   if (!cutoff) return 0;
-  const filtered = txns.filter(t => t[dateField] && t[dateField] >= cutoff);
+  const isMmyy = /^\d{4}$/.test(cutoff); // mmyy is 4 digits, yyyy-mm is 7
+  const cutoffSort = isMmyy ? toSortableDate(cutoff) : cutoff;
+  const filtered = txns.filter(t => {
+    const v = t[dateField];
+    if (!v) return false;
+    const vSort = isMmyy ? toSortableDate(v) : v;
+    return vSort >= cutoffSort;
+  });
   const psfs = filtered.map(t => t.pricePsf).filter(Boolean);
   return psfs.length ? Math.round(psfs.reduce((a, b) => a + b, 0) / psfs.length) : 0;
 }
@@ -304,7 +312,7 @@ function buildDistricts(projects, rentals, cutoff) {
     for (const t of p.transactions) {
       if (t.pricePsf > 0) {
         map[d].psfArr.push(t.pricePsf);
-        if (cutoff && t.contractDate >= cutoff) map[d].psfArr1y.push(t.pricePsf);
+        if (cutoff && t.contractDate && toSortableDate(t.contractDate) >= toSortableDate(cutoff)) map[d].psfArr1y.push(t.pricePsf);
       }
       const yr = t.contractDate?.substring(0, 4);
       if (yr) {
