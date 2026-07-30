@@ -15,16 +15,15 @@ function router() {
 
 // ── Load data ──
 async function loadData() {
-  const [idx, dists, summ, hdb] = await Promise.all([
+  const [idx, dists, summ] = await Promise.all([
     fetchJSON('property-index.json'),
     fetchJSON('districts.json'),
-    fetchJSON('market-summary.json'),
-    fetchJSON('hdb-index.json').catch(() => [])
+    fetchJSON('market-summary.json')
   ]);
   projectsIndex = idx;
   districtsData = dists;
   marketSummary = summ;
-  hdbIndex = hdb;
+  hdbIndex = idx.filter(p => p.type === 'HDB');
 }
 
 function getIndex() {
