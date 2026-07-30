@@ -728,13 +728,15 @@ function renderFullMap() {
 
 // ── Formatters ──
 function fmtNum(n) {
-  if (n == null || isNaN(n)) return '-';
-  return n.toLocaleString();
+  const v = Number(n);
+  if (v == null || isNaN(v)) return '-';
+  return v.toLocaleString();
 }
 
 function fmtPrice(n) {
-  if (n == null || isNaN(n)) return '-';
-  return '$' + n.toLocaleString();
+  const v = Number(n);
+  if (v == null || isNaN(v)) return '-';
+  return '$' + v.toLocaleString();
 }
 
 function saleTypeLabel(t) {
