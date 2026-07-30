@@ -95,7 +95,7 @@ function renderPrivateDashboard() {
             <span class="d-name">D${d.district} ${d.name}</span>
             <span class="d-sector ${d.sector.toLowerCase()}">${d.sector}</span>
           </div>
-          <div class="d-psf">$${fmtNum(d.medianPsf)}</div>
+          <div class="d-psf">$${fmtNum(d.avgPsf1y || d.avgPsf || d.medianPsf)}<span class="d-psf-label">1yr avg</span></div>
           <div class="d-detail">
             <span>${d.projectCount} projects</span>
             <span>${fmtNum(d.totalTransactions)} txns</span>

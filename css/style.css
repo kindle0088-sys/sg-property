@@ -66,6 +66,7 @@ footer{padding:24px 0;text-align:center;color:var(--text3);font-size:12px;border
 .district-card .d-name{font-size:13px;font-weight:600;color:#fff}
 .district-card .d-sector{font-size:10px;padding:2px 8px;border-radius:10px;background:var(--bg3);color:var(--text2)}
 .district-card .d-psf{font-size:16px;font-weight:700;color:var(--gold)}
+.d-psf-label{display:block;font-size:10px;font-weight:400;color:var(--text3);margin-top:-2px}
 .district-card .d-detail{font-size:11px;color:var(--text2)}
 .district-card .d-detail span{margin-right:12px}
 
