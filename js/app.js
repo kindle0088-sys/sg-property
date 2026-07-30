@@ -80,7 +80,7 @@ function renderPrivateDashboard() {
       <button class="filter-btn" data-filter="HDB" onclick="setFilter('HDB')">HDB</button>
     </div>
     <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Search by project name, street, or district..." oninput="searchProjects(this.value)">
+      <input type="text" id="search-input" placeholder="Search by project name, street, or district..." autocomplete="off" oninput="searchProjects(this.value)">
     </div>
     <div id="search-results" class="search-results"></div>
 
@@ -169,7 +169,7 @@ function renderOverview() {
 
     <div class="section-title">Search All Projects</div>
     <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Search by project name, street, or town..." oninput="searchProjects(this.value)">
+      <input type="text" id="search-input" placeholder="Search by project name, street, or town..." autocomplete="off" oninput="searchProjects(this.value)">
     </div>
     <div id="search-results" class="search-results"></div>
 
@@ -225,7 +225,7 @@ function renderHdbDashboard() {
 
     <div class="section-title">Search HDB Blocks</div>
     <div class="search-bar">
-      <input type="text" id="search-input" placeholder="Search by block name, street, or town..." oninput="searchProjects(this.value)">
+      <input type="text" id="search-input" placeholder="Search by block name, street, or town..." autocomplete="off" oninput="searchProjects(this.value)">
     </div>
     <div id="search-results" class="search-results"></div>
 
