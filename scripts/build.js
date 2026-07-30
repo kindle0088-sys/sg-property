@@ -16,6 +16,21 @@ import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { getToken, fetchAllTransactions, fetchTransactions, fetchRentals, processTransactions, processRentals } from './ura-fetcher.js';
 
+// Helper: convert "mmyy" (e.g. "1225") to sortable "20yy-mm" ("2025-12")
+function toSortableDate(d) {
+  if (!d || d.length < 4) return '';
+  return `20${d.substring(2,4)}-${d.substring(0,2)}`;
+}
+
+// Helper: display format "mmyy" → "Mon YYYY"
+function fmtDate(d) {
+  if (!d || d.length < 4) return d || '';
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const mm = parseInt(d.substring(0,2), 10);
+  const yy = d.substring(2,4);
+  return `${months[mm-1] || d.substring(0,2)} 20${yy}`;
+}
+
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA = join(__dirname, '..', 'data');
 const PROJ_DIR = join(DATA, 'projects');
@@ -108,11 +123,17 @@ async function main() {
       id: p.id, name: p.name, street: p.street,
       marketSegment: p.marketSegment, coord: p.coord,
       stats: p.stats,
+      fmtFirstDate: fmtDate(p.stats.dateRange.min),
+      fmtLastDate: fmtDate(p.stats.dateRange.max),
+      sortFirstDate: toSortableDate(p.stats.dateRange.min),
+      sortLastDate: toSortableDate(p.stats.dateRange.max),
       transactions: p.transactions.slice(0, 500).map(t => ({
         propertyType: t.propertyType, district: t.district,
         typeOfSale: t.typeOfSale, price: t.price, areaSqf: Math.round(t.areaSqf),
         pricePsf: t.pricePsf, floorRange: t.floorRange,
         contractDate: t.contractDate,
+        fmtDate: fmtDate(t.contractDate),
+        sortDate: toSortableDate(t.contractDate),
         tenureType: t.tenure.type,
         tenureYears: t.tenure.years
       }))

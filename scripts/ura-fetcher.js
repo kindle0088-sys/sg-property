@@ -125,10 +125,23 @@ export function processTransactions(rawData) {
     const tx = p.transactions;
     if (!tx.length) continue;
     const psfArr = tx.map(t => t.pricePsf).filter(Boolean);
-    const years = [...new Set(tx.map(t => t.contractDate?.substring(0, 4)).filter(Boolean))].sort();
+    // Fix: mmyy format (e.g. "0126" = Jan 2026). Extract actual 4-digit year.
+    const years = [...new Set(tx.map(t => {
+      if (!t.contractDate || t.contractDate.length < 4) return null;
+      const yy = t.contractDate.substring(2, 4);
+      return yy ? `20${yy}` : null;
+    }).filter(Boolean))].sort();
     const districts = [...new Set(tx.map(t => t.district).filter(d => d != null))].sort();
 
-    tx.sort((a, b) => (b.contractDate || '').localeCompare(a.contractDate || ''));
+    // Fix sort: convert "mmyy" → "20yy-mm" for correct cross-year ordering
+    function sortKey(d) {
+      if (!d || d.length < 4) return '';
+      return `20${d.substring(2,4)}-${d.substring(0,2)}`;
+    }
+    tx.sort((a, b) => sortKey(b.contractDate).localeCompare(sortKey(a.contractDate)));
+
+    // Use sortKey for date range too
+    const sortedDates = tx.map(t => t.contractDate).filter(Boolean).sort((a, b) => sortKey(a).localeCompare(sortKey(b)));
 
     result.push({
       ...p,
@@ -144,8 +157,8 @@ export function processTransactions(rawData) {
         propertyTypes: [...new Set(tx.map(t => t.propertyType).filter(Boolean))],
         tenureTypes: [...new Set(tx.map(t => t.tenure.type).filter(Boolean))],
         dateRange: {
-          min: tx.reduce((m, t) => !m || t.contractDate < m ? t.contractDate : m, null),
-          max: tx.reduce((m, t) => !m || t.contractDate > m ? t.contractDate : m, null)
+          min: sortedDates.length ? sortedDates[0] : null,
+          max: sortedDates.length ? sortedDates[sortedDates.length - 1] : null
         }
       }
     });

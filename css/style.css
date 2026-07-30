@@ -80,6 +80,11 @@ tr:hover{background:var(--bg-hover)}
 .text-red{color:var(--red);font-weight:600}
 .text-gold{color:var(--gold)}
 .text-muted{color:var(--text2)}
+.pagination{display:flex;align-items:center;justify-content:center;gap:12px;padding:12px 0;font-size:13px}
+.page-btn{background:var(--bg3);color:var(--text1);border:1px solid var(--border);border-radius:6px;padding:6px 16px;cursor:pointer;font-size:13px;transition:all .15s}
+.page-btn:hover:not(:disabled){background:var(--gold);color:#000}
+.page-btn:disabled{opacity:.3;cursor:default}
+.page-info{color:var(--text2);font-size:12px}
 .text-blue{color:var(--blue)}
 
 /* Search */

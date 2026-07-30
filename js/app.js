@@ -136,11 +136,15 @@ async function renderProject(id) {
 
   // Stats
   const psfArr = t.map(x => x.pricePsf).filter(Boolean);
-  const recent = t.slice(0, 20);
+  const PAGE_SIZE = 25;
+  const txPage = (window._txPages && window._txPages[p.id]) || 0;
+  const pageStart = txPage * PAGE_SIZE;
+  const pageRows = t.slice(pageStart, pageStart + PAGE_SIZE);
+  const totalPages = Math.ceil(t.length / PAGE_SIZE);
   const byType = {};
   const byYear = {};
   t.forEach(x => {
-    const yr = (x.contractDate || '').substring(0, 4);
+    const yr = (x.sortDate || '').substring(0, 4) || (x.contractDate || '').substring(0, 4);
     if (yr) { byYear[yr] = (byYear[yr] || 0) + 1; }
     const pt = x.propertyType || 'Unknown';
     if (!byType[pt]) byType[pt] = { count: 0, sumPsf: 0 };
@@ -158,8 +162,8 @@ async function renderProject(id) {
         <div class="pm"><div class="pv">$${p.stats.minPsf}</div><div class="pl">Min PSF</div></div>
         <div class="pm"><div class="pv">$${p.stats.maxPsf}</div><div class="pl">Max PSF</div></div>
         <div class="pm"><div class="pv">${fmtNum(p.stats.totalTransactions)}</div><div class="pl">Transactions</div></div>
-        <div class="pm"><div class="pv">${p.stats.dateRange?.max?.substring(0,7) || 'N/A'}</div><div class="pl">Latest</div></div>
-        <div class="pm"><div class="pv">${p.stats.dateRange?.min?.substring(0,7) || 'N/A'}</div><div class="pl">Earliest</div></div>
+        <div class="pm"><div class="pv">${p.fmtLastDate || p.stats.dateRange?.max?.substring(0,7) || 'N/A'}</div><div class="pl">Latest</div></div>
+        <div class="pm"><div class="pv">${p.fmtFirstDate || p.stats.dateRange?.min?.substring(0,7) || 'N/A'}</div><div class="pl">Earliest</div></div>
       </div>
       <div>${(p.stats.propertyTypes || []).map(t => `<span class="tag">${t}</span>`).join('')}
       ${(p.stats.districts || []).map(d => `<span class="tag ccr">D${d}</span>`).join('')}
@@ -177,9 +181,9 @@ async function renderProject(id) {
         <table>
           <thead><tr><th>Date</th><th>Type</th><th>Area (sqf)</th><th>PSF</th><th>Price</th><th>Floor</th><th>Sale Type</th></tr></thead>
           <tbody>
-            ${recent.map(x => `
+            ${pageRows.map(x => `
               <tr>
-                <td class="text-muted">${x.contractDate || '-'}</td>
+                <td class="text-muted">${x.fmtDate || x.contractDate || '-'}</td>
                 <td>${x.propertyType || '-'}</td>
                 <td>${x.areaSqf || '-'}</td>
                 <td class="${x.pricePsf > p.stats.avgPsf ? 'text-red' : 'text-green'}">$${fmtNum(x.pricePsf)}</td>
@@ -190,7 +194,13 @@ async function renderProject(id) {
             `).join('')}
           </tbody>
         </table>
-        ${t.length > 20 ? `<div class="text-muted" style="text-align:center;padding:8px;font-size:12px">Showing 20 of ${t.length} transactions</div>` : ''}
+        ${t.length > PAGE_SIZE ? `
+        <div class="pagination">
+          <button class="page-btn" onclick="pageTxns('${p.id}', ${txPage - 1})" ${txPage === 0 ? 'disabled' : ''}>&larr; Prev</button>
+          <span class="page-info">Page ${txPage + 1} of ${totalPages} · ${t.length} transactions</span>
+          <button class="page-btn" onclick="pageTxns('${p.id}', ${txPage + 1})" ${txPage >= totalPages - 1 ? 'disabled' : ''}>Next &rarr;</button>
+        </div>
+        ` : t.length > 0 ? `<div class="text-muted" style="text-align:center;padding:8px;font-size:12px">${t.length} transaction${t.length > 1 ? 's' : ''}</div>` : ''}
       </div>
     </div>
 
@@ -207,8 +217,8 @@ async function renderProject(id) {
     </div>
   `;
 
-  // Render chart
-  const sorted = [...t].filter(x => x.contractDate).sort((a, b) => a.contractDate.localeCompare(b.contractDate));
+  // Render chart — sort by sortDate (yyyy-mm) for proper cross-year ordering
+  const sorted = [...t].filter(x => x.sortDate).sort((a, b) => a.sortDate.localeCompare(b.sortDate));
   renderPriceChart(sorted);
 
   // Render map
@@ -356,15 +366,23 @@ function switchTab(el, id) {
   if (tc) tc.classList.add('active');
 }
 
+// ── Pagination ──
+function pageTxns(projectId, page) {
+  // Store page in a global map
+  if (!window._txPages) window._txPages = {};
+  window._txPages[projectId] = page;
+  renderProject(projectId);
+}
+
 // ── Charts ──
 function renderPriceChart(transactions) {
   const canvas = document.getElementById('priceChart');
   if (!canvas) return;
 
-  // Group by month
+  // Group by month — use sortDate (yyyy-mm) for proper ordering
   const byMonth = {};
   transactions.forEach(t => {
-    const m = (t.contractDate || '').substring(0, 7);
+    const m = (t.sortDate || '').substring(0, 7);
     if (!m) return;
     if (!byMonth[m]) byMonth[m] = { prices: [], psfs: [], count: 0 };
     byMonth[m].prices.push(t.price);
