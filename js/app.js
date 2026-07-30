@@ -57,10 +57,10 @@ function renderDashboard() {
       <div class="kpi-row">
         <div class="kpi"><div class="val">${sm.totalProjects}</div><div class="lbl">Projects</div></div>
         <div class="kpi"><div class="val">${fmtNum(sm.totalTransactions)}</div><div class="lbl">Transactions</div></div>
-        <div class="kpi"><div class="val">$${sm.overallAvgPsf}</div><div class="lbl">Avg PSF</div></div>
-        <div class="kpi"><div class="val">$${sm.bySegment.CCR.avgPsf}</div><div class="lbl">CCR Avg PSF</div></div>
-        <div class="kpi"><div class="val">$${sm.bySegment.RCR.avgPsf}</div><div class="lbl">RCR Avg PSF</div></div>
-        <div class="kpi"><div class="val">$${sm.bySegment.OCR.avgPsf}</div><div class="lbl">OCR Avg PSF</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf)}</div><div class="lbl">Avg PSF</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(sm.bySegment.CCR.avgPsf)}</div><div class="lbl">CCR Avg PSF</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(sm.bySegment.RCR.avgPsf)}</div><div class="lbl">RCR Avg PSF</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(sm.bySegment.OCR.avgPsf)}</div><div class="lbl">OCR Avg PSF</div></div>
         <div class="kpi"><div class="val">${activeDists.length}</div><div class="lbl">Districts Active</div></div>
       </div>
     </div>
@@ -82,7 +82,7 @@ function renderDashboard() {
             <span class="d-name">D${d.district} ${d.name}</span>
             <span class="d-sector ${d.sector.toLowerCase()}">${d.sector}</span>
           </div>
-          <div class="d-psf">$${d.medianPsf}</div>
+          <div class="d-psf">$${fmtNum(d.medianPsf)}</div>
           <div class="d-detail">
             <span>${d.projectCount} projects</span>
             <span>${fmtNum(d.totalTransactions)} txns</span>
@@ -102,7 +102,7 @@ function renderDashboard() {
               <tr onclick="navigate('/district/${d.district}')" style="cursor:pointer">
                 <td class="text-gold">D${d.district}</td>
                 <td>${d.name}</td>
-                <td class="text-blue">$${d.avgPsf}</td>
+                <td class="text-blue">$${fmtNum(d.avgPsf)}</td>
                 <td>${fmtNum(d.totalTransactions)}</td>
               </tr>
             `).join('')}
@@ -118,7 +118,7 @@ function renderDashboard() {
               <tr onclick="navigate('/district/${d.district}')" style="cursor:pointer">
                 <td class="text-gold">D${d.district}</td>
                 <td>${d.name}</td>
-                <td class="text-blue">$${d.medianPsf}</td>
+                <td class="text-blue">$${fmtNum(d.medianPsf)}</td>
                 <td><span class="tag ${d.sector.toLowerCase()}">${d.sector}</span></td>
               </tr>
             `).join('')}
@@ -158,9 +158,9 @@ async function renderProject(id) {
       <h1>${p.name}</h1>
       <div class="sub">${p.street}${p.marketSegment ? ' · ' + p.marketSegment : ''}</div>
       <div class="project-meta">
-        <div class="pm"><div class="pv">$${p.stats.avgPsf}</div><div class="pl">Avg PSF</div></div>
-        <div class="pm"><div class="pv">$${p.stats.minPsf}</div><div class="pl">Min PSF</div></div>
-        <div class="pm"><div class="pv">$${p.stats.maxPsf}</div><div class="pl">Max PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(p.stats.avgPsf)}</div><div class="pl">Avg PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(p.stats.minPsf)}</div><div class="pl">Min PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(p.stats.maxPsf)}</div><div class="pl">Max PSF</div></div>
         <div class="pm"><div class="pv">${fmtNum(p.stats.totalTransactions)}</div><div class="pl">Transactions</div></div>
         <div class="pm"><div class="pv">${p.fmtLastDate || p.stats.dateRange?.max?.substring(0,7) || 'N/A'}</div><div class="pl">Latest</div></div>
         <div class="pm"><div class="pv">${p.fmtFirstDate || p.stats.dateRange?.min?.substring(0,7) || 'N/A'}</div><div class="pl">Earliest</div></div>
@@ -241,10 +241,10 @@ function renderDistrict(d) {
       <h1>D${data.district} — ${data.name}</h1>
       <div class="sub">${data.sector} · ${data.projectCount} projects · ${fmtNum(data.totalTransactions)} transactions</div>
       <div class="project-meta">
-        <div class="pm"><div class="pv">$${data.medianPsf}</div><div class="pl">Median PSF</div></div>
-        <div class="pm"><div class="pv">$${data.avgPsf}</div><div class="pl">Avg PSF</div></div>
-        <div class="pm"><div class="pv">$${data.minPsf}</div><div class="pl">Min PSF</div></div>
-        <div class="pm"><div class="pv">$${data.maxPsf}</div><div class="pl">Max PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.medianPsf)}</div><div class="pl">Median PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.avgPsf)}</div><div class="pl">Avg PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.minPsf)}</div><div class="pl">Min PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.maxPsf)}</div><div class="pl">Max PSF</div></div>
         ${data.rental ? `<div class="pm"><div class="pv">$${fmtNum(data.rental.median)}</div><div class="pl">Rental Median</div></div>` : ''}
       </div>
     </div>
@@ -254,9 +254,9 @@ function renderDistrict(d) {
       ${projects.sort((a, b) => b.totalTxns - a.totalTxns).map(p => `
         <div class="card" onclick="navigate('/project/${p.id}')">
           <h3>${p.name}</h3>
-          <div class="meta">${p.street || ''} ${p.avgPsf ? '· avg $' + p.avgPsf + ' psf' : ''}</div>
+          <div class="meta">${p.street || ''} ${p.avgPsf ? '· avg $' + fmtNum(p.avgPsf) + ' psf' : ''}</div>
           <div class="stat">
-            <span>PSF: <span class="stat-gold">$${p.avgPsf || '-'}</span></span>
+            <span>PSF: <span class="stat-gold">$${fmtNum(p.avgPsf) || '-'}</span></span>
             <span>Txns: <span class="stat-gold">${p.totalTxns}</span></span>
             <span>${p.years?.[0] || ''} - ${p.years?.[p.years.length-1] || ''}</span>
           </div>
@@ -272,15 +272,56 @@ function renderMapView() {
     <div class="project-hero">
       <a href="#" onclick="navigate('/');return false" style="font-size:13px">&larr; Back to Dashboard</a>
       <h1>Project Map</h1>
-      <div class="sub">${projectsIndex.filter(p=>p.coord).length} projects with coordinates</div>
+      <div class="sub" id="map-subtitle">${projectsIndex.filter(p=>p.coord).length} projects with coordinates</div>
+    </div>
+    <div class="map-toolbar">
+      <div class="map-search-wrap">
+        <input type="text" id="map-search-input" class="map-search" placeholder="Search projects on map..." oninput="filterMapMarkers(this.value)">
+        <span class="map-search-icon">🔍</span>
+      </div>
+      <button class="map-fullscreen-btn" onclick="toggleMapFullscreen()" title="Toggle fullscreen">⛶ Fullscreen</button>
     </div>
     <div class="map-container" id="fullMap" style="height:550px"></div>
+    <div id="map-status" class="text-muted" style="text-align:center;padding:6px;font-size:12px"></div>
   `;
   try {
     renderFullMap();
   } catch (e) {
     document.getElementById('main').innerHTML +=
       `<div class="error" style="margin-top:12px">⚠️ Map failed to load: ${e.message}</div>`;
+  }
+}
+
+// ── Map search filtering ──
+function filterMapMarkers(q) {
+  const ql = (q || '').toLowerCase().trim();
+  if (!window._mapMarkers) return;
+  let visible = 0;
+  const total = window._mapMarkers.length;
+  window._mapMarkers.forEach(m => {
+    const match = !ql || m.name.toLowerCase().includes(ql) || (m.street || '').toLowerCase().includes(ql);
+    if (match) {
+      if (m.marker) m.marker.addTo(window._mapCluster || window._map);
+      visible++;
+    } else {
+      if (m.marker && window._mapCluster) window._mapCluster.removeLayer(m.marker);
+      else if (m.marker && window._map) m.marker.remove();
+    }
+  });
+  document.getElementById('map-subtitle').textContent = ql
+    ? visible + ' of ' + total + ' projects match "' + ql + '"'
+    : total + ' projects with coordinates';
+  document.getElementById('map-status').textContent = visible + ' markers visible';
+}
+
+// ── Map fullscreen ──
+function toggleMapFullscreen() {
+  const el = document.getElementById('fullMap');
+  if (!el) return;
+  if (!document.fullscreenElement) {
+    el.requestFullscreen().catch(() => {});
+  } else {
+    document.exitFullscreen().catch(() => {});
   }
 }
 
@@ -303,7 +344,7 @@ function searchProjects(q) {
   el.innerHTML = results.map(p => `
     <div class="search-result-item" onclick="navigate('/project/${p.id}')">
       <div class="sr-name">${highlight(p.name, ql)}</div>
-      <div class="sr-meta">D${p.district || '?'} · $${p.avgPsf || '-'} psf · ${p.totalTxns} txns ${p.years?.length ? '· ' + p.years[0] + '-' + p.years[p.years.length-1] : ''}</div>
+      <div class="sr-meta">D${p.district || '?'} · $${fmtNum(p.avgPsf) || '-'} psf · ${p.totalTxns} txns ${p.years?.length ? '· ' + p.years[0] + '-' + p.years[p.years.length-1] : ''}</div>
     </div>
   `).join('');
 }
@@ -481,6 +522,9 @@ function renderFullMap() {
   }).addTo(map);
 
   const markers = L.markerClusterGroup({ chunkedLoading: true });
+  window._map = map;
+  window._mapCluster = markers;
+  window._mapMarkers = [];
   let count = 0;
   projectsIndex.forEach(p => {
     if (!p.coord) return;
@@ -489,21 +533,16 @@ function renderFullMap() {
     m.bindPopup(`
       <div style="min-width:180px">
         <b>${p.name}</b><br>
-        <span style="color:#94a3b8">D${p.district || '?'} · Avg $${p.avgPsf || '-'} psf · ${p.totalTxns} txns</span><br>
+        <span style="color:#94a3b8">D${p.district || '?'} · Avg $${fmtNum(p.avgPsf) || '-'} psf · ${p.totalTxns} txns</span><br>
         <a href="#/project/${pid}" style="color:#fbbf24;font-size:12px;margin-top:6px;display:inline-block">→ View Details</a>
       </div>
     `);
     m.on('click', () => { navigate('/project/' + pid); });
     markers.addLayer(m);
+    window._mapMarkers.push({ marker: m, name: p.name, street: p.street, id: pid });
     count++;
   });
   map.addLayer(markers);
-
-  // Add district labels as circles
-  const colors = { CCR: '#fbbf24', RCR: '#60a5fa', OCR: '#22c55e' };
-  districtsData.filter(d => d.projectCount > 0).forEach(d => {
-    // Just use cluster markers, no district circles for now
-  });
 
   document.querySelector('#fullMap + .leaflet-control')?.remove();
 }
