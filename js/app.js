@@ -4,6 +4,8 @@ const DATA = 'data/';
 let projectsIndex = [];
 let districtsData = [];
 let marketSummary = null;
+let hdbIndex = [];
+let propertyFilter = 'All'; // All, Private, HDB
 
 // ── Page router (hashchange handler) ──
 function router() {
@@ -13,14 +15,27 @@ function router() {
 
 // ── Load data ──
 async function loadData() {
-  const [idx, dists, summ] = await Promise.all([
-    fetchJSON('projects-index.json'),
+  const [idx, dists, summ, hdb] = await Promise.all([
+    fetchJSON('property-index.json'),
     fetchJSON('districts.json'),
-    fetchJSON('market-summary.json')
+    fetchJSON('market-summary.json'),
+    fetchJSON('hdb-index.json').catch(() => [])
   ]);
   projectsIndex = idx;
   districtsData = dists;
   marketSummary = summ;
+  hdbIndex = hdb;
+}
+
+function getIndex() {
+  if (propertyFilter === 'All') return projectsIndex;
+  return projectsIndex.filter(p => (p.type || 'Private') === propertyFilter);
+}
+
+function setFilter(type) {
+  propertyFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === type));
+  searchProjects(document.getElementById('search-input')?.value || '');
 }
 
 async function fetchJSON(file) {
@@ -30,7 +45,9 @@ async function fetchJSON(file) {
 }
 
 async function fetchProject(id) {
-  const resp = await fetch(`${DATA}projects/${id}.json`);
+  // HDB projects are in data/hdb/ directory
+  const prefix = id.startsWith('hdb-') ? 'hdb/' : 'projects/';
+  const resp = await fetch(`${DATA}${prefix}${id}.json`);
   if (!resp.ok) throw new Error(`Project not found: ${id}`);
   return resp.json();
 }
@@ -44,6 +61,8 @@ function showLoading() {
 function renderDashboard() {
   const dists = districtsData;
   const sm = marketSummary;
+  const hdbCount = hdbIndex.length;
+  const hdbTxns = hdbIndex.reduce((s, p) => s + (p.totalTxns || 0), 0);
   const activeDists = dists.filter(d => d.projectCount > 0);
 
   // Top gainers/losers - projects sorted by avg psf change (approximate from district data)
@@ -53,19 +72,23 @@ function renderDashboard() {
   document.getElementById('main').innerHTML = `
     <div class="hero">
       <h1>Singapore Property Dashboard</h1>
-      <p>URA transaction data · ${sm.totalProjects} projects · ${fmtNum(sm.totalTransactions)} transactions</p>
+      <p>URA private condos + HDB resale transactions</p>
       <div class="kpi-row">
-        <div class="kpi"><div class="val">${sm.totalProjects}</div><div class="lbl">Projects</div></div>
-        <div class="kpi"><div class="val">${fmtNum(sm.totalTransactions)}</div><div class="lbl">Transactions</div></div>
-        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf)}</div><div class="lbl">Avg PSF</div></div>
-        <div class="kpi"><div class="val">$${fmtNum(sm.bySegment.CCR.avgPsf)}</div><div class="lbl">CCR Avg PSF</div></div>
-        <div class="kpi"><div class="val">$${fmtNum(sm.bySegment.RCR.avgPsf)}</div><div class="lbl">RCR Avg PSF</div></div>
-        <div class="kpi"><div class="val">$${fmtNum(sm.bySegment.OCR.avgPsf)}</div><div class="lbl">OCR Avg PSF</div></div>
-        <div class="kpi"><div class="val">${activeDists.length}</div><div class="lbl">Districts Active</div></div>
+        <div class="kpi"><div class="val">${sm.totalProjects}</div><div class="lbl">Private Projects</div></div>
+        <div class="kpi"><div class="val">${fmtNum(hdbCount)}</div><div class="lbl">HDB Blocks</div></div>
+        <div class="kpi"><div class="val">${fmtNum(sm.totalTransactions)}</div><div class="lbl">Private Txns</div></div>
+        <div class="kpi"><div class="val">${fmtNum(hdbTxns)}</div><div class="lbl">HDB Txns</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf)}</div><div class="lbl">Private Avg PSF</div></div>
+        <div class="kpi"><div class="val">${activeDists.length}</div><div class="lbl">Districts</div></div>
       </div>
     </div>
 
     <div class="section-title">Search Projects</div>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="All" onclick="setFilter('All')">All</button>
+      <button class="filter-btn" data-filter="Private" onclick="setFilter('Private')">Private</button>
+      <button class="filter-btn" data-filter="HDB" onclick="setFilter('HDB')">HDB</button>
+    </div>
     <div class="search-bar">
       <input type="text" id="search-input" placeholder="Search by project name, street, or district..." oninput="searchProjects(this.value)">
     </div>
@@ -292,6 +315,154 @@ function renderMapView() {
   }
 }
 
+// ── HDB project detail view ──
+async function renderHdbProject(id) {
+  const p = projectsIndex.find(x => x.id === id);
+  if (!p) { document.getElementById('main').innerHTML = '<div class="error">⚠️ Project not found</div>'; return; }
+
+  try {
+    const data = await fetchProject(id);
+    const tx = data.transactions || [];
+    const st = data.stats;
+
+    // Stats
+    const psfArr = tx.map(x => x.pricePsf).filter(Boolean);
+    const byYear = {};
+    tx.forEach(x => {
+      const yr = (x.month || '').substring(0, 4);
+      if (yr) byYear[yr] = (byYear[yr] || 0) + 1;
+    });
+
+    // Pagination
+    const PAGE_SIZE = 25;
+    let currentPage = parseInt(new URLSearchParams(window.location.hash.split('?')[1]).get('page')) || 0;
+
+    function goToPage(page) {
+      currentPage = page;
+      navigate('/project/' + id + '?page=' + page);
+    }
+
+    function renderTable(page) {
+      const start = page * PAGE_SIZE;
+      const end = start + PAGE_SIZE;
+      const pageTx = tx.slice(start, end);
+      const totalPages = Math.ceil(tx.length / PAGE_SIZE);
+      return `
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Month</th><th>Type</th><th>Area (sqf)</th><th>PSF</th><th>Price</th><th>Storey</th><th>Rem Lease</th></tr></thead>
+            <tbody>
+              ${pageTx.map(x => `
+                <tr>
+                  <td class="text-muted">${x.month || '-'}</td>
+                  <td>${x.flatType || '-'}</td>
+                  <td>${x.floorAreaSqf || '-'}</td>
+                  <td class="${x.pricePsf > st.avgPsf ? 'text-red' : 'text-green'}">$${fmtNum(x.pricePsf)}</td>
+                  <td>${fmtPrice(x.resalePrice)}</td>
+                  <td class="text-muted">${x.storeyRange || '-'}</td>
+                  <td class="text-muted">${x.remainingLease != null ? x.remainingLease + ' yrs' : '-'}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+        ${tx.length > PAGE_SIZE ? `
+        <div class="pagination">
+          <button ${page === 0 ? 'disabled' : ''} onclick="pageHdb('${id}', ${page-1})">&larr; Prev</button>
+          <span>Page ${page+1} of ${totalPages} · ${fmtNum(tx.length)} transactions</span>
+          <button ${page >= totalPages-1 ? 'disabled' : ''} onclick="pageHdb('${id}', ${page+1})">Next &rarr;</button>
+        </div>` : ''}
+      `;
+    }
+
+    document.getElementById('main').innerHTML = `
+      <div class="project-hero">
+        <a href="#" onclick="navigate('/');return false" style="font-size:13px">&larr; Back to Dashboard</a>
+        <h1><span class="tag-hdb" style="font-size:14px;vertical-align:middle;margin-right:8px">HDB</span>${data.name}</h1>
+        <div class="sub">${data.town} · ${data.street} · Block ${data.block} · ${st.years[0] || '?'} - ${st.years[st.years.length-1] || '?'}</div>
+        <div class="project-meta">
+          <div class="pm"><div class="pv">${fmtNum(st.totalTransactions)}</div><div class="pl">Total Transactions</div></div>
+          <div class="pm"><div class="pv">$${fmtNum(st.avgPsf)}</div><div class="pl">Avg PSF</div></div>
+          <div class="pm"><div class="pv">$${fmtNum(st.minPsf)}</div><div class="pl">Min PSF</div></div>
+          <div class="pm"><div class="pv">$${fmtNum(st.maxPsf)}</div><div class="pl">Max PSF</div></div>
+          <div class="pm"><div class="pv">${fmtPrice(st.minPrice)}</div><div class="pl">Min Price</div></div>
+          <div class="pm"><div class="pv">${fmtPrice(st.maxPrice)}</div><div class="pl">Max Price</div></div>
+        </div>
+        <div class="flat-tags">
+          ${(data.flatTypes || []).map(f => `<span class="tag">${f}</span>`).join(' ')}
+          ${(data.flatModels || []).slice(0, 3).map(m => `<span class="tag tag-model">${m}</span>`).join(' ')}
+        </div>
+      </div>
+
+      <div class="tab-bar">
+        <span class="tab active" onclick="switchTab(this,'txns')">Transactions (${fmtNum(tx.length)})</span>
+        <span class="tab" onclick="switchTab(this,'chart')">Price Trend</span>
+      </div>
+
+      <div id="tab-txns" class="tab-content active">
+        ${renderTable(currentPage)}
+      </div>
+
+      <div id="tab-chart" class="tab-content">
+        <div class="chart-wrap">
+          <canvas id="priceChart"></canvas>
+        </div>
+      </div>
+    `;
+
+    // Render chart
+    const sorted = [...tx].filter(x => x.month).sort((a, b) => a.month.localeCompare(b.month));
+    renderHdbChart(sorted);
+  } catch (e) {
+    document.getElementById('main').innerHTML = `<div class="error">⚠️ ${e.message}</div>`;
+  }
+}
+
+function renderHdbChart(transactions) {
+  // Group by month
+  const byMonth = {};
+  transactions.forEach(t => {
+    const m = t.month || '';
+    if (!m) return;
+    if (!byMonth[m]) byMonth[m] = { prices: [], psfs: [], count: 0 };
+    byMonth[m].prices.push(t.resalePrice);
+    byMonth[m].psfs.push(t.pricePsf);
+    byMonth[m].count++;
+  });
+
+  const labels = Object.keys(byMonth).sort();
+  const avgPsfData = labels.map(m => {
+    const arr = byMonth[m].psfs.filter(Boolean);
+    return arr.length ? Math.round(arr.reduce((a, b) => a + b, 0) / arr.length) : 0;
+  });
+  const countData = labels.map(m => byMonth[m].count);
+
+  try {
+    const ctx = document.getElementById('priceChart')?.getContext('2d');
+    if (!ctx) return;
+    if (window._priceChart) window._priceChart.destroy();
+    window._priceChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels,
+        datasets: [
+          { label: 'HDB Resale Price (bar)', data: countData, backgroundColor: 'rgba(34,197,94,0.3)', order: 2, yAxisID: 'y1' },
+          { label: 'Avg PSF', data: avgPsfData, borderColor: '#fbbf24', backgroundColor: '#fbbf24', type: 'line', order: 1, yAxisID: 'y', tension: 0.3, pointRadius: 3 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { labels: { color: '#94a3b8', font: { size: 11 } } } },
+        scales: {
+          x: { ticks: { color: '#64748b', maxRotation: 45, maxTicksLimit: 20 } },
+          y: { position: 'left', ticks: { color: '#64748b', callback: v => '$' + v } },
+          y1: { position: 'right', grid: { display: false }, ticks: { color: '#64748b' } }
+        }
+      }
+    });
+  } catch(e) { /* chart fail silently */ }
+}
+
 // ── Map search filtering ──
 function filterMapMarkers(q) {
   const ql = (q || '').toLowerCase().trim();
@@ -332,8 +503,9 @@ function searchProjects(q) {
   const ql = (q || '').toLowerCase().trim();
   if (!ql) { el.innerHTML = ''; return; }
 
-  const results = projectsIndex
-    .filter(p => p.name.toLowerCase().includes(ql) || (p.street || '').toLowerCase().includes(ql))
+  const filtered = getIndex();
+  const results = filtered
+    .filter(p => p.name?.toLowerCase().includes(ql) || (p.street || p.town || '').toLowerCase().includes(ql))
     .slice(0, 20);
 
   if (!results.length) {
@@ -341,11 +513,14 @@ function searchProjects(q) {
     return;
   }
 
-  el.innerHTML = results.map(p => `
+  el.innerHTML = results.map(p => {
+    const isHDB = p.type === 'HDB';
+    return `
     <div class="search-result-item" onclick="navigate('/project/${p.id}')">
-      <div class="sr-name">${highlight(p.name, ql)}</div>
-      <div class="sr-meta">D${p.district || '?'} · $${fmtNum(p.avgPsf) || '-'} psf · ${p.totalTxns} txns ${p.years?.length ? '· ' + p.years[0] + '-' + p.years[p.years.length-1] : ''}</div>
-    </div>
+      <div class="sr-name">${isHDB ? '<span class="tag-hdb">HDB</span> ' : ''}${highlight(p.name, ql)}</div>
+      <div class="sr-meta">${isHDB ? p.town : 'D' + p.district} · $${fmtNum(p.avgPsf) || '-'} psf · ${fmtNum(p.totalTxns)} txns ${p.years?.length ? '· ' + p.years[0] + '-' + p.years[p.years.length-1] : ''}</div>
+    </div>`;
+  }).join('');
   `).join('');
 }
 
@@ -384,7 +559,9 @@ async function routeTo(path) {
     }
 
     if (p === 'project' && r[0]) {
-      await renderProject(r[0]);
+      const isHdb = r[0].startsWith('hdb-');
+      if (isHdb) await renderHdbProject(r[0]);
+      else await renderProject(r[0]);
     } else if (p === 'district' && r[0]) {
       renderDistrict(r[0]);
     } else if (p === 'map') {
@@ -413,6 +590,10 @@ function pageTxns(projectId, page) {
   if (!window._txPages) window._txPages = {};
   window._txPages[projectId] = page;
   renderProject(projectId);
+}
+
+function pageHdb(projectId, page) {
+  navigate('/project/' + projectId + '?page=' + page);
 }
 
 // ── Charts ──

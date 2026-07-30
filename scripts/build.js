@@ -15,6 +15,7 @@ import { writeFileSync, mkdirSync, existsSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { getToken, fetchAllTransactions, fetchTransactions, fetchRentals, processTransactions, processRentals } from './ura-fetcher.js';
+import { fetchHdbData, processHdbData } from './hdb-fetcher.js';
 
 // Helper: convert "mmyy" (e.g. "1225") to sortable "20yy-mm" ("2025-12")
 function toSortableDate(d) {
@@ -91,16 +92,25 @@ async function main() {
   }
 
   // 4. Process
-  console.log('\n4/5 Processing data...');
+  console.log('\n4/5 Processing URA data...');
   const projects = processTransactions(raw);
   const rentals = processRentals(rawRent);
   console.log(`  ${projects.length} projects, ${projects.reduce((s, p) => s + p.transactions.length, 0)} transactions`);
   console.log(`  ${rentals.length} rental records`);
 
+  // 4b. HDB Data
+  console.log('\n4b/5 Fetching HDB resale data...');
+  const hdbRaw = demo ? [] : await fetchHdbData(process.argv.includes('--fresh'));
+  const hdbProjects = demo ? [] : processHdbData(hdbRaw);
+  const hdbTxns = hdbProjects.reduce((s, p) => s + p.transactions.length, 0);
+  const hdbTotalTxns = hdbProjects.reduce((s, p) => s + p.stats.totalTransactions, 0);
+  console.log(`  ${hdbProjects.length} HDB blocks, ${hdbTxns} cached / ${hdbTotalTxns} total transactions`);
+  console.log(`  HDB data: ${hdbRaw.length.toLocaleString()} raw records spanning ${hdbProjects[0]?.stats.years[0] || '?'}-${hdbProjects[0]?.stats.years[hdbProjects[0]?.stats.years.length-1] || '?'} to today`);
+
   // 5. Generate output
   console.log('\n5/5 Generating files...');
 
-  // 5a. Project index
+  // 5a. URA project index
   const idx = projects.map(p => ({
     id: p.id, name: p.name, street: p.street,
     district: p.stats.districts[0] || null,
@@ -142,26 +152,71 @@ async function main() {
   }
   console.log(`  ${n} project detail files`);
 
-  // 5c. Districts
+  // 5c. HDB project index
+  const hdbIdx = hdbProjects.map(p => ({
+    id: p.id, name: p.name, town: p.town, type: 'HDB', coord: null,
+    avgPsf: p.stats.avgPsf, minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
+    totalTxns: p.stats.totalTransactions,
+    dateRange: p.stats.dateRange,
+    years: p.stats.years,
+    flatTypes: p.flatTypes,
+    street: p.street
+  }));
+  writeJSON(join(DATA, 'hdb-index.json'), hdbIdx);
+  console.log(`  hdb-index.json (${hdbIdx.length})`);
+
+  // 5d. Per-block HDB files
+  const HDB_DIR = join(DATA, 'hdb');
+  mkdir(HDB_DIR);
+  let m = 0;
+  for (const p of hdbProjects) {
+    writeJSON(join(HDB_DIR, `${p.id}.json`), {
+      id: p.id, name: p.name, type: 'HDB',
+      town: p.town, street: p.street, block: p.block,
+      flatTypes: p.flatTypes, flatModels: p.flatModels,
+      stats: p.stats,
+      transactions: p.transactions.slice(-500).map(t => ({
+        month: t.month, flatType: t.flatType, storeyRange: t.storeyRange,
+        floorAreaSqf: t.floorAreaSqf, pricePsf: t.pricePsf,
+        resalePrice: t.resalePrice, flatModel: t.flatModel,
+        remainingLease: t.remainingLease, leaseCommenceDate: t.leaseCommenceDate
+      }))
+    });
+    m++;
+  }
+  console.log(`  ${m} HDB block detail files`);
+
+  // 5e. Combined index (URA + HDB)
+  const combinedIdx = [
+    ...idx.map(p => ({ ...p, type: p.type || 'Private' })),
+    ...hdbIdx
+  ];
+  writeJSON(join(DATA, 'property-index.json'), combinedIdx);
+  console.log(`  property-index.json (${combinedIdx.length})`);
+
+  // 5f. Districts (URA only, HDB by town instead)
   const dists = buildDistricts(projects, rentals);
   writeJSON(join(DATA, 'districts.json'), dists);
   console.log(`  districts.json (${dists.length})`);
 
-  // 5d. Rentals
+  // 5h. Rentals
   writeJSON(join(DATA, 'rentals.json'), rentals);
   console.log(`  rentals.json (${rentals.length})`);
 
-  // 5e. Market summary
+  // 5i. Market summary
   const summary = buildSummary(projects, dists);
   writeJSON(join(DATA, 'market-summary.json'), summary);
   console.log('  market-summary.json');
 
-  // 5f. Build meta
+  // 5j. Build meta
   const secs = ((Date.now() - t0) / 1000).toFixed(1);
   writeJSON(join(DATA, 'build-meta.json'), {
     buildTime: new Date().toISOString(), elapsed: secs,
     projects: projects.length,
     transactions: projects.reduce((s, p) => s + p.transactions.length, 0),
+    hdbBlocks: hdbProjects.length,
+    hdbTransactions: hdbTxns,
+    hdbRawRecords: hdbRaw.length,
     rentals: rentals.length, demo
   });
   console.log('  build-meta.json');

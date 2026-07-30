@@ -10,6 +10,7 @@
     "build:demo": "node build.js --demo"
   },
   "dependencies": {
+    "csv-parse": "^7.0.1",
     "node-fetch": "^3.3.0",
     "proj4": "^2.21.0"
   }
