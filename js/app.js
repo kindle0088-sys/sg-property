@@ -10,8 +10,6 @@ async function router() {
   const hash = (location.hash.slice(1) || '/').replace(/^\/+/, '');
   const [path, ...rest] = hash.split('/');
 
-  showLoading();
-
   try {
     if (!projectsIndex.length) await loadData();
 
@@ -169,7 +167,7 @@ async function renderProject(id) {
 
   document.getElementById('main').innerHTML = `
     <div class="project-hero">
-      <a href="#" onclick="navigate('/')" style="font-size:13px">&larr; Back to Dashboard</a>
+      <a href="javascript:void(0)" onclick="navigate('/')" style="font-size:13px">&larr; Back to Dashboard</a>
       <h1>${p.name}</h1>
       <div class="sub">${p.street}${p.marketSegment ? ' · ' + p.marketSegment : ''}</div>
       <div class="project-meta">
@@ -246,7 +244,7 @@ function renderDistrict(d) {
 
   document.getElementById('main').innerHTML = `
     <div class="project-hero">
-      <a href="#" onclick="navigate('/')" style="font-size:13px">&larr; Back to Dashboard</a>
+      <a href="javascript:void(0)" onclick="navigate('/')" style="font-size:13px">&larr; Back to Dashboard</a>
       <h1>D${data.district} — ${data.name}</h1>
       <div class="sub">${data.sector} · ${data.projectCount} projects · ${fmtNum(data.totalTransactions)} transactions</div>
       <div class="project-meta">
@@ -426,6 +424,7 @@ const chartOptions = {
 function renderProjectMap(coord, name) {
   const el = document.getElementById('projectMap');
   if (!el) return;
+  if (typeof L === 'undefined') { el.innerHTML = '<div class="text-muted">Map library not loaded</div>'; return; }
   const map = L.map(el, { zoomControl: true }).setView([coord.lat, coord.lng], 15);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19, attribution: '&copy; OpenStreetMap'
@@ -437,6 +436,7 @@ function renderProjectMap(coord, name) {
 function renderFullMap() {
   const el = document.getElementById('fullMap');
   if (!el) return;
+  if (typeof L === 'undefined') { el.innerHTML = '<div class="text-muted">Map library (Leaflet) not loaded. Check your network or ad-blocker.</div>'; return; }
   const map = L.map(el, { zoomControl: true }).setView([1.3521, 103.8198], 11);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19, attribution: '&copy; OpenStreetMap'
