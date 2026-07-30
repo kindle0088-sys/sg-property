@@ -7,7 +7,7 @@ let marketSummary = null;
 
 // ── Page router ──
 async function router() {
-  const hash = location.hash.slice(1) || '/';
+  const hash = (location.hash.slice(1) || '/').replace(/^\/+/, '');
   const [path, ...rest] = hash.split('/');
 
   showLoading();
@@ -279,13 +279,18 @@ function renderDistrict(d) {
 function renderMapView() {
   document.getElementById('main').innerHTML = `
     <div class="project-hero">
-      <a href="#" onclick="navigate('/')" style="font-size:13px">&larr; Back to Dashboard</a>
+      <a href="#" onclick="navigate('/');return false" style="font-size:13px">&larr; Back to Dashboard</a>
       <h1>Project Map</h1>
       <div class="sub">${projectsIndex.filter(p=>p.coord).length} projects with coordinates</div>
     </div>
     <div class="map-container" id="fullMap" style="height:550px"></div>
   `;
-  renderFullMap();
+  try {
+    renderFullMap();
+  } catch (e) {
+    document.getElementById('main').innerHTML +=
+      `<div class="error" style="margin-top:12px">⚠️ Map failed to load: ${e.message}</div>`;
+  }
 }
 
 // ── Search ──
