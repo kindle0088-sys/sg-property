@@ -5,27 +5,10 @@ let projectsIndex = [];
 let districtsData = [];
 let marketSummary = null;
 
-// ── Page router ──
-async function router() {
+// ── Page router (hashchange handler) ──
+function router() {
   const hash = (location.hash.slice(1) || '/').replace(/^\/+/, '');
-  const [path, ...rest] = hash.split('/');
-
-  try {
-    if (!projectsIndex.length) await loadData();
-
-    if (path === 'project' && rest[0]) {
-      await renderProject(rest[0]);
-    } else if (path === 'district' && rest[0]) {
-      renderDistrict(rest[0]);
-    } else if (path === 'map') {
-      renderMapView();
-    } else {
-      renderDashboard();
-    }
-  } catch (err) {
-    document.getElementById('main').innerHTML =
-      `<div class="error">⚠️ ${err.message}</div>`;
-  }
+  routeTo(hash);
 }
 
 // ── Load data ──
@@ -324,9 +307,46 @@ function highlight(text, query) {
 
 // ── Navigation ──
 function navigate(path) {
+  // Set hash for bookmarkability
   location.hash = '#' + path;
+  // Directly call the router (reliable across all browsers)
+  routeTo(path);
 }
 
+// Route to a path directly (no hash dependency)
+async function routeTo(path) {
+  const parts = path.replace(/^\/+/, '').split('/');
+  const p = parts[0] || '';
+  const r = parts.slice(1);
+
+  try {
+    // If on initial load, show a loading state
+    if (!projectsIndex.length) {
+      document.getElementById('main').innerHTML =
+        `<div class="loading"><div class="spinner"></div>Loading...</div>`;
+      await loadData();
+      if (!projectsIndex.length) {
+        document.getElementById('main').innerHTML =
+          `<div class="error">⚠️ Failed to load property data. Please check your network connection and try refreshing.</div>`;
+        return;
+      }
+    }
+
+    if (p === 'project' && r[0]) {
+      await renderProject(r[0]);
+    } else if (p === 'district' && r[0]) {
+      renderDistrict(r[0]);
+    } else if (p === 'map') {
+      renderMapView();
+    } else {
+      renderDashboard();
+    }
+  } catch (err) {
+    console.error('Route error:', err);
+    document.getElementById('main').innerHTML =
+      `<div class="error">⚠️ ${err.message}</div>`;
+  }
+}
 // ── Tab switching ──
 function switchTab(el, id) {
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
