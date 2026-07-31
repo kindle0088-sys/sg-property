@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stirling Residences 尚景苑 — D3 Queenstown RCR 大盘深度投资分析</title>
+<style>
+:root{--bg:#0b1120;--card:#1e293b;--card2:#273449;--gold:#fbbf24;--blue:#60a5fa;--green:#22c55e;--red:#ef4444;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+.hero{background:linear-gradient(135deg,#0f172a,#1e293b 60%,#3b2f1a);border:1px solid #334155;border-radius:16px;padding:36px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero::after{content:"SR";position:absolute;right:-20px;top:-40px;font-size:160px;font-weight:800;color:rgba(251,191,36,.06)}
+.hero .tag{display:inline-block;background:rgba(251,191,36,.15);color:var(--gold);border:1px solid rgba(251,191,36,.4);padding:3px 12px;border-radius:20px;font-size:12px;margin-bottom:14px}
+.hero h1{font-size:30px;font-weight:700;margin-bottom:6px}
+.hero .sub{color:var(--text2);font-size:14px;margin-bottom:16px}
+.hero .score-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hero .score{font-size:52px;font-weight:800;color:var(--gold)}
+.hero .score-label{font-size:13px;color:var(--text2)}
+.hero .score-verdict{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.4);color:#86efac;padding:6px 16px;border-radius:8px;font-weight:600}
+.hero .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:22px}
+.hero .meta-grid .m{background:rgba(15,23,42,.6);border:1px solid #334155;border-radius:10px;padding:10px 14px}
+.hero .meta-grid .m .k{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+.hero .meta-grid .m .v{font-size:15px;font-weight:600;color:var(--text);margin-top:2px}
+.section{margin-top:34px}
+.section h2{font-size:21px;font-weight:700;color:var(--gold);border-left:4px solid var(--gold);padding-left:12px;margin-bottom:16px}
+.highlight-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.35);border-radius:12px;padding:16px 20px;margin:14px 0;font-size:14px}
+.highlight-box b{color:var(--gold)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 20px}
+.card h3{font-size:16px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card p{font-size:14px;color:var(--text2)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}
+th{background:var(--card2);color:var(--gold);font-weight:600;text-align:left;padding:10px 12px;font-size:13px}
+td{padding:9px 12px;border-bottom:1px solid #334155}
+tr:hover td{background:rgba(51,65,85,.25)}
+.num{font-variant-numeric:tabular-nums}
+.num-green{color:#6ee7b7}
+.num-red{color:#fca5a5}
+.dim{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 22px;margin-bottom:16px}
+.dim-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.dim-score{font-size:34px;font-weight:800;color:var(--gold);min-width:64px;text-align:center}
+.dim-title{font-size:17px;font-weight:700}
+.dim-weight{font-size:12px;color:var(--text3)}
+.stars{color:var(--gold);letter-spacing:2px;font-size:13px}
+.fac-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fac-tags span{background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:var(--blue);padding:4px 12px;border-radius:20px;font-size:12px}
+.fac-tags span.ok{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.4);color:#86efac}
+.fac-tags span.miss{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35);color:#fca5a5}
+.quote{background:var(--card2);border-left:3px solid var(--blue);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;color:var(--text2)}
+.quote b{color:var(--text)}
+.quote .src{display:block;font-size:12px;color:var(--text3);margin-top:6px}
+.risk-warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.4);border-radius:12px;padding:16px 20px;margin:14px 0}
+.risk-warn b{color:#fca5a5}
+.verdict-box{background:linear-gradient(135deg,#1e293b,#273449);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:24px 28px;margin-top:18px}
+.verdict-box h3{color:var(--gold);margin-bottom:12px;font-size:18px}
+.verdict-box .fit{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.verdict-box .fit div{flex:1;min-width:200px;background:rgba(15,23,42,.5);border-radius:10px;padding:14px 16px}
+.verdict-box .fit .fit-yes b{color:#86efac}
+.verdict-box .fit .fit-no b{color:#fca5a5}
+.disclaimer{margin-top:40px;padding-top:20px;border-top:1px solid #334155;font-size:12px;color:var(--text3)}
+.back-link{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--blue);text-decoration:none}
+.back-link:hover{text-decoration:underline}
+.pct-up{color:#fca5a5}
+.pct-down{color:#6ee7b7}
+@media(max-width:768px){.grid2,.grid3{grid-template-columns:1fr}.hero h1{font-size:24px}.hero .score{font-size:40px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back-link" href="../">← 返回研报索引</a>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="tag">D3 Queenstown · RCR 城市边缘 · 99年地契</span>
+  <h1>Stirling Residences 尚景苑</h1>
+  <div class="sub">21-25 Stirling Road, Singapore · 1,259 户 · TOP 2022 · 中资双雄（Logan + Nanshan）联袂</div>
+  <div class="score-row">
+    <div><span class="score">6.8</span><div class="score-label">综合评分 / 10</div></div>
+    <span class="score-verdict">✅ 可考虑 — 自住优先的 RCR 大盘</span>
+  </div>
+  <div class="meta-grid">
+    <div class="m"><div class="k">地契</div><div class="v">99 年 (2017起)</div></div>
+    <div class="m"><div class="k">总单位</div><div class="v">1,259 套</div></div>
+    <div class="m"><div class="k">塔楼</div><div class="v">3 栋 (38-40层)</div></div>
+    <div class="m"><div class="k">最近 MRT</div><div class="v">Queenstown 3-5min</div></div>
+    <div class="m"><div class="k">成交均价</div><div class="v">$2,401 psf (1y)</div></div>
+    <div class="m"><div class="k">租金回报</div><div class="v">3.6% 毛收益</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<div class="section">
+  <h2>📌 执行摘要</h2>
+  <div class="highlight-box">
+    <b>一句话结论：</b>Stirling Residences 是 Queenstown 核心区罕见的不临主路大盘——1,259 户 × 3-5 分钟步行 MRT × 全 Singapore 最活跃的转售流动性之一。2022 年 TOP 至今 438 笔成交 <b>零亏损</b>，2026 年 6 月还创出 $2,800 psf 新高。但它本质是"买了住得很舒服"的盘，不是"买了等着涨"的盘——3.6% 租售比在 RCR 新盘里不算突出，99 年地契只剩 90 年，且 D3 板块 2024-2026 年扎堆上市了 Zyron Grand、Penrith 等新盘形成竞争。<b>自住 8 分、纯投资 6 分。</b>
+  </div>
+</div>
+
+<!-- 项目核心参数 -->
+<div class="section">
+  <h2>🏗️ 项目核心参数</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>📐 基本信息</h3>
+      <table>
+        <tr><td>地块面积</td><td class="num">227,223 sqft / 21,110 sqm</td></tr>
+        <tr><td>容积率 (Plot Ratio)</td><td class="num">4.2</td></tr>
+        <tr><td>土地性质</td><td>99 年地契（2017-08-18 起）</td></tr>
+        <tr><td>土地成本</td><td class="num">$1,003M（2017 年首个破 $1B 住宅地块）</td></tr>
+        <tr><td>盈亏平衡</td><td class="num">≈$1,542 psf</td></tr>
+        <tr><td>建筑师</td><td>P&T Consultants</td></tr>
+        <tr><td>总包</td><td>China Construction (South Pacific)</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🏢 楼栋与户型</h3>
+      <table>
+        <tr><td>楼栋</td><td>3 塔（1×38层 + 2×40层）</td></tr>
+        <tr><td>车位</td><td class="num">1,259（1:1 罕见配置）</td></tr>
+        <tr><td>1BR / 1BR+Study</td><td class="num">441-710 sqft · 227 套 (18%)</td></tr>
+        <tr><td>2BR (含P/Study)</td><td class="num">624-980 sqft · 687 套 (55%)</td></tr>
+        <tr><td>3BR (含P/U)</td><td class="num">883-1,281 sqft · 263 套 (21%)</td></tr>
+        <tr><td>4BR + PH</td><td class="num">1,346-1,970 sqft · 82 套 (7%)</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>🎪 配套设施（70+ 项，分类速览）</h3>
+    <div class="fac-tags">
+      <span class="ok">50m Lap Pool + 30m Pool</span>
+      <span class="ok">Spa Deck + Steam Room</span>
+      <span class="ok">Aqua Gym + Gym</span>
+      <span class="ok">Tennis Court</span>
+      <span class="ok">4 个 Sky/Roof Terrace</span>
+      <span class="ok">BBQ + Teppanyaki Pavilion ×2</span>
+      <span class="ok">Putting Green</span>
+      <span class="ok">儿童乐园 + Childcare Centre</span>
+      <span class="ok">图书馆 + Function Room</span>
+      <span class="ok">Koi Pond + 禅意园林</span>
+      <span class="miss">无篮球/羽毛球场</span>
+    </div>
+    <p style="margin-top:12px;font-size:13px;color:var(--text2)">点评：园林和休息空间占比极高（设计师把所有预算砸在了"森林浴"主题上），但纯运动设施偏少，BBQ 位仅 2 个对 1,259 户而言偏紧。</p>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🚇 交通与通勤</h3>
+      <table>
+        <tr><td>Queenstown MRT (EW19)</td><td class="num-green">步行 3-5 分钟 (约400m)</td></tr>
+        <tr><td>Commonwealth MRT</td><td class="num">步行 ~680m</td></tr>
+        <tr><td>CBD (Raffles Place)</td><td class="num">MRT 约 10 分钟</td></tr>
+        <tr><td>Orchard Road</td><td class="num">车程约 10 分钟</td></tr>
+        <tr><td>AYE / Farrer Rd</td><td class="num">几分钟上高速</td></tr>
+        <tr><td>巴士站</td><td class="num">步行 3 分钟内 3 个</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🏫 教育���2km 内 12 所，9 所 1km）</h3>
+      <table>
+        <tr><td>Queenstown Primary</td><td class="num">350m</td></tr>
+        <tr><td>Alexandra Primary</td><td class="num">860m</td></tr>
+        <tr><td>GIIS Queenstown</td><td class="num">230m</td></tr>
+        <tr><td>Tanglin Trust (国际)</td><td class="num">280m</td></tr>
+        <tr><td>River Valley High</td><td class="num">460m</td></tr>
+        <tr><td>Queensway Secondary</td><td class="num">230m</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 七维评分 -->
+<div class="section">
+  <h2>📊 七维评分</h2>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.0</div>
+      <div>
+        <div class="dim-title">🗺️ 地段 Location <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>Queenstown 是新加坡第一个卫星镇，成熟度无可挑剔。项目<b>不临主路</b>（背靠有地住宅区），既躲开了 MRT 高架噪音，又保持 3-5 分钟步行到 EW19。周边 Anchorpoint、Alexandra Central、Queensway Shopping Centre、IKEA Alexandra 全部步行可达；Mei Chin Road 巴刹就在马路对面。对 D3 来说这是"闹中取静"的最优解——Queenstown 板块里 Commonwealth Towers 和 Queens Peak 都贴着 MRT 太吵，Stirling 是��一"安静 + 近 MRT"兼得的盘。9 所小学在 1km 内，家庭客友好。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">5.0</div>
+      <div>
+        <div class="dim-title">💰 租金回报 Rental Yield <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★★★☆☆☆☆☆</div>
+      </div>
+    </div>
+    <p>毛回报率约 <b>3.6%</b>（URA 12 个月租金数据：$5.5-9.3 psf/月，均值 $7.2 psf/月）。租金绝对值不低（1BR $2,400+、2BR $3,800-4,500），但入场价太高摊薄了回报——$2,400 psf 的价位决定了这是"赚价差"型资产，不是"吃现金流"型。对比 RCR 同类新盘（Avenue South Residence 等）属正常水平，D3 板块里没有明显套利空间。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">7.0</div>
+      <div>
+        <div class="dim-title">📈 资本增值 Capital Appreciation <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★★★☆☆☆</div>
+      </div>
+    </div>
+    <p>增值履历非常健康：2021 年 $2,047 → 2022 $2,156 → 2023 $2,284 → 2024 $2,322 → 2025 $2,379 → 2026 $2,439 psf，五年 +19%，<b>Square Foot Research 统计 152 笔转售全部盈利、零亏损</b>。2026 年 6 月一笔 3BR（1,055 sqft, 31-35层）成交 $2,953,888 = <b>$2,800 psf，创板块新纪录</b>。中长期利好：Greater Southern Waterfront（大南部滨海区）规划、one-north 科创走廊扩围、Holland Village 连接带。但注意 D3 供应端 2024-2026 涌现 Zyron Grand ($3,050 psf)、Penrith ($2,795)、One Pearl Bank ($2,569) 等新盘，短期供应压力存在。地契还剩 90 年，远未进入折价区。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">6.0</div>
+      <div>
+        <div class="dim-title">🏢 开发商 Developer <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★☆☆☆☆</div>
+      </div>
+    </div>
+    <p>Logan Property（港交所上市 3380.HK）+ Nanshan Group（南山集团）联合体。两者都是中资巨头，Logan 在中国开发超 110 个项目、250M sqft 体量，但<b>在新加坡本地盘不多</b>，缺乏本土口碑沉淀。BCA CONQUAS 评级 <b>Band 3</b>（中等，非顶级），且 Logan 旗下另一个项目 The Florence Residences 被 BCA 标记为"Not Banded"且有大量渗水类 major defect 投诉——虽与 Stirling 无关，但给品牌减分。Stirling 本身的交付口碑尚可（见住户评价），早期对中资开发商"偷工减料"的质疑后来被 152 笔零亏损转售证明不成立。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">6.0</div>
+      <div>
+        <div class="dim-title">💸 持有成本 Holding Costs <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★☆☆☆☆</div>
+      </div>
+    </div>
+    <p>1,259 户大盘摊薄后物业费尚可（2BR 约 $350-450/月），但 3 栋 38-40 层高塔的电梯维护、园林养护成本会随楼龄逐年爬升。物业税按出租/自住档位走标准 RCR 水平。2022 年 TOP 的新盘意味着短期内无大修基金压力，但持有 10 年以上需关注 MCST 储备金是否充足（住户已反映维护偏 spotty，见评价章节）。自住首套税负可控。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.0</div>
+      <div>
+        <div class="dim-title">🔄 退出流动性 Exit Liquidity <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>这是 Stirling 最强的单项。1,259 户大盘 + Queenstown 成熟区 = <b>新加坡转售市场最活跃的盘之一</b>：2024 年 100 笔、2025 年 116 笔成��，2026 年 7 个月已 64 笔；EdgeProp 2026 年 4 月还把它列为全岛两周内成交最活跃的 resale 项目。2BR 是绝对主力（占 55%），恰好是市场最深、最容易出手的户型。当前 PropertyGuru 挂售 56-63 套、价格 $2,016-2,837 psf，议价空间约 3-5%，属于大盘正常水平。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">6.0</div>
+      <div>
+        <div class="dim-title">⚠️ 风险控制 Leverage &amp; Risk <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★☆☆☆☆</div>
+      </div>
+    </div>
+    <p>主要风险：① <b>99 年地契剩 90 年</b>——短期内无碍，但 2040 年代后进入 lease decay 讨论区；② <b>高 psf + 高利率敏感</b>——$2,400 psf 对利率变化弹性大，若利率反弹 1%，2BR 月供增加约 $400-500；③ <b>D3 供应扎堆</b>——周边多个新盘 2024-2026 陆续 TOP，二手挂牌价受一手尾盘压制；④ 大盘租客比例高（46.5% 买家来自 HDB 升级、相当部分为出租），租客流动性可能影响居住氛围。SSD 窗口：2022 年 TOP 前买的都已过 3 年锁定期，新买家 3 年内出售仍要交 SSD。</p>
+  </div>
+</div>
+
+<!-- 价格走势 -->
+<div class="section">
+  <h2>📈 价格走势与区域对比</h2>
+  <div class="card">
+    <table>
+      <thead><tr><th>年份</th><th>成交数</th><th>均价 PSF</th><th>同比</th></tr></thead>
+      <tbody>
+        <tr><td>2021</td><td class="num">8</td><td class="num">$2,047</td><td class="num">—</td></tr>
+        <tr><td>2022</td><td class="num">76</td><td class="num">$2,156</td><td class="num pct-up">+5.3%</td></tr>
+        <tr><td>2023</td><td class="num">74</td><td class="num">$2,284</td><td class="num pct-up">+5.9%</td></tr>
+        <tr><td>2024</td><td class="num">100</td><td class="num">$2,322</td><td class="num pct-up">+1.7%</td></tr>
+        <tr><td>2025</td><td class="num">116</td><td class="num">$2,379</td><td class="num pct-up">+2.5%</td></tr>
+        <tr><td>2026 (至7月)</td><td class="num">64</td><td class="num">$2,439</td><td class="num pct-up">+2.5%</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--text3)">数据源：URA PMI_Resi_Transaction（经自有 dashboard 交叉验证，438 笔全量）</p>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🏙️ D3 板块竞品对比（12 个月均价）</h3>
+      <table>
+        <thead><tr><th>项目</th><th>地契</th><th>均价 PSF</th></tr></thead>
+        <tbody>
+          <tr><td>Zyron Grand</td><td>99 (2024起)</td><td class="num">$3,050</td></tr>
+          <tr><td>Penrith</td><td>99 (2024起)</td><td class="num">$2,795</td></tr>
+          <tr><td>One Pearl Bank</td><td>99 (2019起)</td><td class="num">$2,569</td></tr>
+          <tr><td><b>Stirling Residences</b></td><td>99 (2017起)</td><td class="num" style="color:var(--gold)"><b>$2,401</b></td></tr>
+          <tr><td>Avenue South Residence</td><td>99 (2018起)</td><td class="num">$2,260</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text3);margin-top:8px">Stirling 在 D3 次新盘里 psf 最低——不是因为它差，而是因为它是 2017 年拿的地（成本 $1,542 psf），比 2024 年拿地的 Zyron Grand 便宜一大截，<b>性价比反而是它的卖点</b>。</p>
+    </div>
+    <div class="card">
+      <h3>🧾 交易画像</h3>
+      <table>
+        <tbody>
+          <tr><td>买家身份：新加坡人</td><td class="num">76.3%</td></tr>
+          <tr><td>买家身份：PR</td><td class="num">19.7%</td></tr>
+          <tr><td>买家身份：外国人</td><td class="num">3.9%</td></tr>
+          <tr><td>来自 HDB 升级</td><td class="num">46.5%</td></tr>
+          <tr><td>来自私宅</td><td class="num">53.5%</td></tr>
+          <tr><td>历史高 / 低</td><td class="num">$2,800 / $1,531 psf</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:12px;color:var(--text3);margin-top:8px">一半买家是 HDB 升级者——说明这个盘是"组屋换公寓"路径上的主力承接盘，接盘人群基础扎实。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 真实居住体验 -->
+<div class="section">
+  <h2>🏡 真实居住体验</h2>
+
+  <div class="quote">
+    <b>"小区环境绝对五星级，2022 年的 TOP 楼盘，整体设施非常新……三个 BBQ 区域特别适合朋友聚会。"</b>
+    <span class="src">[百度看房日记，现住户，2026] — 现住户好评，但指出卧室偏小："适合两个人住的小家庭，有老人/保姆/小孩会有点挤"</span>
+  </div>
+
+  <div class="quote">
+    <b>"这是 Queenstown 板块唯一不贴 MRT、不受进出站噪音影响的私宅——Queenstown MRT 步行 3 分钟，位置安静到有点意外。"</b>
+    <span class="src">[Stacked Homes 实地探访，2025] — 专业测评确认"闹中取静"属性；同时批评维护 spotty："停车场低层脏、部分电梯大堂角落磨损、只有 2 个 BBQ 位对 1,259 户偏少"</span>
+  </div>
+
+  <div class="quote">
+    <b>"景观好、园林设计一流……但隔音一般，能听到邻居脚步声；高峰期电梯等得久；物业管理响应效率一般。"</b>
+    <span class="src">[Wheree 聚合用户评价 7.4/10，2026] — 分项：设施 8.0 / 设计 7.5 / 环境 7.2 / 安全 6.9 / 建造质量 6.5 / 位置 8.5</span>
+  </div>
+
+  <div class="highlight-box" style="margin-top:16px">
+    <b>居住体验综合评级：⭐⭐⭐⭐☆ 4.2 / 5</b><br>
+    优点：环境安静、园林出色、设施新、位置满分（评分 8.5）、1:1 车位。<br>
+    缺点：隔音一般（大盘高塔通病）、电梯高峰期排队、维护保养跟 2022 年楼龄不符（停车场/大堂磨损明显）、运动设施种类偏少。<br>
+    <b>结论：住着舒服的"品质盘"，但物业管理水准是未来 10 年最大的不确定变量——1,259 户大盘的 MCST 决策效率直接影响居住体验和二手价格。</b>
+  </div>
+</div>
+
+<!-- 风险提示 -->
+<div class="section">
+  <h2>⚠️ 风险提示</h2>
+  <div class="risk-warn">
+    <b>重点风险：</b>
+    <ol style="margin:10px 0 0 18px;font-size:14px">
+      <li><b>租售比仅 3.6%</b> —— 在 $2,400 psf 的高位上，纯投资现金流回报偏低，赚的是价差不是租金。</li>
+      <li><b>99 年地契剩 90 年</b> —— 2026 年入场，到 2070 年还剩 60 年，届时买家贷款和转售会开始承压（虽是很远期的事）。</li>
+      <li><b>D3 供应扎堆</b> —— Zyron Grand / Penrith / One Pearl Bank 等新盘陆续 TOP，二手挂牌竞争加剧，短期价格天花板受压。</li>
+      <li><b>物业管理存疑</b> —— 住户多次反馈维护滞后，若 MCST 不提高管理费标准，10 年后小区品质可能下滑。</li>
+      <li><b>利率敏感性</b> —— 高 psf 意味着高杠杆，利率上行周期月供压力显著。</li>
+      <li><b>中资开发商口碑</b> —— Logan/Nanshan 新加坡本地盘少，品牌溢价能力弱于本地老牌开发商。</li>
+    </ol>
+  </div>
+</div>
+
+<!-- 最终结论 -->
+<div class="section">
+  <h2>🎯 最终结论</h2>
+  <div class="verdict-box">
+    <h3>综合评分 6.8 / 10 — 可考虑（自住优先）</h3>
+    <p>Stirling Residences 的本质是：<b>用 2017 年的土地成本，买到 2026 年 Queenstown 最稀缺的"安静 + 近 MRT"组合</b>。它的 152 笔转售零亏损、全岛最活跃流动性、$2,800 psf 新纪录都是"地板很硬"的证明——但 3.6% 租售比和 90 年地契决定了它更适合"住十年以上"的人。</p>
+    <div class="fit">
+      <div class="fit-yes">
+        <b>✅ 适合：</b><br>
+        自住家庭（9 所小学 1km）<br>
+        HDB 升级者（46.5% 的邻居都是）<br>
+        Queenstown 老居民置换<br>
+        one-north / CBD 上班族<br>
+        追求安静但不愿牺牲便利的人
+      </div>
+      <div class="fit-no">
+        <b>❌ 不适合：</b><br>
+        纯收租型投资者（3.6% 太低）<br>
+        3-5 年短线炒作（SSD + 供应压力）<br>
+        追求运动设施全配的人<br>
+        预算敏感的大户型买家（4BR $1,346 sqft 起约 $3.2M+）
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:14px;color:var(--text2)">
+      <b style="color:var(--gold)">买入建议：</b>2BR（624-980 sqft）是性价比和流动性的甜点区，$1.5-1.8M 可以拿下；3BR 高楼层（$2,600-2,800 psf）虽有海景/城景溢价，但要接受"为景观多付 15%"的代价。谈判空间存在（当前挂售议价 3-5%），不急的话等 Q4 再入。
+    </p>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <b>免责声明：</b>本报告基于公开数据（URA、EdgeProp、BCA、PropertyGuru、Stacked Homes、Wheree 等）与自有 dashboard 交叉验证整理，仅供投资参考，不构成买卖建议。房地产市场受政策、利率、宏观经济影响波动较大，请结合自身财务状况独立决策。数据截至 2026-07-31。
+</div>
+
+</div>
+</body>
+</html>
