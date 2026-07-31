@@ -11,11 +11,50 @@
  *   node build.js          (full fetch, 4 batches)
  */
 
-import { writeFileSync, mkdirSync, existsSync } from 'fs';
+import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { getToken, fetchAllTransactions, fetchTransactions, fetchRentals, processTransactions, processRentals } from './ura-fetcher.js';
 import { fetchHdbData, processHdbData } from './hdb-fetcher.js';
+
+// ── Amenities (MRT stations + schools) for proximity enrichment ──
+let MRT_STATIONS = [];
+let SCHOOLS = [];
+
+function loadAmenities() {
+  try { MRT_STATIONS = JSON.parse(readFileSync(join(DATA, 'mrt-stations.json'), 'utf-8')); } catch (e) { MRT_STATIONS = []; }
+  try { SCHOOLS = JSON.parse(readFileSync(join(DATA, 'schools.json'), 'utf-8')); } catch (e) { SCHOOLS = []; }
+  console.log(`  Amenities: ${MRT_STATIONS.length} MRT stations, ${SCHOOLS.length} schools`);
+}
+
+// Haversine distance in meters between two lat/lng points
+function haversineM(lat1, lng1, lat2, lng2) {
+  const R = 6371000;
+  const toRad = d => d * Math.PI / 180;
+  const dLat = toRad(lat2 - lat1), dLng = toRad(lng2 - lng1);
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+  return 2 * R * Math.asin(Math.sqrt(a));
+}
+
+// Nearest MRT station + primary schools within 1km for a project coordinate
+function enrichProximity(coord) {
+  if (!coord || !coord.lat || !coord.lng) return null;
+  let nearest = null, nearestDist = Infinity;
+  for (const s of MRT_STATIONS) {
+    const d = haversineM(coord.lat, coord.lng, s.lat, s.lng);
+    if (d < nearestDist) { nearestDist = d; nearest = s; }
+  }
+  const schools1km = SCHOOLS
+    .filter(s => haversineM(coord.lat, coord.lng, s.lat, s.lng) <= 1000)
+    .map(s => s.name)
+    .slice(0, 5); // cap display at 5
+  return {
+    nearestMrt: nearest ? nearest.name : null,
+    nearestMrtDistM: nearest ? Math.round(nearestDist) : null,
+    schools1km,
+    schoolCount1km: SCHOOLS.filter(s => haversineM(coord.lat, coord.lng, s.lat, s.lng) <= 1000).length
+  };
+}
 
 // Helper: convert "mmyy" (e.g. "1225") to sortable "20yy-mm" ("2025-12")
 function toSortableDate(d) {
@@ -79,6 +118,7 @@ async function main() {
   console.log();
 
   mkdir(DATA); mkdir(PROJ_DIR);
+  loadAmenities();
 
   // 1. Token
   console.log('1/5 Getting URA token...');
@@ -177,7 +217,8 @@ async function main() {
     coord: p.coord,
     propertyTypes: p.stats.propertyTypes,
     tenureTypes: p.stats.tenureTypes,
-    years: p.stats.years
+    years: p.stats.years,
+    proximity: enrichProximity(p.coord)
   }));
   writeJSON(join(DATA, 'projects-index.json'), idx);
   console.log(`  projects-index.json (${idx.length})`);
@@ -189,6 +230,7 @@ async function main() {
     writeJSON(join(PROJ_DIR, `${p.id}.json`), {
       id: p.id, name: p.name, street: p.street,
       marketSegment: p.marketSegment, coord: p.coord,
+      proximity: enrichProximity(p.coord),
       stats: { ...p.stats, avgPsf1y: avg1y },
       fmtFirstDate: fmtDate(p.stats.dateRange.min),
       fmtLastDate: fmtDate(p.stats.dateRange.max),
@@ -358,6 +400,29 @@ function buildDistricts(projects, rentals, cutoff) {
         byBedroom: byBd
       };
     }
+    // Investment metrics: 5-year appreciation (from byYear) + gross rental yield
+    const yrKeys = Object.keys(years).sort();
+    const curYear = new Date().getFullYear();
+    const targetY = String(curYear - 5);
+    const oldestKey = yrKeys.find(y => y >= targetY) || yrKeys[0];
+    const latestKey = yrKeys[yrKeys.length - 1];
+    let appreciation5y = null, appreciation5yCagr = null;
+    if (oldestKey && latestKey && oldestKey !== latestKey) {
+      const o = years[oldestKey]?.avgPsf;
+      const l = years[latestKey]?.avgPsf;
+      if (o > 0 && l > 0) {
+        const ratio = l / o;
+        const span = Math.max(parseInt(latestKey) - parseInt(oldestKey), 1);
+        appreciation5y = Math.round((ratio - 1) * 1000) / 10;          // cumulative %
+        appreciation5yCagr = Math.round((Math.pow(ratio, 1 / span) - 1) * 1000) / 10; // annualized %
+      }
+    }
+    // Gross rental yield: median rent × 12 / (median PSF × 1000 sqf typical unit)
+    const medianPsfVal = sorted.length ? sorted[Math.floor(sorted.length / 2)] : 0;
+    let grossYieldPct = null;
+    if (rentalSummary?.median && medianPsfVal > 0) {
+      grossYieldPct = Math.round(rentalSummary.median * 12 / (medianPsfVal * 1000) * 1000) / 10;
+    }
     return {
       district: d.district, name: d.name, sector: d.sector,
       projectCount: d.projectCount, totalTransactions: d.totalTransactions,
@@ -366,7 +431,8 @@ function buildDistricts(projects, rentals, cutoff) {
       medianPsf: sorted.length ? sorted[Math.floor(sorted.length / 2)] : 0,
       minPsf: sorted[0] || 0, maxPsf: sorted[sorted.length - 1] || 0,
       byYear: years,
-      rental: rentalSummary
+      rental: rentalSummary,
+      appreciation5y, appreciation5yCagr, grossYieldPct
     };
   });
 }
@@ -442,6 +508,13 @@ function buildSummary(projects, districts, hdbProjects) {
   const hdbPsf1y = hdbProjects ? hdbProjects.map(p => p.stats.avgPsf1y || 0).filter(Boolean) : [];
   const hdbTxns = hdbProjects ? hdbProjects.reduce((s, p) => s + p.stats.totalTransactions, 0) : 0;
   const hdbTowns = hdbProjects ? [...new Set(hdbProjects.map(p => p.town).filter(Boolean))].length : 0;
+
+  // Island-wide investment metrics (derived from district-level aggregates)
+  const active = districts.filter(d => d.projectCount > 0 && d.avgPsf > 0);
+  const ylds = active.map(d => d.grossYieldPct).filter(v => v != null);
+  const apprs = active.map(d => d.appreciation5y).filter(v => v != null);
+  const median = arr => arr.length ? arr.sort((a, b) => a - b)[Math.floor(arr.length / 2)] : null;
+
   return {
     buildTime: new Date().toISOString(),
     totalProjects: projects.length,
@@ -454,7 +527,9 @@ function buildSummary(projects, districts, hdbProjects) {
     hdbTransactions: hdbTxns,
     hdbAvgPsf: hdbPsf.length ? Math.round(hdbPsf.reduce((a, b) => a + b, 0) / hdbPsf.length) : 0,
     hdbAvgPsf1y: hdbPsf1y.length ? Math.round(hdbPsf1y.reduce((a, b) => a + b, 0) / hdbPsf1y.length) : 0,
-    hdbTowns: hdbTowns
+    hdbTowns: hdbTowns,
+    grossYieldMedianPct: median(ylds),
+    appreciation5yMedianPct: median(apprs)
   };
 }
 

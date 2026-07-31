@@ -2,6 +2,20 @@
 import { state } from '../state.js';
 import { fmtNum, fmtPrice, showPsf, psfTrend } from '../utils.js';
 
+// ── Investment metric helper (shared by district cards & detail) ──
+export function invMetric(d) {
+  const parts = [];
+  if (d.grossYieldPct != null) {
+    parts.push(`<span class="inv-yield">Yield ${d.grossYieldPct.toFixed(1)}%</span>`);
+  }
+  if (d.appreciation5y != null) {
+    const v = d.appreciation5y;
+    const cls = v >= 0 ? 'text-red' : 'text-green';
+    parts.push(`<span class="${cls}">5y ${v >= 0 ? '+' : ''}${v.toFixed(1)}%</span>`);
+  }
+  return parts.length ? `<div class="d-inv">${parts.join(' · ')}</div>` : '';
+}
+
 // ── Private Dashboard view ──
 export function renderPrivateDashboard() {
   const dists = state.districtsData;
@@ -54,6 +68,7 @@ export function renderPrivateDashboard() {
             <span class="d-sector ${d.sector.toLowerCase()}">${d.sector}</span>
           </div>
           <div class="d-psf">$${fmtNum(d.avgPsf1y || d.avgPsf || d.medianPsf)}<span class="d-psf-label">1yr avg</span></div>
+          ${invMetric(d)}
           <div class="d-detail">
             <span>${d.projectCount} projects</span>
             <span>${fmtNum(d.totalTransactions)} txns</span>
@@ -121,7 +136,10 @@ export function renderDistrict(d) {
         <div class="pm"><div class="pv">$${fmtNum(data.minPsf)}</div><div class="pl">Min PSF</div></div>
         <div class="pm"><div class="pv">$${fmtNum(data.maxPsf)}</div><div class="pl">Max PSF</div></div>
         ${data.rental ? `<div class="pm"><div class="pv">$${fmtNum(data.rental.median)}</div><div class="pl">Rental Median</div></div>` : ''}
+        ${data.grossYieldPct != null ? `<div class="pm"><div class="pv" style="color:var(--gold)">${data.grossYieldPct.toFixed(1)}%</div><div class="pl">Gross Yield</div></div>` : ''}
+        ${data.appreciation5y != null ? `<div class="pm"><div class="pv ${data.appreciation5y >= 0 ? 'text-red' : 'text-green'}">${data.appreciation5y >= 0 ? '+' : ''}${data.appreciation5y.toFixed(1)}%</div><div class="pl">5yr Appreciation</div></div>` : ''}
       </div>
+      ${data.byYear ? `<div class="byyear-chips">${Object.entries(data.byYear).sort(([a],[b]) => a.localeCompare(b)).map(([y, v]) => `<span class="tag">${y}: $${fmtNum(v.avgPsf)}</span>`).join('')}</div>` : ''}
     </div>
 
     <div class="section-title">Projects in D${d} (${projects.length})</div>

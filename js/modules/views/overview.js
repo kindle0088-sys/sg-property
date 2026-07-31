@@ -23,6 +23,8 @@ export function renderOverview() {
         <div class="kpi"><div class="val">$${fmtNum(hdbAvg)}</div><div class="lbl">HDB Avg PSF</div></div>
         <div class="kpi"><div class="val">${dists.length}</div><div class="lbl">Districts</div></div>
         <div class="kpi"><div class="val">${hdbTownsArr.length}</div><div class="lbl">Towns</div></div>
+        ${sm.grossYieldMedianPct != null ? `<div class="kpi"><div class="val" style="color:var(--gold)">${sm.grossYieldMedianPct.toFixed(1)}%</div><div class="lbl">Med Gross Yield</div></div>` : ''}
+        ${sm.appreciation5yMedianPct != null ? `<div class="kpi"><div class="val ${sm.appreciation5yMedianPct >= 0 ? 'text-red' : 'text-green'}">${sm.appreciation5yMedianPct >= 0 ? '+' : ''}${sm.appreciation5yMedianPct.toFixed(1)}%</div><div class="lbl">5yr Appreciation</div></div>` : ''}
       </div>
     </div>
 

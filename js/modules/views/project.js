@@ -45,6 +45,12 @@ export async function renderProject(id) {
       <div>${(p.stats.propertyTypes || []).map(t => `<span class="tag">${t}</span>`).join('')}
       ${(p.stats.districts || []).map(d => `<span class="tag ccr">D${d}</span>`).join('')}
       ${(p.stats.tenureTypes || []).map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      ${p.proximity ? `
+      <div class="proximity-box">
+        <span class="prox-item">🚇 Nearest MRT: <strong>${p.proximity.nearestMrt}</strong> <span class="text-muted">(${fmtNum(p.proximity.nearestMrtDistM)}m)</span></span>
+        <span class="prox-item">🏫 ${p.proximity.schoolCount1km} schools within 1km</span>
+        ${p.proximity.schools1km?.length ? `<span class="prox-item">${p.proximity.schools1km.map(s => `<span class="tag">${s.replace(/\s+PRIMARY\s+SCHOOL$/i, '')}</span>`).join(' ')}</span>` : ''}
+      </div>` : ''}
     </div>
 
     <div class="tabs">

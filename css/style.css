@@ -67,6 +67,13 @@ footer{padding:24px 0;text-align:center;color:var(--text3);font-size:12px;border
 .district-card .d-sector{font-size:10px;padding:2px 8px;border-radius:10px;background:var(--bg3);color:var(--text2)}
 .district-card .d-psf{font-size:16px;font-weight:700;color:var(--gold)}
 .d-psf-label{display:block;font-size:10px;font-weight:400;color:var(--text3);margin-top:-2px}
+.d-inv{display:flex;flex-wrap:wrap;gap:10px;font-size:11px;margin:4px 0 2px}
+.inv-yield{color:var(--gold);font-weight:600}
+.byyear-chips{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0 4px}
+.byyear-chips .tag{font-size:10px;padding:2px 7px}
+.proximity-box{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:12px;padding:10px 14px;background:var(--bg2);border:1px solid var(--border);border-radius:8px;font-size:12px}
+.prox-item{display:inline-flex;align-items:center;gap:5px;color:var(--text2)}
+.prox-item strong{color:var(--text)}
 .district-card .d-detail{font-size:11px;color:var(--text2)}
 .district-card .d-detail span{margin-right:12px}
 
