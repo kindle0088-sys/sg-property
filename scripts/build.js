@@ -120,40 +120,77 @@ async function main() {
   mkdir(DATA); mkdir(PROJ_DIR);
   loadAmenities();
 
+  const skipUra = process.argv.includes('--skip-ura');
+
   // 1. Token
-  console.log('1/5 Getting URA token...');
-  const tok = await getToken();
-  console.log('  OK:', tok.substring(0, 12) + '...');
+  if (skipUra) {
+    console.log('1/5 SKIPPING URA token (--skip-ura, reusing committed artifacts)');
+  } else {
+    console.log('1/5 Getting URA token...');
+    const tok = await getToken();
+    console.log('  OK:', tok.substring(0, 12) + '...');
+  }
 
   // 2. Transactions
-  console.log('\n2/5 Fetching transactions...');
-  let raw;
-  if (demo) {
-    raw = await fetchTransactions(1);
-    console.log(`  Demo: ${raw.length} projects from batch 1`);
+  let raw = [];
+  if (skipUra) {
+    console.log('\n2/5 SKIPPING URA transactions (reusing committed projects-index.json)');
   } else {
-    raw = await fetchAllTransactions();
+    console.log('\n2/5 Fetching transactions...');
+    if (demo) {
+      raw = await fetchTransactions(1);
+      console.log(`  Demo: ${raw.length} projects from batch 1`);
+    } else {
+      raw = await fetchAllTransactions();
+    }
+    const txCount = raw.reduce((s, p) => s + (p.transaction?.length || 0), 0);
+    console.log(`  Total: ${raw.length} projects, ${txCount} raw transactions`);
   }
-  const txCount = raw.reduce((s, p) => s + (p.transaction?.length || 0), 0);
-  console.log(`  Total: ${raw.length} projects, ${txCount} raw transactions`);
 
   // 3. Rentals
-  console.log('\n3/5 Fetching rentals...');
-  const now = new Date();
-  const q = Math.floor(now.getMonth() / 3) + 1;
-  const y = String(now.getFullYear()).slice(-2);
   let rawRent = [];
-  for (const rp of [`${y}Q${q}`, `${y}Q${q - 1 || 4}`, `${String(now.getFullYear() - 1).slice(-2)}Q4`]) {
-    try { rawRent = await fetchRentals(rp); if (rawRent.length) { console.log(`  Found ${rawRent.length} rental records for ${rp}`); break; } }
-    catch (e) { console.log(`  ${rp}: ${e.message}`); }
+  if (skipUra) {
+    console.log('\n3/5 SKIPPING URA rentals (reusing committed rentals.json)');
+  } else {
+    console.log('\n3/5 Fetching rentals...');
+    const now = new Date();
+    const q = Math.floor(now.getMonth() / 3) + 1;
+    const y = String(now.getFullYear()).slice(-2);
+    for (const rp of [`${y}Q${q}`, `${y}Q${q - 1 || 4}`, `${String(now.getFullYear() - 1).slice(-2)}Q4`]) {
+      try { rawRent = await fetchRentals(rp); if (rawRent.length) { console.log(`  Found ${rawRent.length} rental records for ${rp}`); break; } }
+      catch (e) { console.log(`  ${rp}: ${e.message}`); }
+    }
   }
 
-  // 4. Process
+  // 4. Process (in --skip-ura mode, rebuild URA projects/rentals from committed artifacts)
   console.log('\n4/5 Processing URA data...');
-  const projects = processTransactions(raw);
-  const rentals = processRentals(rawRent);
-  console.log(`  ${projects.length} projects, ${projects.reduce((s, p) => s + p.transactions.length, 0)} transactions`);
-  console.log(`  ${rentals.length} rental records`);
+  let projects, rentals;
+  if (skipUra && !demo) {
+    try {
+      const committedIdx = JSON.parse(readFileSync(join(DATA, 'projects-index.json'), 'utf-8'));
+      projects = committedIdx.map(x => ({
+        id: x.id, name: x.name, street: x.street, marketSegment: x.marketSegment,
+        coord: x.coord, proximity: x.proximity,
+        stats: {
+          districts: [x.district], avgPsf: x.avgPsf, avgPsf1y: x.avgPsf1y,
+          minPsf: x.minPsf, maxPsf: x.maxPsf, totalTransactions: x.totalTxns,
+          dateRange: x.dateRange, years: x.years,
+          propertyTypes: x.propertyTypes, tenureTypes: x.tenureTypes
+        },
+        transactions: []
+      }));
+      rentals = JSON.parse(readFileSync(join(DATA, 'rentals.json'), 'utf-8'));
+      console.log(`  Reused ${projects.length} committed URA projects + ${rentals.length} rentals`);
+    } catch (e) {
+      console.log('  No committed URA artifacts found — falling back to empty');
+      projects = []; rentals = [];
+    }
+  } else {
+    projects = processTransactions(raw);
+    rentals = processRentals(rawRent);
+    console.log(`  ${projects.length} projects, ${projects.reduce((s, p) => s + p.transactions.length, 0)} transactions`);
+    console.log(`  ${rentals.length} rental records`);
+  }
 
   // 4b. HDB Data
   const skipHdb = process.argv.includes('--skip-hdb');
@@ -218,7 +255,9 @@ async function main() {
   console.log(`  Avg 1y cutoff: URA=${CUTOFF_MMYY} HDB=${CUTOFF_HDB}`);
 
   // Inject avgPsf1y into project stats objects for downstream aggregations
-  for (const p of projects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY);
+  if (!skipUra) {
+    for (const p of projects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY);
+  }
   if (!skipHdb) {
     for (const p of hdbProjects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
   }
@@ -226,26 +265,46 @@ async function main() {
   // 5. Generate output
   console.log('\n5/5 Generating files...');
 
-  // 5a. URA project index
-  const idx = projects.map(p => ({
-    id: p.id, name: p.name, street: p.street,
-    district: p.stats.districts[0] || null,
-    marketSegment: p.marketSegment,
-    avgPsf: p.stats.avgPsf, avgPsf1y: computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY),
-    minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
-    totalTxns: p.stats.totalTransactions,
-    dateRange: p.stats.dateRange,
-    coord: p.coord,
-    propertyTypes: p.stats.propertyTypes,
-    tenureTypes: p.stats.tenureTypes,
-    years: p.stats.years,
-    proximity: enrichProximity(p.coord)
-  }));
-  writeJSON(join(DATA, 'projects-index.json'), idx);
-  console.log(`  projects-index.json (${idx.length})`);
+  // 5a. URA project index (reuse committed file in --skip-ura mode)
+  let idx;
+  if (skipUra && !demo) {
+    idx = projects.map(p => ({
+      id: p.id, name: p.name, street: p.street,
+      district: p.stats.districts[0] || null,
+      marketSegment: p.marketSegment,
+      avgPsf: p.stats.avgPsf, avgPsf1y: p.stats.avgPsf1y,
+      minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
+      totalTxns: p.stats.totalTransactions,
+      dateRange: p.stats.dateRange,
+      coord: p.coord,
+      propertyTypes: p.stats.propertyTypes,
+      tenureTypes: p.stats.tenureTypes,
+      years: p.stats.years,
+      proximity: p.proximity
+    }));
+    console.log(`  projects-index.json (reused, ${idx.length})`);
+  } else {
+    idx = projects.map(p => ({
+      id: p.id, name: p.name, street: p.street,
+      district: p.stats.districts[0] || null,
+      marketSegment: p.marketSegment,
+      avgPsf: p.stats.avgPsf, avgPsf1y: computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY),
+      minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
+      totalTxns: p.stats.totalTransactions,
+      dateRange: p.stats.dateRange,
+      coord: p.coord,
+      propertyTypes: p.stats.propertyTypes,
+      tenureTypes: p.stats.tenureTypes,
+      years: p.stats.years,
+      proximity: enrichProximity(p.coord)
+    }));
+    writeJSON(join(DATA, 'projects-index.json'), idx);
+    console.log(`  projects-index.json (${idx.length})`);
+  }
 
-  // 5b. Per-project
+  // 5b. Per-project (skip writing in --skip-ura mode — reuse committed files)
   let n = 0;
+  if (!skipUra) {
   for (const p of projects) {
     const avg1y = computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY);
     writeJSON(join(PROJ_DIR, `${p.id}.json`), {
@@ -270,7 +329,8 @@ async function main() {
     });
     n++;
   }
-  console.log(`  ${n} project detail files`);
+  }
+  console.log(`  ${n} project detail files${skipUra ? ' (reused committed)' : ''}`);
 
   // 5c. HDB project index
   let hdbIdx;
@@ -329,9 +389,21 @@ async function main() {
   console.log(`  property-index.json (${combinedIdx.length})`);
 
   // 5f. Districts (URA only, HDB by town instead)
-  const dists = buildDistricts(projects, rentals, CUTOFF_MMYY);
-  writeJSON(join(DATA, 'districts.json'), dists);
-  console.log(`  districts.json (${dists.length})`);
+  let dists;
+  if (skipUra && !demo) {
+    try {
+      dists = JSON.parse(readFileSync(join(DATA, 'districts.json'), 'utf-8'));
+      console.log(`  districts.json (reused, ${dists.length})`);
+    } catch (e) {
+      dists = buildDistricts(projects, rentals, CUTOFF_MMYY);
+      writeJSON(join(DATA, 'districts.json'), dists);
+      console.log(`  districts.json (${dists.length})`);
+    }
+  } else {
+    dists = buildDistricts(projects, rentals, CUTOFF_MMYY);
+    writeJSON(join(DATA, 'districts.json'), dists);
+    console.log(`  districts.json (${dists.length})`);
+  }
 
   // 5g. HDB Towns summary (skip when reusing committed artifacts)
   if (skipHdb) {
@@ -343,9 +415,11 @@ async function main() {
     console.log(`  hdb-towns.json (${Object.keys(hdbTowns).length} towns)`);
   }
 
-  // 5h. Rentals
-  writeJSON(join(DATA, 'rentals.json'), rentals);
-  console.log(`  rentals.json (${rentals.length})`);
+  // 5h. Rentals (skip writing in --skip-ura mode — reuse committed)
+  if (!skipUra) {
+    writeJSON(join(DATA, 'rentals.json'), rentals);
+  }
+  console.log(`  rentals.json (${rentals.length}${skipUra ? ', reused' : ''})`);
 
   // 5i. Market summary
   const summary = buildSummary(projects, dists, hdbProjects);

@@ -44,11 +44,9 @@ jobs:
         working-directory: scripts
         run: npm ci
 
-      - name: Run full build (--fresh pulls all HDB datasets)
+      - name: Run full build (--fresh pulls HDB, --skip-ura reuses committed URA artifacts)
         working-directory: scripts
-        env:
-          URA_ACCESS_KEY: ${{ secrets.URA_ACCESS_KEY }}
-        run: node build.js --fresh
+        run: node build.js --fresh --skip-ura
 
       - name: Commit and push data updates
         run: |
