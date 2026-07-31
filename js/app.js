@@ -228,7 +228,7 @@ function renderHdbDashboard() {
     <div class="section-title">Towns Overview</div>
     <div class="town-row">
       ${sortedTowns.map(([name, t]) => `
-        <div class="town-card" onclick="navigate('/town/${name.toLowerCase().replace(/\\s+/g, '-')}')">
+        <div class="town-card" onclick="navigate('/town/${slugifyTown(name)}')">
           <div class="t-header">
             <span class="t-name">${name}</span>
           </div>
@@ -251,7 +251,7 @@ function renderHdbDashboard() {
           <table>
             <tr><th>Town</th><th>Blocks</th><th>Avg PSF</th><th>Transactions</th></tr>
             ${sortedTowns.slice(0, 10).map(([name, t]) => `
-              <tr onclick="navigate('/town/${name.toLowerCase().replace(/\\s+/g, '-')}')" style="cursor:pointer">
+              <tr onclick="navigate('/town/${slugifyTown(name)}')" style="cursor:pointer">
                 <td class="text-gold">${name}</td>
                 <td>${fmtNum(t.blocks)}</td>
                 <td class="text-blue">$${fmtNum(t.avgPsf1y || t.avgPsf)}</td>
@@ -267,7 +267,7 @@ function renderHdbDashboard() {
           <table>
             <tr><th>Town</th><th>Avg PSF</th><th>Blocks</th><th>Transactions</th></tr>
             ${[...townEntries].sort((a, b) => (b[1].avgPsf1y || b[1].avgPsf) - (a[1].avgPsf1y || a[1].avgPsf)).slice(0, 10).map(([name, t]) => `
-              <tr onclick="navigate('/town/${name.toLowerCase().replace(/\\s+/g, '-')}')" style="cursor:pointer">
+              <tr onclick="navigate('/town/${slugifyTown(name)}')" style="cursor:pointer">
                 <td class="text-gold">${name}</td>
                 <td class="text-blue">$${fmtNum(t.avgPsf1y || t.avgPsf)}</td>
                 <td>${fmtNum(t.blocks)}</td>
@@ -285,7 +285,7 @@ function renderHdbDashboard() {
 function renderTown(townSlug) {
   // Find town from slug (lowercase, hyphens)
   const townName = Object.keys(hdbTownsData).find(
-    k => k.toLowerCase().replace(/\\s+/g, '-') === townSlug
+    k => slugifyTown(k) === townSlug
   );
   if (!townName) {
     document.getElementById('main').innerHTML = `<div class="error">⚠️ Town "${townSlug}" not found</div>`;
@@ -711,6 +711,10 @@ function highlight(text, query) {
 }
 
 // ── 1-year PSF helpers ──
+// Town name → URL-safe slug (spaces and slashes → hyphens)
+function slugifyTown(name) {
+  return (name || '').toLowerCase().replace(/[\s/]+/g, '-');
+}
 function showPsf(p) {
   const v = p.avgPsf1y || p.avgPsf || 0;
   return fmtNum(v);
