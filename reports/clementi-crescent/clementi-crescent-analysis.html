@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clementi Crest 金文泰景 — Blk 445A + 445B 百万组屋纪录盘深度投资分析</title>
+<style>
+:root{--bg:#0b1120;--card:#1e293b;--card2:#273449;--gold:#fbbf24;--blue:#60a5fa;--green:#22c55e;--red:#ef4444;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+.hero{background:linear-gradient(135deg,#0f172a,#1e293b 60%,#1a3a2a);border:1px solid #334155;border-radius:16px;padding:36px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero::after{content:"CC";position:absolute;right:-20px;top:-40px;font-size:160px;font-weight:800;color:rgba(251,191,36,.06)}
+.hero .tag{display:inline-block;background:rgba(34,197,94,.15);color:#86efac;border:1px solid rgba(34,197,94,.4);padding:3px 12px;border-radius:20px;font-size:12px;margin-bottom:14px}
+.hero h1{font-size:30px;font-weight:700;margin-bottom:6px}
+.hero .sub{color:var(--text2);font-size:14px;margin-bottom:16px}
+.hero .score-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hero .score{font-size:52px;font-weight:800;color:var(--gold)}
+.hero .score-label{font-size:13px;color:var(--text2)}
+.hero .score-verdict{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.4);color:#86efac;padding:6px 16px;border-radius:8px;font-weight:600}
+.hero .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:22px}
+.hero .meta-grid .m{background:rgba(15,23,42,.6);border:1px solid #334155;border-radius:10px;padding:10px 14px}
+.hero .meta-grid .m .k{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+.hero .meta-grid .m .v{font-size:15px;font-weight:600;color:var(--text);margin-top:2px}
+.section{margin-top:34px}
+.section h2{font-size:21px;font-weight:700;color:var(--gold);border-left:4px solid var(--gold);padding-left:12px;margin-bottom:16px}
+.highlight-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.35);border-radius:12px;padding:16px 20px;margin:14px 0;font-size:14px}
+.highlight-box b{color:var(--gold)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 20px}
+.card h3{font-size:16px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card p{font-size:14px;color:var(--text2)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}
+th{background:var(--card2);color:var(--gold);font-weight:600;text-align:left;padding:10px 12px;font-size:13px}
+td{padding:9px 12px;border-bottom:1px solid #334155}
+tr:hover td{background:rgba(51,65,85,.25)}
+.num{font-variant-numeric:tabular-nums}
+.num-green{color:#6ee7b7}
+.num-red{color:#fca5a5}
+.dim{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 22px;margin-bottom:16px}
+.dim-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.dim-score{font-size:34px;font-weight:800;color:var(--gold);min-width:64px;text-align:center}
+.dim-title{font-size:17px;font-weight:700}
+.dim-weight{font-size:12px;color:var(--text3)}
+.stars{color:var(--gold);letter-spacing:2px;font-size:13px}
+.fac-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fac-tags span{background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:var(--blue);padding:4px 12px;border-radius:20px;font-size:12px}
+.fac-tags span.ok{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.4);color:#86efac}
+.fac-tags span.miss{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35);color:#fca5a5}
+.quote{background:var(--card2);border-left:3px solid var(--blue);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;color:var(--text2)}
+.quote b{color:var(--text)}
+.quote .src{display:block;font-size:12px;color:var(--text3);margin-top:6px}
+.risk-warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.4);border-radius:12px;padding:16px 20px;margin:14px 0}
+.risk-warn b{color:#fca5a5}
+.verdict-box{background:linear-gradient(135deg,#1e293b,#273449);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:24px 28px;margin-top:18px}
+.verdict-box h3{color:var(--gold);margin-bottom:12px;font-size:18px}
+.verdict-box .fit{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.verdict-box .fit div{flex:1;min-width:200px;background:rgba(15,23,42,.5);border-radius:10px;padding:14px 16px}
+.verdict-box .fit .fit-yes b{color:#86efac}
+.verdict-box .fit .fit-no b{color:#fca5a5}
+.disclaimer{margin-top:40px;padding-top:20px;border-top:1px solid #334155;font-size:12px;color:var(--text3)}
+.back-link{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--blue);text-decoration:none}
+.back-link:hover{text-decoration:underline}
+.pct-up{color:#fca5a5}
+.pct-down{color:#6ee7b7}
+@media(max-width:768px){.grid2,.grid3{grid-template-columns:1fr}.hero h1{font-size:24px}.hero .score{font-size:40px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back-link" href="../">← 返回研报索引</a>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="tag">HDB · D05 Clementi 成熟镇区 · 99年地契 · 2020 TOP</span>
+  <h1>Clementi Crest 金文泰景</h1>
+  <div class="sub">Blk 445A + 445B Clementi Ave 3 · 385 户双塔 · MOP 2025 年 6 月 · 金文泰百万组屋纪录盘</div>
+  <div class="score-row">
+    <div><span class="score">8.0</span><div class="score-label">综合评分 / 10</div></div>
+    <span class="score-verdict">✅ 推荐 — 金文泰最年轻次新盘，稀缺性拉满</span>
+  </div>
+  <div class="meta-grid">
+    <div class="m"><div class="k">楼栋</div><div class="v">445A + 445B</div></div>
+    <div class="m"><div class="k">总单位</div><div class="v">385 户</div></div>
+    <div class="m"><div class="k">地契</div><div class="v">99 年 (剩~94年)</div></div>
+    <div class="m"><div class="k">最近 MRT</div><div class="v">Clementi 4-6min</div></div>
+    <div class="m"><div class="k">成交均价</div><div class="v">$1,190 psf (1y)</div></div>
+    <div class="m"><div class="k">最高纪录</div><div class="v">$1.58M (2026.05)</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<div class="section">
+  <h2>📌 执行摘要</h2>
+  <div class="highlight-box">
+    <b>一句话结论：</b>Clementi Crest 是金文泰 <b>15 年来第 3 个 BTO</b>、也是全区<b>最年轻的双塔组屋</b>——步行 4-6 分钟到 Clementi MRT（EW23），1km 内 4 所小学，2025 年 6 月刚过 MOP 就以"百万组屋"身份横扫纪录：4-room 站稳 $1.1-1.3M，5-room 从 $1.459M → $1.5M → $1.51M → <b>$1.58M（2026.05，全区纪录 + 5-room psf 纪录）</b>。首轮业主获利普遍超 $70 万，BTO 价到转售价翻了一倍多。未来还有 Cross Island Line 双站 800m 内的规划利好。但<b>百万级 HDB 的政策敏感性和溢价风险是唯一刺</b>——自住 9 分，纯投资 6 分。
+  </div>
+</div>
+
+<!-- 项目核心参数 -->
+<div class="section">
+  <h2>🏗️ 项目核心参数</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>📐 基本信息</h3>
+      <table>
+        <tr><td>项目名</td><td>Clementi Crest（金文泰景）</td></tr>
+        <tr><td>地址</td><td>445A / 445B Clementi Ave 3</td></tr>
+        <tr><td>BTO 推出</td><td class="num">2015 年 5 月（金文泰 15 年来第 3 个 BTO）</td></tr>
+        <tr><td>TOP / MOP</td><td class="num">2020-06 / 2025-06</td></tr>
+        <tr><td>地契</td><td class="num">99 年（2020/21 起算，剩 ~94 年）</td></tr>
+        <tr><td>楼栋</td><td class="num">2 栋 40 层塔楼</td></tr>
+        <tr><td>开发商</td><td>HDB（政府统一建）</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🏢 楼栋与户型</h3>
+      <table>
+        <tr><td>4-Room</td><td class="num">229 户（445A×114 + 445B×115）· 1,001 sqft</td></tr>
+        <tr><td>5-Room</td><td class="num">156 户（445A×78 + 445B×78）· 1,216 sqft</td></tr>
+        <tr><td>合计</td><td class="num">385 户 · 2 个户型 · 双塔对称</td></tr>
+        <tr><td>BTO 售价</td><td class="num">4R $478K-621K / 5R $576K-725K</td></tr>
+        <tr><td>当前转售</td><td class="num">4R $999K-1.3M / 5R $1.3M-1.68M</td></tr>
+        <tr><td>申购热度</td><td class="num">5R 申购率 13.1x（2,047 抢 156）</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>🎪 配套设施（HDB 标准配置）</h3>
+    <div class="fac-tags">
+      <span class="ok">Childcare Centre</span>
+      <span class="ok">儿童游乐场</span>
+      <span class="ok">Fitness Corner</span>
+      <span class="ok">社区客厅 Community Living Room</span>
+      <span class="ok">多层停车场</span>
+      <span class="ok">屋顶花园 Rooftop Garden</span>
+      <span class="miss">无泳池（HDB 标准）</span>
+    </div>
+    <p style="margin-top:12px;font-size:13px;color:var(--text2)">HDB 项目以社区配套为核心，Clementi 镇中心（Clementi Mall + 巴士转换站 + 图书馆 + 巴刹）就在步行范围，补足了组屋自带的"简配"。</p>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🚇 交通与通勤</h3>
+      <table>
+        <tr><td>Clementi MRT (EW23)</td><td class="num-green">步行 4-6 分钟（~800m）</td></tr>
+        <tr><td>Dover MRT (EW22)</td><td class="num">1.5km 内</td></tr>
+        <tr><td>巴士服务</td><td class="num">97/188/196/197/198/963</td></tr>
+        <tr><td>规划 CRL 站</td><td class="num-green">Clementi / West Coast 站 ≤800m（Cross Island Line）</td></tr>
+        <tr><td>NUS / one-north</td><td class="num">EW 线直达 2-4 站</td></tr>
+        <tr><td>Jurong East 枢纽</td><td class="num">EW 线 3 站</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🏫 教育（1km 内 4 所小学）</h3>
+      <table>
+        <tr><td>Clementi Primary</td><td class="num">~500m</td></tr>
+        <tr><td>Nan Hua Primary（名校）</td><td class="num">1km 内</td></tr>
+        <tr><td>Pei Tong Primary</td><td class="num">1km 内</td></tr>
+        <tr><td>Qifa Primary</td><td class="num">1km 内</td></tr>
+        <tr><td>中学/专科</td><td class="num">Nan Hua High · NUS High · SST · SP</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- 七维评分 -->
+<div class="section">
+  <h2>📊 七维评分（HDB 基准）</h2>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">9.0</div>
+      <div>
+        <div class="dim-title">🗺️ 地段 Location <span style="font-size:12px;color:var(--text3)">(权重 25%)</span></div>
+        <div class="stars">★★★★★★★★★☆</div>
+      </div>
+    </div>
+    <p>Clementi 是新加坡最老的成熟镇区之一，也是教育-科创走廊的枢纽：NUS、one-north、Mapletree Business City、Science Park 全在 EW 线 2-4 站内。Clementi Crest 距 EW23 步行 4-6 分钟，镇中心 5 分钟生活圈：The Clementi Mall、321 Clementi、Grantral Mall、NEWest、巴刹、图书馆、诊所一应俱全。<b>1km 内 4 所小学（含 Nan Hua 名校）</b>是全新加坡最顶级的学区配置之一。更关键的是稀缺性——金文泰 15 年才出 3 个 BTO，未来新盘大概率转 Plus/Prime 分类（10 年 MOP），Clementi Crest 的"5 年 MOP + 次新 + 核心位"组合在存量市场几乎无对手。给 9.0 的 HDB 地段天花板。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">5.5</div>
+      <div>
+        <div class="dim-title">💰 租金���报 Rental Yield <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★★★☆☆☆☆☆</div>
+      </div>
+    </div>
+    <p>租金水平在 HDB 里相当硬：4-room 445A 月租 $4,600-$5,000（均值 $4,750）、445B $4,000-$4,700（均值 $4,367）；5-room $4,700-$5,300。按现价 $1.1-1.2M 的 4-room 买入，毛回报约 <b>4.6-5.0%</b>——比同区 Condo（The Clement Canopy 等约 3.5-4%）高出一个身位，符合 HDB 基数低回报高的规律。但百万级入场价让绝对回报的吸引力打折：同样 $1.2M，去 Queenstown 买 4-room 回报更高；而且 5-room 出租样本少、流动性差。给 5.5，属于"回报尚可但不突出"。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.5</div>
+      <div>
+        <div class="dim-title">📈 资本增值 Capital Appreciation <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>增值履历是全区最强，MOP 后 14 个月连破 5 次纪录：</p>
+    <table>
+      <thead><tr><th>时间</th><th>楼栋</th><th>户型</th><th>价格</th><th>备注</th></tr></thead>
+      <tbody>
+        <tr><td>2025.12</td><td>445B</td><td class="num">5R 25-27F</td><td class="num-red">$1,458,888</td><td>首个纪录，业主获利 $75万+</td></tr>
+        <tr><td>2025.12</td><td>445B</td><td class="num">5R</td><td class="num-red">$1.50M</td><td>破 $1.5M</td></tr>
+        <tr><td>2026.01</td><td>445A</td><td class="num">5R 40-42F</td><td class="num-red">$1.51M</td><td>再刷新</td></tr>
+        <tr><td>2026.03</td><td>445A</td><td class="num">5R</td><td class="num-red">$1.50M</td><td>—</td></tr>
+        <tr><td>2026.05</td><td>445A</td><td class="num">5R 37-39F</td><td class="num-red">$1.58M</td><td><b>Clementi 全区纪录 + 5R psf 纪录 ($1,299)</b></td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:10px">BTO 买入 → 转售：4-room +$62万以上（+130%）、5-room +$85万以上（+174%）。未来催化：① <b>CRL Cross Island Line</b> 规划 Clementi 与 West Coast 双站 ≤800m（2030s 兑现）；② <b>Jurong Lake District</b> 第二 CBD 战略持续推进；③ NUS/one-north 扩容带来长期租购需求。风险是 resale 买家已在高位入场，未来 5 年涨幅大概率回到个位数/年化——8.5 是"历史表现 + 未来利好"的综合分。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">9.0</div>
+      <div>
+        <div class="dim-title">🏗️ 建造质量与维护 <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★★★★☆</div>
+      </div>
+    </div>
+    <p>2020 年 6 月 TOP，楼龄仅 6 年，是金文泰<b>最新建成</b>的组屋（周边 Clementi Cascadia 2017、更早的多为 80-90 年代）。40 层新塔采用现代 BTO 工艺（Model A/Improved 户型），剩余地契 94 年，无 ERS（电梯翻新）需求、无外墙大修压力、无渗水历史投诉。政府统建 + 次新楼龄 = 质量维度的满分区间。给 9.0。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.5</div>
+      <div>
+        <div class="dim-title">💸 持有成本 Holding Costs <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>HDB 天生优势：<b>无 MCST 管理费</b>（Town Council 费用约 $30-80/月，远低于 Condo 的 $400-600）、自住首套房产税极低（约 $100-200/年）、HDB Loan 利率 2.6% 固定。自住首套房月度持有成本 <b>&lt;$300</b>，属于 HDB 框架的最高档。唯一注意：百万级贷款本金高，若用银行房贷（利率 ~2.8-3.2% 浮动）则月供 $4,500+，对现金流敏感。给 8.5。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.5</div>
+      <div>
+        <div class="dim-title">🔄 退出流动性 Exit Liquidity <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>MOP 后 14 个月（2025.06-2026.07）两栋合计 <b>64 笔成交</b>（445A×36 + 445B×28），年化 ~55 笔对 385 户的小盘来说相当活跃——因为它是全区唯一"5 年 MOP + 次新 + 学区 + 近 MRT"的全能选手，买家池集中在有娃家庭和 NUS 系从业者。4-room 1,001 sqft 是市场最深的户型（PropertyGuru 挂售 $999K-$1.3M），正常 1-2 个月可出手。扣分项：百万级 HDB 买家池天然小于 $800K 段，5-room 尤其挑客。给 8.5。</p>
+  </div>
+
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">6.5</div>
+      <div>
+        <div class="dim-title">⚠️ 风险控制 Leverage &amp; Risk <span style="font-size:12px;color:var(--text3)">(权重 5%)</span></div>
+        <div class="stars">★★★★★★☆☆☆☆</div>
+      </div>
+    </div>
+    <p>核心风险全在"百万"两个字上：① <b>政策敏感</b>——政府多次表态关注百万组屋现象，一旦加码（如收紧 COV 披露、限制高价位组屋贷款），Clementi Crest 这种纪录盘首当其冲；② <b>COV 溢价风险</b>——当前成交普遍高于 valuation（cash over valuation），市场转冷时溢价最先蒸发；③ <b>Plus/Prime 对比</b>——未来金文泰新 BTO 若划为 Plus（10 年 MOP），反而凸显 Clementi Crest 5 年 MOP 的优势，这是利好面；④ 地契 94 年无碍、MOP 已过、无非法改造——合规面满分。6.5 反映"基本面健康但政策敞口偏大"。</p>
+  </div>
+</div>
+
+<!-- 价格数据 -->
+<div class="section">
+  <h2>📊 成交数据（自有 dashboard 交叉验证）</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>🏢 Blk 445A（114×4R + 78×5R）</h3>
+      <table>
+        <tbody>
+          <tr><td>总成交</td><td class="num">36 笔（2025×21 + 2026×15）</td></tr>
+          <tr><td>均价 PSF</td><td class="num">$1,199（1y: $1,200）</td></tr>
+          <tr><td>区间</td><td class="num">$986 - $1,349 psf</td></tr>
+          <tr><td>最新 4R</td><td class="num">$1.21M - $1.34M（1001 sqft）</td></tr>
+          <tr><td>最新 5R</td><td class="num">$1.58M（1216 sqft, 37-39F）</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🏢 Blk 445B（115×4R + 78×5R）</h3>
+      <table>
+        <tbody>
+          <tr><td>总成交</td><td class="num">28 笔（2025×20 + 2026×8）</td></tr>
+          <tr><td>均价 PSF</td><td class="num">$1,180（1y: $1,180）</td></tr>
+          <tr><td>区间</td><td class="num">$945 - $1,299 psf</td></tr>
+          <tr><td>最新 4R</td><td class="num">$1.19M - $1.30M（1001 sqft）</td></tr>
+          <tr><td>最新 5R</td><td class="num">$1.458M（1216 sqft, 22-24F）</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="card" style="margin-top:16px">
+    <h3>🏘️ 同区对比（Clementi 存量组屋）</h3>
+    <table>
+      <thead><tr><th>项目</th><th>TOP</th><th>距 MRT</th><th>4R 参考价</th><th>特点</th></tr></thead>
+      <tbody>
+        <tr><td><b>Clementi Crest</b></td><td class="num">2020</td><td class="num">4-6min</td><td class="num-red">$1.1-1.3M</td><td>全区最新，学区最强</td></tr>
+        <tr><td>Clementi Cascadia</td><td class="num">2017</td><td class="num">2min</td><td class="num-red">$1.0-1.3M</td><td>近 MRT 但楼龄+3年</td></tr>
+        <tr><td>Clementi Towers</td><td class="num">2016</td><td class="num">1min</td><td class="num">$0.9-1.1M</td><td>综合项目，商业裙楼</td></tr>
+        <tr><td>老组屋（80-90s）</td><td class="num">1980-90</td><td class="num">5-15min</td><td class="num">$0.6-0.8M</td><td>大面积但楼龄老</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--text3);margin-top:8px">Clementi Crest 比 Cascadia 贵约 10-15%，换来的是 3 年新楼龄 + 双 40 层塔楼 + 更好学区圈。在当前市场，"新"就是溢价的理由。</p>
+  </div>
+</div>
+
+<!-- 真实居住体验 -->
+<div class="section">
+  <h2>🏡 真实居住体验</h2>
+
+  <div class="quote">
+    <b>"MOP 刚过就以 $1.459M 卖出 5-room，业主获利超 $750K——金文泰 BTO 的利润神话。"</b>
+    <span class="src">[Uchify, 2025.12] — 首轮纪录交易，指出 BTO 首轮业主利润最大，后续买家难复制</span>
+  </div>
+
+  <div class="quote">
+    <b>"百万挂牌价甚至贵过 Queenstown 成熟区——但 Clementi 的次新 BTO 就是这个价，Cascadia 也一样贵。新常态。"</b>
+    <span class="src">[Home &amp; Decor Review, 2026] — 专业测评确认价格偏高但属板块常态；看好 CRL 与 JLD 长期利好</span>
+  </div>
+
+  <div class="quote">
+    <b>"4-room 出租 $4,600-5,000/月，NUS 教工和学生家长租客源源不断——位置决定了租客质量。"</b>
+    <span class="src">[StackProperty 租赁记录, 2025.09] — 445A 近 3 年 5 笔租赁全部 $4,600+</span>
+  </div>
+
+  <div class="highlight-box" style="margin-top:16px">
+    <b>居住体验综合评级：⭐⭐⭐⭐½ 4.5 / 5</b><br>
+    优点：40 层新塔视野开阔、双塔对称布局通透、社区设施齐全（托儿所/游乐场/屋顶花园）、学区-地铁-商场三位一体、NUS 上班族通勤极佳。<br>
+    缺点：无泳池（HDB 通病）、高楼层单位转手价高但电梯高峰期等待长、巴刹高峰时段拥挤、百万价位邻居以"高价接手家庭"为主、部分业主仍在装修期（MOP 后两年）。<br>
+    <b>结论：居住品质是金文泰 HDB 的天花板，自住体验接近 Condo 社区感；扣分仅在"无泳池 + 高密度 40 层"这两点 HDB 固有的小遗憾。</b>
+  </div>
+</div>
+
+<!-- 风险提示 -->
+<div class="section">
+  <h2>⚠️ 风险提示</h2>
+  <div class="risk-warn">
+    <b>重点风险（百万 HDB 专属）：</b>
+    <ol style="margin:10px 0 0 18px;font-size:14px">
+      <li><b>政策瞄准镜</b> —— 百万组屋是政府舆论焦点，若加码冷却措施（贷款收紧/COV 管控），纪录盘估值最脆弱。</li>
+      <li><b>COV 溢价</b> —— 成交普遍高于官方 valuation，市场转向时溢价层最先蒸发（10-15% 空间）。</li>
+      <li><b>高位接盘</b> —— 首轮业主 +130~174% 的利润已成历史，resale 买家未来 5 年难复制；心理预期要放平。</li>
+      <li><b>买家池窄</b> —— HDB 仅限新加坡公民家庭，$1.2M+ 段还要叠加收入门槛（MSR 30%），能接盘的买家显著少于 $800K 段。</li>
+      <li><b>CRL 兑现期长</b> —— Cross Island Line 金文泰段预计 2030s 通车，短期利好已被价格提前消化。</li>
+    </ol>
+  </div>
+</div>
+
+<!-- 最终结论 -->
+<div class="section">
+  <h2>🎯 最终结论</h2>
+  <div class="verdict-box">
+    <h3>综合评分 8.0 / 10 — 推荐（自住首选，投资慎追高）</h3>
+    <p>Clementi Crest 是金文泰<b>最后一块"5 年 MOP + 次新 + 核心位"拼图</b>——未来新 BTO 大概率 Plus 分类 10 年 MOP，这个盘的稀缺性只会越来越强。4-room 是性价比与流动性的甜点（$1.1-1.25M 可入），5-room 纪录价（$1.5M+）是给"非高楼层不要"的预算充裕买家准备的。</p>
+    <div class="fit">
+      <div class="fit-yes">
+        <b>✅ 适合：</b><br>
+        有娃家庭（4 所小学 1km）<br>
+        NUS / one-north 从业者<br>
+        金文泰老组屋升级者<br>
+        能接受 $1.1M+ 预算的公民家庭<br>
+        长期自住（10 年+）
+      </div>
+      <div class="fit-no">
+        <b>❌ 不适合：</b><br>
+        纯投资客（百万 HDB 政策风险）<br>
+        预算 &lt;$1M 的买家（去买 Cascadia 低层或老组屋）<br>
+        短线 3-5 年套利者（COV 溢价风险）<br>
+        非公民/单身（HDB 买家池限制）
+      </div>
+    </div>
+    <p style="margin-top:16px;font-size:14px;color:var(--text2)">
+      <b style="color:var(--gold)">买入建议：</b>4-room 优先 16 层以上、朝镇中心面（view 保值）；5-room 若追求纪录盘属性可盯 35 层以上高区，但务必核对 COV——2026 年中的市场，议价空间开始松动，8-9 月是传统淡季，是谈价的窗口期。
+    </p>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <b>免责声明：</b>本报告基于公开数据（HDB、URA、EdgeProp、99.co、Home &amp; Decor��Uchify 等）与自有 dashboard（URA/HDB 全量交易数据）交叉验证整理，仅供投资参考，不构成买卖建议。HDB 转售受政策、利率、市场情绪影响较大，百万级组屋尤其敏感，请结合自身资格与财务状况独立决策。数据截至 2026-07-31。
+</div>
+
+</div>
+</body>
+</html>
