@@ -23,12 +23,36 @@ const API_BASE = 'https://eservice.ura.gov.sg/uraDataService/invokeUraDS/v1';
 
 let _token = null;
 
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+// URA gateway is flaky from overseas (504 timeouts). Retry with backoff.
+async function fetchWithRetry(url, opts, { retries = 4, baseDelay = 3000, label = 'URA' } = {}) {
+  let lastErr;
+  for (let i = 0; i < retries; i++) {
+    try {
+      const resp = await fetch(url, opts);
+      if (resp.ok) return resp;
+      // 504 / 5xx are transient — retry; 4xx are permanent — fail fast
+      if (resp.status >= 400 && resp.status < 500 && resp.status !== 429) {
+        throw new Error(`${label} failed: ${resp.status}`);
+      }
+      lastErr = new Error(`${label} failed: ${resp.status}`);
+      console.log(`  ⚠ ${label} ${resp.status} (attempt ${i + 1}/${retries}), retrying in ${baseDelay / 1000}s...`);
+    } catch (e) {
+      if (!(e instanceof Error && e.message.startsWith(`${label} failed:`))) throw e; // network error
+      lastErr = e;
+      console.log(`  ⚠ ${label} network error (attempt ${i + 1}/${retries}), retrying in ${baseDelay / 1000}s...`);
+    }
+    await sleep(baseDelay * Math.pow(2, i));
+  }
+  throw lastErr;
+}
+
 export async function getToken() {
-  const resp = await fetch(TOKEN_URL, {
+  const resp = await fetchWithRetry(TOKEN_URL, {
     method: 'GET',
     headers: { 'AccessKey': URA_ACCESS_KEY }
-  });
-  if (!resp.ok) throw new Error(`URA token failed: ${resp.status}`);
+  }, { label: 'URA token' });
   const data = await resp.json();
   if (data.Result) { _token = data.Result; return data.Result; }
   throw new Error(`URA token error: ${JSON.stringify(data)}`);
@@ -42,8 +66,7 @@ function headers() {
 async function fetchService(service, params = {}) {
   const qs = new URLSearchParams({ service, ...params }).toString();
   const url = `${API_BASE}?${qs}`;
-  const resp = await fetch(url, { method: 'GET', headers: headers() });
-  if (!resp.ok) throw new Error(`URA ${service} failed: ${resp.status}`);
+  const resp = await fetchWithRetry(url, { method: 'GET', headers: headers() }, { label: `URA ${service}` });
   const data = await resp.json();
   return data.Result || [];
 }
