@@ -211,15 +211,15 @@ async function main() {
 
   // 5c. HDB project index
   const hdbIdx = hdbProjects.map(p => ({
-    id: p.id, name: p.name, town: p.town, type: 'HDB', coord: null,
+    id: p.id, name: p.name, town: p.town, block: p.block, street: p.street,
+    type: 'HDB', coord: null,
     avgPsf: p.stats.avgPsf,
     avgPsf1y: computeAvg1y(p.transactions, 'month', CUTOFF_HDB),
     minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
     totalTxns: p.stats.totalTransactions,
     dateRange: p.stats.dateRange,
     years: p.stats.years,
-    flatTypes: p.flatTypes,
-    street: p.street
+    flatTypes: p.flatTypes
   }));
   writeJSON(join(DATA, 'hdb-index.json'), hdbIdx);
   console.log(`  hdb-index.json (${hdbIdx.length})`);
@@ -235,7 +235,7 @@ async function main() {
       town: p.town, street: p.street, block: p.block,
       flatTypes: p.flatTypes, flatModels: p.flatModels,
       stats: { ...p.stats, avgPsf1y: avg1y },
-      transactions: p.transactions.slice(-500).map(t => ({
+      transactions: p.transactions.map(t => ({
         contractDate: t.month ? t.month.substring(5,7) + t.month.substring(2,4) : '',
         fmtDate: t.month ? fmtDate(t.month.substring(5,7) + t.month.substring(2,4)) : '',
         sortDate: t.month ? t.month.substring(0,7) : '',
@@ -314,7 +314,7 @@ function buildDistricts(projects, rentals, cutoff) {
         map[d].psfArr.push(t.pricePsf);
         if (cutoff && t.contractDate && toSortableDate(t.contractDate) >= toSortableDate(cutoff)) map[d].psfArr1y.push(t.pricePsf);
       }
-      const yr = t.contractDate?.substring(0, 4);
+      const yr = t.contractDate?.length >= 4 ? `20${t.contractDate.substring(2, 4)}` : null;
       if (yr) {
         if (!map[d].byYear[yr]) map[d].byYear[yr] = { count: 0, sum: 0 };
         map[d].byYear[yr].count++;

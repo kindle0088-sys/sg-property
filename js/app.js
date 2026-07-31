@@ -7,11 +7,7 @@ let marketSummary = null;
 let hdbIndex = [];
 let hdbTownsData = {};
 
-// ── Page router (hashchange handler) ──
-function router() {
-  const hash = (location.hash.slice(1) || '/').replace(/^\/+/, '');
-  routeTo(hash);
-}
+// ── Page router (hashchange handler) — defined below near navigate() ──
 
 // ── Load data ──
 async function loadData() {
@@ -684,6 +680,11 @@ function searchProjects(q) {
   if (!ql) { el.innerHTML = ''; return; }
 
   const results = projectsIndex
+    .filter(p => {
+      if (propertyFilter === 'Private') return (p.type || 'Private') !== 'HDB';
+      if (propertyFilter === 'HDB') return p.type === 'HDB';
+      return true;
+    })
     .filter(p => p.name?.toLowerCase().includes(ql) || (p.street || p.town || '').toLowerCase().includes(ql))
     .slice(0, 20);
 
@@ -723,11 +724,31 @@ function psfTrend(p) {
 }
 
 // ── Navigation ──
+let _lastRoute = null;
 function navigate(path) {
-  // Set hash for bookmarkability
-  location.hash = '#' + path;
-  // Directly call the router (reliable across all browsers)
-  routeTo(path);
+  const clean = path.replace(/^\/+/, '');
+  // Dedup: record route, set hash (triggers hashchange → router), then render once
+  _lastRoute = clean;
+  location.hash = '#' + clean;
+  routeTo(clean);
+}
+
+// Router for hashchange (back/forward buttons, manual URL edits)
+function router() {
+  const hash = (location.hash.slice(1) || '/').replace(/^\/+/, '');
+  if (hash === _lastRoute) return; // already handled by navigate()
+  _lastRoute = hash;
+  routeTo(hash);
+}
+
+// ── Property type filter (All / Private / HDB) ──
+let propertyFilter = 'All';
+function setFilter(type) {
+  propertyFilter = type;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b.dataset.filter === type));
+  // Re-run current search with the new filter
+  const q = document.getElementById('search-input')?.value || '';
+  searchProjects(q);
 }
 
 // Route to a path directly (no hash dependency)
@@ -824,7 +845,8 @@ function renderPriceChart(transactions) {
   });
   const volumes = labels.map(m => byMonth[m].count);
 
-  new Chart(canvas, {
+  if (window._priceChart) window._priceChart.destroy();
+  window._priceChart = new Chart(canvas, {
     type: 'bar',
     data: {
       labels,
@@ -890,7 +912,9 @@ function renderProjectMap(coord, name) {
   const el = document.getElementById('projectMap');
   if (!el) return;
   if (typeof L === 'undefined') { el.innerHTML = '<div class="text-muted">Map library not loaded</div>'; return; }
+  if (window._projectMap) { window._projectMap.remove(); window._projectMap = null; }
   const map = L.map(el, { zoomControl: true }).setView([coord.lat, coord.lng], 15);
+  window._projectMap = map;
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19, attribution: '&copy; OpenStreetMap'
   }).addTo(map);
@@ -902,7 +926,9 @@ function renderFullMap() {
   const el = document.getElementById('fullMap');
   if (!el) return;
   if (typeof L === 'undefined') { el.innerHTML = '<div class="text-muted">Map library (Leaflet) not loaded. Check your network or ad-blocker.</div>'; return; }
+  if (window._fullMap) { window._fullMap.remove(); window._fullMap = null; }
   const map = L.map(el, { zoomControl: true }).setView([1.3521, 103.8198], 11);
+  window._fullMap = map;
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19, attribution: '&copy; OpenStreetMap'
   }).addTo(map);

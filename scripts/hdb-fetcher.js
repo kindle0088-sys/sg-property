@@ -19,6 +19,16 @@ const DATASETS = [
     hasRemainingLease: false
   },
   {
+    id: 'd_43f493c6c50d54243cc1eab0df142d6a',
+    name: '2000-Feb2012', isActive: false,
+    hasRemainingLease: false
+  },
+  {
+    id: 'd_2d5ff9ea31397b66239f245f57751537',
+    name: 'Mar2012-Dec2014', isActive: false,
+    hasRemainingLease: false
+  },
+  {
     id: 'd_ea9ed51da2787afaf8e51f827c304208',
     name: '2015-2016', isActive: false,
     hasRemainingLease: true
@@ -120,7 +130,9 @@ function pushBatch(target, source, batchSize = 50000) {
 }
 
 function blockId(town, block, street) {
-  return `hdb-${town.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${block}`;
+  // Include street to avoid merging different blocks with same number on different streets
+  const streetPart = (street || '').toLowerCase().replace(/[^a-z0-9]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
+  return `hdb-${town.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${block}-${streetPart || 'ns'}`;
 }
 
 export async function fetchHdbData(forceRefresh = false) {
@@ -142,10 +154,10 @@ export async function fetchHdbData(forceRefresh = false) {
     console.log(`  Fetching ${ds.name}...`);
     try {
       const rawRecords = await fetchPaginated(ds);
-      pushBatch(allRecords, rawRecords);
       console.log(`    Raw: ${rawRecords.length.toLocaleString()} records`);
 
-      // Batch normalize 
+      // Batch normalize — only normalized records go into allRecords (raw would
+      // create duplicate entries with mismatched field names in processHdbData)
       let normalized = [];
       for (let i = 0; i < rawRecords.length; i += 50000) {
         const batch = rawRecords.slice(i, i + 50000).map(r => normalizeRow(r, ds.hasRemainingLease)).filter(Boolean);
@@ -211,11 +223,11 @@ export function processHdbData(records) {
         minPsf: psfArr.length ? Math.min(...psfArr) : 0,
         maxPsf: psfArr.length ? Math.max(...psfArr) : 0,
         years,
-        dateRange: { min: tx[0]?.month || null, max: tx[tx.length-1]?.month || null },
+        dateRange: { min: tx[tx.length-1]?.month || null, max: tx[0]?.month || null },
         propertyTypes: ['HDB'],
         tenureTypes: ['99-year Leasehold']
       },
-      transactions: tx.slice(-500)
+      transactions: tx
     });
   }
 

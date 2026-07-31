@@ -3,9 +3,21 @@
  * Handles token acquisition and data fetching from URA Data Service
  */
 
+import { readFileSync, existsSync } from 'fs';
+import { join, dirname } from 'path';
+import { fileURLToPath } from 'url';
 import { svy21ToWgs84, projectSlug } from './svy21.js';
 
-const URA_ACCESS_KEY = '45e72284-8979-4a7a-85cf-0d359c83c848';
+// URA access key: read from environment variable or local gitignored file
+// Never commit the key to the repository.
+const __dirname = dirname(fileURLToPath(import.meta.url));
+function loadAccessKey() {
+  if (process.env.URA_ACCESS_KEY) return process.env.URA_ACCESS_KEY;
+  const keyFile = join(__dirname, '.ura-key');
+  if (existsSync(keyFile)) return readFileSync(keyFile, 'utf-8').trim();
+  throw new Error('URA_ACCESS_KEY not set. Create scripts/.ura-key or set the URA_ACCESS_KEY env var.');
+}
+const URA_ACCESS_KEY = loadAccessKey();
 const TOKEN_URL = 'https://eservice.ura.gov.sg/uraDataService/insertNewToken/v1';
 const API_BASE = 'https://eservice.ura.gov.sg/uraDataService/invokeUraDS/v1';
 
