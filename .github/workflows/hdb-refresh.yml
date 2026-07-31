@@ -1,22 +1,22 @@
-name: Daily URA Build
+name: HDB Full Refresh
 
 on:
   schedule:
-    # Daily 02:00 UTC = 10:00 Singapore time
-    - cron: '0 2 * * *'
+    # Weekly: Sunday 04:00 UTC = 12:00 Singapore time
+    - cron: '0 4 * * 0'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: daily-ura
+  group: hdb-refresh
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 120
 
     steps:
       - name: Checkout
@@ -29,15 +29,26 @@ jobs:
           cache: npm
           cache-dependency-path: scripts/package-lock.json
 
+      - name: Compute cache key
+        run: echo "DAY_KEY=$(date +%Y%m%d)" >> $GITHUB_ENV
+
+      - name: Cache HDB raw data (255MB, rolling daily)
+        uses: actions/cache@v4
+        with:
+          path: data/hdb_cache
+          key: hdb-cache-${{ env.DAY_KEY }}
+          restore-keys: |
+            hdb-cache-
+
       - name: Install dependencies
         working-directory: scripts
         run: npm ci
 
-      - name: Run build (URA only, reuses committed HDB artifacts)
+      - name: Run full build (--fresh pulls all HDB datasets)
         working-directory: scripts
         env:
           URA_ACCESS_KEY: ${{ secrets.URA_ACCESS_KEY }}
-        run: node build.js --skip-hdb
+        run: node build.js --fresh
 
       - name: Commit and push data updates
         run: |
@@ -47,6 +58,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No data changes; skipping commit"
           else
-            git commit -m "chore: daily URA data build $(date -u +%Y-%m-%d)"
+            git commit -m "chore: weekly HDB full refresh $(date -u +%Y-%m-%d)"
             git push origin main
           fi

@@ -156,16 +156,35 @@ async function main() {
   console.log(`  ${rentals.length} rental records`);
 
   // 4b. HDB Data
-  console.log('\n4b/5 Fetching HDB resale data...');
-  const hdbRaw = demo ? [] : await fetchHdbData(process.argv.includes('--fresh'));
-  const hdbProjects = demo ? [] : processHdbData(hdbRaw);
-  const hdbTxns = hdbProjects.reduce((s, p) => s + p.transactions.length, 0);
+  const skipHdb = process.argv.includes('--skip-hdb');
+  console.log(skipHdb
+    ? '\n4b/5 SKIPPING HDB fetch (--skip-hdb, reusing committed artifacts)'
+    : '\n4b/5 Fetching HDB resale data...');
+  const hdbRaw = demo || skipHdb ? [] : await fetchHdbData(process.argv.includes('--fresh'));
+  let hdbProjects = demo ? [] : processHdbData(hdbRaw);
+  // In --skip-hdb mode, reconstruct a minimal HDB view from committed hdb-index.json
+  // so downstream aggregations (market summary) still have HDB numbers.
+  let hdbIdxCommitted = [];
+  if (skipHdb && !demo) {
+    try {
+      hdbIdxCommitted = JSON.parse(readFileSync(join(DATA, 'hdb-index.json'), 'utf-8'));
+      hdbProjects = hdbIdxCommitted.map(x => ({
+        stats: { avgPsf: x.avgPsf, avgPsf1y: x.avgPsf1y, totalTransactions: x.totalTxns },
+        town: x.town
+      }));
+      console.log(`  Reused ${hdbIdxCommitted.length} committed HDB blocks from hdb-index.json`);
+    } catch (e) {
+      console.log('  No committed hdb-index.json found — HDB stats will be 0');
+      hdbProjects = [];
+    }
+  }
+  const hdbTxns = hdbProjects.reduce((s, p) => s + (p.transactions?.length || 0), 0);
   const hdbTotalTxns = hdbProjects.reduce((s, p) => s + p.stats.totalTransactions, 0);
   console.log(`  ${hdbProjects.length} HDB blocks, ${hdbTxns} cached / ${hdbTotalTxns} total transactions`);
-  console.log(`  HDB data: ${hdbRaw.length.toLocaleString()} raw records spanning ${hdbProjects[0]?.stats.years[0] || '?'}-${hdbProjects[0]?.stats.years[hdbProjects[0]?.stats.years.length-1] || '?'} to today`);
+  console.log(`  HDB data: ${hdbRaw.length.toLocaleString()} raw records spanning ${hdbProjects[0]?.stats.years?.[0] || '?'}-${hdbProjects[0]?.stats.years?.[hdbProjects[0]?.stats.years.length-1] || '?'} to today`);
 
   // 4c. Compute 1-year averages
-  const hdbTxnCount = hdbProjects.reduce((s, p) => s + p.transactions.length, 0);
+  const hdbTxnCount = hdbProjects.reduce((s, p) => s + (p.transactions?.length || 0), 0);
   const uraTxns = projects.reduce((s, p) => s + p.transactions.length, 0);
 
   // Latest date across URA (mmyy format - need sortable comparison for cross-year)
@@ -181,7 +200,7 @@ async function main() {
   // Latest date across HDB (yyyy-mm format)
   let latestHdb = '';
   for (const p of hdbProjects) {
-    for (const t of p.transactions) {
+    for (const t of p.transactions || []) {
       if (t.month && t.month > latestHdb) latestHdb = t.month;
     }
   }
@@ -200,7 +219,9 @@ async function main() {
 
   // Inject avgPsf1y into project stats objects for downstream aggregations
   for (const p of projects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY);
-  for (const p of hdbProjects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
+  if (!skipHdb) {
+    for (const p of hdbProjects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
+  }
 
   // 5. Generate output
   console.log('\n5/5 Generating files...');
@@ -252,44 +273,52 @@ async function main() {
   console.log(`  ${n} project detail files`);
 
   // 5c. HDB project index
-  const hdbIdx = hdbProjects.map(p => ({
-    id: p.id, name: p.name, town: p.town, block: p.block, street: p.street,
-    type: 'HDB', coord: null,
-    avgPsf: p.stats.avgPsf,
-    avgPsf1y: computeAvg1y(p.transactions, 'month', CUTOFF_HDB),
-    minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
-    totalTxns: p.stats.totalTransactions,
-    dateRange: p.stats.dateRange,
-    years: p.stats.years,
-    flatTypes: p.flatTypes
-  }));
-  writeJSON(join(DATA, 'hdb-index.json'), hdbIdx);
-  console.log(`  hdb-index.json (${hdbIdx.length})`);
-
-  // 5d. Per-block HDB files
-  const HDB_DIR = join(DATA, 'hdb');
-  mkdir(HDB_DIR);
-  let m = 0;
-  for (const p of hdbProjects) {
-    const avg1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
-    writeJSON(join(HDB_DIR, `${p.id}.json`), {
-      id: p.id, name: p.name, type: 'HDB',
-      town: p.town, street: p.street, block: p.block,
-      flatTypes: p.flatTypes, flatModels: p.flatModels,
-      stats: { ...p.stats, avgPsf1y: avg1y },
-      transactions: p.transactions.map(t => ({
-        contractDate: t.month ? t.month.substring(5,7) + t.month.substring(2,4) : '',
-        fmtDate: t.month ? fmtDate(t.month.substring(5,7) + t.month.substring(2,4)) : '',
-        sortDate: t.month ? t.month.substring(0,7) : '',
-        flatType: t.flatType, storeyRange: t.storeyRange,
-        floorAreaSqf: t.floorAreaSqf, pricePsf: t.pricePsf,
-        resalePrice: t.resalePrice, flatModel: t.flatModel,
-        remainingLease: t.remainingLease, leaseCommenceDate: t.leaseCommenceDate
-      }))
-    });
-    m++;
+  let hdbIdx;
+  if (skipHdb && hdbIdxCommitted.length) {
+    hdbIdx = hdbIdxCommitted; // reuse committed file untouched
+    console.log(`  hdb-index.json (reused, ${hdbIdx.length})`);
+  } else {
+    hdbIdx = hdbProjects.map(p => ({
+      id: p.id, name: p.name, town: p.town, block: p.block, street: p.street,
+      type: 'HDB', coord: null,
+      avgPsf: p.stats.avgPsf,
+      avgPsf1y: computeAvg1y(p.transactions, 'month', CUTOFF_HDB),
+      minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
+      totalTxns: p.stats.totalTransactions,
+      dateRange: p.stats.dateRange,
+      years: p.stats.years,
+      flatTypes: p.flatTypes
+    }));
+    writeJSON(join(DATA, 'hdb-index.json'), hdbIdx);
+    console.log(`  hdb-index.json (${hdbIdx.length})`);
   }
-  console.log(`  ${m} HDB block detail files`);
+
+  // 5d. Per-block HDB files (skip when reusing committed artifacts)
+  let m = 0;
+  if (!skipHdb) {
+    const HDB_DIR = join(DATA, 'hdb');
+    mkdir(HDB_DIR);
+    for (const p of hdbProjects) {
+      const avg1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
+      writeJSON(join(HDB_DIR, `${p.id}.json`), {
+        id: p.id, name: p.name, type: 'HDB',
+        town: p.town, street: p.street, block: p.block,
+        flatTypes: p.flatTypes, flatModels: p.flatModels,
+        stats: { ...p.stats, avgPsf1y: avg1y },
+        transactions: p.transactions.map(t => ({
+          contractDate: t.month ? t.month.substring(5,7) + t.month.substring(2,4) : '',
+          fmtDate: t.month ? fmtDate(t.month.substring(5,7) + t.month.substring(2,4)) : '',
+          sortDate: t.month ? t.month.substring(0,7) : '',
+          flatType: t.flatType, storeyRange: t.storeyRange,
+          floorAreaSqf: t.floorAreaSqf, pricePsf: t.pricePsf,
+          resalePrice: t.resalePrice, flatModel: t.flatModel,
+          remainingLease: t.remainingLease, leaseCommenceDate: t.leaseCommenceDate
+        }))
+      });
+      m++;
+    }
+  }
+  console.log(`  ${m} HDB block detail files (${skipHdb ? 'skipped — reusing committed' : 'written'})`);
 
   // 5e. Combined index (URA + HDB)
   const combinedIdx = [
@@ -304,11 +333,15 @@ async function main() {
   writeJSON(join(DATA, 'districts.json'), dists);
   console.log(`  districts.json (${dists.length})`);
 
-  // 5g. HDB Towns summary
-  console.log('  Building HDB towns...');
-  const hdbTowns = buildHdbTowns(hdbProjects, CUTOFF_HDB);
-  writeJSON(join(DATA, 'hdb-towns.json'), hdbTowns);
-  console.log(`  hdb-towns.json (${Object.keys(hdbTowns).length} towns)`);
+  // 5g. HDB Towns summary (skip when reusing committed artifacts)
+  if (skipHdb) {
+    console.log('  hdb-towns.json (reused from committed file)');
+  } else {
+    console.log('  Building HDB towns...');
+    const hdbTowns = buildHdbTowns(hdbProjects, CUTOFF_HDB);
+    writeJSON(join(DATA, 'hdb-towns.json'), hdbTowns);
+    console.log(`  hdb-towns.json (${Object.keys(hdbTowns).length} towns)`);
+  }
 
   // 5h. Rentals
   writeJSON(join(DATA, 'rentals.json'), rentals);
