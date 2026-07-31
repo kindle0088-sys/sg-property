@@ -6,7 +6,7 @@ import { renderOverview } from './views/overview.js';
 import { renderPrivateDashboard, renderDistrict } from './views/private.js';
 import { renderHdbDashboard, renderTown } from './views/hdb.js';
 import { renderProject, renderHdbProject } from './views/project.js';
-import { renderMapView, filterMapMarkers, toggleMapFullscreen } from './views/map.js';
+import { renderMapView, renderProjectMap, filterMapMarkers, toggleMapFullscreen } from './views/map.js';
 
 // ── Navigation ──
 export function navigate(path) {
@@ -82,6 +82,19 @@ export function switchTab(el, id) {
   el.classList.add('active');
   const tc = document.getElementById('tab-' + id);
   if (tc) tc.classList.add('active');
+
+  // Location tab: initialize the deferred project map now that the container
+  // is visible (Leaflet needs measurable dimensions), or refresh an existing
+  // map's size after the container became visible.
+  if (id === 'map') {
+    const pending = state.pendingProjectMap;
+    if (pending) {
+      renderProjectMap(pending.coord, pending.name);
+      state.pendingProjectMap = null;
+    } else if (state.map.projectMap) {
+      setTimeout(() => state.map.projectMap.invalidateSize(), 60);
+    }
+  }
 }
 
 // ── Pagination ──

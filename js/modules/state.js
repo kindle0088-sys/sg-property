@@ -15,6 +15,9 @@ export const state = {
     markers: [],
     projectMap: null
   },
+  // deferred project map — Leaflet can't measure a display:none container,
+  // so the project map is initialized lazily when the Location tab opens.
+  pendingProjectMap: null,
   // pagination state
   txPages: {}
 };

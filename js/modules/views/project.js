@@ -3,7 +3,6 @@ import { state } from '../state.js';
 import { fmtNum, fmtPrice, saleTypeLabel, showPsf } from '../utils.js';
 import { fetchProject } from '../data.js';
 import { renderPriceChart, renderHdbChart } from '../charts.js';
-import { renderProjectMap } from './map.js';
 
 const PAGE_SIZE = 25;
 
@@ -104,8 +103,11 @@ export async function renderProject(id) {
   const sorted = [...t].filter(x => x.sortDate).sort((a, b) => a.sortDate.localeCompare(b.sortDate));
   renderPriceChart(sorted);
 
-  // Render map
-  if (p.coord) renderProjectMap(p.coord, p.name);
+  // Map: do NOT render here — #projectMap lives in a display:none tab, and
+  // Leaflet can't measure a hidden container (produces grey tiles).
+  // Defer to switchTab('map'), which initializes the map once the tab is visible.
+  if (state.map.projectMap) { state.map.projectMap.remove(); state.map.projectMap = null; }
+  state.pendingProjectMap = p.coord ? { coord: p.coord, name: p.name } : null;
 }
 
 // ── HDB project detail view ──
