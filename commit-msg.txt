@@ -1,0 +1,21 @@
+feat(compare): A/B project comparison page (in-page search variant)
+
+- New route /compare + Compare nav entry; URL params ?a=...&b=... for sharing
+- Two search boxes with dropdown suggestions (combined projects-index + hdb-index)
+  HDB/Private can be mixed (lazy-loads HDB index when needed)
+- Per-side metric card: 1yr PSF, gross yield (HDB only, from hdb-rentals.json),
+  nearest MRT + distance, 1km school count, full-period price growth %,
+  tenure/lease info. Up/down colors follow China convention (red up, green down).
+- Dual-axis trend chart (Chart.js) for the two projects' avg PSF per year:
+  left axis for A (gold), right axis for B (blue), solves magnitude gap
+  (e.g. private $5000 vs HDB $500)
+- Two Leaflet mini-maps (independent state from project detail page) showing
+  each project location with colored marker matching chart color
+- Router pages map updated to 5 entries; smoke-test covers new exports;
+  styles appended (compare-picker, cmp-card grid, suggest dropdown)
+
+CDP verified: cross-type compare (The Marq $5624 PSF vs HDB Blk 216 $522 PSF)
+all metrics render, trend chart shows both series with distinct Y axes,
+URL updates on selection, hash routing with query params works.
+
+Backup tag: backup-20260801-pre-compare points to b9b2b7806 if needed.

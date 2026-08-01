@@ -20,6 +20,8 @@ export const state = {
   // deferred project map — Leaflet can't measure a display:none container,
   // so the project map is initialized lazily when the Location tab opens.
   pendingProjectMap: null,
+  // A/B compare state
+  compare: { A: null, B: null },
   // pagination state
   txPages: {}
 };

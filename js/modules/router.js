@@ -7,6 +7,7 @@ import { renderPrivateDashboard, renderDistrict } from './views/private.js';
 import { renderHdbDashboard, renderTown } from './views/hdb.js';
 import { renderProject, renderHdbProject } from './views/project.js';
 import { renderMapView, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter, setMapYear, updateYearPreview, setMapColorMode } from './views/map.js';
+import { renderCompareView, compareSuggest, selectCompare } from './views/compare.js';
 
 // ── Navigation ──
 export function navigate(path) {
@@ -45,14 +46,15 @@ export async function routeTo(path) {
 
     // Update nav active state
     document.querySelectorAll('nav a').forEach(a => a.classList.remove('nav-active'));
-    const pages = { overview:0, private:1, hdb:2, map:3 };
+    const pages = { overview:0, private:1, hdb:2, map:3, compare:4 };
     const navIdx = pages[p];
     if (navIdx !== undefined) {
       document.querySelectorAll('nav a')[navIdx]?.classList.add('nav-active');
     }
 
-    // HDB 索引懒加载：HDB 页 / 市镇 / 地图 / HDB 楼栋详情才拉 7MB 索引
-    if (p === 'hdb' || p === 'town' || p === 'map' || (p === 'project' && r[0]?.startsWith('hdb-'))) {
+    // HDB 索引懒加载：HDB 页 / 市镇 / 地图 / HDB 楼栋详情 / 对比页才拉 7MB 索引
+    const page = p.split('?')[0];
+    if (page === 'hdb' || page === 'town' || page === 'map' || page === 'compare' || (page === 'project' && r[0]?.startsWith('hdb-'))) {
       await loadHdbIndex().catch(() => {});
     }
 
@@ -60,6 +62,10 @@ export async function routeTo(path) {
       const isHdb = r[0].startsWith('hdb-');
       if (isHdb) await renderHdbProject(r[0]);
       else await renderProject(r[0]);
+    } else if (page === 'compare') {
+      // #/compare?a=xxx&b=yyy（URL 参数可分享）
+      const sp = new URLSearchParams(p.split('?')[1] || '');
+      renderCompareView({ a: sp.get('a') || '', b: sp.get('b') || '' });
     } else if (p === 'district' && r[0]) {
       renderDistrict(r[0]);
     } else if (p === 'town' && r[0]) {
@@ -128,4 +134,6 @@ export function exposeGlobals() {
   window.setMapColorMode = setMapColorMode;
   window.updateYearPreview = updateYearPreview;
   window.toggleMapFullscreen = toggleMapFullscreen;
+  window.compareSuggest = compareSuggest;
+  window.selectCompare = selectCompare;
 }

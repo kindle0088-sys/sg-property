@@ -211,3 +211,46 @@ export function renderLeaseScatter(transactions) {
     }
   });
 }
+
+// ── A/B 对比：两条年均 PSF 走势叠加 ──
+export function renderCompareChart(sA, sB, nameA, nameB) {
+  const canvas = document.getElementById('compareChart');
+  if (!canvas) return;
+  if (window._compareChart) window._compareChart.destroy();
+  const labels = [...new Set([...sA.map(s => s.year), ...sB.map(s => s.year)])].sort();
+  const trunc = n => (n || '').length > 22 ? n.slice(0, 22) + '…' : n;
+  const mk = (s, color, name) => ({
+    label: trunc(name),
+    data: labels.map(y => s.find(x => x.year === y)?.psf ?? null),
+    borderColor: color, backgroundColor: 'transparent', borderWidth: 2.5,
+    pointRadius: 3.5, pointBackgroundColor: color, tension: 0.3, spanGaps: true
+  });
+  try {
+    window._compareChart = new Chart(canvas, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          { ...mk(sA, '#fbbf24', nameA), yAxisID: 'y', order: 1 },
+          { ...mk(sB, '#60a5fa', nameB), yAxisID: 'y1', order: 2 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { labels: { color: '#94a3b8', font: { size: 11 } } },
+          tooltip: {
+            callbacks: {
+              label: ctx => `${ctx.dataset.label}: $${ctx.parsed.y}`
+            }
+          }
+        },
+        scales: {
+          x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(42,58,84,0.5)' } },
+          y: { beginAtZero: false, position: 'left', ticks: { color: '#fbbf24', font: { size: 10 }, callback: v => '$' + v }, grid: { color: 'rgba(42,58,84,0.3)' }, title: { display: true, text: 'A (左轴)', color: '#fbbf24', font: { size: 10 } } },
+          y1: { beginAtZero: false, position: 'right', ticks: { color: '#60a5fa', font: { size: 10 }, callback: v => '$' + v }, grid: { display: false }, title: { display: true, text: 'B (右轴)', color: '#60a5fa', font: { size: 10 } } }
+        }
+      }
+    });
+  } catch(e) { /* chart fail silently */ }
+}

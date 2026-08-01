@@ -312,3 +312,32 @@ tr:hover{background:var(--bg-hover)}
 .map-color-mode{display:flex;gap:4px}
 .psf-legend-item{display:inline-flex;align-items:center;gap:4px;margin-right:12px;font-size:12px;color:var(--text2)}
 .psf-legend-item i{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+/* ── A/B Compare page ── */
+.compare-picker{display:flex;gap:12px;align-items:flex-start;margin:14px 0;flex-wrap:wrap}
+.cp-side{flex:1;min-width:220px;position:relative}
+.cp-label{font-size:12px;color:var(--text2);margin-bottom:4px;font-weight:500}
+.cmp-input{width:100%;padding:10px 12px;border-radius:8px;border:1px solid var(--border);background:var(--bg2);color:var(--text);font-size:14px;outline:none}
+.cmp-input:focus{border-color:var(--gold)}
+.cp-vs{align-self:center;font-weight:500;color:var(--gold);font-size:16px;padding:0 6px}
+.cp-suggest{position:absolute;top:100%;left:0;right:0;background:var(--bg2);border:1px solid var(--border);border-radius:8px;margin-top:4px;z-index:60;display:none;max-height:320px;overflow:auto}
+.cp-suggest.open{display:block}
+.cp-item{padding:9px 12px;font-size:13px;cursor:pointer;border-bottom:1px solid var(--border)}
+.cp-item:last-child{border-bottom:none}
+.cp-item:hover{background:var(--bg-hover)}
+.cp-item-meta{color:var(--text2);font-size:11px;float:right;margin-left:10px;line-height:20px}
+.compare-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin:14px 0}
+.cmp-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.cmp-card-head{display:flex;align-items:center;gap:8px;font-size:15px;margin-bottom:4px;flex-wrap:wrap}
+.cmp-side-dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.cmp-card-sub{font-size:12px;color:var(--text2);margin-bottom:12px}
+.cmp-metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.cmp-metric{background:var(--bg3);border-radius:8px;padding:8px 10px;min-width:0}
+.cm-label{display:block;font-size:11px;color:var(--text2);margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cm-val{font-size:16px;font-weight:500;color:var(--text)}
+.cmp-metric .up{color:var(--red)}
+.cmp-metric .down{color:var(--green)}
+.cmp-chart{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin:14px 0}
+.compare-maps{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px;margin:14px 0}
+.cmp-map-card{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:14px 16px}
+.cmp-map-title{font-size:13px;color:var(--text2);margin-bottom:8px}
