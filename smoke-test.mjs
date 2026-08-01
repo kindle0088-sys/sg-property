@@ -12,17 +12,17 @@ globalThis.L = { map: () => ({ setView: () => ({}) }), markerClusterGroup: () =>
 const { router, navigate, exposeGlobals, switchTab, pageTxns, pageHdb } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/router.js');
 const { state } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/state.js');
 const { fmtNum, fmtPrice, slugifyTown, showPsf, highlight } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/utils.js');
-const { loadData, fetchProject, showLoading } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/data.js');
+const { loadData, loadHdbIndex, fetchProject, showLoading } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/data.js');
 const { renderPriceChart, renderHdbChart } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/charts.js');
 const { searchProjects, setFilter, clearSearch } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/search.js');
 const { renderOverview } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/overview.js');
 const { renderPrivateDashboard, renderDistrict } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/private.js');
 const { renderHdbDashboard, renderTown } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/hdb.js');
 const { renderProject, renderHdbProject } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/project.js');
-const { renderMapView, renderFullMap, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/map.js');
+const { renderMapView, renderFullMap, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter, setMapYear, updateYearPreview } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/map.js');
 
 // Verify all exports are functions
-const exports = { router, navigate, exposeGlobals, switchTab, pageTxns, pageHdb, loadData, fetchProject, showLoading, renderPriceChart, renderHdbChart, searchProjects, setFilter, clearSearch, renderOverview, renderPrivateDashboard, renderDistrict, renderHdbDashboard, renderTown, renderProject, renderHdbProject, renderMapView, renderFullMap, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter };
+const exports = { router, navigate, exposeGlobals, switchTab, pageTxns, pageHdb, loadData, loadHdbIndex, fetchProject, showLoading, renderPriceChart, renderHdbChart, searchProjects, setFilter, clearSearch, renderOverview, renderPrivateDashboard, renderDistrict, renderHdbDashboard, renderTown, renderProject, renderHdbProject, renderMapView, renderFullMap, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter, setMapYear, updateYearPreview };
 let fail = 0;
 for (const [name, fn] of Object.entries(exports)) {
   if (typeof fn !== 'function') { console.error('NOT A FUNCTION:', name); fail++; }

@@ -300,3 +300,9 @@ tr:hover{background:var(--bg-hover)}
 /* ── HDB demolished banner + tag ── */
 .demolished-banner{background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.4);color:#f59e0b;border-radius:8px;padding:8px 12px;font-size:13px;margin:10px 0}
 .tag-demolished{display:inline-block;padding:1px 6px;border-radius:4px;background:#f59e0b;color:#fff;font-size:10px;font-weight:600;vertical-align:middle}
+
+/* ── Map year timeline ── */
+.map-time-filter{display:flex;align-items:center;gap:8px;margin:6px 0 8px;flex-wrap:wrap}
+.map-time-label{font-size:12px;color:var(--text2)}
+.map-time-filter input[type=range]{flex:1;min-width:140px;accent-color:var(--gold);height:4px;cursor:pointer}
+.map-year-val{font-size:12px;color:var(--gold);font-weight:500;min-width:34px;text-align:center}

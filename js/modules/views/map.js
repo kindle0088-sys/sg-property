@@ -18,7 +18,7 @@ function mapType(p) {
 
 // ── Map view ──
 export function renderMapView() {
-  const withCoord = state.projectsIndex.filter(p => p.coord).length;
+  const withCoord = [...state.projectsIndex, ...state.hdbIndex].filter(p => p.coord).length;
   document.getElementById('main').innerHTML = `
     <div class="project-hero">
       <a href="#" onclick="navigate('/private');return false" style="font-size:13px">&larr; Back to Private</a>
@@ -38,12 +38,18 @@ export function renderMapView() {
       </div>
       <button class="map-fullscreen-btn" onclick="toggleMapFullscreen()" title="Toggle fullscreen">⛶ Fullscreen</button>
     </div>
+    <div class="map-time-filter">
+      <span class="map-time-label">成交年份:</span>
+      <button class="filter-btn" id="map-year-all" onclick="setMapYear('All')">All</button>
+      <input type="range" id="map-year-slider" min="1990" max="2026" value="2026" step="1" oninput="updateYearPreview(this.value)" onchange="setMapYear(this.value)">
+      <span class="map-year-val" id="map-year-label">全部</span>
+    </div>
     <div class="map-legend">
       <span><i style="background:#3b82f6"></i>Private</span>
       <span><i style="background:#a855f7"></i>EC</span>
       <span><i style="background:#f59e0b"></i>HDB</span>
     </div>
-    <div class="map-container" id="fullMap" style="height:550px"></div>
+    <div class="map-container" id="fullMap" style="height:520px"></div>
     <div id="map-status" class="text-muted" style="text-align:center;padding:6px;font-size:12px"></div>
   `;
   try {
@@ -52,6 +58,21 @@ export function renderMapView() {
     document.getElementById('main').innerHTML +=
       `<div class="error" style="margin-top:12px">⚠️ Map failed to load: ${e.message}</div>`;
   }
+}
+
+// ── 年份时间轴 ──
+export function setMapYear(year) {
+  state.map.year = year;
+  document.getElementById('map-year-label').textContent = year === 'All' ? '全部' : String(year);
+  document.getElementById('map-year-all').classList.toggle('active', year === 'All');
+  const q = document.getElementById('map-search-input')?.value || '';
+  filterMapMarkers(q);
+}
+
+// 拖动过程中只更新预览，松手（onchange）才真正过滤，避免卡顿
+export function updateYearPreview(v) {
+  const label = document.getElementById('map-year-label');
+  if (label) label.textContent = v;
 }
 
 // ── Type filter (All / Private / EC / HDB) ──
@@ -70,18 +91,20 @@ export function setMapTypeFilter(type) {
   filterMapMarkers(q);
 }
 
-// ── Map search filtering (叠加类型筛选) ──
+// ── Map search filtering (叠加类型 + 年份筛选) ──
 export function filterMapMarkers(q) {
   const ql = (q || '').toLowerCase().trim();
   const markers = state.map.markers;
   if (!markers.length) return;
   const typeFilter = state.map.typeFilter || 'All';
+  const yearFilter = state.map.year || 'All';
   let visible = 0;
   const total = markers.length;
   markers.forEach(m => {
     const match = !ql || m.name.toLowerCase().includes(ql) || (m.street || '').toLowerCase().includes(ql);
     const showType = typeFilter === 'All' || m.type === typeFilter;
-    const show = match && showType;
+    const showYear = yearFilter === 'All' || (m.years && m.years.includes(String(yearFilter)));
+    const show = match && showType && showYear;
     const cluster = state.map.clusters[m.type];
     if (!cluster) return;
     if (show) {
@@ -93,10 +116,11 @@ export function filterMapMarkers(q) {
     }
   });
   const typeLabel = typeFilter === 'All' ? '' : ` · ${typeFilter}`;
+  const yearLabel = yearFilter === 'All' ? '' : ` · ${yearFilter}`;
   document.getElementById('map-subtitle').textContent = ql
-    ? `${visible} of ${total} match "${ql}"${typeLabel}`
-    : `${total} projects with coordinates${typeLabel}`;
-  document.getElementById('map-status').textContent = `${visible} markers visible${typeLabel}`;
+    ? `${visible} of ${total} match "${ql}"${typeLabel}${yearLabel}`
+    : `${total} projects with coordinates${typeLabel}${yearLabel}`;
+  document.getElementById('map-status').textContent = `${visible} markers visible${typeLabel}${yearLabel}`;
 }
 
 // ── Map fullscreen ──
@@ -173,10 +197,13 @@ export function renderFullMap() {
   }
   state.map.markers = [];
   state.map.typeFilter = state.map.typeFilter || 'All';
+  state.map.year = state.map.year || 'All';
 
   let count = 0;
   const counts = { Private: 0, EC: 0, HDB: 0 };
-  state.projectsIndex.forEach(p => {
+  let minYear = 9999, maxYear = 0;
+  const all = [...state.projectsIndex, ...state.hdbIndex];
+  all.forEach(p => {
     if (!p.coord) return;
     const type = mapType(p);
     const meta = TYPE_META[type];
@@ -196,11 +223,26 @@ export function renderFullMap() {
       marker: m, name: p.name,
       street: p.street || p.town || '',
       id: p.id, type,
+      years: p.years || [],
       onMap: true
     });
+    for (const y of p.years || []) {
+      const n = parseInt(y, 10);
+      if (n && !isNaN(n)) { if (n < minYear) minYear = n; if (n > maxYear) maxYear = n; }
+    }
     counts[type]++;
     count++;
   });
+
+  // 年份 slider 范围（动态）
+  if (minYear < 9999 && maxYear > 0) {
+    const slider = document.getElementById('map-year-slider');
+    if (slider) {
+      slider.min = String(minYear);
+      slider.max = String(maxYear);
+      slider.value = String(maxYear);
+    }
+  }
 
   // 默认 All：三层全挂
   const typeFilter = state.map.typeFilter;

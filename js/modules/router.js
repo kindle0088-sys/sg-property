@@ -1,12 +1,12 @@
 /* === Router: navigation, routing, tabs, pagination === */
 import { state } from './state.js';
-import { loadData, showLoading } from './data.js';
+import { loadData, loadHdbIndex, showLoading } from './data.js';
 import { setFilter, searchProjects, clearSearch } from './search.js';
 import { renderOverview } from './views/overview.js';
 import { renderPrivateDashboard, renderDistrict } from './views/private.js';
 import { renderHdbDashboard, renderTown } from './views/hdb.js';
 import { renderProject, renderHdbProject } from './views/project.js';
-import { renderMapView, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter } from './views/map.js';
+import { renderMapView, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter, setMapYear, updateYearPreview } from './views/map.js';
 
 // ── Navigation ──
 export function navigate(path) {
@@ -49,6 +49,11 @@ export async function routeTo(path) {
     const navIdx = pages[p];
     if (navIdx !== undefined) {
       document.querySelectorAll('nav a')[navIdx]?.classList.add('nav-active');
+    }
+
+    // HDB 索引懒加载：HDB 页 / 市镇 / 地图 / HDB 楼栋详情才拉 7MB 索引
+    if (p === 'hdb' || p === 'town' || p === 'map' || (p === 'project' && r[0]?.startsWith('hdb-'))) {
+      await loadHdbIndex().catch(() => {});
     }
 
     if (p === 'project' && r[0]) {
@@ -119,5 +124,7 @@ export function exposeGlobals() {
   window.pageHdb = pageHdb;
   window.filterMapMarkers = filterMapMarkers;
   window.setMapTypeFilter = setMapTypeFilter;
+  window.setMapYear = setMapYear;
+  window.updateYearPreview = updateYearPreview;
   window.toggleMapFullscreen = toggleMapFullscreen;
 }

@@ -9,9 +9,13 @@ async function fetchJSON(file) {
   return resp.json();
 }
 
+/**
+ * 核心数据（首屏）：URA 项目索引 + 聚合统计 + HDB 元数据
+ * 不加载 8MB 的 HDB 完整索引——进入 HDB/地图/楼栋路由时才懒加载（loadHdbIndex）
+ */
 export async function loadData() {
   const [idx, dists, summ, hdbTowns, hdbRentals, hdbLeaseCurve] = await Promise.all([
-    fetchJSON('property-index.json'),
+    fetchJSON('projects-index.json'),
     fetchJSON('districts.json'),
     fetchJSON('market-summary.json'),
     fetchJSON('hdb-towns.json').catch(() => ({})),
@@ -24,7 +28,7 @@ export async function loadData() {
   state.hdbTownsData = hdbTowns;
   state.hdbRentals = hdbRentals;
   state.hdbLeaseCurve = hdbLeaseCurve;
-  state.hdbIndex = idx.filter(p => p.type === 'HDB');
+  state.hdbIndex = []; // HDB 索引懒加载
 
   // Footer: 显示数据更新时间（buildTime 是 UTC ISO，转新加坡时间 SGT）
   if (summ?.buildTime) {
@@ -36,6 +40,18 @@ export async function loadData() {
       el.textContent = 'Data updated ' + iso + ' SGT';
     }
   }
+}
+
+// HDB 索引懒��载（幂等：只拉一次）
+let _hdbPromise = null;
+export function loadHdbIndex() {
+  if (state.hdbIndex.length) return Promise.resolve(state.hdbIndex);
+  if (!_hdbPromise) {
+    _hdbPromise = fetchJSON('hdb-index.json')
+      .then(idx => { state.hdbIndex = idx; return idx; })
+      .catch(err => { _hdbPromise = null; throw err; });
+  }
+  return _hdbPromise;
 }
 
 export async function fetchProject(id) {

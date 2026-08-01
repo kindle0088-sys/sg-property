@@ -280,6 +280,7 @@ async function main() {
   if (skipUra && !demo) {
     idx = projects.map(p => ({
       id: p.id, name: p.name, street: p.street,
+      type: ecType(p),
       district: p.stats.districts[0] || null,
       marketSegment: p.marketSegment,
       avgPsf: p.stats.avgPsf, avgPsf1y: p.stats.avgPsf1y,
@@ -292,10 +293,12 @@ async function main() {
       years: p.stats.years,
       proximity: p.proximity
     }));
-    console.log(`  projects-index.json (reused, ${idx.length})`);
+    writeJSON(join(DATA, 'projects-index.json'), idx); // 从 committed 重建 + 注入 type
+    console.log(`  projects-index.json (reused + type, ${idx.length})`);
   } else {
     idx = projects.map(p => ({
       id: p.id, name: p.name, street: p.street,
+      type: ecType(p),
       district: p.stats.districts[0] || null,
       marketSegment: p.marketSegment,
       avgPsf: p.stats.avgPsf, avgPsf1y: computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY),

@@ -4,8 +4,8 @@ import { fmtNum } from '../utils.js';
 
 export function renderOverview() {
   const sm = state.marketSummary;
-  const hdbCount = state.hdbIndex.length;
-  const hdbTxns = state.hdbIndex.reduce((s, p) => s + (p.totalTxns || 0), 0);
+  const hdbCount = sm.hdbBlocks || 0;           // 用 market-summary（HDB 索引懒加载）
+  const hdbTxns = sm.hdbTransactions || 0;
   const hdbTownsArr = Object.keys(state.hdbTownsData);
   const hdbAvg = sm.hdbAvgPsf1y || sm.hdbAvgPsf || 0;
   const dists = state.districtsData.filter(d => d.projectCount > 0);

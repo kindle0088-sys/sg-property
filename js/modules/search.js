@@ -1,6 +1,7 @@
 /* === Search + property type filter === */
 import { state } from './state.js';
 import { fmtNum, showPsf, highlight } from './utils.js';
+import { loadHdbIndex } from './data.js';
 
 // ── Property type filter (All / Private / HDB) ──
 export function setFilter(type) {
@@ -19,7 +20,17 @@ export function searchProjects(q) {
   if (!ql) { el.innerHTML = ''; hideClear(); return; }
   showClear();
 
-  const results = state.projectsIndex
+  // HDB 索引懒加载：未加载时后台拉取，完成后刷新结果（首屏搜索也能找到 HDB）
+  if (!state.hdbIndex.length && !searchProjects._loadingHdb) {
+    searchProjects._loadingHdb = true;
+    loadHdbIndex().catch(() => {}).finally(() => {
+      searchProjects._loadingHdb = false;
+      if (document.getElementById('search-input')?.value) searchProjects(document.getElementById('search-input').value);
+    });
+  }
+
+  const all = [...state.projectsIndex, ...state.hdbIndex];
+  const results = all
     .filter(p => {
       if (state.propertyFilter === 'Private') return (p.type || 'Private') !== 'HDB';
       if (state.propertyFilter === 'HDB') return p.type === 'HDB';

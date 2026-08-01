@@ -20,8 +20,8 @@ export function invMetric(d) {
 export function renderPrivateDashboard() {
   const dists = state.districtsData;
   const sm = state.marketSummary;
-  const hdbCount = state.hdbIndex.length;
-  const hdbTxns = state.hdbIndex.reduce((s, p) => s + (p.totalTxns || 0), 0);
+  const hdbCount = sm.hdbBlocks || 0;           // 用 market-summary（HDB 索引懒加载）
+  const hdbTxns = sm.hdbTransactions || 0;
   const activeDists = dists.filter(d => d.projectCount > 0);
 
   // Top gainers/losers - projects sorted by avg psf change (approximate from district data)
