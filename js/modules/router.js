@@ -6,7 +6,7 @@ import { renderOverview } from './views/overview.js';
 import { renderPrivateDashboard, renderDistrict } from './views/private.js';
 import { renderHdbDashboard, renderTown } from './views/hdb.js';
 import { renderProject, renderHdbProject } from './views/project.js';
-import { renderMapView, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter, setMapYear, updateYearPreview } from './views/map.js';
+import { renderMapView, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter, setMapYear, updateYearPreview, setMapColorMode } from './views/map.js';
 
 // ── Navigation ──
 export function navigate(path) {
@@ -125,6 +125,7 @@ export function exposeGlobals() {
   window.filterMapMarkers = filterMapMarkers;
   window.setMapTypeFilter = setMapTypeFilter;
   window.setMapYear = setMapYear;
+  window.setMapColorMode = setMapColorMode;
   window.updateYearPreview = updateYearPreview;
   window.toggleMapFullscreen = toggleMapFullscreen;
 }

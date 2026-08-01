@@ -1,0 +1,18 @@
+feat(map): PSF heatmap color mode (type vs price)
+
+- map.js: 6-band percentile color ramp (red=expensive, blue=cheap) for
+  markers + cluster bubbles. Toggle in toolbar (类型色 / 价格热力).
+- psfScale computed once per map render using quantile buckets (20/40/60/80/95)
+  so colors distribute evenly despite HDB (~$500) vs private (~$2500+) skew
+- marker stores _psf, setStyle for instant recolor on mode switch
+- cluster iconCreateFunction: price mode computes average PSF of children
+  -> color; type mode uses dominant type (unchanged)
+- Toolbar: type filter / search / year slider all still stack with color mode
+- Legend swaps: type mode shows Private/EC/HDB dots, price mode shows
+  6 color swatches with "low"/"high"/"no-data" labels and $ buckets in tooltip
+- Outlier filter: PSF < $200 excluded from scale (8 HDB have avgPsf1y in
+  $72-$142 range - data quality issue from resale floor-area records,
+  noted as future cleanup task)
+
+Verified via CDP: mode toggle instant, purple #a855f7 absent in price mode,
+warm #ef4444/#fb923c/#fbbf24 present, cluster bg matches color ramp.

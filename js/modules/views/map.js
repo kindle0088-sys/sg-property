@@ -16,6 +16,37 @@ function mapType(p) {
   return 'Private';
 }
 
+// ── PSF 热力色带（红贵蓝便宜，中国习惯的暖色高价） ──
+const PSF_COLORS = ['#3b82f6', '#22d3ee', '#34d399', '#fbbf24', '#fb923c', '#ef4444'];
+const NO_PSF_COLOR = '#64748b';
+const PSF_PCTS = [0.2, 0.4, 0.6, 0.8, 0.95];
+
+// 按分位数建色带边界（避免线性分档把绝大多数点挤进低档；
+// 过滤 $200 以下脏数据——新加坡任何房产 PSF 不存在这么低的值）
+function psfScaleOf(markers) {
+  const psfs = markers.map(m => m.psf).filter(v => v && v >= 200).sort((a, b) => a - b);
+  const n = psfs.length;
+  if (!n) return null;
+  return {
+    buckets: PSF_PCTS.map(p => psfs[Math.min(n - 1, Math.floor(p * n))]),
+    min: psfs[0], max: psfs[n - 1]
+  };
+}
+
+function psfColor(psf, scale) {
+  if (!psf || psf <= 0 || !scale) return NO_PSF_COLOR;
+  for (let i = 0; i < scale.buckets.length; i++) {
+    if (psf <= scale.buckets[i]) return PSF_COLORS[i];
+  }
+  return PSF_COLORS[PSF_COLORS.length - 1];
+}
+
+// marker 当前模式下的颜色
+function markerColor(m) {
+  if (state.map.colorMode === 'psf') return psfColor(m.psf, state.map.psfScale);
+  return (TYPE_META[m.type] || TYPE_META.Private).color;
+}
+
 // ── Map view ──
 export function renderMapView() {
   const withCoord = [...state.projectsIndex, ...state.hdbIndex].filter(p => p.coord).length;
@@ -44,10 +75,12 @@ export function renderMapView() {
       <input type="range" id="map-year-slider" min="1990" max="2026" value="2026" step="1" oninput="updateYearPreview(this.value)" onchange="setMapYear(this.value)">
       <span class="map-year-val" id="map-year-label">全部</span>
     </div>
-    <div class="map-legend">
-      <span><i style="background:#3b82f6"></i>Private</span>
-      <span><i style="background:#a855f7"></i>EC</span>
-      <span><i style="background:#f59e0b"></i>HDB</span>
+    <div class="map-legend-row">
+      <div class="map-color-mode">
+        <button class="filter-btn active" data-mode="type" onclick="setMapColorMode('type')">类型色</button>
+        <button class="filter-btn" data-mode="psf" onclick="setMapColorMode('psf')">价格热力</button>
+      </div>
+      <div class="map-legend" id="map-legend"></div>
     </div>
     <div class="map-container" id="fullMap" style="height:520px"></div>
     <div id="map-status" class="text-muted" style="text-align:center;padding:6px;font-size:12px"></div>
@@ -89,6 +122,54 @@ export function setMapTypeFilter(type) {
   // 重新叠加搜索过滤
   const q = document.getElementById('map-search-input')?.value || '';
   filterMapMarkers(q);
+}
+
+// ── 颜色模式：类型色 / PSF 价格热力 ──
+export function setMapColorMode(mode) {
+  if (mode !== 'psf') mode = 'type';
+  state.map.colorMode = mode;
+  document.querySelectorAll('.map-color-mode .filter-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.mode === mode));
+  const map = state.map.fullMap;
+  if (!map || !state.map.markers.length) { renderLegend(); return; }
+  // 即时更新所有 marker 颜色（在 cluster 内的也生效）
+  for (const m of state.map.markers) {
+    const c = markerColor(m);
+    m.marker.setStyle({ color: c, fillColor: c });
+  }
+  // cluster 气泡重染色（iconCreateFunction 按当前模式重算）
+  for (const t of Object.keys(state.map.clusters)) {
+    const cluster = state.map.clusters[t];
+    if (typeof cluster.refreshClusters === 'function') cluster.refreshClusters();
+    else { map.removeLayer(cluster); map.addLayer(cluster); }
+  }
+  renderLegend();
+}
+
+function renderLegend() {
+  const el = document.getElementById('map-legend');
+  if (!el) return;
+  if (state.map.colorMode !== 'psf') {
+    el.innerHTML =
+      '<span><i style="background:#3b82f6"></i>Private</span>' +
+      '<span><i style="background:#a855f7"></i>EC</span>' +
+      '<span><i style="background:#f59e0b"></i>HDB</span>';
+    return;
+  }
+  const scale = state.map.psfScale;
+  if (!scale) { el.innerHTML = '<span style="color:var(--text2)">no price data</span>'; return; }
+  const item = (c, txt, tip) =>
+    `<span class="psf-legend-item" title="${tip || ''}"><i style="background:${c}"></i>${txt}</span>`;
+  const tips = PSF_COLORS.map((c, i) => {
+    const low = i === 0 ? scale.min : scale.buckets[i - 1];
+    const hi = scale.buckets[i];
+    return `$${Math.round(low)} - $${Math.round(hi)}`;
+  });
+  el.innerHTML =
+    item(PSF_COLORS[0], '低', tips[0]) +
+    PSF_COLORS.slice(1, -1).map((c, i) => item(c, '', tips[i + 1])).join('') +
+    item(PSF_COLORS[PSF_COLORS.length - 1], '高', tips[tips.length - 1]) +
+    item(NO_PSF_COLOR, '无数据');
 }
 
 // ── Map search filtering (叠加类型 + 年份筛选) ──
@@ -175,7 +256,7 @@ export function renderFullMap() {
     maxZoom: 19, attribution: '&copy; OpenStreetMap'
   }).addTo(map);
 
-  // 每类型一个 cluster 层（cluster 颜色按内部主要类型染色）
+  // 每类型一个 cluster 层（cluster 颜色按当前模式：类型色 / 内部平均 PSF）
   state.map.clusters = {};
   for (const t of Object.keys(TYPE_META)) {
     state.map.clusters[t] = L.markerClusterGroup({
@@ -183,10 +264,18 @@ export function renderFullMap() {
       showCoverageOnHover: false,
       maxClusterRadius: 60,
       iconCreateFunction: (c) => {
-        const counts = { Private: 0, EC: 0, HDB: 0 };
-        for (const m of c.getAllChildMarkers()) counts[m._mapType]++;
-        const dominant = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
-        const color = TYPE_META[dominant].color;
+        let color;
+        if (state.map.colorMode === 'psf') {
+          const children = c.getAllChildMarkers();
+          let sum = 0, n = 0;
+          for (const m of children) { if (m._psf && m._psf > 0) { sum += m._psf; n++; } }
+          color = n ? psfColor(sum / n, state.map.psfScale) : NO_PSF_COLOR;
+        } else {
+          const counts = { Private: 0, EC: 0, HDB: 0 };
+          for (const m of c.getAllChildMarkers()) counts[m._mapType]++;
+          const dominant = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+          color = TYPE_META[dominant].color;
+        }
         return L.divIcon({
           html: `<div style="background:${color}"><span>${c.getChildCount()}</span></div>`,
           className: 'marker-cluster marker-cluster-custom',
@@ -198,6 +287,7 @@ export function renderFullMap() {
   state.map.markers = [];
   state.map.typeFilter = state.map.typeFilter || 'All';
   state.map.year = state.map.year || 'All';
+  state.map.colorMode = state.map.colorMode || 'type';
 
   let count = 0;
   const counts = { Private: 0, EC: 0, HDB: 0 };
@@ -206,16 +296,19 @@ export function renderFullMap() {
   all.forEach(p => {
     if (!p.coord) return;
     const type = mapType(p);
-    const meta = TYPE_META[type];
+    const psf = p.avgPsf1y || p.avgPsf || null;
+    const m0 = { type, psf };
+    const color = markerColor(m0);
     const m = L.circleMarker([p.coord.lat, p.coord.lng], {
       radius: type === 'HDB' ? 4 : 5,
-      color: meta.color,
-      fillColor: meta.color,
+      color,
+      fillColor: color,
       fillOpacity: 0.85,
       weight: 1,
       opacity: 1
     });
     m._mapType = type; // 让 cluster iconCreateFunction 能识别
+    m._psf = psf;      // PSF 热力模式用
     m.bindPopup(popupHtml(p, type));
     m.on('click', () => m.openPopup());
     state.map.clusters[type].addLayer(m);
@@ -223,6 +316,7 @@ export function renderFullMap() {
       marker: m, name: p.name,
       street: p.street || p.town || '',
       id: p.id, type,
+      psf,
       years: p.years || [],
       onMap: true
     });
@@ -233,6 +327,9 @@ export function renderFullMap() {
     counts[type]++;
     count++;
   });
+
+  // PSF 色带（基于所有有价格的 marker 分位数）
+  state.map.psfScale = psfScaleOf(state.map.markers);
 
   // 年份 slider 范围（动态）
   if (minYear < 9999 && maxYear > 0) {
@@ -253,6 +350,7 @@ export function renderFullMap() {
   document.getElementById('map-subtitle').textContent =
     `${count} projects with coordinates (Private ${counts.Private} · EC ${counts.EC} · HDB ${counts.HDB})`;
   document.getElementById('map-status').textContent = `${count} markers visible`;
+  renderLegend();
 
   document.querySelector('#fullMap + .leaflet-control')?.remove();
 }

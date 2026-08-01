@@ -19,10 +19,10 @@ const { renderOverview } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/p
 const { renderPrivateDashboard, renderDistrict } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/private.js');
 const { renderHdbDashboard, renderTown } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/hdb.js');
 const { renderProject, renderHdbProject } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/project.js');
-const { renderMapView, renderFullMap, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter, setMapYear, updateYearPreview } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/map.js');
+const { renderMapView, renderFullMap, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter, setMapYear, updateYearPreview, setMapColorMode } = await import('file:///C:/Users/jiali/WorkBuddy/Claw/property-dashboard/js/modules/views/map.js');
 
 // Verify all exports are functions
-const exports = { router, navigate, exposeGlobals, switchTab, pageTxns, pageHdb, loadData, loadHdbIndex, fetchProject, showLoading, renderPriceChart, renderHdbChart, searchProjects, setFilter, clearSearch, renderOverview, renderPrivateDashboard, renderDistrict, renderHdbDashboard, renderTown, renderProject, renderHdbProject, renderMapView, renderFullMap, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter, setMapYear, updateYearPreview };
+const exports = { router, navigate, exposeGlobals, switchTab, pageTxns, pageHdb, loadData, loadHdbIndex, fetchProject, showLoading, renderPriceChart, renderHdbChart, searchProjects, setFilter, clearSearch, renderOverview, renderPrivateDashboard, renderDistrict, renderHdbDashboard, renderTown, renderProject, renderHdbProject, renderMapView, renderFullMap, renderProjectMap, filterMapMarkers, toggleMapFullscreen, setMapTypeFilter, setMapYear, updateYearPreview, setMapColorMode };
 let fail = 0;
 for (const [name, fn] of Object.entries(exports)) {
   if (typeof fn !== 'function') { console.error('NOT A FUNCTION:', name); fail++; }
@@ -37,7 +37,7 @@ if (!highlight('Marina Bay', 'bay').includes('<strong')) { console.error('highli
 
 // exposeGlobals should attach to window
 exposeGlobals();
-if (typeof window.navigate !== 'function' || typeof window.setFilter !== 'function' || typeof window.searchProjects !== 'function' || typeof window.switchTab !== 'function' || typeof window.pageTxns !== 'function' || typeof window.pageHdb !== 'function' || typeof window.filterMapMarkers !== 'function' || typeof window.toggleMapFullscreen !== 'function' || typeof window.setMapTypeFilter !== 'function' || typeof window.clearSearch !== 'function') {
+if (typeof window.navigate !== 'function' || typeof window.setFilter !== 'function' || typeof window.searchProjects !== 'function' || typeof window.switchTab !== 'function' || typeof window.pageTxns !== 'function' || typeof window.pageHdb !== 'function' || typeof window.filterMapMarkers !== 'function' || typeof window.toggleMapFullscreen !== 'function' || typeof window.setMapTypeFilter !== 'function' || typeof window.setMapColorMode !== 'function' || typeof window.clearSearch !== 'function') {
   console.error('window globals missing'); fail++;
 }
 
