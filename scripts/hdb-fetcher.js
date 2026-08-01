@@ -10,7 +10,8 @@ import { fileURLToPath } from 'url';
 import https from 'https';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-const CACHE_DIR = join(__dirname, '..', 'data', 'hdb_cache');
+// Allow overriding cache location (used by tests; CI could point elsewhere too)
+const CACHE_DIR = process.env.HDB_CACHE_DIR || join(__dirname, '..', 'data', 'hdb_cache');
 
 const DATASETS = [
   {
@@ -107,6 +108,7 @@ function normalizeRow(row, hasRemainingLease) {
     : (leaseCommence ? Math.max(0, 99 - (parseInt(row.month?.substring(0, 4) || '2026') - leaseCommence)) : null);
 
   return {
+    _id: row._id, // keep upstream row id — incremental anchor for active dataset
     month: row.month || '',
     town: (row.town || '').toUpperCase().trim(),
     flatType: (row.flat_type || '').toUpperCase().trim(),
@@ -135,35 +137,112 @@ function blockId(town, block, street) {
   return `hdb-${town.toLowerCase().replace(/[^a-z0-9]/g, '-')}-${block}-${streetPart || 'ns'}`;
 }
 
+// Incremental fetch for an active dataset: pull only rows with _id > cached maxId.
+// data.gov.sg appends new rows at the tail with monotonically increasing _id.
+// Returns null when the cache predates _id tracking (legacy format) — caller
+// should then fall back to a full re-fetch to bootstrap the anchor.
+async function fetchActiveIncremental(ds, cached) {
+  const maxId = cached.reduce((m, r) => Math.max(m, r._id || 0), 0);
+  if (maxId === 0 && cached.length > 0) {
+    console.log(`    Legacy cache without _id anchor (${cached.length} rows) — full re-fetch required`);
+    return null;
+  }
+  console.log(`    Incremental: cached ${cached.length.toLocaleString()} rows, max _id=${maxId}`);
+
+  const fresh = [];
+  const LIMIT = 5000;
+  let offset = 0;
+  // Loop until we've seen a batch with no row above maxId — the tail is new.
+  while (true) {
+    const url = `${API_BASE}?resource_id=${ds.id}&limit=${LIMIT}&offset=${offset}&sort=_id%20desc`;
+    let resp;
+    try { resp = await fetchJson(url); } catch (e) {
+      console.log(`    Error at offset ${offset}: ${e.message}`);
+      break;
+    }
+    if (!resp?.success || !resp?.result?.records?.length) break;
+    const records = resp.result.records;
+    const newRows = records.filter(r => (r._id || 0) > maxId);
+    fresh.push(...newRows);
+    const total = resp.result.total || 0;
+    offset += records.length;
+    // Stop when this batch contains no new rows (we've reached the cached region)
+    // or when we've covered the whole dataset.
+    if (newRows.length === 0 || offset >= total || records.length < LIMIT) break;
+    if (offset > 300000) break; // safety cap — should never be reached in practice
+  }
+
+  console.log(`    Incremental: ${fresh.length.toLocaleString()} new rows found`);
+  if (!fresh.length) return cached;
+
+  // Normalize new rows and merge (dedupe by _id)
+  const byId = new Map(cached.map(r => [r._id, r]));
+  for (let i = 0; i < fresh.length; i += 50000) {
+    const batch = fresh.slice(i, i + 50000)
+      .map(r => normalizeRow(r, ds.hasRemainingLease))
+      .filter(Boolean);
+    for (const row of batch) byId.set(row._id, row);
+  }
+  return [...byId.values()];
+}
+
 export async function fetchHdbData(forceRefresh = false) {
   ensureDir(CACHE_DIR);
   let allRecords = [];
 
   for (const ds of DATASETS) {
     const cacheFile = join(CACHE_DIR, `${ds.id}.json`);
+    const hasCache = existsSync(cacheFile);
 
-    // Use cache if available and not forcing refresh
-    if (!forceRefresh && existsSync(cacheFile)) {
-      const raw = readFileSync(cacheFile, 'utf-8');
-      const cached = JSON.parse(raw);
-      pushBatch(allRecords, cached);
-      console.log(`  ${ds.name}: ${cached.length.toLocaleString()} records (cached)`);
-      continue;
+    // ── Historical datasets: never re-fetch unless forced ──
+    if (!ds.isActive) {
+      if (!forceRefresh && hasCache) {
+        const cached = JSON.parse(readFileSync(cacheFile, 'utf-8'));
+        pushBatch(allRecords, cached);
+        console.log(`  ${ds.name}: ${cached.length.toLocaleString()} records (cached)`);
+        continue;
+      }
+      if (forceRefresh && hasCache) {
+        const cached = JSON.parse(readFileSync(cacheFile, 'utf-8'));
+        pushBatch(allRecords, cached);
+        console.log(`  ${ds.name}: ${cached.length.toLocaleString()} records (cached, historical kept — not re-fetched even with --fresh)`);
+        continue;
+      }
+      // No cache at all → full fetch once
+      console.log(`  ${ds.name}: no cache — full fetch (one-time)`);
+    } else if (!forceRefresh && hasCache) {
+      // ── Active dataset: incremental by _id anchor ──
+      console.log(`  ${ds.name} (active): incremental update`);
+      try {
+        const cached = JSON.parse(readFileSync(cacheFile, 'utf-8'));
+        const merged = await fetchActiveIncremental(ds, cached);
+        if (merged) {
+          writeFileSync(cacheFile, JSON.stringify(merged));
+          pushBatch(allRecords, merged);
+          console.log(`    Merged cache: ${merged.length.toLocaleString()} records`);
+          continue;
+        }
+        console.log(`    Legacy cache — falling through to full fetch to bootstrap _id anchor`);
+        // fall through to full fetch
+      } catch (err) {
+        console.log(`  ${ds.name}: incremental FAILED (${err.message}) — falling back to full fetch`);
+        // fall through to full fetch
+      }
+    } else {
+      console.log(`  ${ds.name}: no cache or --fresh — full fetch`);
     }
 
-    console.log(`  Fetching ${ds.name}...`);
+    // ── Full fetch (no cache, --fresh, or incremental failed) ──
     try {
       const rawRecords = await fetchPaginated(ds);
       console.log(`    Raw: ${rawRecords.length.toLocaleString()} records`);
 
-      // Batch normalize — only normalized records go into allRecords (raw would
-      // create duplicate entries with mismatched field names in processHdbData)
       let normalized = [];
       for (let i = 0; i < rawRecords.length; i += 50000) {
         const batch = rawRecords.slice(i, i + 50000).map(r => normalizeRow(r, ds.hasRemainingLease)).filter(Boolean);
         pushBatch(normalized, batch);
       }
-      
+
       writeFileSync(cacheFile, JSON.stringify(normalized));
       pushBatch(allRecords, normalized);
       console.log(`    Normalized: ${normalized.length.toLocaleString()} records`);

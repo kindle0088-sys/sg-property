@@ -1,22 +1,19 @@
-name: HDB Daily Increment
+name: HDB Full Refresh (Manual)
 
 on:
-  schedule:
-    # Daily 20:00 UTC = 04:00 Singapore time
-    - cron: '0 20 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 concurrency:
-  group: hdb-daily
+  group: hdb-full
   cancel-in-progress: false
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 120
 
     steps:
       - name: Checkout
@@ -32,7 +29,7 @@ jobs:
       - name: Compute cache key
         run: echo "DAY_KEY=$(date +%Y%m%d)" >> $GITHUB_ENV
 
-      - name: Cache HDB raw data (255MB, rolling daily)
+      - name: Cache HDB raw data (255MB, rolling)
         uses: actions/cache@v4
         with:
           path: data/hdb_cache
@@ -44,9 +41,9 @@ jobs:
         working-directory: scripts
         run: npm ci
 
-      - name: Run incremental build (active dataset only, ~seconds)
+      - name: Run full refresh (--fresh pulls all HDB datasets, --skip-ura reuses committed URA)
         working-directory: scripts
-        run: node build.js --skip-ura
+        run: node build.js --fresh --skip-ura
 
       - name: Commit and push data updates
         run: |
@@ -56,6 +53,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No data changes; skipping commit"
           else
-            git commit -m "chore: HDB incremental update $(date -u +%Y-%m-%d)"
+            git commit -m "chore: HDB full refresh $(date -u +%Y-%m-%d)"
             git push origin main
           fi

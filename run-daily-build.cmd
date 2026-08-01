@@ -3,6 +3,7 @@ REM ============================================================
 REM SG Property Dashboard - Daily URA Build (run via Task Scheduler)
 REM Runs from Singapore local machine (URA API is geo-restricted:
 REM it times out from GitHub Actions' US runners).
+REM Scheduled: 06:00 Singapore time (daily URA refresh)
 REM ============================================================
 
 setlocal
