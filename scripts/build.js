@@ -76,6 +76,16 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA = join(__dirname, '..', 'data');
 const PROJ_DIR = join(DATA, 'projects');
 
+// HDB 楼栋坐标（由 scripts/build-hdb-coords.mjs 生成，缺失时优雅降级为 null）
+let HDB_COORDS = {};
+try { HDB_COORDS = JSON.parse(readFileSync(join(DATA, 'hdb-coords.json'), 'utf-8')); } catch (e) { /* no coords yet */ }
+
+// EC 判定：URA propertyTypes 含 Executive Condominium
+function ecType(p) {
+  const pts = (p.stats?.propertyTypes || p.propertyTypes || []).map(x => String(x).toLowerCase());
+  return pts.includes('executive condominium') ? 'EC' : 'Private';
+}
+
 const D = {
   1: 'Raffles Place / Marina', 2: 'Anson / Tanjong Pagar', 3: 'Queenstown / Tiong Bahru',
   4: 'Sentosa / Harbourfront', 5: 'Bugis / City Hall', 6: 'High Street / Beach Road',
@@ -340,7 +350,7 @@ async function main() {
   } else {
     hdbIdx = hdbProjects.map(p => ({
       id: p.id, name: p.name, town: p.town, block: p.block, street: p.street,
-      type: 'HDB', coord: null,
+      type: 'HDB', coord: HDB_COORDS[p.id] || null,
       avgPsf: p.stats.avgPsf,
       avgPsf1y: computeAvg1y(p.transactions, 'month', CUTOFF_HDB),
       minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
@@ -382,7 +392,7 @@ async function main() {
 
   // 5e. Combined index (URA + HDB)
   const combinedIdx = [
-    ...idx.map(p => ({ ...p, type: p.type || 'Private' })),
+    ...idx.map(p => ({ ...p, type: p.type || ecType(p) })),
     ...hdbIdx
   ];
   writeJSON(join(DATA, 'property-index.json'), combinedIdx);

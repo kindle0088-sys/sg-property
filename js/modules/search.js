@@ -35,9 +35,11 @@ export function searchProjects(q) {
 
   el.innerHTML = results.map(p => {
     const isHDB = p.type === 'HDB';
+    const isEC = p.type === 'EC';
+    const badge = isHDB ? '<span class="tag-hdb">HDB</span> ' : (isEC ? '<span class="tag-ec">EC</span> ' : '');
     return `
     <div class="search-result-item" onclick="navigate('/project/${p.id}')">
-      <div class="sr-name">${isHDB ? '<span class="tag-hdb">HDB</span> ' : ''}${highlight(p.name, ql)}</div>
+      <div class="sr-name">${badge}${highlight(p.name, ql)}</div>
       <div class="sr-meta">${isHDB ? p.town : 'D' + p.district} · $${showPsf(p)} psf · ${fmtNum(p.totalTxns)} txns ${p.years?.length ? '· ' + p.years[0] + '-' + p.years[p.years.length-1] : ''}</div>
     </div>`;
   }).join('');

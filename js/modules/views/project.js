@@ -191,6 +191,7 @@ export async function renderHdbProject(id) {
       <div class="tab-bar">
         <span class="tab active" onclick="switchTab(this,'txns')">Transactions (${fmtNum(tx.length)})</span>
         <span class="tab" onclick="switchTab(this,'chart')">Price Trend</span>
+        ${data.coord ? `<span class="tab" onclick="switchTab(this,'map')">Location</span>` : ''}
       </div>
 
       <div id="tab-txns" class="tab-content active">
@@ -202,11 +203,20 @@ export async function renderHdbProject(id) {
           <canvas id="priceChart"></canvas>
         </div>
       </div>
+
+      ${data.coord ? `
+      <div id="tab-map" class="tab-content">
+        <div class="map-container" id="projectMap"></div>
+      </div>` : ''}
     `;
 
     // Render chart
     const sorted = [...tx].filter(x => x.sortDate).sort((a, b) => a.sortDate.localeCompare(b.sortDate));
     renderHdbChart(sorted);
+
+    // Map: defer to switchTab('map') like private projects (hidden container issue)
+    if (state.map.projectMap) { state.map.projectMap.remove(); state.map.projectMap = null; }
+    state.pendingProjectMap = data.coord ? { coord: data.coord, name: data.name } : null;
   } catch (e) {
     document.getElementById('main').innerHTML = `<div class="error">⚠️ ${e.message}</div>`;
   }

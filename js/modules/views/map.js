@@ -2,20 +2,46 @@
 import { state } from '../state.js';
 import { showPsf } from '../utils.js';
 
+// 类型 → 颜色/文案
+const TYPE_META = {
+  Private: { color: '#3b82f6', label: 'Private' },
+  EC:      { color: '#a855f7', label: 'EC' },
+  HDB:     { color: '#f59e0b', label: 'HDB' }
+};
+
+// 判定项目类型（property-index 已带 type: Private/EC/HDB，兜底判断）
+function mapType(p) {
+  if (p.type === 'EC') return 'EC';
+  if (p.type === 'HDB') return 'HDB';
+  return 'Private';
+}
+
 // ── Map view ──
 export function renderMapView() {
+  const withCoord = state.projectsIndex.filter(p => p.coord).length;
   document.getElementById('main').innerHTML = `
     <div class="project-hero">
       <a href="#" onclick="navigate('/private');return false" style="font-size:13px">&larr; Back to Private</a>
       <h1>Project Map</h1>
-      <div class="sub" id="map-subtitle">${state.projectsIndex.filter(p=>p.coord).length} projects with coordinates</div>
+      <div class="sub" id="map-subtitle">${withCoord} projects with coordinates</div>
     </div>
     <div class="map-toolbar">
+      <div class="map-type-filter" id="map-type-filter">
+        <button class="filter-btn active" data-type="All" onclick="setMapTypeFilter('All')">All</button>
+        <button class="filter-btn" data-type="Private" onclick="setMapTypeFilter('Private')">Private</button>
+        <button class="filter-btn" data-type="EC" onclick="setMapTypeFilter('EC')">EC</button>
+        <button class="filter-btn" data-type="HDB" onclick="setMapTypeFilter('HDB')">HDB</button>
+      </div>
       <div class="map-search-wrap">
         <input type="text" id="map-search-input" class="map-search" placeholder="Search projects on map..." oninput="filterMapMarkers(this.value)">
         <span class="map-search-icon">🔍</span>
       </div>
       <button class="map-fullscreen-btn" onclick="toggleMapFullscreen()" title="Toggle fullscreen">⛶ Fullscreen</button>
+    </div>
+    <div class="map-legend">
+      <span><i style="background:#3b82f6"></i>Private</span>
+      <span><i style="background:#a855f7"></i>EC</span>
+      <span><i style="background:#f59e0b"></i>HDB</span>
     </div>
     <div class="map-container" id="fullMap" style="height:550px"></div>
     <div id="map-status" class="text-muted" style="text-align:center;padding:6px;font-size:12px"></div>
@@ -28,27 +54,49 @@ export function renderMapView() {
   }
 }
 
-// ── Map search filtering ──
+// ── Type filter (All / Private / EC / HDB) ──
+export function setMapTypeFilter(type) {
+  state.map.typeFilter = type;
+  document.querySelectorAll('#map-type-filter .filter-btn').forEach(b =>
+    b.classList.toggle('active', b.dataset.type === type));
+  const map = state.map.fullMap;
+  if (!map || !state.map.clusters) return;
+  for (const [t, cluster] of Object.entries(state.map.clusters)) {
+    if (type === 'All' || t === type) map.addLayer(cluster);
+    else map.removeLayer(cluster);
+  }
+  // 重新叠加搜索过滤
+  const q = document.getElementById('map-search-input')?.value || '';
+  filterMapMarkers(q);
+}
+
+// ── Map search filtering (叠加类型筛选) ──
 export function filterMapMarkers(q) {
   const ql = (q || '').toLowerCase().trim();
   const markers = state.map.markers;
   if (!markers.length) return;
+  const typeFilter = state.map.typeFilter || 'All';
   let visible = 0;
   const total = markers.length;
   markers.forEach(m => {
     const match = !ql || m.name.toLowerCase().includes(ql) || (m.street || '').toLowerCase().includes(ql);
-    if (match) {
-      if (m.marker) m.marker.addTo(state.map.cluster || state.map.fullMap);
+    const showType = typeFilter === 'All' || m.type === typeFilter;
+    const show = match && showType;
+    const cluster = state.map.clusters[m.type];
+    if (!cluster) return;
+    if (show) {
+      if (!m.onMap) { cluster.addLayer(m.marker); m.onMap = true; }
       visible++;
-    } else {
-      if (m.marker && state.map.cluster) state.map.cluster.removeLayer(m.marker);
-      else if (m.marker && state.map.fullMap) m.marker.remove();
+    } else if (m.onMap) {
+      cluster.removeLayer(m.marker);
+      m.onMap = false;
     }
   });
+  const typeLabel = typeFilter === 'All' ? '' : ` · ${typeFilter}`;
   document.getElementById('map-subtitle').textContent = ql
-    ? visible + ' of ' + total + ' projects match "' + ql + '"'
-    : total + ' projects with coordinates';
-  document.getElementById('map-status').textContent = visible + ' markers visible';
+    ? `${visible} of ${total} match "${ql}"${typeLabel}`
+    : `${total} projects with coordinates${typeLabel}`;
+  document.getElementById('map-status').textContent = `${visible} markers visible${typeLabel}`;
 }
 
 // ── Map fullscreen ──
@@ -77,7 +125,21 @@ export function renderProjectMap(coord, name) {
     .bindPopup(`<b>${name}</b>`).openPopup();
 }
 
-// ── Full project map ──
+// ── Popup 内容（带类型徽章） ──
+function popupHtml(p, type) {
+  const meta = TYPE_META[type] || TYPE_META.Private;
+  const badge = `<span style="display:inline-block;padding:1px 7px;border-radius:4px;font-size:11px;font-weight:600;color:#fff;background:${meta.color};vertical-align:middle">${meta.label}</span>`;
+  const loc = type === 'HDB' ? p.town : `D${p.district || '?'}`;
+  return `
+    <div style="min-width:180px">
+      ${badge} <b>${p.name}</b><br>
+      <span style="color:#94a3b8">${loc} · 1yr $${showPsf(p)} psf · ${p.totalTxns} txns</span><br>
+      <a href="#/project/${p.id}" style="color:#fbbf24;font-size:12px;margin-top:6px;display:inline-block">→ View Details</a>
+    </div>
+  `;
+}
+
+// ── Full project map（三类型三层 cluster） ──
 export function renderFullMap() {
   const el = document.getElementById('fullMap');
   if (!el) return;
@@ -89,27 +151,66 @@ export function renderFullMap() {
     maxZoom: 19, attribution: '&copy; OpenStreetMap'
   }).addTo(map);
 
-  const markers = L.markerClusterGroup({ chunkedLoading: true });
-  state.map.cluster = markers;
+  // 每类型一个 cluster 层（cluster 颜色按内部主要类型染色）
+  state.map.clusters = {};
+  for (const t of Object.keys(TYPE_META)) {
+    state.map.clusters[t] = L.markerClusterGroup({
+      chunkedLoading: true,
+      showCoverageOnHover: false,
+      maxClusterRadius: 60,
+      iconCreateFunction: (c) => {
+        const counts = { Private: 0, EC: 0, HDB: 0 };
+        for (const m of c.getAllChildMarkers()) counts[m._mapType]++;
+        const dominant = Object.entries(counts).sort((a, b) => b[1] - a[1])[0][0];
+        const color = TYPE_META[dominant].color;
+        return L.divIcon({
+          html: `<div style="background:${color}"><span>${c.getChildCount()}</span></div>`,
+          className: 'marker-cluster marker-cluster-custom',
+          iconSize: L.point(40, 40)
+        });
+      }
+    });
+  }
   state.map.markers = [];
+  state.map.typeFilter = state.map.typeFilter || 'All';
+
   let count = 0;
+  const counts = { Private: 0, EC: 0, HDB: 0 };
   state.projectsIndex.forEach(p => {
     if (!p.coord) return;
-    const m = L.marker([p.coord.lat, p.coord.lng]);
-    const pid = p.id;
-    m.bindPopup(`
-      <div style="min-width:180px">
-        <b>${p.name}</b><br>
-        <span style="color:#94a3b8">D${p.district || '?'} · 1yr $${showPsf(p)} psf · ${p.totalTxns} txns</span><br>
-        <a href="#/project/${pid}" style="color:#fbbf24;font-size:12px;margin-top:6px;display:inline-block">→ View Details</a>
-      </div>
-    `);
-    m.on('click', () => { window.navigate('/project/' + pid); });
-    markers.addLayer(m);
-    state.map.markers.push({ marker: m, name: p.name, street: p.street, id: pid });
+    const type = mapType(p);
+    const meta = TYPE_META[type];
+    const m = L.circleMarker([p.coord.lat, p.coord.lng], {
+      radius: type === 'HDB' ? 4 : 5,
+      color: meta.color,
+      fillColor: meta.color,
+      fillOpacity: 0.85,
+      weight: 1,
+      opacity: 1
+    });
+    m._mapType = type; // 让 cluster iconCreateFunction 能识别
+    m.bindPopup(popupHtml(p, type));
+    m.on('click', () => m.openPopup());
+    state.map.clusters[type].addLayer(m);
+    state.map.markers.push({
+      marker: m, name: p.name,
+      street: p.street || p.town || '',
+      id: p.id, type,
+      onMap: true
+    });
+    counts[type]++;
     count++;
   });
-  map.addLayer(markers);
+
+  // 默认 All：三层全挂
+  const typeFilter = state.map.typeFilter;
+  for (const [t, cluster] of Object.entries(state.map.clusters)) {
+    if (typeFilter === 'All' || t === typeFilter) map.addLayer(cluster);
+  }
+
+  document.getElementById('map-subtitle').textContent =
+    `${count} projects with coordinates (Private ${counts.Private} · EC ${counts.EC} · HDB ${counts.HDB})`;
+  document.getElementById('map-status').textContent = `${count} markers visible`;
 
   document.querySelector('#fullMap + .leaflet-control')?.remove();
 }
