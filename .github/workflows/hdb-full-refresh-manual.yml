@@ -53,6 +53,12 @@ jobs:
           if git diff --cached --quiet; then
             echo "No data changes; skipping commit"
           else
-            git commit -m "chore: HDB full refresh $(date -u +%Y-%m-%d)"
-            git push origin main
+            REAL=$(git diff --cached --name-only | grep -E 'data/(hdb|hdb-index|hdb-towns|property-index)' || true)
+            if [ -z "$REAL" ]; then
+              echo "Only timestamp/aggregate changes; skipping commit"
+              git reset -q
+            else
+              git commit -m "chore: HDB full refresh $(date -u +%Y-%m-%d)"
+              git push origin main
+            fi
           fi

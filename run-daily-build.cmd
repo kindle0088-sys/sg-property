@@ -20,12 +20,18 @@ if errorlevel 1 (
 )
 
 cd /d "%ROOT%"
-git add data/ .github/ scripts/build.js scripts/ura-fetcher.js scripts/fetch-schools.js
-git -c user.name="kindle0088-sys" -c user.email="kindle0088-sys@users.noreply.github.com" commit -m "chore: daily URA data build"
+git add data/ .github/
+git diff --cached --name-only | findstr /R "data/projects data/projects-index data/districts data/rentals data/property-index" >nul
 if errorlevel 1 (
-  echo [%date% %time%] Nothing to commit or commit failed
+  echo [%date% %time%] Only timestamp/aggregate changes; skipping commit
+  git reset -q
 ) else (
-  echo [%date% %time%] Committed
+  git -c user.name="kindle0088-sys" -c user.email="kindle0088-sys@users.noreply.github.com" commit -m "chore: daily URA data build"
+  if errorlevel 1 (
+    echo [%date% %time%] Commit failed
+  ) else (
+    echo [%date% %time%] Committed
+  )
 )
 
 git pull --rebase

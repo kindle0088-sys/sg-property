@@ -56,6 +56,14 @@ jobs:
           if git diff --cached --quiet; then
             echo "No data changes; skipping commit"
           else
-            git commit -m "chore: HDB incremental update $(date -u +%Y-%m-%d)"
-            git push origin main
+            # Commit only when real HDB data files changed (not buildTime-only
+            # churn in market-summary/build-meta aggregates).
+            REAL=$(git diff --cached --name-only | grep -E 'data/(hdb|hdb-index|hdb-towns|property-index)' || true)
+            if [ -z "$REAL" ]; then
+              echo "Only timestamp/aggregate changes; skipping commit"
+              git reset -q
+            else
+              git commit -m "chore: HDB incremental update $(date -u +%Y-%m-%d)"
+              git push origin main
+            fi
           fi
