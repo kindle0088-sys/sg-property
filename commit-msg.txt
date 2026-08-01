@@ -1,0 +1,13 @@
+feat(report): The Pinnacle@Duxton HDB seven-dimension investment analysis
+
+- The Pinnacle@Duxton: D2 CBD landmark HDB (TOP 2009, 7x50F, 1848 units,
+  99yr lease from 2011, world's tallest public housing + longest skybridge)
+- Score 8.4/10 (推荐): location 9.5 / yield 7.0 / appreciation 8.5 /
+  build quality 8.5 / holding cost 8.0 / liquidity 8.5 / risk 7.5 (HDB weights)
+- Key thesis: ultimate CBD location + landmark scarcity + NOT subject to PLH
+  (MOP passed 2014 before PLH launched 2021) = full resale premium to owner
+- Data: HDB resales 2014-2026 (774 tx, 2015 $850 -> 2026 $1,318 psf +55%),
+  2026-05 5RM $1.63M & 4RM $1.55M break project records; rents 4RM $4,735/m
+  avg / 5RM $5,116/m avg (4.2% gross yield); resident reviews from Stacked
+  Homes/ENEWS/Business Insider/Wanderlog (4.0/5)
+- reports/index.html: add HDB card, count 16->17

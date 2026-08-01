@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Pinnacle@Duxton — 新加坡 HDB 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#14532d 0%,#052e16 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.price-table{margin:16px 0}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+.warn-box{background:linear-gradient(135deg,#451a03 0%,#3b0f02 100%);border-left:4px solid #ef4444;border-radius:0 12px 12px 0;padding:18px 22px;margin:20px 0}
+.risk-table td:first-child{font-weight:600;color:#f1f5f9}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <span class="hero-badge">HDB · PREMIUM · DISTRICT 2 · CBD 正中心</span>
+  <h1>The Pinnacle@Duxton</h1>
+  <p class="address">📍 1A-1G Cantonment Road, Singapore 080001 &nbsp;|&nbsp; D2 Tanjong Pagar · Central Area</p>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">$1,318</div><div class="lbl">1yr 均价 PSF</div></div>
+    <div class="kpi"><div class="val">4.2%</div><div class="lbl">毛租金收益率</div></div>
+    <div class="kpi"><div class="val">+55%</div><div class="lbl">2015–2026 增值</div></div>
+    <div class="kpi"><div class="val">99 年</div><div class="lbl">地契（2011 年起）</div></div>
+    <div class="kpi"><div class="val">1,848</div><div class="lbl">总单位数</div></div>
+    <div class="kpi"><div class="val">2009</div><div class="lbl">TOP</div></div>
+  </div>
+</div>
+
+<!-- Executive Summary -->
+<section>
+  <div class="section-title">📋 执行摘要</div>
+  <div class="summary-box">
+    <p style="color:#f1f5f9;font-size:15px;">The Pinnacle@Duxton 是新加坡<strong>最具标志性的公共住宅</strong>——全球最高公共住宅（7 栋 50 层）、世界最长空中花园（26 层与 50 层双 Skybridge，各 500 米）、2010 年 CTBUH 最佳高层建筑奖得主。它位于<strong>CBD 正中心</strong>，Outram Park 三线换乘站步行 4 分钟，Raffles Place 与 Tanjong Pagar 办公区步行可达——全新加坡没有任何 HDB 比它更中心。</p>
+    <br>
+    <p style="color:#f1f5f9;font-size:15px;"><strong style="color:#fbbf24;">综合评分：<span class="num-green">8.4 / 10</span> — 推荐</strong></p>
+    <br>
+    <p style="color:#f1f5f9;font-size:15px;">核心逻辑是<strong>地段的终极稀缺 + 地标的品牌溢价</strong>：2004 年开盘 4 房仅 $298K，2026 年转售已见 <strong>$1.55M（$1,500 psf）</strong>，20 年增值约 5 倍；2025-08 一宗 5 房 $1.6M 曾并列新加坡 HDB 历史第二高纪录，而本地 URA 数据显示 2026-05 已出现 <strong>5 房 $1.63M</strong> 的更高成交。年转售约 65 笔，流动性全岛 HDB 顶尖。短板同样真实：<strong>1km 内仅 1 所小学</strong>（Cantonment Primary）、$1.3M+ 的入场门槛把多数家庭挡在门外、总价高导致收益率仅 4.2%。适合<strong>CBD 通勤自住家庭与长线资产配置者</strong>——买的是"新加坡唯一"。</p>
+  </div>
+</section>
+
+<!-- Hardware Specs -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">地址 / 邮编</div><div class="spec-value">1A-1G Cantonment Road · 080001</div></div>
+    <div class="spec-card"><div class="spec-label">HDB 市镇 / 邮区</div><div class="spec-value">Central Area · D2 Tanjong Pagar</div></div>
+    <div class="spec-card"><div class="spec-label">土地类型</div><div class="spec-value">99 年租约（2011 年起 · 剩余约 85 年）</div></div>
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">HDB（政府组屋，全球设计竞赛中标方案）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP / MOP</div><div class="spec-value">2009-12-13 · MOP 2014-12-13 已过</div></div>
+    <div class="spec-card"><div class="spec-label">楼栋 / 高度</div><div class="spec-value">7 栋 50 层（全球最高公共住宅）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">1,848 户（7 栋 × 176 四房 + 88 五房）</div></div>
+    <div class="spec-card"><div class="spec-label">PLH 状态</div><div class="spec-value" style="color:#22c55e">✅ 不受 PLH 限制（2021 年前已过 MOP，不追溯）</div></div>
+  </div>
+
+  <table>
+    <tr><th>户型</th><th>数量</th><th>面积 (sqft)</th><th>2026 转售中位价</th></tr>
+    <tr><td>4-Room（四房）</td><td>1,232 户</td><td>965 – 1,044</td><td>$1.43M（$1,428 psf）</td></tr>
+    <tr><td>5-Room（五房）</td><td>616 户</td><td>1,130 – 1,155</td><td>$1.51M（$1,328 psf）</td></tr>
+  </table>
+
+  <div class="spec-label" style="margin:20px 0 10px">标志性设施（HDB 罕见配置）</div>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🌉</span> 双 Skybridge（26F + 50F）</div>
+    <div class="facility-tag"><span class="icon">🏙️</span> 50 层空中花园（世界最长 500m）</div>
+    <div class="facility-tag"><span class="icon">🍽️</span> Essen 美食广场（内置）</div>
+    <div class="facility-tag"><span class="icon">🏃</span> 环形慢跑径（26F）</div>
+    <div class="facility-tag"><span class="icon">🏀</span> 篮球场 × 2</div>
+    <div class="facility-tag"><span class="icon">👶</span> 儿童游乐场 × 3</div>
+    <div class="facility-tag"><span class="icon">🏫</span> 2 所托儿所（Sparkletots + MMI）</div>
+    <div class="facility-tag"><span class="icon">🌳</span> 社区花园 + 环境甲板</div>
+    <div class="facility-tag"><span class="icon">🏋️</span> 户外健身房（26F）</div>
+    <div class="facility-tag"><span class="icon">🏛️</span> 居民委员会中心 + 社区广场</div>
+    <div class="facility-tag"><span class="icon">🛡️</span> 24h 安保 + 访客闸机</div>
+    <div class="facility-tag"><span class="icon">🅿️</span> 地下车库（season $90-160/月）</div>
+  </div>
+
+  <div class="spec-grid" style="margin-top:20px">
+    <div class="spec-card"><div class="spec-label">最近地铁</div><div class="spec-value">Outram Park MRT（EW+NE+TE 三线）· 327-464m 步行约 4-7 分钟</div></div>
+    <div class="spec-card"><div class="spec-label">次选地铁</div><div class="spec-value">Tanjong Pagar (EW) 525m · Maxwell (TE) 步行可达</div></div>
+    <div class="spec-card"><div class="spec-label">1km 内地铁</div><div class="spec-value">Chinatown (NE+DT) · Telok Ayer (DT) · 2026 年将新增 Cantonment / Prince Edward (CC6)</div></div>
+    <div class="spec-card"><div class="spec-label">通勤</div><div class="spec-value">Raffles Place / Tanjong Pagar 办公区步行可达 · CBD 中心</div></div>
+    <div class="spec-card full"><div class="spec-label">学校（唯一短板）</div><div class="spec-value">1km 内仅 Cantonment Primary（0.3km）；2km 内 CHIJ Kellock · Radin Mas Primary · Zhangde Primary；中学 Outram Secondary · 附近多所国际学校</div></div>
+    <div class="spec-card full"><div class="spec-label">生活配套（全岛顶级）</div><div class="spec-value">Maxwell Food Centre · Amoy St Food Centre · Chinatown Complex · Lau Pa Sat · 100AM · Chinatown Point · Duxton Hill 咖啡馆区 · SGH + Outram Polyclinic 数分钟 · Duxton Plain Park 紧邻</div></div>
+  </div>
+</section>
+
+<!-- Dimension Scores -->
+<section>
+  <div class="section-title">⭐ 七维评分卡（HDB 基准）</div>
+  <div class="score-grid">
+
+    <!-- 1. Location -->
+    <div class="score-card">
+      <div class="score-header">
+        <span class="score-name">📍 地段 (Location)</span>
+        <span class="score-badge">9.5 / 10</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar bar-high" style="width:95%"></div></div>
+      <p class="score-desc" style="font-size:13px;color:#94a3b8;margin-top:8px">全新加坡没有任何 HDB 比它更中心。<strong>Outram Park 三线换乘（EW+NE+TE）步行 4-7 分钟</strong>，Tanjong Pagar / Maxwell 双站覆盖，2026 年 Cantonment 站（CC6）开通后进入"五站环绕"格局。Raffles Place 与 Tanjong Pagar 办公区步行可达，CBD 白领通勤零成本。<br><br>扣分（唯一）：<strong>1km 内仅 1 所小学</strong>，有学龄儿童的家庭选择受限。</p>
+    </div>
+
+    <!-- 2. Rental Yield -->
+    <div class="score-card">
+      <div class="score-header">
+        <span class="score-name">💰 租金回报 (Rental Yield)</span>
+        <span class="score-badge">7.0 / 10</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div>
+      <p class="score-desc" style="font-size:13px;color:#94a3b8;margin-top:8px">毛收益率约 <strong>4.2%</strong>（4RM：平均租 $4,735/月 ÷ $1.32M ≈ 4.3%；5RM：$5,116/月 ÷ $1.48M ≈ 4.1%，近 3 年 349 笔租赁）。<strong>租金绝对值全岛 HDB 第一梯队</strong>——CBD 白领与金融城工作者租住需求稳定。<br><br>对 HDB 基准（3.5-4.5% 为 7-8 分档）属中上；但总价高，现金流绝对额可观（$5,000/月级）。</p>
+    </div>
+
+    <!-- 3. Capital Appreciation -->
+    <div class="score-card">
+      <div class="score-header">
+        <span class="score-name">📈 资本增值 (Capital Appreciation)</span>
+        <span class="score-badge">8.5 / 10</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar bar-high" style="width:85%"></div></div>
+      <p class="score-desc" style="font-size:13px;color:#94a3b8;margin-top:8px">2004 年开盘 4 房 $298K → 2026 年转售 <strong>$1.55M（约 5 倍）</strong>；2015 年均价 $850 psf → 2026 年 $1,318（<strong>+55%</strong>），2021→2026 也录得 +34.9%。<br><br>纪录频破：2025-08 5 房 $1.6M 并列历史第二高 HDB 转售；本地 URA 数据更显示 <strong>2026-05 出现 5 房 $1.63M（$1,442 psf）</strong>——刷新项目纪录。CBD 无新增 HDB 供应 + 不受 PLH 限制 + 地标稀缺性，长线逻辑坚实；扣分：地契剩 85 年。</p>
+    </div>
+
+    <!-- 4. Build Quality -->
+    <div class="score-card">
+      <div class="score-header">
+        <span class="score-name">🏗️ 建造质量与维护 (Build Quality)</span>
+        <span class="score-badge">8.5 / 10</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar bar-high" style="width:85%"></div></div>
+      <p class="score-desc" style="font-size:13px;color:#94a3b8;margin-top:8px">2009 年竣工（17 年楼龄），全球设计竞赛中标方案，<strong>2010 年 CTBUH 最佳高层建筑奖 + 2011 年 ULI 全球卓越奖</strong>。内部非承重墙可拆改，户型定制自由度高于普通 HDB。<br><br>作为国家地标，公共区域由 HDB 与市镇会重点维护（空中花园每日限流 200 人、定期修缮）；电梯 50 层高密度运行但楼龄尚浅，未到 ERS 周期。住户偶有吐槽：<strong>原始电路品质一般</strong>、公共走廊铁栅栏"监狱感"（详见居住体验）。</p>
+    </div>
+
+    <!-- 5. Holding Costs -->
+    <div class="score-card">
+      <div class="score-header">
+        <span class="score-name">💸 持有成本 (Holding Costs)</span>
+        <span class="score-badge">8.0 / 10</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div>
+      <p class="score-desc" style="font-size:13px;color:#94a3b8;margin-top:8px">HDB 持有成本天然低：<strong>无 MCST 管理费</strong>（公共区域由 HDB/市镇会维护，管理费已隐含在屋价），Owner-Occupier 物业税首 $8,000 免征、整体年税负远低于同价私宅。停车 season 仅 $90-160/月。<br><br>唯一的"隐藏成本"：50 层高楼的公共设施（电梯、空中花园）维护分摊会随楼龄上升，但规模效应（1848 户）使其低于小型私宅的人均摊付。</p>
+    </div>
+
+    <!-- 6. Exit Liquidity -->
+    <div class="score-card">
+      <div class="score-header">
+        <span class="score-name">🔁 退出流动性 (Exit Liquidity)</span>
+        <span class="score-badge">8.5 / 10</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar bar-high" style="width:85%"></div></div>
+      <p class="score-desc" style="font-size:13px;color:#94a3b8;margin-top:8px">近 12 年共 <strong>774 笔转售（年均约 65 笔）</strong>，全岛 HDB 流动性顶尖。2025-2026 年"百万级"成交成常态（2025 年 6 笔 5 房百万+），高低层价差 8-12%，高层户型挂牌即被抢。<br><br>买家池：SC 家庭 / SC+PR 联合（PR 不可单独购买，外国人不可买）——比私宅窄，但 Pinnacle 的需求远大于供给，实际成交周期短。</p>
+    </div>
+
+    <!-- 7. Risk Control -->
+    <div class="score-card">
+      <div class="score-header">
+        <span class="score-name">🛡️ 风险控制 (Leverage & Risk)</span>
+        <span class="score-badge">7.5 / 10</span>
+      </div>
+      <div class="score-bar-bg"><div class="score-bar bar-mid" style="width:75%"></div></div>
+      <p class="score-desc" style="font-size:13px;color:#94a3b8;margin-top:8px">合规风险低：<strong>MOP 已于 2014 年到期</strong>，无转售/出租限制（MOP 后可整租）；不在 PLH 计划内，无 10 年 MOP / 津贴回收约束；无 SSD。<br><br>主要风险是<strong>政策与估值</strong>：① $1.3-1.6M 总价触及 HDB 贷款天花板，2023 年 LTV 从 80% 收紧至 75% 已影响高价位 HDB；② 若政府未来对"天价组屋"出台限价/冷却措施（如 2021 年 PLH 的逻辑延伸），Pinnacle 这类高溢价标的首当其冲；③ 地契剩 85 年，30 年后（剩 ~55 年）贷款与转售将承压。</p>
+    </div>
+
+  </div>
+
+  <!-- Score calculation -->
+  <div class="highlight-box">
+    <strong style="color:#fbbf24">综合评分计算（HDB 权重）</strong><br>
+    <span style="font-size:13px;color:#cbd5e1">
+      9.5×25% + 7.0×15% + 8.5×20% + 8.5×10% + 8.0×10% + 8.5×15% + 7.5×5% = <strong style="color:#fbbf24;font-size:16px">8.4 / 10</strong>
+    </span><br>
+    <span style="font-size:12px;color:#94a3b8">评级区间：7.5-8.9 = 推荐 · 地段权重 25%（HDB 高度依赖交通与配套）</span>
+  </div>
+</section>
+
+<!-- Price Trend -->
+<section>
+  <div class="section-title">📊 价格走势与纪录</div>
+  <table>
+    <tr><th>年份</th><th>转售笔数</th><th>年均 PSF</th><th>当年最高 PSF</th></tr>
+    <tr><td>2015</td><td>124</td><td>$850</td><td>$989</td></tr>
+    <tr><td>2017</td><td>64</td><td>$869</td><td>$988</td></tr>
+    <tr><td>2019</td><td>53</td><td>$933</td><td>$1,097</td></tr>
+    <tr><td>2021</td><td>114</td><td>$977</td><td>$1,199</td></tr>
+    <tr><td>2022</td><td>65</td><td>$1,068</td><td>$1,369</td></tr>
+    <tr><td>2023</td><td>48</td><td>$1,195</td><td>$1,409</td></tr>
+    <tr><td>2024</td><td>45</td><td>$1,296</td><td>$1,448</td></tr>
+    <tr><td>2025</td><td>52</td><td>$1,343</td><td>$1,500</td></tr>
+    <tr><td>2026 (至7月)</td><td>35</td><td>$1,318</td><td><span class="num-green">$1,500</span></td></tr>
+  </table>
+  <p style="font-size:13px;color:#94a3b8">2015→2026 累计 <span class="num-green">+55%</span>；2021→2026 <span class="num-green">+34.9%</span>。2026 年成交亮点：2026-05 <strong>5 房 $1,630,000（$1,442 psf）</strong> 与 4 房 <strong>$1,550,000（$1,500 psf）</strong>——双双刷新项目与新加坡 HDB 转售纪录榜。</p>
+
+  <div class="highlight-box">
+    <strong style="color:#fbbf24">纪录时间线</strong>
+    <div class="timeline">
+      <div class="tl-item"><div class="tl-year">2004-05-29</div><div class="tl-detail">BTO 推出，申购爆棚：原计划三期发售，最终一期售罄（4 房 $298K-381K / 5 房 $345K-439K）</div></div>
+      <div class="tl-item"><div class="tl-year">2009-12-13</div><div class="tl-detail">TOP 交房；成为全球最高公共住宅（7 栋 50 层）</div></div>
+      <div class="tl-item"><div class="tl-year">2014-12-13</div><div class="tl-detail">5 年 MOP 到期，转售市场开启</div></div>
+      <div class="tl-item"><div class="tl-year">2015-01</div><div class="tl-detail">早期转售 $900K+，开始出现"百万组屋"讨论</div></div>
+      <div class="tl-item"><div class="tl-year">2019-02</div><div class="tl-detail">41 层 5 房 $1.2M，创当时新加坡 HDB 转售纪录（业主账面获利约 $800K）</div></div>
+      <div class="tl-item"><div class="tl-year">2025-08</div><div class="tl-detail">5 房 $1.6M（1G 栋 49-51 层，$1,415 psf）并列新加坡 HDB 历史第二高</div></div>
+      <div class="tl-item"><div class="tl-year">2026-05</div><div class="tl-detail"><strong>5 房 $1.63M（$1,442 psf）刷新项目纪录</strong>（本地 URA 转售数据）</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- HDB Compliance -->
+<section>
+  <div class="section-title">📜 HDB 专属合规说明</div>
+  <table>
+    <tr><th>事项</th><th>状态</th></tr>
+    <tr><td>MOP（最短居住期）</td><td><span class="num-green">✅ 2014-12 已过</span>（可自由转售 / 整租）</td></tr>
+    <tr><td>PLH（黄金地段组屋模式）</td><td><span class="num-green">✅ 不受影响</span>（PLH 2021 年推出，Pinnacle 已过 MOP 且已转售，不追溯）</td></tr>
+    <tr><td>买家资格</td><td>仅 <strong>SC 家庭 / SC+PR 联合</strong>可购；PR 不可单独购买；外国人不可购买</td></tr>
+    <tr><td>转售税</td><td>无 SSD；但若曾购买过补贴新组屋，转售可能需缴 <strong>Resale Levy</strong></td></tr>
+    <tr><td>出租</td><td>MOP 后可整间出租，无国籍限制（租客可为 PR/外国人）</td></tr>
+    <tr><td>贷款</td><td>HDB Loan 90% LTV（SC 首套）或银行房贷 75%（2023-08 起）；$1.5M 级总价受 TDSR 严格约束</td></tr>
+    <tr><td>物业税</td><td>Owner-Occupier 首 $8,000 AV 免征，后续累进；自住税负显著低于同价私宅</td></tr>
+    <tr><td>津贴</td><td>转售无新购津贴（仅 BTO 首次申购适用）；无 EHG 补帖</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong style="color:#fbbf24">为什么"不受 PLH 限制"极其重要</strong>：2021 年后推出的黄金地段 HDB（如 Bukit Chanchu 一带）都要受 10 年 MOP、津贴回收与转售溢价分成约束，而 Pinnacle@Duxton 因在 PLH 模式诞生前完成 MOP，<strong>转售收益 100% 归业主</strong>——这正是它能屡创新高纪录的制度红利。未来政策风险在于：若政府将类似约束"回溯"到现有高价组屋（目前无此迹象），Pinnacle 将首当其冲。
+  </div>
+</section>
+
+<!-- Resident Reviews -->
+<section>
+  <div class="section-title">👥 真实居住体验</div>
+  <p style="font-size:13px;color:#94a3b8;margin-bottom:16px">数据来源：Stacked Homes 深度探访（2023-2024）· ENEWS 业主自述（2020）· Business Insider 业主访谈（2023）· Wanderlog 访客观察 · 综合评价：位置与视野近乎满分，社区氛围与部分设施品质有争议。</p>
+
+  <div class="review-item">
+    <div class="review-dimension">👍 视野与地标感（一致好评）</div>
+    <div class="review-quote">"The Skybridge views are unbeatable — the best 360° CBD panorama without dining at a fancy rooftop restaurant. Worth every cent of the $6 entry."</div>
+    <div class="review-source">— Stacked Homes 深度探访, 2024</div>
+    <div class="review-quote">"Living here is a joy. We enjoy hosting gatherings — a lot of meals and a lot of memories. I'm glad I pulled the trigger."（装修 $65K，业主 Lee 夫妇）</div>
+    <div class="review-source">— Business Insider 业主访谈, 2023</div>
+  </div>
+
+  <div class="review-item">
+    <div class="review-dimension">👍 配套与户型</div>
+    <div class="review-quote">"3 playgrounds, basketball courts, 2 preschools, community garden, jogging track, food court — for an HDB this is genuinely rare. The internal walls are mostly non-load-bearing so layouts are highly customisable."</div>
+    <div class="review-source">— Stacked Homes 探访, 2023</div>
+    <div class="review-quote">"Every unit is effectively a corner unit; 6 units share 4 lifts. The common space in front of the door gets great sunlight."</div>
+    <div class="review-source">— Stacked Homes 户型分析, 2023</div>
+  </div>
+
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 负面反馈（真实存在）</div>
+    <div class="review-quote">"The common corridors feel cold — almost like a prison given the colour scheme and concrete nature of the common area."（公共走廊铁栅栏 + 混凝土色调）</div>
+    <div class="review-source">— Stacked Homes, 2023</div>
+    <div class="review-quote">"The wiring quality is not the best — first-generation owners now face a hefty cost to fix it. The original kitchen design wasn't great either."（原始电路品质一般）</div>
+    <div class="review-source">— ENEWS 业主自述（Ethan Liew）, 2020-05</div>
+    <div class="review-quote">"Residents here don't reciprocate smiles — perhaps a mindset of prestige. The kampong spirit is not felt."（社区氛围偏"高冷"，邻里热络度低）</div>
+    <div class="review-source">— Wanderlog 访客观察, 2024</div>
+  </div>
+
+  <div class="review-item">
+    <div class="review-dimension">💡 噪音与特定楼层提示</div>
+    <div class="review-quote">Block 1A 低层紧邻篮球场，球声与鞋底摩擦声持续上传；50 层高空花园为公众景点（每日限 200 人）；高峰期（周末/傍晚）居民需与游客共用电梯与空间。高层（40F+）享有 8-12% 价格溢价，但低层（<10F）转售相对滞销——买房务必按楼层定价预期。</div>
+  </div>
+
+  <div class="highlight-box">
+    <strong style="color:#fbbf24">居住体验综合评级：<span class="star-rating">★★★★☆</span> 4.0 / 5</strong><br>
+    <span style="font-size:13px;color:#cbd5e1">位置、视野、配套是无可争议的满分项；扣分来自公共区域"冷感"设计、原始电路品质与偏淡的社区氛围。总体是"为地段与视野买单"的典型——住的是新加坡最独特的一栋 HDB，接受它不够"温馨"的一面。</span>
+  </div>
+</section>
+
+<!-- Risks -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table class="risk-table">
+    <tr><th>风险</th><th>说明</th><th>等级</th></tr>
+    <tr><td>政策回溯风险</td><td>政府若仿照 PLH 对存量高价组屋出台转售限制/溢价分成，Pinnacle 首当其冲（当前无迹象）</td><td class="num-red">中</td></tr>
+    <tr><td>估值天花板</td><td>$1.3-1.6M 已是 HDB 顶端，买家池（SC 家庭）天然有限，涨幅依赖持续破纪录</td><td class="num-red">中</td></tr>
+    <tr><td>学区短板</td><td>1km 内仅 Cantonment Primary 一所小学，有择校需求的家庭受限</td><td class="num-red">中</td></tr>
+    <tr><td>地契衰减</td><td>剩 85 年；25-30 年后（剩 ~55-60 年）转售与银行贷款将显著承压</td><td class="num-yellow" style="color:#eab308">中长线</td></tr>
+    <tr><td>贷款收紧</td><td>2023-08 LTV 降至 75%；若 TDSR 再收紧，$1.5M 级总价购房门槛升高</td><td class="num-yellow" style="color:#eab308">低-中</td></tr>
+    <tr><td>游客流量</td><td>50 层空中花园每日 200 访客限额，但周末与节庆仍有扰民可能</td><td class="num-yellow" style="color:#eab308">低</td></tr>
+  </table>
+</section>
+
+<!-- Conclusion -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="verdict">
+    <p style="color:#f1f5f9;font-size:15px;"><strong style="color:#fbbf24;">综合评分 8.4/10 — 推荐</strong>，分场景建议：</p>
+    <br>
+    <table>
+      <tr><th>场景</th><th>建议</th><th>一句话理由</th></tr>
+      <tr><td><strong>自住（CBD 工作者）</strong></td><td class="num-green">✅ 强烈推荐</td><td>三线地铁 4 分钟 + Raffles Place 步行上班 + 全球独一份的 50 层视野；$1.3M 换 CBD 地标生活，同类私宅要 $2M+</td></tr>
+      <tr><td><strong>自住（有学龄儿童）</strong></td><td>⚠️ 谨慎</td><td>1km 仅 1 所小学，择校是硬伤；若无学校执念则无碍</td></tr>
+      <tr><td><strong>投资（长线）</strong></td><td class="num-green">✅ 推荐</td><td>年化 4%+ 增值 + 4.2% 租金 + 全岛最强流动性；稀缺地标决定长期价值底线</td></tr>
+      <tr><td><strong>投资（短线/杠杆）</strong></td><td class="num-red">❌ 不建议</td><td>已处 HDB 价格顶端，LTV 75% 上限 + 高总价，短线进出利润空间被政策与税费压缩</td></tr>
+      <tr><td><strong>非 SC 买家</strong></td><td class="num-red">❌ 不可购</td><td>HDB 转售仅限 SC 家庭 / SC+PR 联合；PR 单买或外国人一律不行（与私有化 EC 不同）</td></tr>
+    </table>
+  </div>
+
+  <div class="highlight-box">
+    <strong style="color:#fbbf24">一句话总结</strong>：Pinnacle@Duxton = <strong>新加坡 HDB 的"皇冠明珠"</strong>——CBD 正中心 + 全球最高公共住宅 + 双空中花园地标 + 不受 PLH 限制的制度红利。它是"地段与稀缺性的终极表达"，适合 CBD 自住家庭与长线配置；但 $1.3M+ 的入场价已把"投资性价比"让位于"身份与体验"。买它，买的是<strong>新加坡唯一</strong>。
+  </div>
+</section>
+
+<div class="disclaimer">
+  <strong>免责声明</strong><br>
+  本报告基于 HDB/URA 转售数据（2014-2026，774 笔）、99.co / EdgeProp / Stacked Homes / Business Insider 公开资料与住户评价整理，仅供研究参考，不构成投资建议。房价有涨有跌，过往表现不代表未来回报。报告中 PSF 为实际成交价口径；租金收益率为挂牌/租赁中位数估算；2026 年成交数据截至 7 月。HDB 转售仅限符合资格的新加坡公民家庭，请在决策前咨询 HDB 与持牌房产顾问。报告生成日期：2026-08-01。
+</div>
+
+<footer>
+  <a href="../index.html">← 返回报告索引</a> · <a href="https://kindle0088-sys.github.io/sg-property/">SG Property Dashboard</a><br>
+  SG Property Analysis · The Pinnacle@Duxton · 2026-08-01
+</footer>
+
+</div>
+</body>
+</html>
