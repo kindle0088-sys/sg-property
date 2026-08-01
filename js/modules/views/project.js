@@ -2,7 +2,7 @@
 import { state } from '../state.js';
 import { fmtNum, fmtPrice, saleTypeLabel, showPsf } from '../utils.js';
 import { fetchProject } from '../data.js';
-import { renderPriceChart, renderHdbChart } from '../charts.js';
+import { renderPriceChart, renderHdbChart, renderLeaseScatter } from '../charts.js';
 
 const PAGE_SIZE = 25;
 
@@ -119,6 +119,7 @@ export async function renderHdbProject(id) {
     const data = await fetchProject(id);
     const tx = data.transactions || [];
     const st = data.stats;
+    const blockRent = state.hdbRentals?.byBlock?.[id];
 
     // Stats
     const psfArr = tx.map(x => x.pricePsf).filter(Boolean);
@@ -192,6 +193,10 @@ export async function renderHdbProject(id) {
           <span class="prox-item">🏫 ${data.proximity.schoolCount1km} schools within 1km</span>
           ${data.proximity.schools1km?.length ? `<span class="prox-item">${data.proximity.schools1km.map(s => `<span class="tag">${s.replace(/\s+PRIMARY\s+SCHOOL$/i, '')}</span>`).join(' ')}</span>` : ''}
         </div>` : ''}
+        ${blockRent ? `
+        <div class="proximity-box">
+          <span class="prox-item">🏠 近 12 月租金中位: <strong>$${fmtNum(blockRent.median)}</strong> <span class="text-muted">(${blockRent.count} 笔 · $${fmtNum(blockRent.min)} - $${fmtNum(blockRent.max)})</span></span>
+        </div>` : ''}
         <div class="flat-tags">
           ${(data.flatTypes || []).map(f => `<span class="tag">${f}</span>`).join(' ')}
           ${(data.flatModels || []).slice(0, 3).map(m => `<span class="tag tag-model">${m}</span>`).join(' ')}
@@ -201,6 +206,7 @@ export async function renderHdbProject(id) {
       <div class="tab-bar">
         <span class="tab active" onclick="switchTab(this,'txns')">Transactions (${fmtNum(tx.length)})</span>
         <span class="tab" onclick="switchTab(this,'chart')">Price Trend</span>
+        <span class="tab" onclick="switchTab(this,'lease')">租约 vs 价格</span>
         ${data.coord ? `<span class="tab" onclick="switchTab(this,'map')">Location</span>` : ''}
       </div>
 
@@ -214,15 +220,21 @@ export async function renderHdbProject(id) {
         </div>
       </div>
 
+      <div id="tab-lease" class="tab-content">
+        <div class="chart-wrap" style="height:300px"><canvas id="leaseScatter"></canvas></div>
+        <div class="text-muted" style="font-size:12px;margin-top:6px">每笔成交的剩余租约 vs 成交 PSF——租约越短，单价通常越低（99 年租约折价）。</div>
+      </div>
+
       ${data.coord ? `
       <div id="tab-map" class="tab-content">
         <div class="map-container" id="projectMap"></div>
       </div>` : ''}
     `;
 
-    // Render chart
+    // Render charts
     const sorted = [...tx].filter(x => x.sortDate).sort((a, b) => a.sortDate.localeCompare(b.sortDate));
     renderHdbChart(sorted);
+    renderLeaseScatter(tx);
 
     // Map: defer to switchTab('map') like private projects (hidden container issue)
     if (state.map.projectMap) { state.map.projectMap.remove(); state.map.projectMap = null; }

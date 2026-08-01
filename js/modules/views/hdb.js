@@ -1,6 +1,7 @@
 /* === HDB dashboard + Town detail views === */
 import { state } from '../state.js';
 import { fmtNum, fmtPrice, slugifyTown, showPsf } from '../utils.js';
+import { renderLeaseCurveChart } from '../charts.js';
 
 // ── HDB Dashboard view ──
 export function renderHdbDashboard() {
@@ -13,6 +14,7 @@ export function renderHdbDashboard() {
 
   // Town-level aggregates
   const sortedTowns = [...townEntries].sort((a, b) => b[1].totalTransactions - a[1].totalTransactions);
+  const rents = state.hdbRentals?.byTown || {};
 
   document.getElementById('main').innerHTML = `
     <div class="hero">
@@ -36,9 +38,17 @@ export function renderHdbDashboard() {
     </div>
     <div id="search-results" class="search-results"></div>
 
+    ${state.hdbLeaseCurve?.buckets ? `
+    <div class="section-title">剩余租约折价曲线（近 ${state.hdbLeaseCurve.period ? '' : ''}3 年成交 · 全岛中位）</div>
+    <div class="chart-wrap" style="height:280px"><canvas id="leaseCurveChart"></canvas></div>
+    <div class="text-muted" style="font-size:12px;margin:6px 0 18px">HDB 为 99 年租约，剩余年限越短折价越大（Bala's Curve 效应）。未控制地段与房型差异，仅供参考。</div>
+    ` : ''}
+
     <div class="section-title">Towns Overview</div>
     <div class="town-row">
-      ${sortedTowns.map(([name, t]) => `
+      ${sortedTowns.map(([name, t]) => {
+        const rent = rents[name];
+        return `
         <div class="town-card" onclick="navigate('/town/${slugifyTown(name)}')">
           <div class="t-header">
             <span class="t-name">${name}</span>
@@ -48,11 +58,16 @@ export function renderHdbDashboard() {
             <span>${fmtNum(t.blocks)} blocks</span>
             <span>${fmtNum(t.totalTransactions)} txns</span>
           </div>
+          ${rent?.median4room ? `
+          <div class="t-detail t-rent">
+            <span>Rent 4RM: <span class="text-gold">$${fmtNum(rent.median4room)}</span></span>
+            ${rent.yieldPct ? `<span class="inv-yield">Yield ${rent.yieldPct}%</span>` : ''}
+          </div>` : ''}
           <div class="t-flats">
             ${t.flatTypes.slice(0, 4).map(f => `<span class="tag-tiny">${f}</span>`).join('')}
           </div>
         </div>
-      `).join('')}
+      `;}).join('')}
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px">
@@ -90,6 +105,7 @@ export function renderHdbDashboard() {
       </div>
     </div>
   `;
+  renderLeaseCurveChart(state.hdbLeaseCurve);
 }
 
 // ── Town detail view ──

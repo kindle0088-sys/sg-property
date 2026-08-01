@@ -128,3 +128,86 @@ export function renderHdbChart(transactions) {
     });
   } catch(e) { /* chart fail silently */ }
 }
+
+// ── 全岛剩余租约折价曲线（Bala's Curve 近似） ──
+export function renderLeaseCurveChart(curve) {
+  const canvas = document.getElementById('leaseCurveChart');
+  if (!canvas || !curve?.buckets) return;
+  const buckets = curve.buckets.filter(b => b.medianPsf != null);
+  if (!buckets.length) return;
+  if (window._leaseChart) window._leaseChart.destroy();
+  window._leaseChart = new Chart(canvas, {
+    type: 'line',
+    data: {
+      labels: buckets.map(b => b.label),
+      datasets: [{
+        label: 'Median PSF',
+        data: buckets.map(b => b.medianPsf),
+        borderColor: '#fbbf24',
+        backgroundColor: 'rgba(251,191,36,0.18)',
+        pointBackgroundColor: '#fbbf24',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 1.5,
+        borderWidth: 3,
+        pointRadius: 7,
+        pointHoverRadius: 9,
+        tension: 0.3,
+        fill: true
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: item => `Median PSF: $${item.parsed.y}`,
+            afterBody: items => {
+              const b = buckets[items[0].dataIndex];
+              return `${b.count.toLocaleString()} 笔交易\n相对 90+ 年: ${b.relative != null ? b.relative + '%' : '-'}`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: { ticks: { color: '#94a3b8', font: { size: 11 } }, grid: { color: 'rgba(42,58,84,0.5)' } },
+        y: { ticks: { color: '#fbbf24', font: { size: 10 }, callback: v => '$' + v }, grid: { color: 'rgba(42,58,84,0.3)' } }
+      }
+    }
+  });
+}
+
+// ── 楼栋剩余租约 vs PSF 散点 ──
+export function renderLeaseScatter(transactions) {
+  const canvas = document.getElementById('leaseScatter');
+  if (!canvas) return;
+  const pts = (transactions || [])
+    .filter(t => t.remainingLease != null && t.pricePsf)
+    .map(t => ({ x: Number(t.remainingLease), y: Number(t.pricePsf) }));
+  if (pts.length < 2) {
+    canvas.parentElement.innerHTML = '<div class="text-muted" style="padding:10px;font-size:13px">租约数据不足，无法绘制散点（该楼栋近期交易缺少剩余租约字段）</div>';
+    return;
+  }
+  if (window._leaseScatter) window._leaseScatter.destroy();
+  window._leaseScatter = new Chart(canvas, {
+    type: 'scatter',
+    data: {
+      datasets: [{
+        label: 'Remaining lease vs PSF',
+        data: pts,
+        backgroundColor: 'rgba(245,158,11,0.65)',
+        borderColor: 'rgba(245,158,11,1)',
+        pointRadius: 4,
+        pointHoverRadius: 6
+      }]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { title: { display: true, text: '剩余租约 (年)', color: '#94a3b8', font: { size: 11 } }, ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(42,58,84,0.5)' } },
+        y: { title: { display: true, text: 'PSF ($)', color: '#94a3b8', font: { size: 11 } }, ticks: { color: '#fbbf24', font: { size: 10 }, callback: v => '$' + v }, grid: { color: 'rgba(42,58,84,0.3)' } }
+      }
+    }
+  });
+}

@@ -10,16 +10,20 @@ async function fetchJSON(file) {
 }
 
 export async function loadData() {
-  const [idx, dists, summ, hdbTowns] = await Promise.all([
+  const [idx, dists, summ, hdbTowns, hdbRentals, hdbLeaseCurve] = await Promise.all([
     fetchJSON('property-index.json'),
     fetchJSON('districts.json'),
     fetchJSON('market-summary.json'),
-    fetchJSON('hdb-towns.json').catch(() => ({}))
+    fetchJSON('hdb-towns.json').catch(() => ({})),
+    fetchJSON('hdb-rentals.json').catch(() => null),
+    fetchJSON('hdb-lease-curve.json').catch(() => null)
   ]);
   state.projectsIndex = idx;
   state.districtsData = dists;
   state.marketSummary = summ;
   state.hdbTownsData = hdbTowns;
+  state.hdbRentals = hdbRentals;
+  state.hdbLeaseCurve = hdbLeaseCurve;
   state.hdbIndex = idx.filter(p => p.type === 'HDB');
 
   // Footer: 显示数据更新时间（buildTime 是 UTC ISO，转新加坡时间 SGT）
