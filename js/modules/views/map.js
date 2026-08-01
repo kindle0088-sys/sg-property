@@ -238,7 +238,7 @@ function popupHtml(p, type) {
   return `
     <div style="min-width:180px">
       ${badge} <b>${p.name}</b><br>
-      <span style="color:#94a3b8">${loc} · 1yr $${showPsf(p)} psf · ${p.totalTxns} txns</span><br>
+      <span style="color:#94a3b8">${loc} · ${p.avgPsf1y ? '1yr' : 'all-yr'} $${showPsf(p)} psf · ${p.totalTxns} txns</span><br>
       <a href="#/project/${p.id}" style="color:#fbbf24;font-size:12px;margin-top:6px;display:inline-block">→ View Details</a>
     </div>
   `;

@@ -75,6 +75,7 @@ function fmtDate(d) {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const DATA = join(__dirname, '..', 'data');
 const PROJ_DIR = join(DATA, 'projects');
+const HDB_DIR = join(DATA, 'hdb');
 
 // HDB 楼栋坐标（由 scripts/build-hdb-coords.mjs 生成，缺失时优雅降级为 null）
 let HDB_COORDS = {};
@@ -105,7 +106,9 @@ const SECT = { 1:'CCR',2:'CCR',3:'RCR',4:'CCR',5:'CCR',6:'CCR',7:'CCR',8:'RCR',9
 function mkdir(p) { if (!existsSync(p)) mkdirSync(p, { recursive: true }); }
 
 // Compute average PSF from transactions filtered by date >= cutoff
-// Handles both mmyy (URA) and yyyy-mm (HDB) date formats
+// Handles both mmyy (URA) and yyyy-mm (HDB) date formats.
+// Median ± 3 × 1.4826 × MAD outlier rejection: protects the average
+// against single bad floor-area records skewing PSF.
 function computeAvg1y(txns, dateField, cutoff) {
   if (!cutoff) return 0;
   const isMmyy = /^\d{4}$/.test(cutoff); // mmyy is 4 digits, yyyy-mm is 7
@@ -117,7 +120,34 @@ function computeAvg1y(txns, dateField, cutoff) {
     return vSort >= cutoffSort;
   });
   const psfs = filtered.map(t => t.pricePsf).filter(Boolean);
-  return psfs.length ? Math.round(psfs.reduce((a, b) => a + b, 0) / psfs.length) : 0;
+  if (!psfs.length) return 0;
+  if (psfs.length < 5) return Math.round(psfs.reduce((a, b) => a + b, 0) / psfs.length); // 小样本不过滤
+  const sorted = [...psfs].sort((a, b) => a - b);
+  const median = sorted[Math.floor(sorted.length / 2)];
+  const devs = sorted.map(v => Math.abs(v - median)).sort((a, b) => a - b);
+  const mad = devs[Math.floor(devs.length / 2)] || 0;
+  const lo = median - 3 * 1.4826 * mad;
+  const hi = median + 3 * 1.4826 * mad;
+  const clean = psfs.filter(v => v >= lo && v <= hi);
+  if (!clean.length) return Math.round(median);
+  return Math.round(clean.reduce((a, b) => a + b, 0) / clean.length);
+}
+
+// 读取已提交详情 JSON 里的交易数据（skip 模式下重算 avgPsf1y 用），带内存缓存
+// HDB 详情文件是 sortDate(yyyy-mm) 格式，归一化回 month 字段供 computeAvg1y 使用
+const txnCache = new Map();
+function loadCommittedTxns(id, isHdb) {
+  if (txnCache.has(id)) return txnCache.get(id);
+  let txns = [];
+  try {
+    const d = JSON.parse(readFileSync(join(isHdb ? HDB_DIR : PROJ_DIR, `${id}.json`), 'utf-8'));
+    txns = d.transactions || [];
+    if (isHdb) {
+      txns = txns.map(t => ({ ...t, month: (t.sortDate || '').substring(0, 7) || t.month }));
+    }
+  } catch (e) { txns = []; }
+  txnCache.set(id, txns);
+  return txns;
 }
 
 async function main() {
@@ -187,7 +217,7 @@ async function main() {
           dateRange: x.dateRange, years: x.years,
           propertyTypes: x.propertyTypes, tenureTypes: x.tenureTypes
         },
-        transactions: []
+        transactions: loadCommittedTxns(x.id, false)
       }));
       rentals = JSON.parse(readFileSync(join(DATA, 'rentals.json'), 'utf-8'));
       console.log(`  Reused ${projects.length} committed URA projects + ${rentals.length} rentals`);
@@ -216,8 +246,10 @@ async function main() {
     try {
       hdbIdxCommitted = JSON.parse(readFileSync(join(DATA, 'hdb-index.json'), 'utf-8'));
       hdbProjects = hdbIdxCommitted.map(x => ({
+        id: x.id,
         stats: { avgPsf: x.avgPsf, avgPsf1y: x.avgPsf1y, totalTransactions: x.totalTxns },
-        town: x.town
+        town: x.town,
+        transactions: loadCommittedTxns(x.id, true)
       }));
       console.log(`  Reused ${hdbIdxCommitted.length} committed HDB blocks from hdb-index.json`);
     } catch (e) {
@@ -265,12 +297,9 @@ async function main() {
   console.log(`  Avg 1y cutoff: URA=${CUTOFF_MMYY} HDB=${CUTOFF_HDB}`);
 
   // Inject avgPsf1y into project stats objects for downstream aggregations
-  if (!skipUra) {
-    for (const p of projects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY);
-  }
-  if (!skipHdb) {
-    for (const p of hdbProjects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
-  }
+  // (runs in both full and skip modes — skip mode loads committed txns above)
+  for (const p of projects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY);
+  for (const p of hdbProjects) p.stats.avgPsf1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
 
   // 5. Generate output
   console.log('\n5/5 Generating files...');
@@ -283,7 +312,7 @@ async function main() {
       type: ecType(p),
       district: p.stats.districts[0] || null,
       marketSegment: p.marketSegment,
-      avgPsf: p.stats.avgPsf, avgPsf1y: p.stats.avgPsf1y,
+      avgPsf: p.stats.avgPsf, avgPsf1y: computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY),
       minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
       totalTxns: p.stats.totalTransactions,
       dateRange: p.stats.dateRange,
@@ -293,8 +322,8 @@ async function main() {
       years: p.stats.years,
       proximity: p.proximity
     }));
-    writeJSON(join(DATA, 'projects-index.json'), idx); // 从 committed 重建 + 注入 type
-    console.log(`  projects-index.json (reused + type, ${idx.length})`);
+    writeJSON(join(DATA, 'projects-index.json'), idx); // 从 committed 重建 + 注入 type + 重算 avgPsf1y
+    console.log(`  projects-index.json (rebuilt + type + avgPsf1y, ${idx.length})`);
   } else {
     idx = projects.map(p => ({
       id: p.id, name: p.name, street: p.street,
@@ -348,8 +377,13 @@ async function main() {
   // 5c. HDB project index
   let hdbIdx;
   if (skipHdb && hdbIdxCommitted.length) {
-    hdbIdx = hdbIdxCommitted; // reuse committed file untouched
-    console.log(`  hdb-index.json (reused, ${hdbIdx.length})`);
+    // 从 committed 重建，但重算 avgPsf1y（MAD 过滤）
+    hdbIdx = hdbIdxCommitted.map(x => ({
+      ...x,
+      avgPsf1y: computeAvg1y(loadCommittedTxns(x.id, true), 'month', CUTOFF_HDB)
+    }));
+    writeJSON(join(DATA, 'hdb-index.json'), hdbIdx);
+    console.log(`  hdb-index.json (rebuilt + avgPsf1y, ${hdbIdx.length})`);
   } else {
     hdbIdx = hdbProjects.map(p => ({
       id: p.id, name: p.name, town: p.town, block: p.block, street: p.street,

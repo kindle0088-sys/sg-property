@@ -1,6 +1,6 @@
 /* === HDB dashboard + Town detail views === */
 import { state } from '../state.js';
-import { fmtNum, fmtPrice, slugifyTown, showPsf } from '../utils.js';
+import { fmtNum, fmtPrice, slugifyTown, showPsf, psfLabel } from '../utils.js';
 import { renderLeaseCurveChart } from '../charts.js';
 
 // ── HDB Dashboard view ──
@@ -128,7 +128,7 @@ export function renderTown(townSlug) {
       <div class="sub">${fmtNum(data.blocks)} blocks · ${fmtNum(data.totalTransactions)} transactions · ${data.years[0] || '?'} - ${data.years[data.years.length-1] || '?'}</div>
       <div class="project-meta">
         <div class="pm"><div class="pv">${fmtNum(data.blocks)}</div><div class="pl">Blocks</div></div>
-        <div class="pm"><div class="pv">$${fmtNum(data.avgPsf1y || data.avgPsf)}</div><div class="pl">1yr Avg PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.avgPsf1y || data.avgPsf)}</div><div class="pl">${psfLabel(data)}</div></div>
         <div class="pm"><div class="pv">$${fmtNum(data.minPsf)}</div><div class="pl">Min PSF</div></div>
         <div class="pm"><div class="pv">$${fmtNum(data.maxPsf)}</div><div class="pl">Max PSF</div></div>
         <div class="pm"><div class="pv">${fmtNum(data.totalTransactions)}</div><div class="pl">Total Txns</div></div>
@@ -143,7 +143,7 @@ export function renderTown(townSlug) {
       ${blocks.sort((a, b) => b.totalTxns - a.totalTxns).map(p => `
         <div class="card" onclick="navigate('/project/${p.id}')">
           <h3>${p.name}${p.demolished ? ' <span class="tag-demolished" title="已不在 HDB 现行建筑数据库中">已拆</span>' : ''}</h3>
-          <div class="meta">${p.street || ''} ${p.avgPsf ? '· 1yr $' + showPsf(p) + ' psf' : ''}</div>
+          <div class="meta">${p.street || ''} ${p.avgPsf ? '· ' + (p.avgPsf1y ? '1yr' : 'all-yr') + ' $' + showPsf(p) + ' psf' : ''}</div>
           <div class="stat">
             <span>PSF: <span class="stat-gold">$${showPsf(p)}</span></span>
             <span>Txns: <span class="stat-gold">${fmtNum(p.totalTxns)}</span></span>

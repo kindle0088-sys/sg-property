@@ -1,6 +1,6 @@
 /* === Project detail views (private + HDB) === */
 import { state } from '../state.js';
-import { fmtNum, fmtPrice, saleTypeLabel, showPsf } from '../utils.js';
+import { fmtNum, fmtPrice, saleTypeLabel, showPsf, psfLabel } from '../utils.js';
 import { fetchProject } from '../data.js';
 import { renderPriceChart, renderHdbChart, renderLeaseScatter } from '../charts.js';
 
@@ -34,7 +34,7 @@ export async function renderProject(id) {
       <h1>${p.name}</h1>
       <div class="sub">${p.street}${p.marketSegment ? ' · ' + p.marketSegment : ''}</div>
       <div class="project-meta">
-        <div class="pm"><div class="pv">$${fmtNum(p.stats.avgPsf1y || p.stats.avgPsf)}</div><div class="pl">1yr Avg PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(p.stats.avgPsf1y || p.stats.avgPsf)}</div><div class="pl">${psfLabel(p.stats)}</div></div>
         <div class="pm"><div class="pv">$${fmtNum(p.stats.minPsf)}</div><div class="pl">Min PSF</div></div>
         <div class="pm"><div class="pv">$${fmtNum(p.stats.maxPsf)}</div><div class="pl">Max PSF</div></div>
         <div class="pm"><div class="pv">${fmtNum(p.stats.totalTransactions)}</div><div class="pl">Transactions</div></div>
@@ -181,7 +181,7 @@ export async function renderHdbProject(id) {
         </div>` : ''}
         <div class="project-meta">
           <div class="pm"><div class="pv">${fmtNum(st.totalTransactions)}</div><div class="pl">Total Transactions</div></div>
-          <div class="pm"><div class="pv">$${fmtNum(st.avgPsf1y || st.avgPsf)}</div><div class="pl">1yr Avg PSF</div></div>
+          <div class="pm"><div class="pv">$${fmtNum(st.avgPsf1y || st.avgPsf)}</div><div class="pl">${psfLabel(st)}</div></div>
           <div class="pm"><div class="pv">$${fmtNum(st.minPsf)}</div><div class="pl">Min PSF</div></div>
           <div class="pm"><div class="pv">$${fmtNum(st.maxPsf)}</div><div class="pl">Max PSF</div></div>
           <div class="pm"><div class="pv">${fmtPrice(st.minPrice)}</div><div class="pl">Min Price</div></div>

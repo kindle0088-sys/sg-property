@@ -26,9 +26,20 @@ export function slugifyTown(name) {
   return (name || '').toLowerCase().replace(/[\s/]+/g, '-');
 }
 
-export function showPsf(p) {
+// PSF 数值 + 窗口信息：avgPsf1y 存在 = 真 1yr；否则 fallback 全期平均
+// 前端标签必须用 psfLabel()，避免"历史均价冒充 1yr"
+export function psfText(p) {
   const v = p.avgPsf1y || p.avgPsf || 0;
-  return fmtNum(v);
+  return { v, is1y: !!p.avgPsf1y };
+}
+
+export function showPsf(p) {
+  return fmtNum(psfText(p).v);
+}
+
+// "1yr PSF" vs "Avg PSF (all)"（按项目实际窗口）
+export function psfLabel(p) {
+  return p.avgPsf1y ? '1yr PSF' : 'Avg PSF (all)';
 }
 
 export function psfTrend(p) {

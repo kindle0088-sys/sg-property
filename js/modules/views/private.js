@@ -1,6 +1,6 @@
 /* === Private dashboard + District detail views === */
 import { state } from '../state.js';
-import { fmtNum, fmtPrice, showPsf, psfTrend } from '../utils.js';
+import { fmtNum, fmtPrice, showPsf, psfTrend, psfLabel } from '../utils.js';
 
 // ── Investment metric helper (shared by district cards & detail) ──
 export function invMetric(d) {
@@ -37,7 +37,7 @@ export function renderPrivateDashboard() {
         <div class="kpi"><div class="val">${fmtNum(hdbCount)}</div><div class="lbl">HDB Blocks</div></div>
         <div class="kpi"><div class="val">${fmtNum(sm.totalTransactions)}</div><div class="lbl">Private Txns</div></div>
         <div class="kpi"><div class="val">${fmtNum(hdbTxns)}</div><div class="lbl">HDB Txns</div></div>
-        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf1y || sm.overallAvgPsf)}</div><div class="lbl">1yr Avg PSF</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf1y || sm.overallAvgPsf)}</div><div class="lbl">${sm.overallAvgPsf1y ? '1yr Avg PSF' : 'Avg PSF (all)'}</div></div>
         <div class="kpi"><div class="val">${activeDists.length}</div><div class="lbl">Districts</div></div>
       </div>
     </div>
@@ -67,7 +67,7 @@ export function renderPrivateDashboard() {
             <span class="d-name">D${d.district} ${d.name}</span>
             <span class="d-sector ${d.sector.toLowerCase()}">${d.sector}</span>
           </div>
-          <div class="d-psf">$${fmtNum(d.avgPsf1y || d.avgPsf || d.medianPsf)}<span class="d-psf-label">1yr avg</span></div>
+          <div class="d-psf">$${fmtNum(d.avgPsf1y || d.avgPsf || d.medianPsf)}<span class="d-psf-label">${d.avgPsf1y ? '1yr avg' : 'all-yr avg'}</span></div>
           ${invMetric(d)}
           <div class="d-detail">
             <span>${d.projectCount} projects</span>
@@ -132,7 +132,7 @@ export function renderDistrict(d) {
       <div class="sub">${data.sector} · ${data.projectCount} projects · ${fmtNum(data.totalTransactions)} transactions</div>
       <div class="project-meta">
         <div class="pm"><div class="pv">$${fmtNum(data.medianPsf)}</div><div class="pl">Median PSF</div></div>
-        <div class="pm"><div class="pv">$${fmtNum(data.avgPsf1y || data.avgPsf)}</div><div class="pl">1yr Avg PSF</div></div>
+        <div class="pm"><div class="pv">$${fmtNum(data.avgPsf1y || data.avgPsf)}</div><div class="pl">${psfLabel(data)}</div></div>
         <div class="pm"><div class="pv">$${fmtNum(data.minPsf)}</div><div class="pl">Min PSF</div></div>
         <div class="pm"><div class="pv">$${fmtNum(data.maxPsf)}</div><div class="pl">Max PSF</div></div>
         ${data.rental ? `<div class="pm"><div class="pv">$${fmtNum(data.rental.median)}</div><div class="pl">Rental Median</div></div>` : ''}
@@ -147,7 +147,7 @@ export function renderDistrict(d) {
       ${projects.sort((a, b) => b.totalTxns - a.totalTxns).map(p => `
         <div class="card" onclick="navigate('/project/${p.id}')">
           <h3>${p.name}</h3>
-          <div class="meta">${p.street || ''} ${p.avgPsf ? '· 1yr $' + showPsf(p) + ' psf' : ''}</div>
+          <div class="meta">${p.street || ''} ${p.avgPsf ? '· ' + (p.avgPsf1y ? '1yr' : 'all-yr') + ' $' + showPsf(p) + ' psf' : ''}</div>
           <div class="stat">
             <span>PSF: <span class="stat-gold">$${showPsf(p)}</span></span>
             <span>Txns: <span class="stat-gold">${p.totalTxns}</span></span>

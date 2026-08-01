@@ -1,7 +1,7 @@
 /* === A/B Project Comparison view === */
 import { state } from '../state.js';
 import { loadHdbIndex, fetchProject } from '../data.js';
-import { fmtNum, showPsf } from '../utils.js';
+import { fmtNum, showPsf, psfLabel } from '../utils.js';
 import { renderCompareChart } from '../charts.js';
 
 const SIDE_META = {
@@ -147,7 +147,7 @@ function cmpCard(side, idx, detail) {
       </div>
       <div class="cmp-card-sub">${loc} · ${fmtNum(st.totalTransactions || 0)} txns${yrsLabel ? ' · ' + yrsLabel : ''}</div>
       <div class="cmp-metrics">
-        <div class="cmp-metric"><span class="cm-label">1yr PSF</span><span class="cm-val">$${fmtNum(psf)}</span></div>
+        <div class="cmp-metric"><span class="cm-label">${psfLabel(idx)}</span><span class="cm-val">$${fmtNum(psf)}</span></div>
         <div class="cmp-metric"><span class="cm-label">毛收益率</span><span class="cm-val">${yld != null ? yld + '%' : '—'}</span></div>
         <div class="cmp-metric"><span class="cm-label">最近地铁</span><span class="cm-val">${prox.nearestMrt ? prox.nearestMrt + ' ' + fmtNum(prox.nearestMrtDistM) + 'm' : '—'}</span></div>
         <div class="cmp-metric"><span class="cm-label">1km 学校</span><span class="cm-val">${prox.schoolCount1km != null ? prox.schoolCount1km : '—'}</span></div>

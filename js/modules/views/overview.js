@@ -19,7 +19,7 @@ export function renderOverview() {
         <div class="kpi"><div class="val">${fmtNum(hdbCount)}</div><div class="lbl">HDB Blocks</div></div>
         <div class="kpi"><div class="val">${fmtNum(sm.totalTransactions)}</div><div class="lbl">Private Txns</div></div>
         <div class="kpi"><div class="val">${fmtNum(hdbTxns)}</div><div class="lbl">HDB Txns</div></div>
-        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf1y || sm.overallAvgPsf)}</div><div class="lbl">1yr Avg PSF</div></div>
+        <div class="kpi"><div class="val">$${fmtNum(sm.overallAvgPsf1y || sm.overallAvgPsf)}</div><div class="lbl">${sm.overallAvgPsf1y ? '1yr Avg PSF' : 'Avg PSF (all)'}</div></div>
         <div class="kpi"><div class="val">$${fmtNum(hdbAvg)}</div><div class="lbl">HDB Avg PSF</div></div>
         <div class="kpi"><div class="val">${dists.length}</div><div class="lbl">Districts</div></div>
         <div class="kpi"><div class="val">${hdbTownsArr.length}</div><div class="lbl">Towns</div></div>
