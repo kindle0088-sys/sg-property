@@ -126,7 +126,7 @@ export function renderTown(townSlug) {
     <div class="card-grid">
       ${blocks.sort((a, b) => b.totalTxns - a.totalTxns).map(p => `
         <div class="card" onclick="navigate('/project/${p.id}')">
-          <h3>${p.name}</h3>
+          <h3>${p.name}${p.demolished ? ' <span class="tag-demolished" title="已不在 HDB 现行建筑数据库中">已拆</span>' : ''}</h3>
           <div class="meta">${p.street || ''} ${p.avgPsf ? '· 1yr $' + showPsf(p) + ' psf' : ''}</div>
           <div class="stat">
             <span>PSF: <span class="stat-gold">$${showPsf(p)}</span></span>

@@ -9,6 +9,8 @@ REM ============================================================
 setlocal
 set "ROOT=C:\Users\jiali\WorkBuddy\Claw\property-dashboard"
 set "NODE=C:\Users\jiali\.workbuddy\binaries\node\versions\22.22.2\node.exe"
+set "GH=%LOCALAPPDATA%\Programs\GitHub CLI\gh.exe"
+if not exist "%GH%" set "GH=gh"
 
 echo [%date% %time%] Starting daily URA build...
 
@@ -16,6 +18,15 @@ cd /d "%ROOT%\scripts"
 "%NODE%" build.js --skip-hdb
 if errorlevel 1 (
   echo [%date% %time%] BUILD FAILED
+  REM --- failure notification: append log + open a GitHub issue (once per failure streak) ---
+  mkdir "%ROOT%\logs" 2>nul
+  echo [%date% %time%] BUILD FAILED >> "%ROOT%\logs\build-error.log"
+  "%GH%" issue list -R kindle0088-sys/sg-property --state open --search "Daily URA build failed" --json number --jq "length" > "%TEMP%\gh-open.txt" 2>nul
+  set /p OPEN_ISSUES=<"%TEMP%\gh-open.txt"
+  if not defined OPEN_ISSUES set OPEN_ISSUES=0
+  if "%OPEN_ISSUES%"=="0" (
+    "%GH%" issue create -R kindle0088-sys/sg-property --title "Daily URA build failed" --body "Local scheduled build failed at %date% %time%. See logs\build-error.log." >nul 2>&1
+  )
   exit /b 1
 )
 

@@ -174,6 +174,10 @@ export async function renderHdbProject(id) {
         <a href="#" onclick="navigate('/hdb')" style="font-size:13px">&larr; Back to HDB</a>
         <h1><span class="tag-hdb" style="font-size:14px;vertical-align:middle;margin-right:8px">HDB</span>${data.name}</h1>
         <div class="sub">${data.town} · ${data.street} · Block ${data.block} · ${st.years[0] || '?'} - ${st.years[st.years.length-1] || '?'}</div>
+        ${data.demolished ? `
+        <div class="demolished-banner">
+          ⚠️ 该楼可能已拆除或重建（不在 HDB 现行建筑数据库中），以下仅包含历史成交记录
+        </div>` : ''}
         <div class="project-meta">
           <div class="pm"><div class="pv">${fmtNum(st.totalTransactions)}</div><div class="pl">Total Transactions</div></div>
           <div class="pm"><div class="pv">$${fmtNum(st.avgPsf1y || st.avgPsf)}</div><div class="pl">1yr Avg PSF</div></div>
@@ -182,6 +186,12 @@ export async function renderHdbProject(id) {
           <div class="pm"><div class="pv">${fmtPrice(st.minPrice)}</div><div class="pl">Min Price</div></div>
           <div class="pm"><div class="pv">${fmtPrice(st.maxPrice)}</div><div class="pl">Max Price</div></div>
         </div>
+        ${data.proximity ? `
+        <div class="proximity-box">
+          <span class="prox-item">🚇 Nearest MRT: <strong>${data.proximity.nearestMrt}</strong> <span class="text-muted">(${fmtNum(data.proximity.nearestMrtDistM)}m)</span></span>
+          <span class="prox-item">🏫 ${data.proximity.schoolCount1km} schools within 1km</span>
+          ${data.proximity.schools1km?.length ? `<span class="prox-item">${data.proximity.schools1km.map(s => `<span class="tag">${s.replace(/\s+PRIMARY\s+SCHOOL$/i, '')}</span>`).join(' ')}</span>` : ''}
+        </div>` : ''}
         <div class="flat-tags">
           ${(data.flatTypes || []).map(f => `<span class="tag">${f}</span>`).join(' ')}
           ${(data.flatModels || []).slice(0, 3).map(m => `<span class="tag tag-model">${m}</span>`).join(' ')}

@@ -351,6 +351,8 @@ async function main() {
     hdbIdx = hdbProjects.map(p => ({
       id: p.id, name: p.name, town: p.town, block: p.block, street: p.street,
       type: 'HDB', coord: HDB_COORDS[p.id] || null,
+      proximity: HDB_COORDS[p.id] ? enrichProximity(HDB_COORDS[p.id]) : null,
+      demolished: !HDB_COORDS[p.id],
       avgPsf: p.stats.avgPsf,
       avgPsf1y: computeAvg1y(p.transactions, 'month', CUTOFF_HDB),
       minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
@@ -373,6 +375,9 @@ async function main() {
       writeJSON(join(HDB_DIR, `${p.id}.json`), {
         id: p.id, name: p.name, type: 'HDB',
         town: p.town, street: p.street, block: p.block,
+        coord: HDB_COORDS[p.id] || null,
+        proximity: HDB_COORDS[p.id] ? enrichProximity(HDB_COORDS[p.id]) : null,
+        demolished: !HDB_COORDS[p.id],
         flatTypes: p.flatTypes, flatModels: p.flatModels,
         stats: { ...p.stats, avgPsf1y: avg1y },
         transactions: p.transactions.map(t => ({

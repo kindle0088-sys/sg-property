@@ -21,6 +21,17 @@ export async function loadData() {
   state.marketSummary = summ;
   state.hdbTownsData = hdbTowns;
   state.hdbIndex = idx.filter(p => p.type === 'HDB');
+
+  // Footer: 显示数据更新时间（buildTime 是 UTC ISO，转新加坡时间 SGT）
+  if (summ?.buildTime) {
+    const el = document.getElementById('data-updated');
+    if (el) {
+      const d = new Date(summ.buildTime);
+      const sgt = new Date(d.getTime() + 8 * 3600 * 1000);
+      const iso = sgt.toISOString().slice(0, 16).replace('T', ' ');
+      el.textContent = 'Data updated ' + iso + ' SGT';
+    }
+  }
 }
 
 export async function fetchProject(id) {
