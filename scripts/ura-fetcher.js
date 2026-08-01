@@ -10,6 +10,8 @@ import { svy21ToWgs84, projectSlug } from './svy21.js';
 
 // URA access key: read from environment variable or local gitignored file
 // Never commit the key to the repository.
+// Lazy-loaded: only read when URA API is actually called, so that
+// --skip-ura builds (HDB refresh on CI) can import this module without a key.
 const __dirname = dirname(fileURLToPath(import.meta.url));
 function loadAccessKey() {
   if (process.env.URA_ACCESS_KEY) return process.env.URA_ACCESS_KEY;
@@ -17,7 +19,6 @@ function loadAccessKey() {
   if (existsSync(keyFile)) return readFileSync(keyFile, 'utf-8').trim();
   throw new Error('URA_ACCESS_KEY not set. Create scripts/.ura-key or set the URA_ACCESS_KEY env var.');
 }
-const URA_ACCESS_KEY = loadAccessKey();
 const TOKEN_URL = 'https://eservice.ura.gov.sg/uraDataService/insertNewToken/v1';
 const API_BASE = 'https://eservice.ura.gov.sg/uraDataService/invokeUraDS/v1';
 
@@ -51,7 +52,7 @@ async function fetchWithRetry(url, opts, { retries = 4, baseDelay = 3000, label 
 export async function getToken() {
   const resp = await fetchWithRetry(TOKEN_URL, {
     method: 'GET',
-    headers: { 'AccessKey': URA_ACCESS_KEY }
+    headers: { 'AccessKey': loadAccessKey() }
   }, { label: 'URA token' });
   const data = await resp.json();
   if (data.Result) { _token = data.Result; return data.Result; }
@@ -60,7 +61,7 @@ export async function getToken() {
 
 function headers() {
   if (!_token) throw new Error('Token not available. Call getToken() first.');
-  return { 'AccessKey': URA_ACCESS_KEY, 'Token': _token };
+  return { 'AccessKey': loadAccessKey(), 'Token': _token };
 }
 
 async function fetchService(service, params = {}) {
