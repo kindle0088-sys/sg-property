@@ -14,6 +14,11 @@ if not exist "%GH%" set "GH=gh"
 
 echo [%date% %time%] Starting daily URA build...
 
+REM --- 防 .git 损坏：禁用 git 自动 gc（2026-08-02 事故根因：loose objects 超阈值
+REM     触发 auto-gc，repack 与构建并发中断导致对象丢失）---
+git -C "%ROOT%" config gc.auto 0
+if errorlevel 1 echo [%date% %time%] WARN: failed to disable auto-gc
+
 cd /d "%ROOT%\scripts"
 "%NODE%" build.js --skip-hdb
 if errorlevel 1 (
@@ -50,6 +55,22 @@ git push origin main
 if errorlevel 1 (
   echo [%date% %time%] PUSH FAILED
   exit /b 1
+)
+
+REM --- 错峰显式 gc：构建+推送全部完成后主动打包 loose objects ---
+git -C "%ROOT%" gc --quiet
+if errorlevel 1 (
+  echo [%date% %time%] WARN: git gc reported an error
+) else (
+  echo [%date% %time%] GC done
+)
+
+REM --- loose objects 数量监控（超阈值提醒，防止再次堆积）---
+for /f "tokens=2 delims= " %%b in ('git -C "%ROOT%" count-objects -v ^| findstr /b "count:"') do set "LOOSE_NUM=%%b"
+if not defined LOOSE_NUM set "LOOSE_NUM=?"
+echo [%date% %time%] Loose objects: %LOOSE_NUM%
+if not "%LOOSE_NUM%"=="?" if "%LOOSE_NUM%" GTR "6700" (
+  echo [%date% %time%] WARN: loose objects %LOOSE_NUM% exceed threshold 6700, run manual gc
 )
 
 echo [%date% %time%] Done.
