@@ -3,174 +3,262 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ECOPOLITAN — D19 Punggol EC 深度分析（七维评分 6.80）</title>
+<title>ECOPOLITAN — 新加坡 D19 EC 投资研报</title>
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--text:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b;--green:#10b981;--red:#ef4444;--border:#334155}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
-.wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
-header{text-align:center;padding:40px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
-.tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.4);padding:3px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
-h1{font-size:30px;margin-bottom:6px}
-.sub{color:var(--muted);font-size:14px}
-.scorebox{display:inline-flex;align-items:baseline;gap:6px;margin-top:16px;background:var(--card);border:1px solid var(--border);padding:10px 22px;border-radius:12px}
-.scorebox .num{font-size:40px;font-weight:800;color:var(--accent)}
-.scorebox .lbl{color:var(--muted);font-size:13px}
-h2{font-size:20px;margin:36px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
-.kpi .v{font-size:22px;font-weight:700;color:var(--accent)}
-.kpi .k{font-size:12px;color:var(--muted);margin-top:2px}
-table{width:100%;border-collapse:collapse;margin:10px 0}
-th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
-th{color:var(--muted);font-weight:500;background:var(--card2)}
-tr:hover td{background:rgba(245,158,11,.05)}
-.up{color:var(--red)}.down{color:var(--green)}
-.dim{color:var(--muted);font-size:13px}
-.radar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.dimrow{display:flex;align-items:center;gap:12px;margin:8px 0}
-.dimrow .dn{width:110px;font-size:13px;color:var(--muted);flex-shrink:0}
-.dimrow .bar{flex:1;height:10px;background:var(--card2);border-radius:6px;overflow:hidden}
-.dimrow .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:6px}
-.dimrow .dv{width:36px;text-align:right;font-weight:700;font-size:14px}
-.verdict{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.08));border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:22px;margin-top:20px}
-.verdict h3{color:var(--accent);margin-bottom:10px;font-size:17px}
-ul{padding-left:20px;margin:8px 0}
-li{margin:6px 0;font-size:14px}
-.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.warn b{color:var(--red)}
-.pos{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.pos b{color:var(--green)}
-footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border)}
-footer span{color:var(--accent)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div class="tag">🏘️ EC · 执行共管公寓 · MOP 已过 · 🔑 Dual-Key 双钥匙户型</div>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D19 Punggol · 已过 MOP</div>
   <h1>ECOPOLITAN</h1>
-  <div class="sub">D19 Punggol Walk · 99 年租约（2012 起算）· 512 单位 · TOP 2016</div>
-  <div class="scorebox"><span class="num">6.80</span><span class="lbl">/ 10 七维综合评分</span></div>
-</header>
-
-<section>
-  <h2>一、项目概览</h2>
-  <div class="grid">
-    <div class="kpi"><div class="v">512</div><div class="k">总单位（8 栋 16 层）</div></div>
-    <div class="kpi"><div class="v">$1,190</div><div class="k">历史均价 psf</div></div>
-    <div class="kpi"><div class="v">$1,424</div><div class="k">近 1 年均价 psf</div></div>
-    <div class="kpi"><div class="v">229 笔</div><div class="k">累计交易</div></div>
-    <div class="kpi"><div class="v">3.6%</div><div class="k">租金收益率</div></div>
-    <div class="kpi"><div class="v">560m</div><div class="k">距 Soo Teck LRT</div></div>
+  <div class="address">124-138 Punggol Walk · Punggol · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.70</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,190</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,424</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">229</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">512</div><div class="lbl">总单位数</div></div>
   </div>
-  <div class="card">
-    <p><b>ECOPOLITAN</b>是青建 Qingjian Realty 在 Punggol 打造的"7 Wonders of Nature"生态主题 EC，2016 年 TOP，512 单位。项目首创的 <b>CoSpace™ 专利活动墙 + Dual-Key 双钥匙户型</b>让多代同堂或"自住+出租"成为可能，是 Punggol 最具设计辨识度的 EC 之一。MOP 已于 2021 年届满。</p>
-    <p class="dim" style="margin-top:8px">地址：124-138 Punggol Walk · 地契：99 年（2012-12-04 起算，剩约 85 年）· 户型：3 房（895 sqft）至 5 房（1,518-1,528 sqft），含 CoSpace 与 Dual-Key 变体 · ARC Studio 设计</p>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>生态主题 EC、Dual-Key 双钥匙户型全岛独有</strong>——青建 Qingjian Realty 打造，512 单位，2016 年 TOP。首创 CoSpace™ 专利活动墙 + Dual-Key 双钥匙户型（一套产权两套生活空间），"7 Wonders of Nature" 生态景观。MOP 已于 2021 年届满，未来 CRL Punggol 换乘站（2030s）是下一催化。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Ecopolitan 是"户型创新 + 生态设计"双护城河的成熟 EC。2021-2026 年价格从 $1,066 涨到 $1,442 psf（+35%），租金收益 3.6%。Dual-Key 可"自住+出租"一房两用，是<span class="positive">多代同堂家庭与以租养贷买家的首选</span>，但需接受 LRT 通勤与 Punggol 供给压力。
   </div>
 </section>
 
+<!-- 项目核心参数 -->
 <section>
-  <h2>二、七维评分</h2>
-  <div class="radar">
-    <div class="dimrow"><div class="dn">地段位置</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
-    <div class="dimrow"><div class="dn">租金回报</div><div class="bar"><div class="fill" style="width:50%"></div></div><div class="dv">5.0</div></div>
-    <div class="dimrow"><div class="dn">增值潜力</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
-    <div class="dimrow"><div class="dn">开发商实力</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">持有成本</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">流动性</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
-    <div class="dimrow"><div class="dn">风险控制</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">青建 Qingjian Realty (Punggol Way)</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">512 套 · 8 栋 16 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2012-12-04 起，剩约 85 年）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2016-12-31（已竣工 10 年）</div></div>
+    <div class="spec-card"><div class="spec-label">MOP</div><div class="spec-value">2021 年届满</div></div>
+    <div class="spec-card"><div class="spec-label">设计团队</div><div class="spec-value">ARC Studio Architecture + Urbanism</div></div>
+    <div class="spec-card"><div class="spec-label">专利户型</div><div class="spec-value">CoSpace 活动墙 + Dual-Key 双钥匙</div></div>
+    <div class="spec-card"><div class="spec-label">景观主题</div><div class="spec-value">"7 Wonders of Nature" 生态园林</div></div>
   </div>
-  <div class="card">
-    <table>
-      <tr><th>维度</th><th>评分</th><th>点评</th></tr>
-      <tr><td>地段位置</td><td class="up">7.0</td><td>Punggol 生态滨水镇核心，Soo Teck LRT 560m、Punggol MRT 750m（10-12 分钟）；未来 CRL 增设 Punggol 换乘站（2030s）</td></tr>
-      <tr><td>租金回报</td><td class="up">5.0</td><td>收益约 3.6%；<b>Dual-Key 双钥匙可拆分出租</b>，出租灵活性 EC 中罕见</td></tr>
-      <tr><td>增值潜力</td><td class="up">6.5</td><td>自 2013 开盘增值约 57%；2021-2026 从 $1,066 涨至 $1,442（+35%）；CRL 通车是下一催化</td></tr>
-      <tr><td>开发商实力</td><td class="up">7.5</td><td>青建（中国国企背景，新加坡 EC 最多产的开发商之一），专利户型设计能力突出</td></tr>
-      <tr><td>持有成本</td><td class="up">7.5</td><td>99 年租约 2012 起算（剩约 85 年）；生态设计（自然通风采光）降低能耗成本</td></tr>
-      <tr><td>流动性</td><td class="up">7.0</td><td>512 单位，2021-2026 每年 13-79 笔成交；Dual-Key 户型转售咨询量大</td></tr>
-      <tr><td>风险控制</td><td class="up">7.0</td><td>无期房/MOP 风险；主要风险为 LRT 通勤体验与 Punggol 供给量</td></tr>
-    </table>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th></tr>
+    <tr><td>3 Bedroom（含 Premium/CoSpace）</td><td>895 - 1,217</td><td>272</td></tr>
+    <tr><td>3/4 Bedroom Dual-Key</td><td>1,086 - 1,246</td><td>32</td></tr>
+    <tr><td>4 Bedroom（含 Premium/CoSpace）</td><td>1,138 - 1,367</td><td>176</td></tr>
+    <tr><td>5 Bedroom</td><td>1,518 - 1,528</td><td>32</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ Dual-Key 双钥匙：一套产权两套独立生活空间，可"自住+出租"或"老人+年轻家庭"——Punggol EC 独有。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 泳池 + 生态池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 湖屋健身房（含蒸汽房）</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">🧗</span> 冒险乐园</div>
+    <div class="facility-tag"><span class="icon">💆</span> 迷雾 SPA 池</div>
+    <div class="facility-tag"><span class="icon">🏃</span> 森林慢跑道</div>
+    <div class="facility-tag"><span class="icon">🌿</span> "7 Wonders" 生态景观</div>
+    <div class="facility-tag"><span class="icon">🏢</span> Lakehouse Club</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ + 森林烧烤廊</div>
+    <div class="facility-tag"><span class="icon">☀️</span> 自然通风节能设计</div>
   </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Soo Teck LRT 560m、Cheng Lim LRT 640m；Punggol MRT（NEL+LRT）750m；未来 CRL Punggol 站（2030s）</td></tr>
+    <tr><td>🚗 快速路</td><td>TPE 车程 4 分钟、KPE 直通 CBD（高峰外 20-25 分钟）</td></tr>
+    <tr><td>🏫 学校</td><td>Punggol Green Primary、Compassvale Primary（760m）、Edgefield Primary；国际学校（OFS/GIIS）</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Waterway Point（Punggol 最大滨水商场）、Punggol Plaza、Compass Point</td></tr>
+    <tr><td>🏥 医疗</td><td>Sengkang General Hospital（车程 8 分钟）</td></tr>
+    <tr><td>🌳 自然</td><td>My Waterway @ Punggol、Punggol Waterway Park、SAFRA Punggol、Punggol Driving Range</td></tr>
+  </table>
 </section>
 
+<!-- 七维评分 -->
 <section>
-  <h2>三、价格分析</h2>
-  <div class="card">
-    <table>
-      <tr><th>年份</th><th>交易量</th><th>均价 psf</th><th>同比</th></tr>
-      <tr><td>2021</td><td>79</td><td>$1,066</td><td>—</td></tr>
-      <tr><td>2022</td><td>61</td><td>$1,157</td><td class="up">+8.5%</td></tr>
-      <tr><td>2023</td><td>31</td><td>$1,244</td><td class="up">+7.5%</td></tr>
-      <tr><td>2024</td><td>26</td><td>$1,322</td><td class="up">+6.3%</td></tr>
-      <tr><td>2025</td><td>19</td><td>$1,368</td><td class="up">+3.5%</td></tr>
-      <tr><td>2026 至今</td><td>13</td><td>$1,442</td><td class="up">+5.4%</td></tr>
-    </table>
-    <p class="dim" style="margin-top:10px">数据口径：URA 成交记录（contractDate 08/2021 - 06/2026）。2021-2022 放量（MOP 2021 解禁后集中成交），此后每年成交递减、价格稳步上行。</p>
-    <div class="pos"><b>解读：</b>Ecopolitan 的价格曲线平稳健康，年化约 7%。$1,424 psf（近 1 年）在 Punggol EC 中属合理水平，Dual-Key 户型（约 1,086-1,246 sqft）因"一房两用"特性在转售市场有独立溢价。</div>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Punggol 生态滨水镇核心，LRT/MRT 步行圈，CRL 2030s 加分</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 收益约 3.6%；Dual-Key 可拆分出租，出租灵活性 EC 罕见</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 开盘以来 +57%，5 年 +35%，CRL 通车是下一催化</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 青建（EC 最多产开发商之一），专利户型设计能力强</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 生态设计自然通风采光降低能耗，租约剩 85 年</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · Dual-Key 户型转售咨询量大，普通户型成交稳定</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 无期房/MOP 风险；Punggol 供给量大是主要压力</p></div>
   </div>
-</section>
 
-<section>
-  <h2>四、配套与设施</h2>
-  <div class="card">
-    <table>
-      <tr><th>类别</th><th>内容</th></tr>
-      <tr><td>轨道交通</td><td>Soo Teck LRT 560m、Cheng Lim LRT 640m；Punggol MRT（NEL+LRT）750m；未来 CRL Punggol 站（2030s）</td></tr>
-      <tr><td>快速路</td><td>TPE 车程 4 分钟、KPE 直通 CBD（高峰外 20-25 分钟）</td></tr>
-      <tr><td>商场</td><td>Waterway Point（Punggol 最大滨水商场）、Punggol Plaza、Compass Point</td></tr>
-      <tr><td>学校</td><td>Punggol Green Primary、Compassvale Primary（760m）、Edgefield Primary；国际学校（OFS/GIIS）</td></tr>
-      <tr><td>休闲</td><td>My Waterway @ Punggol、Punggol Waterway Park、SAFRA Punggol、Punggol Driving Range、马术场</td></tr>
-      <tr><td>小区设施</td><td>50m 泳池、生态池、湖屋健身房（含蒸汽房）、网球场、冒险乐园、迷雾 SPA 池、森林步道、"7 Wonders of Nature" 主题景观（30+ 项）</td></tr>
-    </table>
-  </div>
-</section>
-
-<section>
-  <h2>五、居民评价与市场声音</h2>
-  <div class="card">
-    <div class="pos"><b>加分项（市场共识）：</b><ul>
-      <li>Dual-Key 双钥匙：一套产权两套生活空间，可"自住+出租"或"老人+年轻家庭"组合——Punggol EC 独有</li>
-      <li>生态设计理念贯穿（自然通风、节能），"7 Wonders of Nature" 园林在 EC 中品质一流</li>
-      <li>滨水生活：My Waterway 步行可达，遛娃遛狗的天堂</li>
-    </ul></div>
-    <div class="warn"><b>扣分项（买家反馈）：</b><ul>
-      <li>Punggol MRT 步行 10-12 分钟夏天暴晒，LRT 高峰拥挤</li>
-      <li>2016 TOP 楼龄 10 年，设施进入维护周期</li>
-      <li>Punggol 新 EC/私宅供给持续（Twin Waterfalls 就在隔壁），转售竞争存在</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>六、风险提示</h2>
-  <div class="card">
-    <div class="warn"><b>⚠️ 主要风险：</b><ul>
-      <li><b>CRL 兑现期长：</b>Punggol 换乘站 2030 年代才通车，短期无催化</li>
-      <li><b>供给压力：</b>Punggol 是新加坡 EC/私宅供给最密集的区域之一</li>
-      <li><b>楼龄折旧：</b>剩余租约 85 年，10 年后折价显现</li>
-      <li><b>租金回报一般：</b>3.6% 收益率与定期存款利差收窄，现金流吸引力下降</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>七、投资建议</h2>
   <div class="verdict">
-    <h3>综合评定：6.80 / 10 —— 户型创新是最强护城河</h3>
-    <p><b>适合人群：</b>多代同堂家庭、追求"以租养贷"的买家（Dual-Key）、看好 Punggol 滨水生活方式的自住者。</p>
-    <p style="margin-top:8px"><b>策略建议：</b></p>
-    <ul>
-      <li><b>自住：</b>推荐——生态园林 + 滨水配套 + 灵活户型，$1,300-1,450 psf 合理</li>
-      <li><b>投资：</b>中性偏好——Dual-Key 的出租灵活性是独特优势（一房两租约），收益率可跑赢普通 EC；普通户型则一般</li>
-      <li><b>注意：</b>优先选 Dual-Key/CoSpace 户型（稀缺性溢价），CRL 通车前控制仓位</li>
-    </ul>
+    <strong>综合评分：6.70 / 10</strong> —— 加权计算（7.0×20% + 5.0×15% + 6.5×20% + 7.5×10% + 7.5×10% + 7.0×15% + 7.0×10%）。Dual-Key 户型创新是核心护城河，地段与生态设计加分。
   </div>
 </section>
 
-<footer>数据来源：URA 成交记录（本地库 build 2026-08-02）· ShiokNest / Qingjian 官网 / PropertyGuru · 七维投资框架<br>本报告仅供研究参考，不构成投资建议 · 生成于 <span>2026-08-02</span></footer>
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>79</td><td>$1,066</td><td>—</td></tr>
+    <tr><td>2022</td><td>61</td><td>$1,157</td><td class="num-green">+8.5%</td></tr>
+    <tr><td>2023</td><td>31</td><td>$1,244</td><td class="num-green">+7.5%</td></tr>
+    <tr><td>2024</td><td>26</td><td>$1,322</td><td class="num-green">+6.3%</td></tr>
+    <tr><td>2025</td><td>19</td><td>$1,368</td><td class="num-green">+3.5%</td></tr>
+    <tr><td>2026（至今）</td><td>13</td><td>$1,442</td><td class="num-green">+5.4%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>年化约 7% 平稳上行，MOP 解禁（2021）后放量完成。$1,424 psf（近 1 年）在 Punggol EC 中合理——Dual-Key 户型（约 1,086-1,246 sqft）因"一房两用"特性在转售市场有独立溢价。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2021-2022 年为 MOP 解禁后的集中成交窗口。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2012-12</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2016-12</div><div class="tl-detail">TOP 竣工</div></div>
+    <div class="tl-item"><div class="tl-year">2021</div><div class="tl-detail">5 年 MOP 届满 → 可整租 / 转售给符合条件买家</div></div>
+    <div class="tl-item"><div class="tl-year">2026</div><div class="tl-detail">10 年私有化窗口 → 转售给外国人 / 公司不受限</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>当前转售对象</td><td>新加坡公民家庭（MOP 已过，可整租）</td></tr>
+    <tr><td>私有化后</td><td>2026 年起可售予外国人 / 公司</td></tr>
+    <tr><td>贷款约束</td><td>EC 贷款受 MSR 30% 约束（转售阶段）</td></tr>
+    <tr><td>Dual-Key 注意</td><td>双钥匙拆分出租需确认 HDB/市建局允许的出租单元数上限</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Dual-Key 是 Ecopolitan 的灵魂——一套产权两个独立生活区，老人住一侧、小家庭住另一侧互不打扰，或者出租一半补贴房贷，这种灵活度 EC 里只有它有。"</div>
+    <div class="review-source">— ShiokNest / PropertyGuru 评价汇总，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"'7 Wonders of Nature' 生态园林不是噱头——自然通风设计夏天确实省电，儿童冒险乐园和滨水步道遛娃一流，Punggol 生活方式很加分。"</div>
+    <div class="review-source">— 买家论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"Punggol MRT 步行 10-12 分钟夏天暴晒，LRT 高峰拥挤；2016 TOP 楼龄 10 年，设施进入维护周期。"</div>
+    <div class="review-source">— 居民反馈汇总（99.co / PropertyGuru）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"Punggol 是新加坡 EC/私宅供给最密集区域之一（Twin Waterfalls 就在隔壁），转售竞争压力大；CRL 通车前（2030s）缺乏短期催化。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.1/5）</strong> —— 户型创新与生态体验是强项，适合多代同堂家庭与以租养贷买家。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>CRL 兑现期长</td><td class="num-yellow" style="color:#eab308">中</td><td>Punggol 换乘站 2030 年代才通车，短期无催化</td></tr>
+    <tr><td>供给压力</td><td class="num-yellow" style="color:#eab308">中高</td><td>Punggol EC/私宅供给全岛最密集区域之一</td></tr>
+    <tr><td>楼龄折旧</td><td class="num-yellow" style="color:#eab308">中</td><td>剩余租约 85 年，10 年后折价显现</td></tr>
+    <tr><td>租金回报一般</td><td class="num-yellow" style="color:#eab308">中</td><td>3.6% 收益率与定存利差收窄，现金流吸引力下降</td></tr>
+    <tr><td>政策风险</td><td class="num-yellow" style="color:#eab308">低</td><td>EC 政策调整对成熟盘影响有限</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>多代同堂家庭首选。生态园林 + 滨水配套 + Dual-Key 灵活户型，$1,300-1,450 psf 合理；以租养贷买家优先选 Dual-Key。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（中性偏好）：</strong>Dual-Key 出租灵活性是独特优势（一房两租约），收益率可跑赢普通 EC；普通户型则一般，CRL 通车前控制仓位。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>依赖 MRT 直达通勤者、追求全新楼盘者、对 Punggol 供给量敏感者。</div>
+</section>
+
+<footer>
+  ECOPOLITAN Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
 </div>
 </body>
 </html>

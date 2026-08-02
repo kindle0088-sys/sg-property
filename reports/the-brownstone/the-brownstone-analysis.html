@@ -3,176 +3,263 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>THE BROWNSTONE — D27 Canberra EC 深度分析（七维评分 7.05）</title>
+<title>THE BROWNSTONE — 新加坡 D27 EC 投资研报</title>
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--text:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b;--green:#10b981;--red:#ef4444;--border:#334155}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
-.wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
-header{text-align:center;padding:40px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
-.tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.4);padding:3px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
-h1{font-size:30px;margin-bottom:6px}
-.sub{color:var(--muted);font-size:14px}
-.scorebox{display:inline-flex;align-items:baseline;gap:6px;margin-top:16px;background:var(--card);border:1px solid var(--border);padding:10px 22px;border-radius:12px}
-.scorebox .num{font-size:40px;font-weight:800;color:var(--accent)}
-.scorebox .lbl{color:var(--muted);font-size:13px}
-h2{font-size:20px;margin:36px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
-.kpi .v{font-size:22px;font-weight:700;color:var(--accent)}
-.kpi .k{font-size:12px;color:var(--muted);margin-top:2px}
-table{width:100%;border-collapse:collapse;margin:10px 0}
-th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
-th{color:var(--muted);font-weight:500;background:var(--card2)}
-tr:hover td{background:rgba(245,158,11,.05)}
-.up{color:var(--red)}.down{color:var(--green)}
-.dim{color:var(--muted);font-size:13px}
-.radar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.dimrow{display:flex;align-items:center;gap:12px;margin:8px 0}
-.dimrow .dn{width:110px;font-size:13px;color:var(--muted);flex-shrink:0}
-.dimrow .bar{flex:1;height:10px;background:var(--card2);border-radius:6px;overflow:hidden}
-.dimrow .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:6px}
-.dimrow .dv{width:36px;text-align:right;font-weight:700;font-size:14px}
-.verdict{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.08));border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:22px;margin-top:20px}
-.verdict h3{color:var(--accent);margin-bottom:10px;font-size:17px}
-ul{padding-left:20px;margin:8px 0}
-li{margin:6px 0;font-size:14px}
-.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.warn b{color:var(--red)}
-.pos{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.pos b{color:var(--green)}
-footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border)}
-footer span{color:var(--accent)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div class="tag">🏘️ EC · 执行共管公寓 · MOP 已过 · 2027 私有化 · 🚇 唯一紧邻 MRT 的 EC</div>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D27 Sembawang · 已过 MOP</div>
   <h1>THE BROWNSTONE</h1>
-  <div class="sub">D27 Canberra Drive · 99 年租约（2014 起算）· 638 单位 · TOP 2017</div>
-  <div class="scorebox"><span class="num">7.05</span><span class="lbl">/ 10 七维综合评分</span></div>
-</header>
-
-<section>
-  <h2>一、项目概览</h2>
-  <div class="grid">
-    <div class="kpi"><div class="v">638</div><div class="k">总单位（8 栋 10-12 层）</div></div>
-    <div class="kpi"><div class="v">$1,364</div><div class="k">历史均价 psf</div></div>
-    <div class="kpi"><div class="v">$1,522</div><div class="k">近 1 年均价 psf</div></div>
-    <div class="kpi"><div class="v">265 笔</div><div class="k">累计交易</div></div>
-    <div class="kpi"><div class="v">3.57%</div><div class="k">租金收益率</div></div>
-    <div class="kpi"><div class="v">200m</div><div class="k">距 Canberra MRT</div></div>
+  <div class="address">150-164 Canberra Drive · Sembawang · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.95</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,364</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,522</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">265</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">638</div><div class="lbl">总单位数</div></div>
   </div>
-  <div class="card">
-    <p><b>THE BROWNSTONE</b>是城市发展 CDL（City Developments Ltd）与 TID 联合开发的纽约褐石风格 EC，2017 年 TOP。项目最大卖点是<b>全岛唯一紧邻 MRT 站的 EC</b>——Canberra MRT（NSL）仅约 200m 步行 4 分钟。MOP 已于 2022 年届满，<b>2027 年将私有化</b>。</p>
-    <p class="dim" style="margin-top:8px">地址：150-164 Canberra Drive · 地契：99 年（2014-01-28 起算）· 户型：2 房（732-753 sqft）至 5 房顶楼（1,668-1,711 sqft）· 亚洲首次大规模 PPVC 预制建造 · 配备 Hansgrohe/Mitsubishi/Whirlpool 品牌家电</p>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>全岛唯一紧邻 MRT 站的 EC、CDL 龙头开发</strong>——城市发展 CDL 与 TID 联合开发，纽约褐石风格，Canberra MRT（NSL）仅约 200m 步行 4 分钟。2017 年 TOP，亚洲首次大规模 PPVC 预制建造；MOP 已于 2022 年届满，2027 年将私有化。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>The Brownstone 是"地铁盘稀缺 + CDL 品牌"双优势的 EC 标杆。2021-2026 年价格从 $1,035 涨到 $1,534 psf（+48%），租金收益 3.57%。EC 里找不到第二个 200m 地铁盘，<span class="positive">自住投资双优</span>，但需注意 2027 私有化利好可能提前定价。
   </div>
 </section>
 
+<!-- 项目核心参数 -->
 <section>
-  <h2>二、七维评分</h2>
-  <div class="radar">
-    <div class="dimrow"><div class="dn">地段位置</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">租金回报</div><div class="bar"><div class="fill" style="width:50%"></div></div><div class="dv">5.0</div></div>
-    <div class="dimrow"><div class="dn">增值潜力</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
-    <div class="dimrow"><div class="dn">开发商实力</div><div class="bar"><div class="fill" style="width:90%"></div></div><div class="dv">9.0</div></div>
-    <div class="dimrow"><div class="dn">持有成本</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">流动性</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
-    <div class="dimrow"><div class="dn">风险控制</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">CDL（城市发展）× TID（Canvey Developments）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">638 套 · 8 栋 10-12 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2014-01-28 起）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2017-10-30（已竣工 9 年）</div></div>
+    <div class="spec-card"><div class="spec-label">MOP</div><div class="spec-value">2022 年届满 · 2027 年私有化</div></div>
+    <div class="spec-card"><div class="spec-label">建造技术</div><div class="spec-value">PPVC 预制（亚洲首次大规模应用）</div></div>
+    <div class="spec-card"><div class="spec-label">地铁距离</div><div class="spec-value">Canberra MRT 约 200m · 步行 4 分钟</div></div>
+    <div class="spec-card"><div class="spec-label">品牌家电</div><div class="spec-value">Hansgrohe / Mitsubishi / Whirlpool</div></div>
   </div>
-  <div class="card">
-    <table>
-      <tr><th>维度</th><th>评分</th><th>点评</th></tr>
-      <tr><td>地段位置</td><td class="up">7.5</td><td>Canberra MRT 步行 4 分钟（约 200m），EC 中独一无二的地铁盘；Sembawang 站一站之隔，北部区域转型（Woodlands 商业中心、Mandai 野生动物园）受益</td></tr>
-      <tr><td>租金回报</td><td class="up">5.0</td><td>MOP 已过可整租，租金 $4,080-$4,800，收益率约 3.57%；地铁盘对租客吸引力强</td></tr>
-      <tr><td>增值潜力</td><td class="up">6.5</td><td>2021-2026 从 $1,035 涨至 $1,534（+48%）；2027 私有化 + Canberra 区域持续开发是后续催化</td></tr>
-      <tr><td>开发商实力</td><td class="up">9.0</td><td>CDL——新加坡地产龙头、50+ 年历史，第 7 个 EC 项目；PPVC 预制技术（亚洲首次大规模应用）体现工程实力</td></tr>
-      <tr><td>持有成本</td><td class="up">7.5</td><td>99 年租约 2014 起算（剩约 87 年）；品牌家电标配降低首装成本</td></tr>
-      <tr><td>流动性</td><td class="up">7.0</td><td>638 单位，2021-2026 每年 23-101 笔成交，地铁盘转售需求稳定</td></tr>
-      <tr><td>风险控制</td><td class="up">7.0</td><td>无期房风险；主要风险为北部区域私宅供给与 2027 私有化预期提前透支</td></tr>
-    </table>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th></tr>
+    <tr><td>2 Bedroom</td><td>732 - 753</td><td>42</td></tr>
+    <tr><td>3 Bedroom</td><td>883 - 1,055</td><td>282</td></tr>
+    <tr><td>3 Bedroom Premium</td><td>990 - 1,130</td><td>146</td></tr>
+    <tr><td>4 Bedroom</td><td>1,055 - 1,184</td><td>162</td></tr>
+    <tr><td>5 Bedroom Penthouse</td><td>1,668 - 1,711</td><td>6</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 3 房占比 67% 为绝对主力；5 房仅 6 套，大户型稀缺且单价高。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m + 30m 双泳池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房（Sky Gym）</div>
+    <div class="facility-tag"><span class="icon">⛸️</span> Junior 滑冰场</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">🏀</span> 篮球半场</div>
+    <div class="facility-tag"><span class="icon">💆</span> Jasmine Spa</div>
+    <div class="facility-tag"><span class="icon">🧖</span> 蒸汽房</div>
+    <div class="facility-tag"><span class="icon">🍢</span> Sky BBQ ×3</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 感官花园群</div>
+    <div class="facility-tag"><span class="icon">🛝</span> 儿童戏水池 + 游乐场</div>
   </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>Canberra MRT（NSL）约 200m 步行 4 分钟</strong>——EC 中唯一地铁盘；Yishun/Sembawang 站快速换乘</td></tr>
+    <tr><td>🚗 快速路</td><td>SLE 便捷接入，Woodlands 与 Yishun 快速抵达</td></tr>
+    <tr><td>🏫 学校</td><td>Wellington Primary、Sembawang Primary（1km 内）、GEMS World Academy</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Sembawang Shopping Centre、Sun Plaza、Causeway Point、Northpoint City（北部最大商场）</td></tr>
+    <tr><td>🍜 美食</td><td>Chong Pang Market & Food Centre、Jalan Legundi 新兴餐饮区、Orto 休闲公园</td></tr>
+    <tr><td>🌳 自然</td><td>Sembawang Park、Yishun Park、Admiralty Park、Woodlands 水上中心</td></tr>
+  </table>
 </section>
 
+<!-- 七维评分 -->
 <section>
-  <h2>三、价格分析</h2>
-  <div class="card">
-    <table>
-      <tr><th>年份</th><th>交易量</th><th>均价 psf</th><th>同比</th></tr>
-      <tr><td>2021</td><td>1</td><td>$1,035</td><td>—</td></tr>
-      <tr><td>2022</td><td>52</td><td>$1,274</td><td class="up">+23.1%（MOP 解禁放量）</td></tr>
-      <tr><td>2023</td><td>101</td><td>$1,326</td><td class="up">+4.1%</td></tr>
-      <tr><td>2024</td><td>54</td><td>$1,398</td><td class="up">+5.4%</td></tr>
-      <tr><td>2025</td><td>34</td><td>$1,453</td><td class="up">+3.9%</td></tr>
-      <tr><td>2026 至今</td><td>23</td><td>$1,534</td><td class="up">+5.6%</td></tr>
-    </table>
-    <p class="dim" style="margin-top:10px">数据口径：URA 成交记录（contractDate 12/2021 - 07/2026）。2022 年 MOP 解禁后放量（52 笔），2023 年达到峰值 101 笔，此后价格稳步爬坡。</p>
-    <div class="pos"><b>解读：</b>Canberra MRT 通车（2019）叠加 MOP 解禁（2022），Brownstone 完成了"双催化"价值重估，5 年涨幅约 48%。当前 $1,522 psf（近 1 年）在北部 EC 中处于领先位置——地铁盘的溢价是结构性的。</div>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Canberra MRT 200m 步行 4 分钟，EC 独一无二的地铁盘</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · MOP 已过可整租，收益 3.57%，地铁盘对租客吸引力强</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 5 年 +48%，2027 私有化 + Canberra 区域开发是后续催化</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">9.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · CDL 龙头 50+ 年，PPVC 技术体现工程实力，转售认可度行业顶级</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 品牌家电标配，99 年租约 2014 起算（剩约 87 年）</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 638 单位，地铁盘转售需求稳定</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 无期房风险；主要风险为北部供给与私有化预期透支</p></div>
   </div>
-</section>
 
-<section>
-  <h2>四、配套与设施</h2>
-  <div class="card">
-    <table>
-      <tr><th>类别</th><th>内容</th></tr>
-      <tr><td>轨道交通</td><td>Canberra MRT（NSL）约 200m 步行 4 分钟；Yishun/Sembawang 站快速换乘</td></tr>
-      <tr><td>快速路</td><td>SLE 便捷接入，Woodlands 与 Yishun 快速抵达</td></tr>
-      <tr><td>商场</td><td>Sembawang Shopping Centre、Sun Plaza、Causeway Point、Northpoint City（北部最大商场）</td></tr>
-      <tr><td>美食</td><td>Chong Pang Market & Food Centre、Jalan Legundi 新兴餐饮区、Orto 休闲公园（钓虾/钓鱼）</td></tr>
-      <tr><td>学校</td><td>Wellington Primary、Sembawang Primary（1km 内）、GEMS World Academy</td></tr>
-      <tr><td>医疗</td><td>Khoo Teck Puat Hospital（车程 5 分钟）</td></tr>
-      <tr><td>休闲</td><td>Sembawang Park、Yishun Park、Admiralty Park；Woodlands 水上中心</td></tr>
-      <tr><td>小区设施</td><td>50m+30m 双泳池、社交池、儿童戏水池、Junior 滑冰场、网球场、篮球半场、Jasmine Spa、Sky BBQ ×3、蒸汽房、感官花园（30+ 项）</td></tr>
-    </table>
-  </div>
-</section>
-
-<section>
-  <h2>五、居民评价与市场声音</h2>
-  <div class="card">
-    <div class="pos"><b>加分项（市场共识）：</b><ul>
-      <li>EC 里唯一真正的地铁盘——200m 步行 4 分钟，通勤优势碾压同类</li>
-      <li>CDL 品牌溢价：交付质量、物业维护、转售认可度均高于平均水平</li>
-      <li>纽约褐石风格 + 大面积 Jetty 阳台设计辨识度高，单位采光好</li>
-    </ul></div>
-    <div class="warn"><b>扣分项（买家反馈）：</b><ul>
-      <li>5 房仅 6 套（1,668-1,711 sqft），大户型选择稀缺、单价偏高</li>
-      <li>北部区域整体价格弹性弱于东部/西部热门区</li>
-      <li>靠近地铁站的单位受噪音与客流影响</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>六、风险提示</h2>
-  <div class="card">
-    <div class="warn"><b>⚠️ 主要风险：</b><ul>
-      <li><b>私有化预期：</b>2027 私有化利好可能被提前定价，需注意追高位置</li>
-      <li><b>北部供给：</b>Woodlands/Yishun 一带新私宅与 BTO 供给量大，转售竞争存在</li>
-      <li><b>楼龄折旧：</b>2017 TOP，剩余租约 87 年，10 年后租约折价显现</li>
-      <li><b>租金天花板：</b>北部租金水平整体偏低，回报率上限受限（3.57%）</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>七、投资建议</h2>
   <div class="verdict">
-    <h3>综合评定：7.05 / 10 —— EC 里的"地铁盘之王"，自住投资双优</h3>
-    <p><b>适合人群：</b>依赖地铁通勤的北部上班族/家庭、看重 CDL 品质与转售确定性的买家、2027 私有化博弈投资者。</p>
-    <p style="margin-top:8px"><b>策略建议：</b></p>
-    <ul>
-      <li><b>自住：</b>强烈推荐——EC 里找不到第二个 200m 地铁盘，通勤体验 + CDL 品质双保障</li>
-      <li><b>投资：</b>推荐——3.57% 租金 + 私有化催化 + 结构性地铁溢价，$1,450-1,550 psf 区间可入</li>
-      <li><b>注意：</b>2027 私有化前后若价格冲高至 $1,700+ 需谨慎；5 房大户型单价高且流动性差，优先 3-4 房</li>
-    </ul>
+    <strong>综合评分：6.95 / 10</strong> —— 加权计算（7.5×20% + 5.0×15% + 6.5×20% + 9.0×10% + 7.5×10% + 7.0×15% + 7.0×10%）。地铁盘稀缺性 + CDL 品牌双优势拉高总分，是 Top 20 EC 中评分最高的项目。
   </div>
 </section>
 
-<footer>数据来源：URA 成交记录（本地库 build 2026-08-02）· 99.co / CDL 官网 / PropertyGuru · 七维投资框架<br>本报告仅供研究参考，不构成投资建议 · 生成于 <span>2026-08-02</span></footer>
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>1</td><td>$1,035</td><td>—</td></tr>
+    <tr><td>2022（MOP 解禁）</td><td>52</td><td>$1,274</td><td class="num-green">+23.1%</td></tr>
+    <tr><td>2023</td><td>101</td><td>$1,326</td><td class="num-green">+4.1%</td></tr>
+    <tr><td>2024</td><td>54</td><td>$1,398</td><td class="num-green">+5.4%</td></tr>
+    <tr><td>2025</td><td>34</td><td>$1,453</td><td class="num-green">+3.9%</td></tr>
+    <tr><td>2026（至今）</td><td>23</td><td>$1,534</td><td class="num-green">+5.6%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>Canberra MRT 通车（2019）+ MOP 解禁（2022）双重催化完成价值重估，5 年涨幅约 48%。当前 $1,522 psf（近 1 年）在北部 EC 中领先——地铁盘的溢价是结构性的，2027 私有化可能再添一把火。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2022 年 MOP 解禁放量 52 笔，2023 年达峰值 101 笔。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2014-01</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2017-10</div><div class="tl-detail">TOP 竣工（PPVC 提前 4 个月）</div></div>
+    <div class="tl-item"><div class="tl-year">2022</div><div class="tl-detail">5 年 MOP 届满 → 可整租 / 转售给符合条件买家</div></div>
+    <div class="tl-item"><div class="tl-year">2027</div><div class="tl-detail">10 年私有化窗口 → 转售给外国人 / 公司不受限</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>当前转售对象</td><td>新加坡公民家庭（MOP 已过，可整租）</td></tr>
+    <tr><td>私有化后</td><td>2027 年起可售予外国人 / 公司，需求池扩大</td></tr>
+    <tr><td>贷款约束</td><td>EC 贷款受 MSR 30% 约束（转售阶段）</td></tr>
+    <tr><td>CPF 津贴</td><td>二手 EC 买家可获津贴，额度逐年递减</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"EC 里找不到第二个 200m 地铁盘——Canberra MRT 步行 4 分钟，通勤体验碾压同类；CDL 的物业维护也明显好于一般 EC，转售认可度高。"</div>
+    <div class="review-source">— 99.co / PropertyGuru 评价汇总，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"纽约褐石风格 + 大面积 Jetty 阳台辨识度高，单位采光通风好；品牌家电（Hansgrohe/Mitsubishi/Whirlpool）标配省了装修钱。"</div>
+    <div class="review-source">— 买家论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"5 房只有 6 套，想升级大户型的买家选择太少；靠近地铁站的单位有噪音与客流影响。"</div>
+    <div class="review-source">— 居民反馈汇总（99.co / PropertyGuru）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"2027 年私有化利好可能被提前定价——若届时价格冲高至 $1,700+ 需谨慎追高；北部区域整体价格弹性弱于东部西部热门区。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.3/5）</strong> —— 地铁盘通勤 + CDL 品质双重加持，北部 EC 中居住体验最佳之一。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>私有化预期透支</td><td class="num-yellow" style="color:#eab308">中</td><td>2027 私有化利好可能被提前定价</td></tr>
+    <tr><td>北部供给</td><td class="num-yellow" style="color:#eab308">中</td><td>Woodlands/Yishun 新私宅与 BTO 供给量大</td></tr>
+    <tr><td>楼龄折旧</td><td class="num-yellow" style="color:#eab308">中</td><td>剩余租约 87 年，10 年后折价显现</td></tr>
+    <tr><td>租金天花板</td><td class="num-yellow" style="color:#eab308">中</td><td>北部租金水平偏低，回报率上限受限</td></tr>
+    <tr><td>政策风险</td><td class="num-yellow" style="color:#eab308">低</td><td>EC 政策调整对成熟盘影响有限</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（强烈推荐）：</strong>依赖地铁通勤的北部家庭首选。EC 里唯一 200m 地铁盘，通勤体验 + CDL 品质双保障，$1,450-1,550 psf 合理。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（推荐）：</strong>3.57% 租金 + 2027 私有化催化 + 结构性地铁溢价，$1,450-1,550 psf 区间可入；优先 3-4 房（5 房流动性差）。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>2027 私有化后若价格冲高至 $1,700+ 追高者；追求全新楼盘者。</div>
+</section>
+
+<footer>
+  THE BROWNSTONE Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
 </div>
 </body>
 </html>

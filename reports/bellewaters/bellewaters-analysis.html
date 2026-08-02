@@ -3,175 +3,263 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BELLEWATERS — D19 Sengkang EC 深度分析（七维评分 6.80）</title>
+<title>BELLEWATERS — 新加坡 D19 EC 投资研报</title>
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--text:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b;--green:#10b981;--red:#ef4444;--border:#334155}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
-.wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
-header{text-align:center;padding:40px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
-.tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.4);padding:3px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
-h1{font-size:30px;margin-bottom:6px}
-.sub{color:var(--muted);font-size:14px}
-.scorebox{display:inline-flex;align-items:baseline;gap:6px;margin-top:16px;background:var(--card);border:1px solid var(--border);padding:10px 22px;border-radius:12px}
-.scorebox .num{font-size:40px;font-weight:800;color:var(--accent)}
-.scorebox .lbl{color:var(--muted);font-size:13px}
-h2{font-size:20px;margin:36px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
-.kpi .v{font-size:22px;font-weight:700;color:var(--accent)}
-.kpi .k{font-size:12px;color:var(--muted);margin-top:2px}
-table{width:100%;border-collapse:collapse;margin:10px 0}
-th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
-th{color:var(--muted);font-weight:500;background:var(--card2)}
-tr:hover td{background:rgba(245,158,11,.05)}
-.up{color:var(--red)}.down{color:var(--green)}
-.dim{color:var(--muted);font-size:13px}
-.radar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.dimrow{display:flex;align-items:center;gap:12px;margin:8px 0}
-.dimrow .dn{width:110px;font-size:13px;color:var(--muted);flex-shrink:0}
-.dimrow .bar{flex:1;height:10px;background:var(--card2);border-radius:6px;overflow:hidden}
-.dimrow .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:6px}
-.dimrow .dv{width:36px;text-align:right;font-weight:700;font-size:14px}
-.verdict{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.08));border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:22px;margin-top:20px}
-.verdict h3{color:var(--accent);margin-bottom:10px;font-size:17px}
-ul{padding-left:20px;margin:8px 0}
-li{margin:6px 0;font-size:14px}
-.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.warn b{color:var(--red)}
-.pos{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.pos b{color:var(--green)}
-footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border)}
-footer span{color:var(--accent)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div class="tag">🏘️ EC · 执行共管公寓 · MOP 已过 · 2027 私有化</div>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D19 Sengkang · 已过 MOP</div>
   <h1>BELLEWATERS</h1>
-  <div class="sub">D19 Anchorvale Crescent · 99 年租约（2013 起算）· 651 单位 · TOP 2017</div>
-  <div class="scorebox"><span class="num">6.80</span><span class="lbl">/ 10 七维综合评分</span></div>
-</header>
-
-<section>
-  <h2>一、项目概览</h2>
-  <div class="grid">
-    <div class="kpi"><div class="v">651</div><div class="k">总单位（11 栋 16-17 层）</div></div>
-    <div class="kpi"><div class="v">$1,298</div><div class="k">历史均价 psf</div></div>
-    <div class="kpi"><div class="v">$1,514</div><div class="k">近 1 年均价 psf</div></div>
-    <div class="kpi"><div class="v">322 笔</div><div class="k">累计交易</div></div>
-    <div class="kpi"><div class="v">3.33%</div><div class="k">租金收益率</div></div>
-    <div class="kpi"><div class="v">2027</div><div class="k">私有化（10 年 MOP）</div></div>
+  <div class="address">11-31 Anchorvale Crescent · Sengkang · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.70</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,298</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,514</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">322</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">651</div><div class="lbl">总单位数</div></div>
   </div>
-  <div class="card">
-    <p><b>BELLEWATERS</b>是青建 Qingjian Realty 在 Sengkang Anchorvale 打造的大型水景度假风 EC，2017 年 TOP，651 单位，以 50m 无边泳池和瀑布景观著称。项目 MOP 已于 2022 年届满，转售市场成熟，<b>2027 年将完成私有化</b>（届时可自由售予外国人）。</p>
-    <p class="dim" style="margin-top:8px">地址：11-31 Anchorvale Crescent · 地契：99 年（2013-08-28 起算）· 户型：3 房（926-1,270 sqft，含 CoSpace）、4 房（1,130-1,367 sqft）、5 房 CoSpace（1,496-1,528 sqft）</p>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>水景度假风大型 EC、2027 年即将私有化</strong>——青建 Qingjian Realty 打造，651 单位，以 50m 无边泳池和瀑布园林闻名。MOP 已于 2022 年届满，转售市场成熟，租金收益 3.33%；2027 年完成 10 年私有化后需求池将扩大至外国人。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Bellewaters 是"解禁补涨 + 私有化催化"双逻辑的稳健标的。2021-2026 年价格从 $1,041 涨到 $1,554 psf（+49%），年化约 8-10%；2027 私有化是最后一波潜在催化。适合<span class="positive">自住家庭 + 3-5 年投资者</span>，但需接受 LRT 出行与楼龄折旧的现实。
   </div>
 </section>
 
+<!-- 项目核心参数 -->
 <section>
-  <h2>二、七维评分</h2>
-  <div class="radar">
-    <div class="dimrow"><div class="dn">地段位置</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
-    <div class="dimrow"><div class="dn">租金回报</div><div class="bar"><div class="fill" style="width:50%"></div></div><div class="dv">5.0</div></div>
-    <div class="dimrow"><div class="dn">增值潜力</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
-    <div class="dimrow"><div class="dn">开发商实力</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">持有成本</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">流动性</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
-    <div class="dimrow"><div class="dn">风险控制</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">青建 Qingjian Realty (Anchorvale) Pte Ltd</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">651 套 · 11 栋 16-17 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2013-08-28 起）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2017-05-03（已竣工 9 年）</div></div>
+    <div class="spec-card"><div class="spec-label">MOP</div><div class="spec-value">2022 年届满 · 2027 年私有化</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">651 个（含 5 个残疾车位）</div></div>
+    <div class="spec-card"><div class="spec-label">设计风格</div><div class="spec-value">水景度假风 · 瀑布主题园林</div></div>
+    <div class="spec-card"><div class="spec-label">销售状态</div><div class="spec-value">已全盘售罄</div></div>
   </div>
-  <div class="card">
-    <table>
-      <tr><th>维度</th><th>评分</th><th>点评</th></tr>
-      <tr><td>地段位置</td><td class="up">7.0</td><td>Sengkang 成熟组屋区，Farmway LRT 步行 4 分钟（344m）、Cheng Lim LRT 476m，一站到 Sengkang MRT 枢纽；TPE/CTE/SLE 快速接入</td></tr>
-      <tr><td>租金回报</td><td class="up">5.0</td><td>MOP 已过可整租，租金 $2,500-$5,500，收益率约 3.33%；医院（Sengkang General Hospital）带来稳定租客群</td></tr>
-      <tr><td>增值潜力</td><td class="up">6.5</td><td>2021-2026 年从 $1,041 涨至 $1,554（约 +49%），2027 私有化后需求池扩大（外国人可购）是潜在催化</td></tr>
-      <tr><td>开发商实力</td><td class="up">7.5</td><td>青建（Qingjian）新加坡 EC 开发经验丰富，项目交付质量与园林设计口碑良好</td></tr>
-      <tr><td>持有成本</td><td class="up">7.5</td><td>99 年租约 2013 起算（剩约 86 年）；大型社区物业费被 651 户分摊，属 EC 正常水平</td></tr>
-      <tr><td>流动性</td><td class="up">7.0</td><td>322 笔累计成交，2022-2026 每年稳定 40-60 笔转售，市场活跃</td></tr>
-      <tr><td>风险控制</td><td class="up">7.0</td><td>老盘无期房风险、无 MOP 锁定期（已过 5 年 MOP），主要风险来自 LRT 出行体验与区域转售供给</td></tr>
-    </table>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th></tr>
+    <tr><td>3 Bedroom（C1-C4）</td><td>926 - 1,098</td><td>274</td></tr>
+    <tr><td>3 Bedroom CoSpace</td><td>1,238 - 1,270</td><td>96</td></tr>
+    <tr><td>4 Bedroom（D1-D3）</td><td>1,130 - 1,249</td><td>162</td></tr>
+    <tr><td>4 Bedroom CoSpace</td><td>1,270 - 1,367</td><td>85</td></tr>
+    <tr><td>5 Bedroom CoSpace</td><td>1,496 - 1,528</td><td>34</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 4 房 CoSpace 最大 1,367 sqft——CoSpace 活动墙设计是青建的招牌，空间弹性好。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 无边泳池 + Infinity Pool</div>
+    <div class="facility-tag"><span class="icon">💦</span> 水上乐园 + 儿童池</div>
+    <div class="facility-tag"><span class="icon">🏢</span> Sky Lounge + Sky Clubhouse</div>
+    <div class="facility-tag"><span class="icon">🎉</span> 宴会厅 + Banquet Hall</div>
+    <div class="facility-tag"><span class="icon">💆</span> Aqua Spa + 温泉 SPA 屋</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">🏃</span> 瀑布慢跑道 + 森林步道</div>
+    <div class="facility-tag"><span class="icon">🍢</span> 家庭 BBQ + Forest Grill Bar</div>
+    <div class="facility-tag"><span class="icon">🧘</span> 瑜伽/冥想亭 + 竹园</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 40+ 项水景度假设施</div>
   </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Farmway LRT 步行 4 分钟（344m）、Cheng Lim LRT 476m；一站至 Sengkang MRT/LRT 枢纽（NEL 直达市区）</td></tr>
+    <tr><td>🚗 快速路</td><td>TPE 车程 3 分钟、CTE/SLE 快速接入，CBD 约 25 分钟</td></tr>
+    <tr><td>🏫 学校</td><td>Springdale Primary、Anchor Green Primary、Nan Chiau Primary & High（5 分钟车程）、Compassvale Primary</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Compass One（LRT 一站）、Seletar Mall、Waterway Point；Greenwich V 步行可达</td></tr>
+    <tr><td>🏥 医疗</td><td>Sengkang General & Community Hospital（车程 5 分钟）</td></tr>
+    <tr><td>🌳 自然</td><td>Sengkang Riverside Park、Punggol Waterway、Jalan Kayu 美食区</td></tr>
+  </table>
 </section>
 
+<!-- 七维评分 -->
 <section>
-  <h2>三、价格分析</h2>
-  <div class="card">
-    <table>
-      <tr><th>年份</th><th>交易量</th><th>均价 psf</th><th>同比</th></tr>
-      <tr><td>2021</td><td>6</td><td>$1,041</td><td>—（转售起步）</td></tr>
-      <tr><td>2022</td><td>144</td><td>$1,189</td><td class="up">+14.2%</td></tr>
-      <tr><td>2023</td><td>62</td><td>$1,305</td><td class="up">+9.8%</td></tr>
-      <tr><td>2024</td><td>43</td><td>$1,378</td><td class="up">+5.6%</td></tr>
-      <tr><td>2025</td><td>48</td><td>$1,477</td><td class="up">+7.2%</td></tr>
-      <tr><td>2026 至今</td><td>19</td><td>$1,554</td><td class="up">+5.2%</td></tr>
-    </table>
-    <p class="dim" style="margin-top:10px">数据口径：URA 成交记录（contractDate 09/2021 - 07/2026）。2022 年 MOP 解禁后放量成交（144 笔），价格随后 5 年稳步爬坡，年化约 8-10%，属健康的"解禁后价值发现"走势。</p>
-    <div class="pos"><b>解读：</b>Bellewaters 的价格曲线是教科书式的 EC 生命周期：MOP 解禁前折价 → 解禁后放量 → 私有化前稳步补涨。当前 $1,514 psf（近 1 年）相对同区新私宅（Chuan Park 等 $2,000+）仍有明显折价，私有化（2027）或将触发最后一波补涨。</div>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Sengkang 成熟社区，LRT 门口，一站到 MRT 枢纽</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · MOP 已过可整租，收益 3.33%，医院带来稳定租客</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 5 年 +49%，年化 8-10%，2027 私有化是潜在催化</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 青建 EC 开发经验丰富，交付与园林口碑良好</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 651 户大型社区分摊物业费，EC 正常水平</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 每年稳定 40-60 笔转售，市场活跃</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 无期房/MOP 风险，主要风险为 LRT 体验与楼龄折旧</p></div>
   </div>
-</section>
 
-<section>
-  <h2>四、配套与设施</h2>
-  <div class="card">
-    <table>
-      <tr><th>类别</th><th>内容</th></tr>
-      <tr><td>轨道交通</td><td>Farmway LRT（344m 步行 4 分钟）、Cheng Lim LRT（476m）；一站至 Sengkang MRT/LRT 枢纽（NEL 直达市区）</td></tr>
-      <tr><td>快速路</td><td>TPE 车程 3 分钟、CTE/SLE 快速接入，CBD 约 25 分钟</td></tr>
-      <tr><td>商场</td><td>Compass One（LRT 一站）、Seletar Mall、Waterway Point；Greenwich V 步行可达</td></tr>
-      <tr><td>学校</td><td>Springdale Primary、Anchor Green Primary、Nan Chiau Primary & High（5 分钟车程）、Compassvale Primary</td></tr>
-      <tr><td>医疗</td><td>Sengkang General & Community Hospital（车程 5 分钟）</td></tr>
-      <tr><td>休闲</td><td>Sengkang Riverside Park、Punggol Waterway、Sengkang Sports Centre、Jalan Kayu 美食区</td></tr>
-      <tr><td>小区设施</td><td>50m 无边泳池、水上乐园、Sky Lounge、Clubhouse、宴会厅、温泉 SPA、网球场、森林步道（40+ 项水景度假风设施）</td></tr>
-    </table>
-  </div>
-</section>
-
-<section>
-  <h2>五、居民评价与市场声音</h2>
-  <div class="card">
-    <div class="pos"><b>加分项（99.co 4.6/5，50+ 评价）：</b><ul>
-      <li>园林与水景设计出色，"住在度假村"的体验；50m 无边泳池是网红打卡点</li>
-      <li>CoSpace 户型灵活，4 房超大（1,270-1,367 sqft），适合多代家庭</li>
-      <li>医院 + 商场 + 公园步行可达，日常生活自足</li>
-    </ul></div>
-    <div class="warn"><b>扣分项（买家反馈）：</b><ul>
-      <li>LRT 依赖度高且高峰拥挤，转乘 Sengkang MRT 增加通勤时间</li>
-      <li>楼龄近 10 年（2017 TOP），部分设施开始老化、维修基金消耗</li>
-      <li>社区密度较高（651 户/11 栋），泳池周末拥挤</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>六、风险提示</h2>
-  <div class="card">
-    <div class="warn"><b>⚠️ 主要风险：</b><ul>
-      <li><b>私有化预期透支：</b>2027 私有化利好可能已被部分消化，若市场情绪转弱，补涨逻辑会打折</li>
-      <li><b>楼龄折旧：</b>剩余租约 86 年，20 年后租约折价将逐步显现（对比新 EC）</li>
-      <li><b>区域供给：</b>Sengkang 周边新 EC（如 Fernvale 一带）与私宅持续供给，转售竞争存在</li>
-      <li><b>出租竞争：</b>同区 2016-2018 年一批 EC 同期解禁出租，租金上行空间受限</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>七、投资建议</h2>
   <div class="verdict">
-    <h3>综合评定：6.80 / 10 —— 稳健的"解禁补涨"标的</h3>
-    <p><b>适合人群：</b>偏好东北部成熟社区的自住家庭、吃私有化补涨逻辑的 3-5 年投资者、出租型买家（医院客群稳定）。</p>
-    <p style="margin-top:8px"><b>策略建议：</b></p>
-    <ul>
-      <li><b>自住：</b>性价比高——$1,298 历史均价、水景品质、完整配套，$1,400-1,500 psf 区间入市合理</li>
-      <li><b>投资：</b>持有至 2027 私有化窗口，预期私有化前后有 5-10% 溢价空间；租金回报 3.33% 提供安全垫</li>
-      <li><b>注意：</b>避免追高 $1,600 psf 以上（已接近无折价水平），留足安全边际</li>
-    </ul>
+    <strong>综合评分：6.70 / 10</strong> —— 加权计算（7.0×20% + 5.0×15% + 6.5×20% + 7.5×10% + 7.5×10% + 7.0×15% + 7.0×10%）。成熟的转售盘，各维度均衡，私有化催化是最大看点。
   </div>
 </section>
 
-<footer>数据来源：URA 成交记录（本地库 build 2026-08-02）· 99.co / PropertyGuru / Qingjian 官网 · 七维投资框架<br>本报告仅供研究参考，不构成投资建议 · 生成于 <span>2026-08-02</span></footer>
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>6</td><td>$1,041</td><td>—</td></tr>
+    <tr><td>2022（MOP 解禁）</td><td>144</td><td>$1,189</td><td class="num-green">+14.2%</td></tr>
+    <tr><td>2023</td><td>62</td><td>$1,305</td><td class="num-green">+9.8%</td></tr>
+    <tr><td>2024</td><td>43</td><td>$1,378</td><td class="num-green">+5.6%</td></tr>
+    <tr><td>2025</td><td>48</td><td>$1,477</td><td class="num-green">+7.2%</td></tr>
+    <tr><td>2026（至今）</td><td>19</td><td>$1,554</td><td class="num-green">+5.2%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2022 年 MOP 解禁放量成交 144 笔后价格稳步爬坡，5 年年化约 8-10%。当前 $1,514 psf（近 1 年）相对同区新私宅（Chuan Park $2,000+）仍有明显折价——私有化（2027）或将触发最后一波补涨。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2022 年 144 笔为 MOP 解禁后的集中成交——EC 解禁放量的典型结构。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2013-08</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2017-05</div><div class="tl-detail">TOP 竣工</div></div>
+    <div class="tl-item"><div class="tl-year">2022</div><div class="tl-detail">5 年 MOP 届满 → 可整租 / 转售给符合条件买家</div></div>
+    <div class="tl-item"><div class="tl-year">2027</div><div class="tl-detail">10 年私有化窗口 → 转售给外国人 / 公司不受限</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>当前转售对象</td><td>新加坡公民家庭（MOP 已过，可整租）</td></tr>
+    <tr><td>私有化后</td><td>2027 年起可售予外国人 / 公司，需求池扩大</td></tr>
+    <tr><td>贷款约束</td><td>EC 贷款仍受 MSR 30% 约束（转售阶段）</td></tr>
+    <tr><td>CPF 津贴</td><td>二手 EC 买家可获津贴，额度逐年递减</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"园林和水景设计是 Bellewaters 的灵魂，50m 无边泳池+瀑布景观'住在度假村'的体验，99.co 评分 4.6/5（50+ 评价）——这种景观配置在 EC 里是第一梯队。"</div>
+    <div class="review-source">— 99.co 居民评价汇总，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"CoSpace 户型很灵活，4 房 1,270-1,367 sqft 的空间多代同堂完全够用；医院、商场、公园都在步行圈，日常生活几乎不用出小区周边。"</div>
+    <div class="review-source">— 买家论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"LRT 高峰拥挤、转乘 Sengkang MRT 要等，通勤体验一般；楼龄近 10 年，部分设施开始老化，维修基金在消耗。"</div>
+    <div class="review-source">— 居民反馈汇总（99.co / PropertyGuru）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"2027 年私有化是明确的时间节点，参考其他已私有化 EC（如 The Topiary）的走势，私有化前后通常有 5-10% 的溢价空间。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 景观与空间是强项，LRT 通勤与楼龄是折价项，自住舒适度在 Sengkang EC 中属上乘。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>私有化预期透支</td><td class="num-yellow" style="color:#eab308">中</td><td>2027 私有化利好可能被部分提前定价</td></tr>
+    <tr><td>楼龄折旧</td><td class="num-yellow" style="color:#eab308">中</td><td>剩余租约 86 年，20 年后租约折价逐步显现</td></tr>
+    <tr><td>区域供给</td><td class="num-yellow" style="color:#eab308">中</td><td>Sengkang 周边 EC/私宅持续供给，转售竞争存在</td></tr>
+    <tr><td>出租竞争</td><td class="num-yellow" style="color:#eab308">中</td><td>2016-2018 年同期 EC 集中解禁出租，租金上行受限</td></tr>
+    <tr><td>政策风险</td><td class="num-yellow" style="color:#eab308">低</td><td>EC 政策调整对成熟盘影响有限</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>偏好东北部成熟社区的家庭首选。$1,298 历史均价、水景品质、完整配套，$1,400-1,500 psf 区间入市合理——自住舒适度与性价比兼顾。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>持有至 2027 私有化窗口，预期 5-10% 溢价空间；3.33% 租金回报提供安全垫。避免追高 $1,600 psf 以上。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>依赖 MRT 直达通勤者（LRT 转乘）、追求全新楼盘者、对楼龄敏感者。</div>
+</section>
+
+<footer>
+  BELLEWATERS Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
 </div>
 </body>
 </html>

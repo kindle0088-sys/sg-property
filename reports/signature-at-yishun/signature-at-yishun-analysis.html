@@ -3,175 +3,263 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SIGNATURE AT YISHUN 黎景园 — D27 Yishun EC 深度分析（七维评分 6.35）</title>
+<title>SIGNATURE AT YISHUN 黎景园 — 新加坡 D27 EC 投资研报</title>
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--text:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b;--green:#10b981;--red:#ef4444;--border:#334155}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
-.wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
-header{text-align:center;padding:40px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
-.tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.4);padding:3px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
-h1{font-size:30px;margin-bottom:6px}
-.sub{color:var(--muted);font-size:14px}
-.scorebox{display:inline-flex;align-items:baseline;gap:6px;margin-top:16px;background:var(--card);border:1px solid var(--border);padding:10px 22px;border-radius:12px}
-.scorebox .num{font-size:40px;font-weight:800;color:var(--accent)}
-.scorebox .lbl{color:var(--muted);font-size:13px}
-h2{font-size:20px;margin:36px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
-.kpi .v{font-size:22px;font-weight:700;color:var(--accent)}
-.kpi .k{font-size:12px;color:var(--muted);margin-top:2px}
-table{width:100%;border-collapse:collapse;margin:10px 0}
-th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
-th{color:var(--muted);font-weight:500;background:var(--card2)}
-tr:hover td{background:rgba(245,158,11,.05)}
-.up{color:var(--red)}.down{color:var(--green)}
-.dim{color:var(--muted);font-size:13px}
-.radar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.dimrow{display:flex;align-items:center;gap:12px;margin:8px 0}
-.dimrow .dn{width:110px;font-size:13px;color:var(--muted);flex-shrink:0}
-.dimrow .bar{flex:1;height:10px;background:var(--card2);border-radius:6px;overflow:hidden}
-.dimrow .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:6px}
-.dimrow .dv{width:36px;text-align:right;font-weight:700;font-size:14px}
-.verdict{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.08));border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:22px;margin-top:20px}
-.verdict h3{color:var(--accent);margin-bottom:10px;font-size:17px}
-ul{padding-left:20px;margin:8px 0}
-li{margin:6px 0;font-size:14px}
-.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.warn b{color:var(--red)}
-.pos{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.pos b{color:var(--green)}
-footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border)}
-footer span{color:var(--accent)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div class="tag">🏘️ EC · 执行共管公寓 · MOP 已过 · 🎨 Peter Tay 设计</div>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D27 Yishun · 已过 MOP</div>
   <h1>SIGNATURE AT YISHUN 黎景园</h1>
-  <div class="sub">D27 Yishun Street 51 · 99 年租约（2014 起算）· 525 单位 · TOP 2018</div>
-  <div class="scorebox"><span class="num">6.35</span><span class="lbl">/ 10 七维综合评分</span></div>
-</header>
-
-<section>
-  <h2>一、项目概览</h2>
-  <div class="grid">
-    <div class="kpi"><div class="v">525</div><div class="k">总单位（11 栋 12 层）</div></div>
-    <div class="kpi"><div class="v">$1,197</div><div class="k">历史均价 psf</div></div>
-    <div class="kpi"><div class="v">$1,286</div><div class="k">近 1 年均价 psf</div></div>
-    <div class="kpi"><div class="v">218 笔</div><div class="k">累计交易</div></div>
-    <div class="kpi"><div class="v">3.8%</div><div class="k">租金收益率</div></div>
-    <div class="kpi"><div class="v">1.31km</div><div class="k">距 Khatib MRT</div></div>
+  <div class="address">Yishun Street 51 & Yishun Avenue 1 · Yishun · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.25</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,197</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,286</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">218</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">525</div><div class="lbl">总单位数</div></div>
   </div>
-  <div class="card">
-    <p><b>SIGNATURE AT YISHUN（黎景园）</b>是 JBE Holdings 旗下 Gee-I Investments 打造的 SG50 纪念级 EC，2018 年 TOP。项目由<b>总统设计奖得主 Peter Tay</b> 操刀室内设计，以 Yishun 的菠萝种植历史为灵感的菠萝徽章 Clubhouse 独树一帜，50+ 项设施覆盖全龄段。MOP 已于 2023 年届满。</p>
-    <p class="dim" style="margin-top:8px">地址：Yishun Street 51 & Yishun Avenue 1 · 地契：99 年（2014-08-25 起算，剩约 87 年）· 户型：2 房（764-775 sqft）至 4 房 Premium（1,302 sqft）· 43% 单位面向泳池/水景</p>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>SG50 纪念级设计系 EC、Peter Tay 总统设计奖操刀</strong>——JBE Holdings 旗下 Gee-I Investments 开发，525 单位，2018 年 TOP。菠萝徽章 Clubhouse（致敬 Yishun 菠萝种植史）+ 传统游戏主题设施（Chapteh 露台、五石水台），50+ 项设施，43% 单位面向泳池/水景。MOP 已于 2023 年届满。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Signature At Yishun 是"设计情怀 vs 现实短板"的典型——设计辨识度全岛 EC 顶级，但 2025 年后价格滞涨（2026 年 -0.2%，Top 20 唯一停滞）。交通（Khatib 1.3km 步行难）+ 学校（1km 无热门小学）是硬伤。<span class="negative">自住中性、投资谨慎</span>，等待 Chencharu 新镇修复区域价值。
   </div>
 </section>
 
+<!-- 项目核心参数 -->
 <section>
-  <h2>二、七维评分</h2>
-  <div class="radar">
-    <div class="dimrow"><div class="dn">地段位置</div><div class="bar"><div class="fill" style="width:60%"></div></div><div class="dv">6.0</div></div>
-    <div class="dimrow"><div class="dn">租金回报</div><div class="bar"><div class="fill" style="width:50%"></div></div><div class="dv">5.0</div></div>
-    <div class="dimrow"><div class="dn">增值潜力</div><div class="bar"><div class="fill" style="width:60%"></div></div><div class="dv">6.0</div></div>
-    <div class="dimrow"><div class="dn">开发商实力</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
-    <div class="dimrow"><div class="dn">持有成本</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">流动性</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
-    <div class="dimrow"><div class="dn">风险控制</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Gee-I Investments（JBE Holdings 全资子公司）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">525 套 · 11 栋 12 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2014-08-25 起，剩约 87 年）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2018-05-25（已竣工 8 年）</div></div>
+    <div class="spec-card"><div class="spec-label">MOP</div><div class="spec-value">2023 年届满</div></div>
+    <div class="spec-card"><div class="spec-label">室内设计</div><div class="spec-value">Peter Tay（总统设计奖 2014）</div></div>
+    <div class="spec-card"><div class="spec-label">水景比例</div><div class="spec-value">43% 单位面向泳池/水景</div></div>
+    <div class="spec-card"><div class="spec-label">业主构成</div><div class="spec-value">95.9% 新加坡人 · 4.1% PR</div></div>
   </div>
-  <div class="card">
-    <table>
-      <tr><th>维度</th><th>评分</th><th>点评</th></tr>
-      <tr><td>地段位置</td><td class="up">6.0</td><td>Khatib MRT 1.31km（步行 16-18 分钟无遮挡）、Yishun MRT 类似距离；门前巴士站（117/805）接驳——车依赖型社区</td></tr>
-      <tr><td>租金回报</td><td class="up">5.0</td><td>收益约 3.8%，Yishun 租金市场稳定，中位租金约 $3,200-3,500</td></tr>
-      <tr><td>增值潜力</td><td class="up">6.0</td><td>2021-2026 从 $941 涨至 $1,286（+37%）但 2025-2026 增速停滞（1288→1286）；North Gaia 开盘（$1,300）曾带动周边，效应在消退</td></tr>
-      <tr><td>开发商实力</td><td class="up">6.5</td><td>JBE Holdings（中小型开发商），项目数量有限；Peter Tay 设计加成但开发商品牌力弱于 CDL</td></tr>
-      <tr><td>持有成本</td><td class="up">7.5</td><td>99 年租约 2014 起算（剩约 87 年）；525 户分摊物业费</td></tr>
-      <tr><td>流动性</td><td class="up">6.5</td><td>2021-2026 每年 6-82 笔成交；MOP 解禁（2023）后放量但价格弹性有限</td></tr>
-      <tr><td>风险控制</td><td class="up">7.0</td><td>无期房/MOP 风险；主要风险为交通短板与价格滞涨</td></tr>
-    </table>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th></tr>
+    <tr><td>2 Bedroom</td><td>764 - 775</td><td>70</td></tr>
+    <tr><td>3 Bedroom</td><td>947</td><td>60</td></tr>
+    <tr><td>3 Bedroom Premium</td><td>1,076 - 1,098</td><td>239</td></tr>
+    <tr><td>4 Bedroom</td><td>1,184</td><td>132</td></tr>
+    <tr><td>4 Bedroom Premium</td><td>1,302</td><td>24</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 3 房 Premium 占 46% 为绝对主力，户型配比向家庭倾斜。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 5 泳道泳池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 3G Fitness Cove + 瑜伽台</div>
+    <div class="facility-tag"><span class="icon">🏢</span> 菠萝徽章 Clubhouse</div>
+    <div class="facility-tag"><span class="icon">💆</span> Hydrotherapy + 水疗床</div>
+    <div class="facility-tag"><span class="icon">🛝</span> 儿童戏水池 + 滑梯池</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">🐕</span> 宠物区</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 城市农场草坪</div>
+    <div class="facility-tag"><span class="icon">🎮</span> 传统游戏主题设施</div>
+    <div class="facility-tag"><span class="icon">☀️</span> 50+ 项设施全配置</div>
   </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Khatib MRT（NSL）1.31km 步行 16-18 分钟无遮蔽；Yishun MRT 约 1.6km——巴士接驳，车依赖型</td></tr>
+    <tr><td>🚗 快速路</td><td>SLE/CTE 经 Yishun Ave 1/8 接入，CBD 高峰外约 25-30 分钟</td></tr>
+    <tr><td>🏫 学校</td><td>Northbrooks Secondary 302m；1km 内无热门小学（短板）</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Northpoint City（北部最大）、Sun Plaza、Junction 9；Wisteria Mall 500m</td></tr>
+    <tr><td>🏥 医疗</td><td>Khoo Teck Puat Hospital（车程 10 分钟）</td></tr>
+    <tr><td>🌳 自然</td><td>Orto 休闲公园（24 小时）、Bottle Tree Park、Lower Seletar Reservoir</td></tr>
+  </table>
 </section>
 
+<!-- 七维评分 -->
 <section>
-  <h2>三、价格分析</h2>
-  <div class="card">
-    <table>
-      <tr><th>年份</th><th>交易量</th><th>均价 psf</th><th>同比</th></tr>
-      <tr><td>2021</td><td>6</td><td>$941</td><td>—</td></tr>
-      <tr><td>2022</td><td>82</td><td>$1,114</td><td class="up">+18.4%</td></tr>
-      <tr><td>2023</td><td>35</td><td>$1,223</td><td class="up">+9.8%</td></tr>
-      <tr><td>2024</td><td>38</td><td>$1,258</td><td class="up">+2.9%</td></tr>
-      <tr><td>2025</td><td>38</td><td>$1,288</td><td class="up">+2.4%</td></tr>
-      <tr><td>2026 至今</td><td>19</td><td>$1,286</td><td>-0.2%（滞涨）</td></tr>
-    </table>
-    <p class="dim" style="margin-top:10px">数据口径：URA 成交记录（contractDate 08/2021 - 07/2026）。2022-2023 年快速爬坡（MOP 解禁 + North Gaia 开盘联动），2025 年后进入平台期。</p>
-    <div class="warn"><b>解读：</b>Signature 的价格在 2025 年见顶后开始横盘（$1,286-$1,288），是本批次中唯一 2026 年未创新高的项目。与隔壁 The Criterion（$1,369）相比溢价乏力——交通同短板，但开发商品牌与设施规模（57 vs 50）略逊，市场给了真实定价。</div>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · MRT 1.3km+ 无遮蔽步行难，巴士依赖，车依赖型社区</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 收益约 3.8%，Yishun 租金市场稳定</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 5 年 +37% 但 2025-2026 滞涨（-0.2%），North Gaia 联动效应消退</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · JBE 中小开发商，Peter Tay 设计加成但品牌力弱于 CDL</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 525 户分摊物业费，租约剩 87 年</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 转售活跃但价格弹性有限，挂盘周期变长</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 无期房/MOP 风险；滞涨是主要信号</p></div>
   </div>
-</section>
 
-<section>
-  <h2>四、配套与设施</h2>
-  <div class="card">
-    <table>
-      <tr><th>类别</th><th>内容</th></tr>
-      <tr><td>轨道交通</td><td>Khatib MRT（NSL）1.31km 巴士接驳；Yishun MRT 约 1.6km；门口巴士站（804/850E/860 等）</td></tr>
-      <tr><td>快速路</td><td>SLE/CTE 经 Yishun Ave 1/8 便捷接入，CBD 高峰外约 25-30 分钟</td></tr>
-      <tr><td>商场</td><td>Northpoint City（北部最大）、Sun Plaza、Junction 9；Wisteria Mall 500m</td></tr>
-      <tr><td>学校</td><td>Northbrooks Secondary 302m；1km 内无热门小学（短板）</td></tr>
-      <tr><td>医疗</td><td>Khoo Teck Puat Hospital（车程 10 分钟）</td></tr>
-      <tr><td>休闲</td><td>Orto 休闲公园（24 小时）、Bottle Tree Park、Lower Seletar Reservoir、Yishun 公园群</td></tr>
-      <tr><td>小区设施</td><td>50m 5 泳道泳池、儿童戏水池、Poolside Cabanas、Hydrotherapy Alcove、3G Fitness Cove、Clubhouse（菠萝徽章）、Yoga Deck、城市农场草坪、宠物区、50+ 项（含新加坡传统游戏主题设施）</td></tr>
-    </table>
-  </div>
-</section>
-
-<section>
-  <h2>五、居民评价与市场声音</h2>
-  <div class="card">
-    <div class="pos"><b>加分项（市场共识）：</b><ul>
-      <li>设计辨识度全岛 EC 顶级：Peter Tay 室内 + 菠萝徽章 Clubhouse + 传统游戏主题设施（Chapteh 露台、五石水台）</li>
-      <li>43% 单位面泳池/水景，景观溢价比例高</li>
-      <li>业主构成健康：95.9% 本地买家，社区稳定性好</li>
-    </ul></div>
-    <div class="warn"><b>扣分项（买家反馈）：</b><ul>
-      <li>MRT 太远（1.3km+ 无遮蔽步行），通勤依赖巴士/驾车</li>
-      <li>2025 年后价格滞涨，转售挂盘周期变长</li>
-      <li>开发商 JBE 品牌知名度低，转售认可度弱于 CDL 盘</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>六、风险提示</h2>
-  <div class="card">
-    <div class="warn"><b>⚠️ 主要风险：</b><ul>
-      <li><b>价格滞涨：</b>2026 年同比 -0.2%，是 Top 20 中唯一停滞的项目，转售收益预期需下调</li>
-      <li><b>交通短板：</b>无 MRT 步行可达，限制买家池（无车家庭排除）</li>
-      <li><b>学校短板：</b>无 1km 热门小学，对年轻家庭吸引力弱</li>
-      <li><b>区域竞争：</b>Yishun 一带 EC 供给密集（Criterion 隔壁、North Gaia、Parc Canberra），供给消化压力大</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>七、投资建议</h2>
   <div class="verdict">
-    <h3>综合评定：6.35 / 10 —— 设计情怀 vs 现实短板</h3>
-    <p><b>适合人群：</b>注重居住美学、有车且熟悉北部生活的自住家庭；追求低总价入场的预算型买家。</p>
-    <p style="margin-top:8px"><b>策略建议：</b></p>
-    <ul>
-      <li><b>自住：</b>中性偏好——设计与设施是真实亮点，$1,250-1,320 psf 自住舒适度可接受；务必有车</li>
-      <li><b>投资：</b>谨慎——滞涨信号明确，短期无催化；若以出租为目的（3.8% 收益）可考虑，资本利得预期放低</li>
-      <li><b>注意：</b>与隔壁 Criterion（CDL）对比，同价位优先 Criterion；等 Chencharu 新镇动工再看区域修复机会</li>
-    </ul>
+    <strong>综合评分：6.25 / 10</strong> —— 加权计算（6.0×20% + 5.0×15% + 6.0×20% + 6.5×10% + 7.5×10% + 6.5×15% + 7.0×10%）。设计与租金维度尚可，滞涨与交通短板拉低总分，Top 20 中评分最低。
   </div>
 </section>
 
-<footer>数据来源：URA 成交记录（本地库 build 2026-08-02）· ShiokNest / PropertyGuru / 项目官网 · 七维投资框架<br>本报告仅供研究参考，不构成投资建议 · 生成于 <span>2026-08-02</span></footer>
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>6</td><td>$941</td><td>—</td></tr>
+    <tr><td>2022（MOP 解禁）</td><td>82</td><td>$1,114</td><td class="num-green">+18.4%</td></tr>
+    <tr><td>2023</td><td>35</td><td>$1,223</td><td class="num-green">+9.8%</td></tr>
+    <tr><td>2024</td><td>38</td><td>$1,258</td><td class="num-green">+2.9%</td></tr>
+    <tr><td>2025</td><td>38</td><td>$1,288</td><td class="num-green">+2.4%</td></tr>
+    <tr><td>2026（至今）</td><td>19</td><td>$1,286</td><td class="num-red">-0.2%（滞涨）</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2022-2023 年快速爬坡（MOP 解禁 + North Gaia 开盘联动），2025 年见顶后横盘——是本批次唯一 2026 年未创新高的项目。与隔壁 The Criterion（$1,369）相比溢价乏力：交通同短板，但开发商品牌与设施规模（57 vs 50）略逊，市场给了真实定价。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 对比参照：The Criterion（隔壁，CDL）$1,365 psf；North Gaia（新 EC）$1,300+ psf。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2014-08</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2018-05</div><div class="tl-detail">TOP 竣工</div></div>
+    <div class="tl-item"><div class="tl-year">2023</div><div class="tl-detail">5 年 MOP 届满 → 可整租 / 转售给符合条件买家</div></div>
+    <div class="tl-item"><div class="tl-year">2028</div><div class="tl-detail">10 年私有化窗口 → 转售给外国人 / 公司不受限</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>当前转售对象</td><td>新加坡公民家庭（MOP 已过，可整租）</td></tr>
+    <tr><td>私有化后</td><td>2028 年起可售予外国人 / 公司</td></tr>
+    <tr><td>贷款约束</td><td>EC 贷款受 MSR 30% 约束（转售阶段）</td></tr>
+    <tr><td>CPF 津贴</td><td>二手 EC 买家可获津贴，额度逐年递减</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"设计辨识度全岛 EC 顶级——Peter Tay 的室内 + 菠萝徽章 Clubhouse + Chapteh 露台、五石水台这些传统游戏主题设施，处处是细节，住着有身份感。"</div>
+    <div class="review-source">— PropertyGuru / 项目官网评价，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"43% 单位面向泳池水景，景观溢价比例高；业主 95.9% 本地人，社区稳定、邻里氛围好，适合自住家庭。"</div>
+    <div class="review-source">— 买家论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"MRT 太远（1.3km+ 无遮蔽步行），夏天通勤要命；1km 无热门小学，有娃家庭入学吃亏；2025 年后转售挂盘周期明显变长。"</div>
+    <div class="review-source">— ShiokNest 测评 + 居民反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"2026 年价格 -0.2% 是市场给的真实信号——同价位隔壁就是 CDL 的 Criterion，品牌和设施都更强，Signature 的溢价空间被压缩。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★☆☆（3.8/5）</strong> —— 设计与景观是真亮点，交通与价格动能是硬伤；适合有车、注重居住美学的自住家庭。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>价格滞涨</td><td class="num-red">中高</td><td>2026 年 -0.2%，Top 20 唯一停滞项目，转售收益预期需下调</td></tr>
+    <tr><td>交通短板</td><td class="num-red">中高</td><td>MRT 步行不可达，排除无车通勤族买家</td></tr>
+    <tr><td>学校短板</td><td class="num-yellow" style="color:#eab308">中</td><td>无 1km 热门小学，对年轻家庭吸引力弱</td></tr>
+    <tr><td>区域竞争</td><td class="num-yellow" style="color:#eab308">中</td><td>Yishun EC 密集（Criterion 隔壁、North Gaia、Parc Canberra）</td></tr>
+    <tr><td>政策风险</td><td class="num-yellow" style="color:#eab308">低</td><td>EC 政策调整对成熟盘影响有限</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（中性偏好）：</strong>注重居住美学、有车且熟悉北部生活的家庭可考虑。设计与设施是真实亮点，$1,250-1,320 psf 自住舒适度可接受；务必有车。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（谨慎）：</strong>滞涨信号明确，短期无催化；若以出租为目的（3.8% 收益）可考虑，资本利得预期放低；等 Chencharu 新镇动工再看区域修复机会。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>同价位优先考虑隔壁 The Criterion（CDL）；追求资本利得者、无车通勤族、有学龄儿童家庭。</div>
+</section>
+
+<footer>
+  SIGNATURE AT YISHUN Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
 </div>
 </body>
 </html>

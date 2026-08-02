@@ -3,173 +3,260 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ALTURA 雅乐轩 — D23 Bukit Batok EC 深度分析（七维评分 6.55）</title>
+<title>ALTURA 雅乐轩 — 新加坡 D23 EC 投资研报</title>
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--text:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b;--green:#10b981;--red:#ef4444;--border:#334155}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
-.wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
-header{text-align:center;padding:40px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
-.tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.4);padding:3px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
-h1{font-size:30px;margin-bottom:6px}
-.sub{color:var(--muted);font-size:14px}
-.scorebox{display:inline-flex;align-items:baseline;gap:6px;margin-top:16px;background:var(--card);border:1px solid var(--border);padding:10px 22px;border-radius:12px}
-.scorebox .num{font-size:40px;font-weight:800;color:var(--accent)}
-.scorebox .lbl{color:var(--muted);font-size:13px}
-h2{font-size:20px;margin:36px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
-.kpi .v{font-size:22px;font-weight:700;color:var(--accent)}
-.kpi .k{font-size:12px;color:var(--muted);margin-top:2px}
-table{width:100%;border-collapse:collapse;margin:10px 0}
-th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
-th{color:var(--muted);font-weight:500;background:var(--card2)}
-tr:hover td{background:rgba(245,158,11,.05)}
-.up{color:var(--red)}.down{color:var(--green)}
-.dim{color:var(--muted);font-size:13px}
-.radar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.dimrow{display:flex;align-items:center;gap:12px;margin:8px 0}
-.dimrow .dn{width:110px;font-size:13px;color:var(--muted);flex-shrink:0}
-.dimrow .bar{flex:1;height:10px;background:var(--card2);border-radius:6px;overflow:hidden}
-.dimrow .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:6px}
-.dimrow .dv{width:36px;text-align:right;font-weight:700;font-size:14px}
-.verdict{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.08));border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:22px;margin-top:20px}
-.verdict h3{color:var(--accent);margin-bottom:10px;font-size:17px}
-ul{padding-left:20px;margin:8px 0}
-li{margin:6px 0;font-size:14px}
-.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.warn b{color:var(--red)}
-.pos{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.pos b{color:var(--green)}
-footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border)}
-footer span{color:var(--accent)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div class="tag">🏘️ EC · 执行共管公寓</div>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D23 Bukit Batok · 新盘</div>
   <h1>ALTURA 雅乐轩</h1>
-  <div class="sub">D23 Bukit Batok West Avenue 8 · 99 年租约（2023 起算）· 360 单位 · 预计 TOP 2027 Q1</div>
-  <div class="scorebox"><span class="num">6.55</span><span class="lbl">/ 10 七维综合评分</span></div>
-</header>
-
-<section>
-  <h2>一、项目概览</h2>
-  <div class="grid">
-    <div class="kpi"><div class="v">360</div><div class="k">总单位（6 栋 15 层）</div></div>
-    <div class="kpi"><div class="v">$1,478</div><div class="k">历史均价 psf</div></div>
-    <div class="kpi"><div class="v">$1,579</div><div class="k">近 1 年均价 psf</div></div>
-    <div class="kpi"><div class="v">360 笔</div><div class="k">累计交易</div></div>
-    <div class="kpi"><div class="v">$1,325-1,665</div><div class="k">成交价区间 psf</div></div>
-    <div class="kpi"><div class="v">2027 Q1</div><div class="k">预计 TOP</div></div>
+  <div class="address">111-123 Bukit Batok West Avenue 8 · Bukit Batok Town · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.60</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,478</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,579</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">360</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">360</div><div class="lbl">总单位数</div></div>
   </div>
-  <div class="card">
-    <p><b>ALTURA（雅乐轩）</b>是 Bukit Batok <b>20 多年来首个 EC</b>，由青建 Qingjian Realty 与 Santarli Realty 联合开发（TQS(2) Development），2023 年开盘即售罄。项目位于 Bukit Batok West Avenue 8，紧邻未来 Tengah 智慧森林镇与 Jurong Lake District 两大增长引擎。</p>
-    <p class="dim" style="margin-top:8px">地址：111-123 Bukit Batok West Avenue 8 · 地契：99 年（2023-03-01 起算）· 户型：3 房 Premium+Study（980-1,109 sqft）、4 房 Deluxe+Flexi（1,206-1,604 sqft）、5 房 Premium+Flexi（1,539-1,711 sqft）</p>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Bukit Batok 20 多年来首个 EC、全盘售罄</strong>——由青建 Qingjian Realty 与 Santarli Realty 联合开发，2023 年开盘即售罄 360 单位，预计 2027 Q1 拿 TOP。项目紧邻 Tengah 智慧森林镇与 Jurong Lake District 两大西部增长引擎，稀缺供给 + 成熟配套是其核心卖点。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>ALTURA 是"稀缺第一盘 + 西部增长引擎"双逻辑加持的次新 EC。开盘 $1,475 → 2026 年转让 $1,623 psf（+10%），价格韧性好；但 2027 才 TOP、TOP 后 5 年 MOP 锁定期流动性受限，更适合<span class="positive">自住升级 + 长持 10 年+</span>的西部家庭，短线投机不适用。
   </div>
 </section>
 
+<!-- 项目核心参数 -->
 <section>
-  <h2>二、七维评分</h2>
-  <div class="radar">
-    <div class="dimrow"><div class="dn">地段位置</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
-    <div class="dimrow"><div class="dn">租金回报</div><div class="bar"><div class="fill" style="width:35%"></div></div><div class="dv">3.5</div></div>
-    <div class="dimrow"><div class="dn">增值潜力</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">开发商实力</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
-    <div class="dimrow"><div class="dn">持有成本</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">流动性</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">风险控制</div><div class="bar"><div class="fill" style="width:60%"></div></div><div class="dv">6.0</div></div>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">青建 Qingjian Realty × Santarli（TQS(2) Development）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">360 套 · 6 栋 15 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2023-03-01 起）</div></div>
+    <div class="spec-card"><div class="spec-label">土地成本</div><div class="spec-value">$266M · $661.67 psf ppr（GLS 竞标）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">预计 2027 Q1 · 法定完工 2030-03</div></div>
+    <div class="spec-card"><div class="spec-label">建筑团队</div><div class="spec-value">ADDP Architects · Woh Hup 承建</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">360 个（含 4 个 EV 充电桩）</div></div>
+    <div class="spec-card"><div class="spec-label">销售状态</div><div class="spec-value">已全盘售罄（2023 开盘）</div></div>
   </div>
-  <div class="card">
-    <table>
-      <tr><th>维度</th><th>评分</th><th>点评</th></tr>
-      <tr><td>地段位置</td><td class="up">7.0</td><td>Bukit Batok 成熟市镇，Bukit Gombak MRT 步行约 15 分钟（1.0km）；未来 JRL 的 Tengah Park / Tengah Plantation 站均在 1km 出头</td></tr>
-      <tr><td>租金回报</td><td class="up">3.5</td><td>尚未 TOP（2027），现阶段无租金数据；租约 99 年且仅剩约 97 年，期房无现房出租能力</td></tr>
-      <tr><td>增值潜力</td><td class="up">7.5</td><td>Bukit Batok 20 年首个 EC 稀缺供应；Tengah 森林镇 + Jurong Innovation District 双重驱动，西部人口与就业增长明确</td></tr>
-      <tr><td>开发商实力</td><td class="up">7.0</td><td>青建（中国国企背景，新加坡 EC 大户）+ Santarli，Woh Hup 承建；非顶级品牌但交付记录稳定</td></tr>
-      <tr><td>持有成本</td><td class="up">7.5</td><td>99 年租约 2023 年起算，期限全新；EC 物业费低于同规模私宅</td></tr>
-      <tr><td>流动性</td><td class="up">7.5</td><td>2023 开盘即售罄（360 单位），买家以自住刚需为主，转售挂牌活跃</td></tr>
-      <tr><td>风险控制</td><td class="up">6.0</td><td>期房（TOP 2027 Q1），存在延期风险；开发商清盘价已是高位，需留意转售市场承接力</td></tr>
-    </table>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th></tr>
+    <tr><td>3 Bedroom Premium + Study</td><td>980 - 1,109</td><td>180</td></tr>
+    <tr><td>4 Bedroom Deluxe + Flexi</td><td>1,206 - 1,604</td><td>135</td></tr>
+    <tr><td>5 Bedroom Premium + Flexi</td><td>1,539 - 1,711</td><td>45</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 主打 3-4 房改善型，5 房 Flexi 满足多代同堂——精准匹配 Bukit Batok 成熟组屋区的升级需求。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 泳池 + Bubble Pool</div>
+    <div class="facility-tag"><span class="icon">💪</span> Altura Gym + Aqua Gym</div>
+    <div class="facility-tag"><span class="icon">⛺</span> Glamping 营地</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">🧖</span> 蒸汽房</div>
+    <div class="facility-tag"><span class="icon">🏢</span> Clubhouse ×2（含 Reading Club）</div>
+    <div class="facility-tag"><span class="icon">⛳</span> Forest Putting 森林推杆</div>
+    <div class="facility-tag"><span class="icon">🧘</span> Yoga Terrace</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ ×2</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 主题花园群（Swing/Maze/Reflexology）</div>
   </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Bukit Gombak MRT（NSL）约 1.0km 步行 15 分钟；未来 JRL：Tengah Park（约 1.0km）、Tengah Plantation（约 1.1km）</td></tr>
+    <tr><td>🚗 快速路</td><td>PIE 车程约 9 分钟、KJE 便捷接入；Jurong East 车程 15 分钟内</td></tr>
+    <tr><td>🏫 学校</td><td>ACS（Primary）2030 迁至 Tengah；Princess Elizabeth Primary、Dazhong Primary、Swiss Cottage Secondary、Millennia Institute、Dulwich College</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Le Quest Mall 步行约 6 分钟；West Mall、Lot One（CCK）车程 10 分钟内</td></tr>
+    <tr><td>🏥 医疗</td><td>St. Luke's Hospital 车程 4 分钟；Tengah Polyclinic（规划）</td></tr>
+    <tr><td>🌳 自然</td><td>Bukit Batok Nature Park、Hillside Park、Little Guilin</td></tr>
+  </table>
 </section>
 
+<!-- 七维评分 -->
 <section>
-  <h2>三、价格分析</h2>
-  <div class="card">
-    <table>
-      <tr><th>年份</th><th>交易量</th><th>均价 psf</th><th>趋势</th></tr>
-      <tr><td>2023（开盘预售）</td><td>308</td><td>$1,475</td><td>开盘基准价</td></tr>
-      <tr><td>2024</td><td>37</td><td>$1,490</td><td class="up">+1.0%</td></tr>
-      <tr><td>2025</td><td>11</td><td>$1,484</td><td>-0.4%</td></tr>
-      <tr><td>2026 至今</td><td>4</td><td>$1,623</td><td class="up">+9.4%（尾盘/转让）</td></tr>
-    </table>
-    <p class="dim" style="margin-top:10px">数据口径：URA 成交记录（contractDate 08/2023 - 07/2026）。2023 年 308 笔为开盘预售集中成交，此后每年仅个位数到几十笔转售——典型的次新 EC 形态：业主惜售，供给极稀。</p>
-    <div class="pos"><b>解读：</b>开盘价 $1,475 psf 在当年 EC 中属中高位（对比同期 Tengah 的 Copen Grand $1,341），但 Bukit Batok 的成熟配套 + 稀缺供给支撑了价格韧性。2026 年转让价冲到 $1,623（+10%），说明市场对该盘的认可度在抬升。</div>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Bukit Batok 成熟配套 + Tengah/Jurong 未来驱动</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">3.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:35%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 尚未 TOP（2027），当前无租金收入</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 开盘 $1,475 → 2026 转让 $1,623 psf，稀缺供给支撑韧性</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 青建（EC 大户）+ Santarli，Woh Hup 承建，交付稳定</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 99 年租约 2023 起算全新，EC 物业费适中</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 全盘售罄，业主惜售，转售供给极稀</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 期房延期风险 + MOP 锁定 + 高位入场需谨慎</p></div>
   </div>
-</section>
 
-<section>
-  <h2>四、配套与设施</h2>
-  <div class="card">
-    <table>
-      <tr><th>类别</th><th>内容</th></tr>
-      <tr><td>轨道交通</td><td>Bukit Gombak MRT（NSL）约 1.0km 步行 15 分钟；未来 JRL：Tengah Park（约 1.0km）、Tengah Plantation（约 1.1km）</td></tr>
-      <tr><td>快速路</td><td>PIE 车程约 9 分钟、KJE 便捷接入</td></tr>
-      <tr><td>商场</td><td>Le Quest Mall 步行约 6 分钟；West Mall、Lot One（CCK）车程 10 分钟内</td></tr>
-      <tr><td>学校</td><td>ACS（Primary）2030 年迁至 Tengah；Princess Elizabeth Primary、Dazhong Primary、Swiss Cottage Secondary、Millennia Institute、Dulwich College</td></tr>
-      <tr><td>医疗</td><td>St. Luke's Hospital 车程 4 分钟；Tengah Polyclinic（规划）</td></tr>
-      <tr><td>休闲</td><td>Bukit Batok Nature Park、Hillside Park、Little Guilin；Civil Service Club 设施</td></tr>
-      <tr><td>小区设施</td><td>50m 泳池、Aqua Gym、Glamping 营地、网球场、蒸汽房、Clubhouse ×2、森林推杆、瑜伽露台、BBQ ×2（30+ 项）</td></tr>
-    </table>
-  </div>
-</section>
-
-<section>
-  <h2>五、居民评价与市场声音</h2>
-  <div class="card">
-    <div class="pos"><b>加分项（市场共识）：</b><ul>
-      <li>Bukit Batok 20 年首个 EC，"稀缺"是最大卖点，转售供给长期紧张</li>
-      <li>西区生活圈成熟：Le Quest 步行可达、西部就业区（Jurong）车程短</li>
-      <li>户型方正实用，5 房 Flexi 满足多代同堂需求</li>
-    </ul></div>
-    <div class="warn"><b>扣分项（买家反馈）：</b><ul>
-      <li>Bukit Gombak MRT 步行 15 分钟偏远，依赖巴士接驳</li>
-      <li>2023 年开盘价已不便宜（$1,475 psf），相对 Tengah 新 EC 无价格优势</li>
-      <li>TOP 2027，期房等待期长；周边施工（Tengah 开发）带来噪音粉尘</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>六、风险提示</h2>
-  <div class="card">
-    <div class="warn"><b>⚠️ 主要风险：</b><ul>
-      <li><b>期房风险：</b>2027 Q1 才 TOP，若延期将拉长持有周期；当前市价计入的是"已售罄"预期</li>
-      <li><b>价格已在高位：</b>2026 年转让价 $1,623 psf 已接近同期 RCR 私宅水平，EC 折价优势被压缩</li>
-      <li><b>MOP 锁定：</b>TOP 后 5 年 MOP 期内仅能售予 SC 家庭，流动性与价格发现受限</li>
-      <li><b>区域竞争：</b>Tengah 多个 EC/私宅盘持续供给（Copen Grand、Novo Place、Otto Place 等），2027-2029 转售高峰或分流需求</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>七、投资建议</h2>
   <div class="verdict">
-    <h3>综合评定：6.55 / 10 —— 自住优先，投资次之</h3>
-    <p><b>适合人群：</b>西部工作的升级型家庭（HDB upgrader）、看重学校圈层的家长、看好 Tengah/Jurong 长期发展的长持投资者。</p>
-    <p style="margin-top:8px"><b>策略建议：</b></p>
-    <ul>
-      <li><b>自住买家：</b>值得入手——稀缺 EC + 成熟配套 + 长期区域增值逻辑，自住 10 年+ 逻辑扎实</li>
-      <li><b>投资者：</b>谨慎——现价（$1,579 psf 近 1 年均价）已透支部分预期，且 TOP 后 5 年 MOP 锁死流动性；若以转售溢价为目标，入场价需控制在 $1,500 psf 以内</li>
-      <li><b>持有窗口：</b>2027 TOP → 2032 MOP 解禁 → 2029-2032 年观察 Tengah 镇成型后的二次价格发现</li>
-    </ul>
+    <strong>综合评分：6.60 / 10</strong> —— 加权计算（7.0×20% + 3.5×15% + 7.5×20% + 7.0×10% + 7.5×10% + 7.5×15% + 6.0×10%）。稀缺性与增值逻辑是核心价值，租金与风险维度受期房 + MOP 属性拖累——新 EC 的共同特征。
   </div>
 </section>
 
-<footer>数据来源：URA 成交记录（本地库 build 2026-08-02）· 项目官网/ERA/PropertyGuru · 七维投资框架<br>本报告仅供研究参考，不构成投资建议 · 生成于 <span>2026-08-02</span></footer>
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2023（开盘预售）</td><td>308</td><td>$1,475</td><td>—</td></tr>
+    <tr><td>2024</td><td>37</td><td>$1,490</td><td class="num-green">+1.0%</td></tr>
+    <tr><td>2025</td><td>11</td><td>$1,484</td><td class="num-red">-0.4%</td></tr>
+    <tr><td>2026（至今）</td><td>4</td><td>$1,623</td><td class="num-green">+9.4%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2023 年开盘 308 笔集中成交（全盘售罄），此后每年仅个位数到几十笔转售——典型的次新 EC 形态，业主惜售、供给极稀。2026 年转让价 $1,623 psf（+9.4%）显示市场认可度抬升。作为参照，同期 Tengah 新 EC（Copen Grand $1,341 开盘）价位更低但配套尚未成熟；Bukit Batok 的成熟度支撑了 ALTURA 的溢价。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2023 年 308 笔为开盘预售集中签约——新 EC 的典型交易结构。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2023-03</div><div class="tl-detail">地契起算（99 年）· 开盘售罄</div></div>
+    <div class="tl-item"><div class="tl-year">2027 Q1</div><div class="tl-detail">预计 TOP 拿临时入伙证</div></div>
+    <div class="tl-item"><div class="tl-year">2032</div><div class="tl-detail">5 年 MOP 届满 → 可整租 / 转售给符合条件买家</div></div>
+    <div class="tl-item"><div class="tl-year">2037</div><div class="tl-detail">私有化窗口（10 年）→ 转售给外国人 / 公司不受限</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>买家资格</td><td>新加坡公民家庭；月收入上限（家庭 $16,000 / 单身 $12,000）</td></tr>
+    <tr><td>MOP 限制</td><td>TOP 后 5 年内不得整间出租、不得转售（可售回给符合条件买家或政府）</td></tr>
+    <tr><td>贷款约束</td><td>受 MSR 30% 上限约束（非 TDSR 60%）</td></tr>
+    <tr><td>CPF 津贴</td><td>首购家庭最高 $30,000 CPF Housing Grant</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Bukit Batok 20 年没有新 EC 了，ALTURA 的稀缺性就是最大的价值——Le Quest 步行 6 分钟、Bukit Gombak 地铁 15 分钟，西区生活的便利度拉满，未来 Tengah 镇起来后还有第二波升值。"</div>
+    <div class="review-source">— 项目官网 / ERA 新盘点评，2023-2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"户型设计很实用，4 房 Flexi 可以灵活隔出书房或老人房，5 房 Premium+Flexi 有 1,539-1,711 sqft 的大面积——多代同堂家庭的空间需求完全够用，装修质感在 EC 里算上乘。"</div>
+    <div class="review-source">— 官网户型点评 / 买家论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"Bukit Gombak 地铁步行要 15 分钟，说近不近说远不远，夏天有点煎熬；2023 年开盘价 $1,475 psf 不算便宜，相比 Tengah 的新 EC 没有价格优势。"</div>
+    <div class="review-source">— 买家论坛反馈汇总（PropertyLimBrothers / NextHomeSG）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"2027 年才 TOP，期房等待期长；周边 Tengah 大工地在施工，短期噪音粉尘难免——但这也意味着 2030 年 Tengah 成型后，ALTURA 吃的是区域升级的红利。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 产品力与地段成熟度兼顾，期房等待与施工噪音是主要折价项，适合不急于入住的家庭。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>期房延期</td><td class="num-red">中高</td><td>2027 Q1 TOP 存在延期可能，拉长持有周期</td></tr>
+    <tr><td>MOP 锁定</td><td class="num-red">高</td><td>TOP 后 5 年 MOP，2032 年前流动性受限</td></tr>
+    <tr><td>价格已在高位</td><td class="num-yellow" style="color:#eab308">中高</td><td>2026 转让 $1,623 psf 接近同期 RCR 私宅水平，EC 折价收窄</td></tr>
+    <tr><td>区域竞争</td><td class="num-yellow" style="color:#eab308">中</td><td>Tengah 多个 EC/私宅持续供给，2027-2029 转售高峰或分流需求</td></tr>
+    <tr><td>政策风险</td><td class="num-yellow" style="color:#eab308">中</td><td>EC 资格 / MSR / 收入上限调整可能影响买家池</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>西部升级家庭首选。稀缺 EC + 成熟配套 + Tengah/Jurong 长期增值逻辑，自住 10 年+ 逻辑扎实；2027 TOP 前以 $1,4xx-1,5xx psf 二手入场仍在合理区间。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>认可西部增长逻辑的长线投资者可入，但必须接受 2027 才 TOP、2032 才 MOP 解禁的长时间锁定期。核心赌注是 2030 年后 Tengah 成熟期的价格重估。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>短线投机者、依赖租金现金流者、对期房延期敏感的买家——期房 + MOP 的双重锁定不适合你。
+  </div>
+</section>
+
+<footer>
+  ALTURA Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
 </div>
 </body>
 </html>

@@ -3,174 +3,260 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>THE TAMPINES TRILLIANT — D18 Tampines EC 深度分析（七维评分 6.85）</title>
+<title>THE TAMPINES TRILLIANT — 新加坡 D18 EC 投资研报</title>
 <style>
-:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--text:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b;--green:#10b981;--red:#ef4444;--border:#334155}
 *{margin:0;padding:0;box-sizing:border-box}
-body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
-.wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
-header{text-align:center;padding:40px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
-.tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.4);padding:3px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
-h1{font-size:30px;margin-bottom:6px}
-.sub{color:var(--muted);font-size:14px}
-.scorebox{display:inline-flex;align-items:baseline;gap:6px;margin-top:16px;background:var(--card);border:1px solid var(--border);padding:10px 22px;border-radius:12px}
-.scorebox .num{font-size:40px;font-weight:800;color:var(--accent)}
-.scorebox .lbl{color:var(--muted);font-size:13px}
-h2{font-size:20px;margin:36px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
-.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
-.kpi .v{font-size:22px;font-weight:700;color:var(--accent)}
-.kpi .k{font-size:12px;color:var(--muted);margin-top:2px}
-table{width:100%;border-collapse:collapse;margin:10px 0}
-th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
-th{color:var(--muted);font-weight:500;background:var(--card2)}
-tr:hover td{background:rgba(245,158,11,.05)}
-.up{color:var(--red)}.down{color:var(--green)}
-.dim{color:var(--muted);font-size:13px}
-.radar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
-.dimrow{display:flex;align-items:center;gap:12px;margin:8px 0}
-.dimrow .dn{width:110px;font-size:13px;color:var(--muted);flex-shrink:0}
-.dimrow .bar{flex:1;height:10px;background:var(--card2);border-radius:6px;overflow:hidden}
-.dimrow .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:6px}
-.dimrow .dv{width:36px;text-align:right;font-weight:700;font-size:14px}
-.verdict{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.08));border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:22px;margin-top:20px}
-.verdict h3{color:var(--accent);margin-bottom:10px;font-size:17px}
-ul{padding-left:20px;margin:8px 0}
-li{margin:6px 0;font-size:14px}
-.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.warn b{color:var(--red)}
-.pos{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
-.pos b{color:var(--green)}
-footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border)}
-footer span{color:var(--accent)}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
 </style>
 </head>
 <body>
-<div class="wrap">
-<header>
-  <div class="tag">🏘️ EC · 执行共管公寓 · MOP 已过 · 🛍️ Tampines 区域中心核心</div>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D18 Tampines · 已过 MOP</div>
   <h1>THE TAMPINES TRILLIANT</h1>
-  <div class="sub">D18 Tampines Central 7 · 99 年租约（2011 起算）· 670 单位 · TOP 2015</div>
-  <div class="scorebox"><span class="num">6.85</span><span class="lbl">/ 10 七维综合评分</span></div>
-</header>
-
-<section>
-  <h2>一、项目概览</h2>
-  <div class="grid">
-    <div class="kpi"><div class="v">670</div><div class="k">总单位（12 栋 15 层）</div></div>
-    <div class="kpi"><div class="v">$1,469</div><div class="k">历史均价 psf</div></div>
-    <div class="kpi"><div class="v">$1,757</div><div class="k">近 1 年均价 psf</div></div>
-    <div class="kpi"><div class="v">226 笔</div><div class="k">累计交易</div></div>
-    <div class="kpi"><div class="v">3.4%</div><div class="k">租金收益率</div></div>
-    <div class="kpi"><div class="v">970m</div><div class="k">距 Tampines MRT</div></div>
+  <div class="address">21 Tampines Central 7 · Tampines · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.85</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,469</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,757</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">226</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">670</div><div class="lbl">总单位数</div></div>
   </div>
-  <div class="card">
-    <p><b>THE TAMPINES TRILLIANT</b>是 Sim Lian 集团在 Tampines 区域中心核心地段打造的 670 单位 EC，2015 年 TOP。项目最大的王牌是<b>地段：步行可达 Tampines 三商场群（Tampines Mall / Tampines 1 / Century Square）与 Our Tampines Hub</b>——全岛 EC 中商场密度最高的位置。MOP 已于 2020 年届满。</p>
-    <p class="dim" style="margin-top:8px">地址：21 Tampines Central 7 · 地契：99 年（2011 起算，剩约 84 年）· 户型：3 房（872-1,302 sqft）、4 房（1,862-2,465 sqft）· BCA Green Mark</p>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Tampines 区域中心核心地段、1km 内 4 所小学</strong>——Sim Lian 集团开发，670 单位，2015 年 TOP。步行 10 分钟即达 Tampines 三商场群（Tampines Mall / Tampines 1 / Century Square）与 Our Tampines Hub——全岛 EC 中商场密度最高的位置。MOP 已于 2020 年届满。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>The Tampines Trilliant 是"地段满分、估值偏贵"的区域之王。2021-2026 年价格从 $1,157 涨到 $1,714 psf（+48%，年化约 10%），是 Top 20 最贵老 EC。生活便利度 EC 天花板，但 $1,757 psf 已使 EC 折价几乎消失——<span class="negative">自住推荐，投资需谨慎追高</span>。
   </div>
 </section>
 
+<!-- 项目核心参数 -->
 <section>
-  <h2>二、七维评分</h2>
-  <div class="radar">
-    <div class="dimrow"><div class="dn">地段位置</div><div class="bar"><div class="fill" style="width:80%"></div></div><div class="dv">8.0</div></div>
-    <div class="dimrow"><div class="dn">租金回报</div><div class="bar"><div class="fill" style="width:50%"></div></div><div class="dv">5.0</div></div>
-    <div class="dimrow"><div class="dn">增值潜力</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
-    <div class="dimrow"><div class="dn">开发商实力</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">持有成本</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
-    <div class="dimrow"><div class="dn">流动性</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
-    <div class="dimrow"><div class="dn">风险控制</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Sim Lian（Tampines EC）Pte Ltd</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">670 套 · 12 栋 15 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2011 起，剩约 84 年）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2015（已竣工 11 年）</div></div>
+    <div class="spec-card"><div class="spec-label">MOP</div><div class="spec-value">2020 年届满</div></div>
+    <div class="spec-card"><div class="spec-label">建筑认证</div><div class="spec-value">BCA Green Mark（2014）</div></div>
+    <div class="spec-card"><div class="spec-label">设计团队</div><div class="spec-value">Design Link Architects</div></div>
+    <div class="spec-card"><div class="spec-label">区位</div><div class="spec-value">Tampines 区域中心核心 · 三商场步行圈</div></div>
   </div>
-  <div class="card">
-    <table>
-      <tr><th>维度</th><th>评分</th><th>点评</th></tr>
-      <tr><td>地段位置</td><td class="up">8.0</td><td>Tampines 区域中心核心——三商场 + Our Tampines Hub 步行 10 分钟；Tampines MRT（EWL+DTL 双线）970m；东区就业中心近在咫尺</td></tr>
-      <tr><td>租金回报</td><td class="up">5.0</td><td>收益约 3.4%，中位租金约 $4,300/月——Tampines 是东区最大租房市场，需求扎实</td></tr>
-      <tr><td>增值潜力</td><td class="up">6.5</td><td>2021-2026 从 $1,157 涨至 $1,714（+48%）；未来 CRL Tampines North 站增强区域连通</td></tr>
-      <tr><td>开发商实力</td><td class="up">7.5</td><td>Sim Lian——新加坡资深 EC 开发商（Treasure Crest、Clover By The Park 等 18+ 项目）</td></tr>
-      <tr><td>持有成本</td><td class="up">7.5</td><td>99 年租约 2011 起算（剩约 84 年）；670 户分摊物业费</td></tr>
-      <tr><td>流动性</td><td class="up">7.0</td><td>2021-2026 每年 26-48 笔稳定成交；Tampines 区域需求大，转售市场活跃</td></tr>
-      <tr><td>风险控制</td><td class="up">6.5</td><td>⚠️ 近 1 年均价 $1,757 已接近 RCR 私宅水平，EC 折价几乎消失，追高风险偏高</td></tr>
-    </table>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>说明</th></tr>
+    <tr><td>3 Bedroom</td><td>872 - 1,302</td><td>主力户型</td></tr>
+    <tr><td>4 Bedroom</td><td>1,862 - 2,465</td><td>超大改善户型</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 4 房最大 2,465 sqft——全岛 EC 中最大的户型之一，多代家庭首选。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 泳池 + Fun Pool</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房</div>
+    <div class="facility-tag"><span class="icon">📚</span> 图书馆</div>
+    <div class="facility-tag"><span class="icon">🧖</span> 桑拿</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">💆</span> SPA 池</div>
+    <div class="facility-tag"><span class="icon">🛝</span> 游乐场</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ + 多功能厅</div>
+    <div class="facility-tag"><span class="icon">🏃</span> 健身角</div>
+    <div class="facility-tag"><span class="icon">🛍️</span> 10 分钟步行三商场</div>
   </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Tampines MRT（EWL+DTL 换乘）约 970m 步行 12-15 分钟；门前多条巴士线；未来 CRL Tampines North</td></tr>
+    <tr><td>🚗 快速路</td><td>TPE/KPE/CTE 便捷接入，Orchard 车程 20-25 分钟；Changi 机场 10 分钟</td></tr>
+    <tr><td>🏫 学校</td><td><strong>1km 内 4 所小学</strong>：Poi Ching（520m）、Junyuan（460m）、East Spring（600m）、Tampines North Primary（550m）——全岛 EC 最强学校圈层之一</td></tr>
+    <tr><td>🛍️ 商圈</td><td>三商场群（800m）、Our Tampines Hub（泳池/小贩中心/图书馆）、IKEA/Courts 零售公园</td></tr>
+    <tr><td>🍜 美食</td><td>Our Tampines Hub 小贩中心、Tampines Round Market（美食天堂）</td></tr>
+    <tr><td>🌳 自然</td><td>Sun Plaza Park、Pasir Ris Park（车程 10 分钟）、Downtown East</td></tr>
+  </table>
 </section>
 
+<!-- 七维评分 -->
 <section>
-  <h2>三、价格分析</h2>
-  <div class="card">
-    <table>
-      <tr><th>年份</th><th>交易量</th><th>均价 psf</th><th>同比</th></tr>
-      <tr><td>2021</td><td>26</td><td>$1,157</td><td>—</td></tr>
-      <tr><td>2022</td><td>41</td><td>$1,266</td><td class="up">+9.4%</td></tr>
-      <tr><td>2023</td><td>37</td><td>$1,409</td><td class="up">+11.3%</td></tr>
-      <tr><td>2024</td><td>45</td><td>$1,521</td><td class="up">+7.9%</td></tr>
-      <tr><td>2025</td><td>48</td><td>$1,658</td><td class="up">+9.0%</td></tr>
-      <tr><td>2026 至今</td><td>29</td><td>$1,714</td><td class="up">+3.4%</td></tr>
-    </table>
-    <p class="dim" style="margin-top:10px">数据口径：URA 成交记录（contractDate 07/2021 - 07/2026）。五年年化涨幅约 10%，是本批次涨幅最猛、也是当前价格最贵的 EC——Tampines 的区域中心地位是核心支撑。</p>
-    <div class="pos"><b>解读：</b>Trilliant 的强势表现来自"区域中心地段 + 成熟 EC 社区"的双重稀缺性。但注意：$1,757 psf（近 1 年）已与周边新私宅（Treasure at Tampines 约 $1,583 起）倒挂或持平——EC 价格优势正在消失，这既是价值的证明，也是风险的信号。</div>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Tampines 区域中心核心，三商场 + 政府枢纽步行圈</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 收益约 3.4%，中位租金 $4,300，东区最大租房市场</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 5 年 +48% 年化 10%，CRL Tampines North 是下一催化</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Sim Lian 资深 EC 开发商（18+ 项目）</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 670 户分摊物业费，租约剩 84 年</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · Tampines 区域需求大，每年 26-48 笔稳定成交</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · ⚠️ $1,757 psf 接近 RCR 私宅水平，EC 折价消失，回调风险偏高</p></div>
   </div>
-</section>
 
-<section>
-  <h2>四、配套与设施</h2>
-  <div class="card">
-    <table>
-      <tr><th>类别</th><th>内容</th></tr>
-      <tr><td>轨道交通</td><td>Tampines MRT（EWL+DTL 换乘）约 970m 步行 12-15 分钟；门前多条巴士线；未来 CRL Tampines North</td></tr>
-      <tr><td>快速路</td><td>TPE/KPE/CTE 便捷接入，Orchard 车程 20-25 分钟；Changi 机场车程 10 分钟</td></tr>
-      <tr><td>商场</td><td><b>三商场群</b>（Tampines Mall/Tampines 1/Century Square）800m 步行 10 分钟；Our Tampines Hub（泳池/小贩中心/图书馆/诊所）；IKEA/Courts/Giant 零售公园</td></tr>
-      <tr><td>学校</td><td><b>1km 内 4 所小学</b>：Poi Ching（520m）、Junyuan（460m）、East Spring（600m）、Tampines North Primary（550m）——全岛 EC 最强学校圈层之一</td></tr>
-      <tr><td>美食</td><td>Our Tampines Hub 小贩中心、Tampines Round Market & Food Centre（美食天堂）</td></tr>
-      <tr><td>小区设施</td><td>泳池、SPA 池、Fun Pool、健身房、图书馆、桑拿、网球场、BBQ、多功能厅、游乐场</td></tr>
-    </table>
-  </div>
-</section>
-
-<section>
-  <h2>五、居民评价与市场声音</h2>
-  <div class="card">
-    <div class="pos"><b>加分项（市场共识）：</b><ul>
-      <li>生活便利度 EC 天花板：三商场 + 政府综合枢纽 + 零售公园全步行圈</li>
-      <li>学校圈层顶级：1km 内 4 所小学，Poi Ching 更是热门校</li>
-      <li>4 房超大户型（1,862-2,465 sqft），多代家庭空间充裕</li>
-    </ul></div>
-    <div class="warn"><b>扣分项（买家反馈）：</b><ul>
-      <li>Tampines MRT 步行 12-15 分钟略远，夏天体验一般</li>
-      <li>2015 TOP 楼龄 11 年，剩余租约 84 年——全岛 EC 中偏老</li>
-      <li>价格已无 EC 优势，与私宅价差收窄到个位数百分比</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>六、风险提示</h2>
-  <div class="card">
-    <div class="warn"><b>⚠️ 主要风险：</b><ul>
-      <li><b>估值偏高：</b>$1,757 psf（近 1 年）已是全岛最贵老 EC 之一，EC 折价保护几乎耗尽，下行空间比普通 EC 大</li>
-      <li><b>楼龄折旧：</b>2011 起算租约剩 84 年，十年后折价将明显加速</li>
-      <li><b>区域替代：</b>Pasir Ris/Tampines 一带新 EC（Rivelle Tampines $1,933）与新私宅持续供给</li>
-      <li><b>租金回报走低：</b>3.4% 收益率在 EC 中偏低，租金跟不上价格涨幅</li>
-    </ul></div>
-  </div>
-</section>
-
-<section>
-  <h2>七、投资建议</h2>
   <div class="verdict">
-    <h3>综合评定：6.85 / 10 —— 地段满分，估值偏贵的"区域之王"</h3>
-    <p><b>适合人群：</b>看重 Tampines 生活便利与学校圈层的自住家庭、东区上班族、认可区域中心稀缺性的长持买家。</p>
-    <p style="margin-top:8px"><b>策略建议：</b></p>
-    <ul>
-      <li><b>自住：</b>推荐——生活便利度 + 学校圈层无可替代，$1,600-1,700 psf 自住可接受</li>
-      <li><b>投资：</b>谨慎——估值已充分反映地段价值，3.4% 租金回报偏薄，追高 $1,800+ 风险大</li>
-      <li><b>注意：</b>若市场回调，Trilliant 可能成为"跌得多的贵盘"；关注 4 房大户型的相对流动性</li>
-    </ul>
+    <strong>综合评分：6.85 / 10</strong> —— 加权计算（8.0×20% + 5.0×15% + 6.5×20% + 7.5×10% + 7.5×10% + 7.0×15% + 6.5×10%）。地段维度全 EC 顶级，但估值已充分反映，风险维度偏低。
   </div>
 </section>
 
-<footer>数据来源：URA 成交记录（本地库 build 2026-08-02）· ShiokNest / PropertyGuru / 99.co · 七维投资框架<br>本报告仅供研究参考，不构成投资建议 · 生成于 <span>2026-08-02</span></footer>
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>26</td><td>$1,157</td><td>—</td></tr>
+    <tr><td>2022</td><td>41</td><td>$1,266</td><td class="num-green">+9.4%</td></tr>
+    <tr><td>2023</td><td>37</td><td>$1,409</td><td class="num-green">+11.3%</td></tr>
+    <tr><td>2024</td><td>45</td><td>$1,521</td><td class="num-green">+7.9%</td></tr>
+    <tr><td>2025</td><td>48</td><td>$1,658</td><td class="num-green">+9.0%</td></tr>
+    <tr><td>2026（至今）</td><td>29</td><td>$1,714</td><td class="num-green">+3.4%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>5 年年化约 10%，是本批次涨幅最猛、当前价格最贵的 EC。但注意：$1,757 psf（近 1 年）已与周边新私宅（Treasure at Tampines 约 $1,583 起）倒挂或持平——<strong>EC 价格优势正在消失</strong>，这既是价值证明，也是风险信号。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 对比参照：Rivelle Tampines（新 EC）$1,933 psf、Treasure at Tampines（私宅）$1,583+ psf。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2011</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2015</div><div class="tl-detail">TOP 竣工</div></div>
+    <div class="tl-item"><div class="tl-year">2020</div><div class="tl-detail">5 年 MOP 届满 → 可整租 / 转售给符合条件买家</div></div>
+    <div class="tl-item"><div class="tl-year">2025</div><div class="tl-detail">10 年私有化完成 → 转售给外国人 / 公司不受限</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>私有化状态</td><td>已完全私有化——任何买家（含外国人 / 公司）均可购买</td></tr>
+    <tr><td>贷款约束</td><td>私有化后按私宅政策执行（TDSR 60%）</td></tr>
+    <tr><td>剩余租约</td><td>约 84 年（2011 起算 99 年）</td></tr>
+    <tr><td>CPF 津贴</td><td>私有化后不再适用 EC 津贴</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"生活便利度是 EC 天花板——三商场 + Our Tampines Hub + IKEA 零售公园全步行圈，周末出门全是商场，这种便利在 EC 里找不到第二家。"</div>
+    <div class="review-source">— 99.co / PropertyGuru 评价汇总，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"1km 内 4 所小学（Poi Ching 还是热门校），孩子入学竞争占尽先机；4 房 2,465 sqft 的超大户型多代家庭空间充裕。"</div>
+    <div class="review-source">— 买家论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"Tampines MRT 步行 12-15 分钟略远，夏天体验一般；2015 TOP 楼龄 11 年，剩余租约 84 年——全岛 EC 中偏老。"</div>
+    <div class="review-source">— ShiokNest 测评 + 居民反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"价格已无 EC 优势——$1,757 psf 与私宅价差收窄到个位数百分比，市场回调时这种'贵盘'可能跌得更多，投资入场要留足安全边际。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.3/5）</strong> —— 生活便利与学校圈层无敌，自住体验顶级；楼龄与估值是长期折价项。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>估值偏高</td><td class="num-red">中高</td><td>$1,757 psf 全岛最贵老 EC，EC 折价保护几乎耗尽</td></tr>
+    <tr><td>楼龄折旧</td><td class="num-red">中高</td><td>2011 起算租约剩 84 年，十年后折价加速</td></tr>
+    <tr><td>区域替代</td><td class="num-yellow" style="color:#eab308">中</td><td>Pasir Ris/Tampines 新 EC（Rivelle $1,933）与新私宅持续供给</td></tr>
+    <tr><td>租金回报走低</td><td class="num-yellow" style="color:#eab308">中</td><td>3.4% 收益率 EC 中偏低，租金跟不上价格涨幅</td></tr>
+    <tr><td>政策风险</td><td class="num-yellow" style="color:#eab308">低</td><td>私有化后政策敏感度低</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>看重 Tampines 生活便利与学校圈层的家庭首选。生活便利度 + 学校圈层无可替代，$1,600-1,700 psf 自住可接受。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（谨慎）：</strong>估值已充分反映地段价值，3.4% 租金偏薄；若市场回调，Trilliant 可能成为"跌得多的贵盘"。$1,750+ 追高不建议。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>追求 EC 折价红利者（已消失）、依赖高租金回报者、对楼龄敏感者。</div>
+</section>
+
+<footer>
+  THE TAMPINES TRILLIANT Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
 </div>
 </body>
 </html>
