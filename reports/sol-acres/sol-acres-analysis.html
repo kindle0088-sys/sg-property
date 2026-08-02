@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sol Acres — 新加坡 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D23 Choa Chu Kang · 已过 MOP</div>
+  <h1>Sol Acres</h1>
+  <div class="address">2-26 Choa Chu Kang Grove · Choa Chu Kang · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.85</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,396</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,531</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">566</div><div class="lbl">累计转售</div></div>
+    <div class="kpi"><div class="val">1,327</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>CCK 最大型 EC、已过 MOP 可自由出租的"成熟转售盘"</strong>——MCL Land（香港置地集团旗下）开发，1,327 单位、14 座 22-25 层巨型社区，紧邻 Keat Hong 与 Teck Whye 双 LRT 站。2019 年 TOP，MOP 已满，现可整租、可自由转售。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Sol Acres 是"巨型社区 + 双 LRT + 成熟转售"的组合——和前面那些新盘 EC 完全不同：<span class="positive">买入即可出租、转手无锁定</span>，租金回报与退出灵活性是它的核心优势。转售价从 2021 年 $1,097 稳步涨到 2026 年 $1,547 psf（5 年约 +41%），是 CCK 片区流动性最好的 EC 之一。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">MCL Land（香港置地旗下）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">1,327 套 · 14 座 22-25 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2013-10 起）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2019-03（已竣工 7 年）</div></div>
+    <div class="spec-card"><div class="spec-label">MOP 状态</div><div class="spec-value">✅ 已满（可整租/自由转售）</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">1,327 个（1:1）</div></div>
+    <div class="spec-card"><div class="spec-label">户型</div><div class="spec-value">1-5 房全系（CCK 首个 1 房 EC）</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">50+ 项设施，度假风社区</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th></tr>
+    <tr><td>1 Bedroom / +Study</td><td>495 - 646</td><td>151</td></tr>
+    <tr><td>2 Bedroom / +Study</td><td>614 - 936</td><td>326</td></tr>
+    <tr><td>3 Bedroom / +Flex</td><td>926 - 1,098</td><td>668</td></tr>
+    <tr><td>4 Bedroom / +Flex</td><td>1,163 - 1,292</td><td>161</td></tr>
+    <tr><td>5 Bedroom</td><td>1,378 - 1,442</td><td>21</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 全岛少数提供 1 房户型的 EC（面向单身/小家庭）；3 房为绝对主力（50%）。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施（50+ 项）</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 泳池 + 家庭池 + 儿童池</div>
+    <div class="facility-tag"><span class="icon">♨️</span> Jacuzzi + 水疗池 + 足底反射径</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房 + Aqua Gym + 户外健身</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场 + 多功能球场</div>
+    <div class="facility-tag"><span class="icon">🧘</span> 瑜伽亭 + 音乐广场</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 亭 + 户外餐饮亭</div>
+    <div class="facility-tag"><span class="icon">🛼</span> 轮滑径 + 儿童游乐区 ×3</div>
+    <div class="facility-tag"><span class="icon">🐕</span> 宠物角</div>
+    <div class="facility-tag"><span class="icon">📚</span> 阅览室 + 家长休息室</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>Keat Hong LRT 约 240m 步行</strong>；2 站到 CCK MRT（NSL）+ Lot 1 商场；2 站到 Bukit Panjang（DTL）</td></tr>
+    <tr><td>🚗 快速路</td><td>KJE / BKE / PIE 近邻，30 分钟到 CBD / Orchard</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内 3 校：CCK、South View、Teck Whye 小学；Bukit Panjang Govt High 等</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Lot 1 商场、Keat Hong 商场、Junction 10、Bukit Panjang Plaza 车程 5-10 分钟</td></tr>
+    <tr><td>🏢 就业</td><td>Jurong East 第二 CBD 3 站 MRT；Jurong Innovation District 车程内</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Keat Hong LRT 步行 240m，成熟 CCK 生活圈</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · ✅ MOP 已过可整租，但 CCK 租金基数低（3 房约 $3,500-4,200）</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · $1,097 → $1,547 psf（5 年 +41%，年化约 +7%）</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · MCL Land（香港置地集团），40 年历史顶级背景</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 已无 ABSD 风险；巨型社区物业费分摊较低</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 566 笔转售，CCK 最活跃 EC；1 房低价位流动性佳</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · ✅ 已过 MOP 无锁定风险；转售买家池仍限公民</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.85 / 10</strong> —— 加权计算（7.0×20% + 5.0×15% + 7.0×20% + 8.0×10% + 7.5×10% + 7.0×15% + 7.0×10%）。MOP 已过的自由转售 + 顶级开发商是最大加分项。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>20</td><td>$1,097</td><td>—</td></tr>
+    <tr><td>2022</td><td>25</td><td>$1,147</td><td class="num-green">+4.6%</td></tr>
+    <tr><td>2023</td><td>244</td><td>$1,365</td><td class="num-green">+19.0%</td></tr>
+    <tr><td>2024</td><td>158</td><td>$1,429</td><td class="num-green">+4.7%</td></tr>
+    <tr><td>2025</td><td>76</td><td>$1,498</td><td class="num-green">+4.8%</td></tr>
+    <tr><td>2026</td><td>43</td><td>$1,547</td><td class="num-green">+3.3%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2021 年 MOP 解锁后转售起步，2023 年集中放量（244 笔）价格跳涨 19%——此后稳步爬升，5 年年化约 +7%。横向对标：CCK 私宅转售（The Linear、Mayfair Gardens）约 $1,400-1,600 psf，Sol Acres 已基本追平私宅价位，EC 折价红利接近兑现完毕；1 房小户型（$4xxK 起）则是市场上稀缺的低门槛 EC 入场券。
+  </div>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2013-10</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2015-08</div><div class="tl-detail">开盘（1-5 房全系）</div></div>
+    <div class="tl-item"><div class="tl-year">2019-03</div><div class="tl-detail">TOP</div></div>
+    <div class="tl-item"><div class="tl-year">2024（旧框架）</div><div class="tl-detail">✅ MOP（5 年）届满，可整租/转售</div></div>
+    <div class="tl-item"><div class="tl-year">2029（旧框架）</div><div class="tl-detail">私有化完成（10 年），转售不受买家资格限制</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>当前状态</td><td>✅ MOP 已满，可整间出租、自由转售（买家限公民家庭）</td></tr>
+    <tr><td>转售买家</td><td>公民家庭；月收入上限约束（$16,000 家庭）</td></tr>
+    <tr><td>私有化</td><td>预计 2029 年私有化完成后，可售予外国人/公司</td></tr>
+    <tr><td>贷款</td><td>转售 EC 可用 TDSR（非 MSR），贷款灵活度更高</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"1,327 户的大社区设施就是全——50 多项，从泳池、网球场到轮滑径、宠物角，遛娃遛宠物都有地方去。MCL 的交付质量在 CCK 有口皆碑。"</div>
+    <div class="review-source">— 项目资料与住户反馈汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Keat Hong LRT 就在门口（240m），2 站到 CCK MRT 换乘南北线，通勤 CBD 很方便；Lot 1 商场、食阁步行可达，生活配套完全成熟。"</div>
+    <div class="review-source">— 买家/住户反馈汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"巨型社区的短板是人多——早晚高峰电梯、泳池周末像下饺子；1,327 户的管理也有点散，公共区域维护不如小盘精致。"</div>
+    <div class="review-source">— 住户论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"EC 转售买家池有限制（公民+收入上限），2029 年私有化后才会完全打开——但现在买就是'买入即自由'，不用像新盘等十年。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 设施与便利度优秀，巨型社区的人流密度是主要减分项。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>折价红利耗尽</td><td class="num-yellow" style="color:#eab308">中</td><td>转售价已接近私宅，EC 性价比优势减弱</td></tr>
+    <tr><td>地契消耗</td><td class="num-yellow" style="color:#eab308">中低</td><td>99 年地契已消耗 13 年，剩余 86 年</td></tr>
+    <tr><td>巨型社区维护</td><td class="num-yellow" style="color:#eab308">中低</td><td>设施折旧与物业维护质量依赖 MCST 管理</td></tr>
+    <tr><td>私有化等待</td><td class="num-yellow" style="color:#eab308">中低</td><td>2029 年前转售买家池仍受公民限制</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>CCK 家庭自住性价比之王——MCL 品质 + 双 LRT + 成熟配套 + 已过 MOP 的完全自由。$1.4xx psf 买到 1,300+ 户的旗舰社区，比新 EC 少了十年等待。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（推荐）：</strong>转售 EC 中最灵活的标的——买入即可出租回血（3 房月租 $3.5K+），2029 年私有化后买家池打开、流动性升级。1 房小户型（$4xxK）是低门槛的稀缺投资品。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>追求短期暴击者（增值已趋缓）、偏好小盘精致社区者、对地契年限敏感者。
+  </div>
+</section>
+
+<footer>
+  Sol Acres Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parc Greenwich — 新加坡 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D28 Seletar/Fernvale</div>
+  <h1>Parc Greenwich</h1>
+  <div class="address">31-47 Fernvale Lane · Seletar · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.70</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,234</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">—</div><div class="lbl">近 1 年无转售</div></div>
+    <div class="kpi"><div class="val">496</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">496</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Frasers 与 CSC Land 双巨头联合的"绿色度假村"EC</strong>——位于 Seletar 有地住宅区旁，496 单位、9 栋 14 层，Fernvale LRT 步行约 10 分钟。2021 年 9 月开盘即售罄，TOP 2026 年 6 月，主打"乡村花园式社区"与智能家居。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Parc Greenwich 是"顶级开发商组合 + 低密度乡村氛围 + 成熟邻里"的稳健型 EC。开盘 $1,226 到 2024 年转售 $1,456 psf（3 年约 +19%）；TOP 2026 年 6 月、MOP 至 2026+，<span class="positive">买入后等待期较短（已近 TOP）</span>，适合喜欢 Seletar 低密度生活、信任 Frasers 品质的家庭。注意 2024 年后转售记录停滞，流动性需验证。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Frasers Property × CSC Land</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">496 套 · 9 栋 14 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2018-07 起）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2026-06（已近竣工）</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">460 个 + 4 无障碍</div></div>
+    <div class="spec-card"><div class="spec-label">建筑团队</div><div class="spec-value">ADDP Architects · Rich Construction</div></div>
+    <div class="spec-card"><div class="spec-label">销售状态</div><div class="spec-value">2021-09 开盘即售罄</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">智能家居 + 8 大休闲区 + 双会所</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th></tr>
+    <tr><td>2 Bedroom Deluxe</td><td>786 - 990</td><td>14</td></tr>
+    <tr><td>3 Bedroom Deluxe</td><td>958 - 1,195</td><td>52</td></tr>
+    <tr><td>3 Bedroom Premium</td><td>1,001 - 1,216</td><td>194</td></tr>
+    <tr><td>3 Bedroom Premium + Study</td><td>1,066 - 1,281</td><td>124</td></tr>
+    <tr><td>4 Bedroom Premium</td><td>1,206 - 1,410</td><td>98</td></tr>
+    <tr><td>5 Bedroom Luxury</td><td>1,464 - 1,679</td><td>14</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 3 房占 75%，家族型定位；5 房 Luxury 含复式（penthouse）选项。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施（50+ 项）</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m Oasis 泳池 + 活力池 + 儿童池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 3 层 Wellness 会所（健身房）</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场 + 多功能运动厅</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 社区农场 + 香草园 + 果园</div>
+    <div class="facility-tag"><span class="icon">🏘️</span> 双会所（Village Hall + Parkview）</div>
+    <div class="facility-tag"><span class="icon">🐕</span> 宠物角</div>
+    <div class="facility-tag"><span class="icon">🍢</span> Farm-to-table BBQ 亭</div>
+    <div class="facility-tag"><span class="icon">🧘</span> 太极草坪 + 水疗谷</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Fernvale LRT 步行约 10 分钟 → Sengkang MRT（NEL）换乘；CTE / TPE / SLE / KPE 快速路</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内：Fernvale、Sengkang Green 小学；Rosyth、Pei Hwa、Seng Kang Secondary 可达</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Greenwich V 商场正对面；The Seletar Mall 步行可达；Compass One 车程 10 分钟</td></tr>
+    <tr><td>🏢 就业</td><td>Seletar Aerospace Park / 机场、Punggol Digital District、Sengkang West 工业园辐射</td></tr>
+    <tr><td>🌳 自然</td><td>Sengkang Riverside Park、浮动湿地、Sungei Punggol、Hampstead 湿地</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Seletar 低密度居住区 + 商圈邻接，LRT 步行 10 分钟</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · TOP 2026 后 MOP 解锁可出租，租金潜力待验证</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · $1,226 → $1,456（3 年 +19%），2024 后转售停滞</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">8.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:85%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Frasers（星狮）新加坡顶级 + CSC 央企背景</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · EC 首置无 ABSD</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 开盘 409 笔集中成交，但 2024 年后转售样本稀疏</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 已近 TOP，等待期短；MOP 后流动性逐步释放</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.70 / 10</strong> —— 加权计算（7.0×20% + 5.0×15% + 6.5×20% + 8.5×10% + 7.5×10% + 6.0×15% + 7.0×10%）。顶级开发商 + 近 TOP 是亮点，转售流动性待验证是软肋。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021（开盘）</td><td>409</td><td>$1,226</td><td>—</td></tr>
+    <tr><td>2022</td><td>74</td><td>$1,246</td><td class="num-green">+1.6%</td></tr>
+    <tr><td>2023</td><td>6</td><td>$1,332</td><td class="num-green">+6.9%</td></tr>
+    <tr><td>2024</td><td>7</td><td>$1,456</td><td class="num-green">+9.3%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>开盘 409 笔集中签约（2021），转售在 2023-2024 年零星出现（13 笔），价格从 $1,226 爬升到 $1,456 psf（3 年约 +19%）。<strong>2025 年至今无公开转售记录</strong>——可能因临近 TOP 业主惜售。横向对标：Sengkang/Fernvale 私宅转售约 $1,400-1,600 psf；Parc Greenwich 仍有 EC 折价空间，但样本稀疏使价格发现不充分。
+  </div>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2018-07</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2021-09</div><div class="tl-detail">开盘即售罄（409 笔首月）</div></div>
+    <div class="tl-item"><div class="tl-year">2026-06</div><div class="tl-detail">TOP（已近）</div></div>
+    <div class="tl-item"><div class="tl-year">2031</div><div class="tl-detail">5 年 MOP 届满（新框架按 10 年计则至 2036）</div></div>
+    <div class="tl-item"><div class="tl-year">2036-2041</div><div class="tl-detail">私有化窗口开启（新框架 15 年）</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>买家资格</td><td>新加坡公民家庭；月收入上限约束</td></tr>
+    <tr><td>MOP 限制</td><td>不得整间出租、不得转售</td></tr>
+    <tr><td>贷款约束</td><td>受 MSR 30% 上限约束</td></tr>
+    <tr><td>CPF 津贴</td><td>首购家庭最高 $30,000 CPF Housing Grant</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Frasers 和 CSC 的联合出品，品质对标私人公寓——8 大休闲区、双会所、50 多项设施，还有社区农场和果园，'绿色度假村'名副其实。"</div>
+    <div class="review-source">— 项目资料与市场反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"正对 Greenwich V 商场、步行到 Seletar Mall，旁边就是 Seletar 有地住宅区——低密度、安静、配套齐全，非常适合有小孩的家庭。"</div>
+    <div class="review-source">— 买家反馈汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"Fernvale LRT 要走 10 分钟，再到 Sengkang 换乘 NEL——通勤 CBD 整体要 40 分钟以上，对上班族不够友好；2024 年后转售几乎没有成交，流动性存疑。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"North Coast Innovation Corridor、Seletar Aerospace、Punggol Digital District 是区域长线利好，但兑现周期 5-10 年——这是'慢牛'型地段。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 社区品质与低密度氛围优秀，通勤时间与流动性是短板。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>转售流动性</td><td class="num-yellow" style="color:#eab308">中</td><td>2024 年后无成交记录，价格发现不充分</td></tr>
+    <tr><td>MOP 锁定</td><td class="num-red">高</td><td>新框架 10 年 MOP，流动性受限时间长</td></tr>
+    <tr><td>通勤距离</td><td class="num-yellow" style="color:#eab308">中</td><td>LRT + MRT 双程换乘，CBD 通勤 40 分钟+</td></tr>
+    <tr><td>区域增值慢</td><td class="num-yellow" style="color:#eab308">中</td><td>Seletar 利好兑现周期长，属慢牛地段</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>喜欢低密度、绿色社区的家庭——Frasers 品质 + 双会所 + 成熟邻里，2026 年 TOP 后即可入住，等待期已近尾声。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（中性偏谨慎）：</strong>增值逻辑依赖区域长线利好，转售样本稀疏需验证流动性；若以自住为主、投资为辅可考虑，纯投资建议观望或对比活跃盘。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>追求快速转手者、CBD 通勤刚需者、需要即时租金现金流者。
+  </div>
+</section>
+
+<footer>
+  Parc Greenwich Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lumina Grand — 新加坡 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D23 Bukit Batok</div>
+  <h1>Lumina Grand</h1>
+  <div class="address">1-21 Bukit Batok West Avenue 5 · Bukit Batok · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.85</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,515</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,562</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">512</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">512</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>CDL 出品的 Bukit Batok 智能绿色 EC</strong>——城市发展集团（CDL）开发，512 单位、10 栋 12/13 层，紧邻 Tengah 新镇与未来 JRL 地铁（Tengah Park / Tengah Plantation 站）。2024 年 1 月开盘周末售出 53%，快速去化。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Lumina Grand 是"CDL 品牌 + Tengah 邻接 + 名校 1km"的组合盘。开盘 $1,514 到 2026 年 $1,626 psf（2 年约 +7%），价格稳定但不激进。TOP 2027-2029、MOP 至 2032+，适合<span class="positive">信任 CDL 品质、看重西部增值逻辑的家庭</span>。作为 CDL 第二张 Tengah 系 EC 牌（第一张 Copen Grand），品牌延续性是最大卖点。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">CDL 城市发展（Zenith Pte Ltd）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">512 套 · 10 栋 12/13 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2022-12-27 起）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">预计 2027-2029</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">414 个（含 5 EV 桩）</div></div>
+    <div class="spec-card"><div class="spec-label">建筑团队</div><div class="spec-value">P&T Consultants · Woh Hup 承建</div></div>
+    <div class="spec-card"><div class="spec-label">销售状态</div><div class="spec-value">2024-01 开盘，首周末 53%</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">智能家居 + 北南朝向</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>起价</th></tr>
+    <tr><td>3 Bedroom</td><td>936 - 980</td><td>约 $1,360,000</td></tr>
+    <tr><td>4 Bedroom</td><td>1,141 - 1,270</td><td>约 $1,810,000</td></tr>
+    <tr><td>5 Bedroom</td><td>1,496 - 1,711</td><td>约 $2,120,000</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 主力 3-4 房；全系标配智能家居（能源监控、语音助手、远程安防）。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 泳池 + 儿童池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房 + 蒸汽房</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">🏠</span> 会所 + 阅览室</div>
+    <div class="facility-tag"><span class="icon">🎹</span> 音乐室 + 舞蹈室</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 社交草坪 + 大草坪</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤亭</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Bukit Gombak MRT（NSL）约 1.2km；未来 Tengah Park / Tengah Plantation MRT（JRL，2029 通车）</td></tr>
+    <tr><td>🚗 快速路</td><td>KJE / PIE 近邻；15 分钟到 Jurong East</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内：Dazhong、St. Anthony's 小学；<strong>未来 Anglo-Chinese School (Primary) Tengah 校区</strong>；Lianhua、Bukit View 可达</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Le Quest Mall、West Mall、JEM / Westgate / IMM 车程 5-15 分钟</td></tr>
+    <tr><td>🌳 自然</td><td>Bukit Batok Hillside Park、Little Guilin、Tengah Forest Corridor、Jurong Lake Gardens</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Bukit Batok 成熟区 + Tengah/JRL 邻接，现地铁 1.2km</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">3.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:35%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · EC MOP 前不得整租</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · $1,514 → $1,626 psf（2 年 +7%），JRL+ITH 利好</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">9.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · CDL 60 年顶级开发商（Copen Grand 同门）</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · EC 首置无 ABSD，智能节能降低水电</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 512 笔交易，去化扎实</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 10 年 MOP + JRL 2029 兑现依赖</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.85 / 10</strong> —— 加权计算（7.0×20% + 3.5×15% + 7.5×20% + 9.0×10% + 7.5×10% + 7.0×15% + 6.0×10%）。CDL 品牌 + 名校 + JRL 三角支撑，EC 通病的租金/风险维度拉低总分。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2024（开盘）</td><td>438</td><td>$1,514</td><td>—</td></tr>
+    <tr><td>2025</td><td>70</td><td>$1,515</td><td class="num-green">+0.1%</td></tr>
+    <tr><td>2026</td><td>4</td><td>$1,626</td><td class="num-green">+7.3%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>开盘 438 笔集中签约后，2025 年价格横盘（+0.1%），2026 年转售样本跳升至 $1,626 psf。横向对标：Bukit Batok 次新私宅转售约 $1,600-1,800 psf；同区 ALTURA（Bukit Batok West）$1,478 psf——Lumina Grand 定价略高于 ALTURA，反映 CDL 品牌溢价与 Tengah 邻接优势。
+  </div>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2022-12</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2024-01</div><div class="tl-detail">开盘，首周末 53%</div></div>
+    <div class="tl-item"><div class="tl-year">2027-2029</div><div class="tl-detail">预计 TOP</div></div>
+    <div class="tl-item"><div class="tl-year">2032</div><div class="tl-detail">5 年 MOP 届满（新框架按 10 年计则至 2037）</div></div>
+    <div class="tl-item"><div class="tl-year">2037-2042</div><div class="tl-detail">私有化窗口开启（新框架 15 年）</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>买家资格</td><td>新加坡公民家庭；月收入上限约束</td></tr>
+    <tr><td>MOP 限制</td><td>不得整间出租、不得转售</td></tr>
+    <tr><td>贷款约束</td><td>受 MSR 30% 上限约束</td></tr>
+    <tr><td>CPF 津贴</td><td>首购家庭最高 $30,000 CPF Housing Grant</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"CDL 的交付品质在 Bukit Batok 有口皆碑——和 Copen Grand 同门，交房细节、室内用料都是标准之上的。智能家居预装到位，住进去就能用。"</div>
+    <div class="review-source">— 项目资料与市场反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"未来 ACS Primary 校区就在 Tengah，1km 内直接锁定名校资格——对有学龄子女的家庭是实实在在的加分项。"</div>
+    <div class="review-source">— 市场代理分析共识</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"离 Bukit Gombak MRT 1.2km，走路要 15 分钟；JRL 通车前通勤不够方便。车位 414 个对 512 户也略紧。"</div>
+    <div class="review-source">— 买家论坛反馈汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"2025 年价格几乎横盘——CDL 的品牌溢价让开盘价偏高，短期涨幅被压制；中长期看 JRL 通车 + Tengah 成熟才是价值兑现点。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— CDL 品质 + 名校 + 绿化是强项，现地铁距离与短期价格横盘是软肋。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>MOP 锁定</td><td class="num-red">高</td><td>新框架 10 年 MOP，流动性受限时间长</td></tr>
+    <tr><td>短期横盘</td><td class="num-yellow" style="color:#eab308">中</td><td>2025 年价格 +0.1%，增值节奏偏慢</td></tr>
+    <tr><td>JRL 兑现</td><td class="num-yellow" style="color:#eab308">中</td><td>2029 通车是增值关键，延期影响兑现</td></tr>
+    <tr><td>地铁距离</td><td class="num-yellow" style="color:#eab308">中低</td><td>现 Bukit Gombak 站 1.2km，依赖接驳</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>信任 CDL 品质、看重西部名校圈的升级家庭——Tengah 邻接 + ACS 1km + 智能家居，$1.5xx psf 物有所值。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（中性）：</strong>价值兑现依赖 JRL + Tengah 成熟（2030 后），持有周期长；短期涨幅弱于 Copen Grand 等更低价盘。适合长线资金。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>追求短期回报者、依赖地铁步行通勤者、无法接受 10 年锁定者。
+  </div>
+</section>
+
+<footer>
+  Lumina Grand Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>
