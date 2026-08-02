@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE CRITERION — D27 Yishun EC 深度分析（七维评分 6.85）</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--text:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b;--green:#10b981;--red:#ef4444;--border:#334155}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
+header{text-align:center;padding:40px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.4);padding:3px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
+h1{font-size:30px;margin-bottom:6px}
+.sub{color:var(--muted);font-size:14px}
+.scorebox{display:inline-flex;align-items:baseline;gap:6px;margin-top:16px;background:var(--card);border:1px solid var(--border);padding:10px 22px;border-radius:12px}
+.scorebox .num{font-size:40px;font-weight:800;color:var(--accent)}
+.scorebox .lbl{color:var(--muted);font-size:13px}
+h2{font-size:20px;margin:36px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.kpi .v{font-size:22px;font-weight:700;color:var(--accent)}
+.kpi .k{font-size:12px;color:var(--muted);margin-top:2px}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+th{color:var(--muted);font-weight:500;background:var(--card2)}
+tr:hover td{background:rgba(245,158,11,.05)}
+.up{color:var(--red)}.down{color:var(--green)}
+.dim{color:var(--muted);font-size:13px}
+.radar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.dimrow{display:flex;align-items:center;gap:12px;margin:8px 0}
+.dimrow .dn{width:110px;font-size:13px;color:var(--muted);flex-shrink:0}
+.dimrow .bar{flex:1;height:10px;background:var(--card2);border-radius:6px;overflow:hidden}
+.dimrow .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:6px}
+.dimrow .dv{width:36px;text-align:right;font-weight:700;font-size:14px}
+.verdict{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.08));border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:22px;margin-top:20px}
+.verdict h3{color:var(--accent);margin-bottom:10px;font-size:17px}
+ul{padding-left:20px;margin:8px 0}
+li{margin:6px 0;font-size:14px}
+.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
+.warn b{color:var(--red)}
+.pos{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
+.pos b{color:var(--green)}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border)}
+footer span{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="tag">🏘️ EC · 执行共管公寓 · MOP 已过 · CDL 开发</div>
+  <h1>THE CRITERION</h1>
+  <div class="sub">D27 Yishun Street 51 · 99 年租约（2014 起算）· 505 单位 · TOP 2018</div>
+  <div class="scorebox"><span class="num">6.85</span><span class="lbl">/ 10 七维综合评分</span></div>
+</header>
+
+<section>
+  <h2>一、项目概览</h2>
+  <div class="grid">
+    <div class="kpi"><div class="v">505</div><div class="k">总单位（10 栋 13 层）</div></div>
+    <div class="kpi"><div class="v">$1,272</div><div class="k">历史均价 psf</div></div>
+    <div class="kpi"><div class="v">$1,365</div><div class="k">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="v">238 笔</div><div class="k">累计交易</div></div>
+    <div class="kpi"><div class="v">3.84%</div><div class="k">租金收益率</div></div>
+    <div class="kpi"><div class="v">57 项</div><div class="k">设施（6 大主题区）</div></div>
+  </div>
+  <div class="card">
+    <p><b>THE CRITERION</b>是城市发展 CDL 与 TID 联合开发的 505 单位 EC，2018 年 TOP，以 6 大主题 "Haus" 区共 57 项设施著称。项目是<b>新加坡首个配备 Panasonic nanoe-G 空气净化空调的 EC</b>，也是 CDL 旗下最平价的开发项目之一。MOP 已于 2023 年届满。</p>
+    <p class="dim" style="margin-top:8px">地址：9 Yishun Street 51 · 地契：99 年（2014 起算，剩约 87 年）· 户型：2 房（26 套）· 3 房（310 套）· 4 房（152 套）· 5 房（13 套）· 顶楼（4 套）· 俯瞰 Lower Seletar Reservoir</p>
+  </div>
+</section>
+
+<section>
+  <h2>二、七维评分</h2>
+  <div class="radar">
+    <div class="dimrow"><div class="dn">地段位置</div><div class="bar"><div class="fill" style="width:60%"></div></div><div class="dv">6.0</div></div>
+    <div class="dimrow"><div class="dn">租金回报</div><div class="bar"><div class="fill" style="width:50%"></div></div><div class="dv">5.0</div></div>
+    <div class="dimrow"><div class="dn">增值潜力</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
+    <div class="dimrow"><div class="dn">开发商实力</div><div class="bar"><div class="fill" style="width:90%"></div></div><div class="dv">9.0</div></div>
+    <div class="dimrow"><div class="dn">持有成本</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
+    <div class="dimrow"><div class="dn">流动性</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+    <div class="dimrow"><div class="dn">风险控制</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+  </div>
+  <div class="card">
+    <table>
+      <tr><th>维度</th><th>评分</th><th>点评</th></tr>
+      <tr><td>地段位置</td><td class="up">6.0</td><td>Khatib MRT 1.42km（步行 17-20 分钟，日常通勤不现实）、Yishun MRT 1.8km——车依赖型社区；巴士接驳 Yishun Ave 4</td></tr>
+      <tr><td>租金回报</td><td class="up">5.0</td><td>租金收益约 3.84%，中位租金约 $4,000/月；Yishun 租金市场稳定</td></tr>
+      <tr><td>增值潜力</td><td class="up">6.5</td><td>2021-2026 从 $994 涨至 $1,369（+38%）；<b>Chencharu 20 公顷新镇</b>开发是未来十年最大催化</td></tr>
+      <tr><td>开发商实力</td><td class="up">9.0</td><td>CDL——新加坡龙头开发商，交付品质与物业维护口碑行业顶尖</td></tr>
+      <tr><td>持有成本</td><td class="up">7.5</td><td>99 年租约 2014 起算（剩约 87 年）；Panasonic nanoe-G 空调标配（节能）</td></tr>
+      <tr><td>流动性</td><td class="up">7.0</td><td>505 单位，2023-2026 每年 17-98 笔转售，市场活跃</td></tr>
+      <tr><td>风险控制</td><td class="up">7.0</td><td>无期房/MOP 风险；主要风险为交通短板与学校圈层弱</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>三、价格分析</h2>
+  <div class="card">
+    <table>
+      <tr><th>年份</th><th>交易量</th><th>均价 psf</th><th>同比</th></tr>
+      <tr><td>2021</td><td>3</td><td>$994</td><td>—</td></tr>
+      <tr><td>2022</td><td>5</td><td>$1,049</td><td class="up">+5.5%</td></tr>
+      <tr><td>2023</td><td>98</td><td>$1,246</td><td class="up">+18.8%（MOP 解禁放量）</td></tr>
+      <tr><td>2024</td><td>79</td><td>$1,281</td><td class="up">+2.8%</td></tr>
+      <tr><td>2025</td><td>36</td><td>$1,333</td><td class="up">+4.1%</td></tr>
+      <tr><td>2026 至今</td><td>17</td><td>$1,369</td><td class="up">+2.7%</td></tr>
+    </table>
+    <p class="dim" style="margin-top:10px">数据口径：URA 成交记录（contractDate 07/2021 - 07/2026）。2023 年 MOP 解禁后放量 98 笔，价格完成跳升（+18.8%），此后稳步爬坡。</p>
+    <div class="pos"><b>解读：</b>Criterion 的价格节奏清晰：MOP 解禁（2023）触发补涨 → 进入平稳期。$1,365 psf（近 1 年）在北部 EC 中属中位，CDL 品质 + 未来 Chencharu 新镇配套是支撑因素。</div>
+  </div>
+</section>
+
+<section>
+  <h2>四、配套与设施</h2>
+  <div class="card">
+    <table>
+      <tr><th>类别</th><th>内容</th></tr>
+      <tr><td>轨道交通</td><td>Khatib MRT（NSL）1.42km 巴士接驳；Yishun MRT 1.8km；巴士站门前多条线路</td></tr>
+      <tr><td>快速路</td><td>SLE/CTE 便捷接入，CBD 高峰外约 25-30 分钟</td></tr>
+      <tr><td>商场</td><td>Northpoint City（2.5km 北部最大商场）、Junction 9、Wisteria Mall（500m）、Sheng Siong/NTUC（500m 内）</td></tr>
+      <tr><td>学校</td><td>⚠️ 1km 内无小学（Yishun Secondary 1.1km、Wellington Primary 1.44km）——学校圈层是短板</td></tr>
+      <tr><td>医疗</td><td>Khoo Teck Puat Hospital（车程 8 分钟）</td></tr>
+      <tr><td>休闲</td><td>Orchid Country Club（隔壁）、Lower Seletar Reservoir 景观、Springleaf Nature Park、Yishun Stadium</td></tr>
+      <tr><td>小区设施</td><td>50m 泳池、屋顶餐厅、网球场、太阳能电单车、儿童戏水池、阅读室、57 项设施按 6 大 "Haus" 主题分区</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>五、居民评价与市场声音</h2>
+  <div class="card">
+    <div class="pos"><b>加分项（市场共识）：</b><ul>
+      <li>CDL 品牌品质：设施分区设计（6 大 Haus 主题）在 EC 中独树一帜</li>
+      <li>nanoe-G 空气净化空调 + 太阳能电单车，绿色科技配置领先</li>
+      <li>视野开阔：高层俯瞰 Lower Seletar Reservoir 与 Orchid Country Club 高尔夫球场</li>
+    </ul></div>
+    <div class="warn"><b>扣分项（买家反馈）：</b><ul>
+      <li>地铁太远（1.4km+），不驾车通勤很痛苦</li>
+      <li>1km 内没有小学，有娃家庭在入学竞争上吃亏</li>
+      <li>Northpoint City 等大商场需驾车，日常采购靠小区周边小店</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>六、风险提示</h2>
+  <div class="card">
+    <div class="warn"><b>⚠️ 主要风险：</b><ul>
+      <li><b>交通短板：</b>MRT 步行不可达，转售买家群体受限（排除了无车通勤族）</li>
+      <li><b>学校短板：</b>无 1km 内小学，对年轻家庭吸引力下降</li>
+      <li><b>Chencharu 兑现期长：</b>新镇规划到落地需 10 年+，短期催化有限</li>
+      <li><b>区域竞争：</b>Yishun 一带 EC 供给密集（Signature at Yishun 就在隔壁、North Gaia、Parc Canberra）</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>七、投资建议</h2>
+  <div class="verdict">
+    <h3>综合评定：6.85 / 10 —— CDL 品质背书，长期逻辑靠 Chencharu</h3>
+    <p><b>适合人群：</b>有车家庭、看重 CDL 品质与设施丰富度的自住买家、长持 10 年+ 押注 Chencharu 新镇的投资者。</p>
+    <p style="margin-top:8px"><b>策略建议：</b></p>
+    <ul>
+      <li><b>自住：</b>推荐——CDL 交付品质 + 57 项设施 + 水景视野，$1,300-1,400 psf 性价比合理</li>
+      <li><b>投资：</b>中性——租金 3.84% 有安全垫，但短期涨幅有限；长期看 Chencharu 新镇能否改善区域配套</li>
+      <li><b>注意：</b>无车家庭慎选；等 Chencharu 动工信号（2027-2028）再评估加仓</li>
+    </ul>
+  </div>
+</section>
+
+<footer>数据来源：URA 成交记录（本地库 build 2026-08-02）· ShiokNest / PropertyGuru / 项目官网 · 七维投资框架<br>本报告仅供研究参考，不构成投资建议 · 生成于 <span>2026-08-02</span></footer>
+</div>
+</body>
+</html>

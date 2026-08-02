@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE VALES — D19 Sengkang EC 深度分析（七维评分 6.85）</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--text:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b;--green:#10b981;--red:#ef4444;--border:#334155}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
+header{text-align:center;padding:40px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.4);padding:3px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
+h1{font-size:30px;margin-bottom:6px}
+.sub{color:var(--muted);font-size:14px}
+.scorebox{display:inline-flex;align-items:baseline;gap:6px;margin-top:16px;background:var(--card);border:1px solid var(--border);padding:10px 22px;border-radius:12px}
+.scorebox .num{font-size:40px;font-weight:800;color:var(--accent)}
+.scorebox .lbl{color:var(--muted);font-size:13px}
+h2{font-size:20px;margin:36px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.kpi .v{font-size:22px;font-weight:700;color:var(--accent)}
+.kpi .k{font-size:12px;color:var(--muted);margin-top:2px}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+th{color:var(--muted);font-weight:500;background:var(--card2)}
+tr:hover td{background:rgba(245,158,11,.05)}
+.up{color:var(--red)}.down{color:var(--green)}
+.dim{color:var(--muted);font-size:13px}
+.radar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.dimrow{display:flex;align-items:center;gap:12px;margin:8px 0}
+.dimrow .dn{width:110px;font-size:13px;color:var(--muted);flex-shrink:0}
+.dimrow .bar{flex:1;height:10px;background:var(--card2);border-radius:6px;overflow:hidden}
+.dimrow .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:6px}
+.dimrow .dv{width:36px;text-align:right;font-weight:700;font-size:14px}
+.verdict{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.08));border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:22px;margin-top:20px}
+.verdict h3{color:var(--accent);margin-bottom:10px;font-size:17px}
+ul{padding-left:20px;margin:8px 0}
+li{margin:6px 0;font-size:14px}
+.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
+.warn b{color:var(--red)}
+.pos{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
+.pos b{color:var(--green)}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border)}
+footer span{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="tag">🏘️ EC · 执行共管公寓 · MOP 已过 · 🏥 医院就在对面</div>
+  <h1>THE VALES</h1>
+  <div class="sub">D19 Anchorvale Crescent · 99 年租约（2014 起算）· 517 单位 · TOP 2018</div>
+  <div class="scorebox"><span class="num">6.85</span><span class="lbl">/ 10 七维综合评分</span></div>
+</header>
+
+<section>
+  <h2>一、项目概览</h2>
+  <div class="grid">
+    <div class="kpi"><div class="v">517</div><div class="k">总单位（9 栋 15 层）</div></div>
+    <div class="kpi"><div class="v">$1,348</div><div class="k">历史均价 psf</div></div>
+    <div class="kpi"><div class="v">$1,616</div><div class="k">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="v">261 笔</div><div class="k">累计交易</div></div>
+    <div class="kpi"><div class="v">3.84%</div><div class="k">租金收益率</div></div>
+    <div class="kpi"><div class="v">150m</div><div class="k">距 Cheng Lim LRT</div></div>
+  </div>
+  <div class="card">
+    <p><b>THE VALES</b>是 SingHaiyi 集团与 Kay Lim Investment 联合开发的中型 EC，2018 年 TOP。项目的王牌是<b>地理区位：Cheng Lim LRT 就在门口（约 150m），Sengkang General Hospital 就在马路对面</b>，Compass One 商场步行 10 分钟内——是 Sengkang 自足度最高的 EC 之一。MOP 已于 2022 年届满。</p>
+    <p class="dim" style="margin-top:8px">地址：71-87 Anchorvale Crescent · 地契：99 年（2014-05-19 起算，剩约 87 年）· 户型：2 房（764 sqft）至 5 房（1,593 sqft）+ 复式 Maisonette（1,711 sqft）+ 顶楼 Penthouse（1,668 sqft）</p>
+  </div>
+</section>
+
+<section>
+  <h2>二、七维评分</h2>
+  <div class="radar">
+    <div class="dimrow"><div class="dn">地段位置</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
+    <div class="dimrow"><div class="dn">租金回报</div><div class="bar"><div class="fill" style="width:55%"></div></div><div class="dv">5.5</div></div>
+    <div class="dimrow"><div class="dn">增值潜力</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
+    <div class="dimrow"><div class="dn">开发商实力</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+    <div class="dimrow"><div class="dn">持有成本</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
+    <div class="dimrow"><div class="dn">流动性</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+    <div class="dimrow"><div class="dn">风险控制</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+  </div>
+  <div class="card">
+    <table>
+      <tr><th>维度</th><th>评分</th><th>点评</th></tr>
+      <tr><td>地段位置</td><td class="up">7.5</td><td>Cheng Lim LRT 150m 家门口、Sengkang MRT 500m（LRT 一站）；TPE 车程 1 分钟；对面 Sengkang General Hospital——医疗 + 通勤双便利</td></tr>
+      <tr><td>租金回报</td><td class="up">5.5</td><td>租金收益约 3.84%（EC 中上水平），中位租金约 $4,000/月；医院员工是稳定租客来源</td></tr>
+      <tr><td>增值潜力</td><td class="up">6.5</td><td>2021-2026 从 $1,042 涨至 $1,618（+55%，批次内最高）；Sengkang 成熟社区，涨幅主要来自大盘</td></tr>
+      <tr><td>开发商实力</td><td class="up">7.0</td><td>SingHaiyi（新加坡上市公司，曾打造首个豪华酒店式 EC CityLife @ Tampines）+ Kay Lim；中国建筑（S）承建</td></tr>
+      <tr><td>持有成本</td><td class="up">7.5</td><td>99 年租约 2014 起算（剩约 87 年）；517 户中型社区，物业费适中</td></tr>
+      <tr><td>流动性</td><td class="up">7.0</td><td>2021-2026 每年 21-118 笔成交，MOP 解禁后放量稳定</td></tr>
+      <tr><td>风险控制</td><td class="up">7.0</td><td>无期房风险、MOP 已过；主要风险为 LRT 出行与区域供给竞争</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>三、价格分析</h2>
+  <div class="card">
+    <table>
+      <tr><th>年份</th><th>交易量</th><th>均价 psf</th><th>同比</th></tr>
+      <tr><td>2021</td><td>13</td><td>$1,042</td><td>—</td></tr>
+      <tr><td>2022</td><td>118</td><td>$1,224</td><td class="up">+17.5%（MOP 解禁放量）</td></tr>
+      <tr><td>2023</td><td>40</td><td>$1,361</td><td class="up">+11.2%</td></tr>
+      <tr><td>2024</td><td>28</td><td>$1,452</td><td class="up">+6.7%</td></tr>
+      <tr><td>2025</td><td>41</td><td>$1,582</td><td class="up">+9.0%</td></tr>
+      <tr><td>2026 至今</td><td>21</td><td>$1,618</td><td class="up">+2.3%</td></tr>
+    </table>
+    <p class="dim" style="margin-top:10px">数据口径：URA 成交记录（contractDate 08/2021 - 07/2026）。2022 年 MOP 解禁放量 118 笔后，价格持续爬坡，5 年累计 +55%，是本批次涨幅最高的项目。</p>
+    <div class="pos"><b>解读：</b>The Vales 的 +55% 涨幅部分得益于 2022 年 MOP 解禁时的低基数（$1,042），但即便看近 1 年（$1,616 psf），也已接近 Sengkang 新私宅的 6-7 成——医院配套 + LRT 门口的便利性被市场充分认可。</div>
+  </div>
+</section>
+
+<section>
+  <h2>四、配套与设施</h2>
+  <div class="card">
+    <table>
+      <tr><th>类别</th><th>内容</th></tr>
+      <tr><td>轨道交通</td><td>Cheng Lim LRT 约 150m（家门口）、Sengkang MRT/LRT 枢纽约 500m；NEL 直达市区</td></tr>
+      <tr><td>快速路</td><td>TPE 车程 1 分钟，CBD/机场高峰外约 20 分钟</td></tr>
+      <tr><td>商场</td><td>Compass One（约 500m，含 Cold Storage/图书馆/银行）、Seletar Mall、Waterway Point</td></tr>
+      <tr><td>学校</td><td>Nan Chiau Primary（650m，1km 内）、Sengkang Green Primary、Compassvale Primary；中学群（Compassvale/Greendale/Sengkang）步行可达</td></tr>
+      <tr><td>医疗</td><td><b>Sengkang General & Community Hospital 就在马路对面</b>——2 分钟步行</td></tr>
+      <tr><td>休闲</td><td>Sengkang Sports & Recreation Centre（750m）、Sengkang Riverside Park、Punggol Waterway</td></tr>
+      <tr><td>小区设施</td><td>泳池、SPA 池、水上乐园、冒险游乐场、健身房（含更衣+蒸汽房）、网球场、Clubhouse & 游戏室、烧烤、慢跑道（20+ 项）</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>五、居民评价与市场声音</h2>
+  <div class="card">
+    <div class="pos"><b>加分项（市场共识）：</b><ul>
+      <li>医院对面是"结构性优势"——医护人员步行上班，老年家庭就医便利，出租需求有底</li>
+      <li>Cheng Lim LRT 门口 + Compass One 步行圈，日常生活全自足</li>
+      <li>户型选择最丰富：含复式 Maisonette 与 Penthouse，Sengkang EC 独有</li>
+    </ul></div>
+    <div class="warn"><b>扣分项（买家反馈）：</b><ul>
+      <li>LRT 转乘模式，直达 MRT 需换乘，高峰期拥挤</li>
+      <li>部分单位面向医院方向，视野与隐私一般</li>
+      <li>2018 TOP 楼龄 8 年，设施开始进入维护周期</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>六、风险提示</h2>
+  <div class="card">
+    <div class="warn"><b>⚠️ 主要风险：</b><ul>
+      <li><b>涨幅已大：</b>5 年 +55% 后近 1 年增速放缓（+2.3%），追高需谨慎</li>
+      <li><b>区域竞争：</b>Fernvale/Sengkang 同期 EC（Bellewaters、The Topiary）转售供给集中</li>
+      <li><b>楼龄折旧：</b>剩余租约 87 年，10 年后与新盘的价差可能拉大</li>
+      <li><b>租金天花板：</b>虽然医院带来稳定租客，但东北部整体租金水平限制收益率上限</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>七、投资建议</h2>
+  <div class="verdict">
+    <h3>综合评定：6.85 / 10 —— 医院配套驱动的"稳健型"选择</h3>
+    <p><b>适合人群：</b>医疗从业者/有老人家庭的自住买家、追求稳定租金的投资者、喜欢复合户型（Maisonette）的买家。</p>
+    <p style="margin-top:8px"><b>策略建议：</b></p>
+    <ul>
+      <li><b>自住：</b>推荐——医院对面 + 商场步行 + LRT 门口，便利性满分；适合养老与多代家庭</li>
+      <li><b>投资：</b>推荐——3.84% 租金回报是本批次 EC 最高之一，医院客群提供需求韧性；$1,500-1,600 psf 区间可入</li>
+      <li><b>注意：</b>若追求资本利得而非现金流，需等待大盘行情；避免追高 $1,700 psf</li>
+    </ul>
+  </div>
+</section>
+
+<footer>数据来源：URA 成交记录（本地库 build 2026-08-02）· 99.co / ShiokNest / 开发商官网 · 七维投资框架<br>本报告仅供研究参考，不构成投资建议 · 生成于 <span>2026-08-02</span></footer>
+</div>
+</body>
+</html>

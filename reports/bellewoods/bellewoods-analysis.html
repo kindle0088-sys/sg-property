@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BELLEWOODS — D25 Woodlands EC 深度分析（七维评分 6.80）</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--text:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b;--green:#10b981;--red:#ef4444;--border:#334155}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
+header{text-align:center;padding:40px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.4);padding:3px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
+h1{font-size:30px;margin-bottom:6px}
+.sub{color:var(--muted);font-size:14px}
+.scorebox{display:inline-flex;align-items:baseline;gap:6px;margin-top:16px;background:var(--card);border:1px solid var(--border);padding:10px 22px;border-radius:12px}
+.scorebox .num{font-size:40px;font-weight:800;color:var(--accent)}
+.scorebox .lbl{color:var(--muted);font-size:13px}
+h2{font-size:20px;margin:36px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.kpi .v{font-size:22px;font-weight:700;color:var(--accent)}
+.kpi .k{font-size:12px;color:var(--muted);margin-top:2px}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+th{color:var(--muted);font-weight:500;background:var(--card2)}
+tr:hover td{background:rgba(245,158,11,.05)}
+.up{color:var(--red)}.down{color:var(--green)}
+.dim{color:var(--muted);font-size:13px}
+.radar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.dimrow{display:flex;align-items:center;gap:12px;margin:8px 0}
+.dimrow .dn{width:110px;font-size:13px;color:var(--muted);flex-shrink:0}
+.dimrow .bar{flex:1;height:10px;background:var(--card2);border-radius:6px;overflow:hidden}
+.dimrow .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:6px}
+.dimrow .dv{width:36px;text-align:right;font-weight:700;font-size:14px}
+.verdict{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.08));border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:22px;margin-top:20px}
+.verdict h3{color:var(--accent);margin-bottom:10px;font-size:17px}
+ul{padding-left:20px;margin:8px 0}
+li{margin:6px 0;font-size:14px}
+.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
+.warn b{color:var(--red)}
+.pos{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
+.pos b{color:var(--green)}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border)}
+footer span{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="tag">🏘️ EC · 执行共管公寓 · MOP 已过 · 🌳 森林主题水景社区</div>
+  <h1>BELLEWOODS</h1>
+  <div class="sub">D25 Woodlands Avenue 5 · 99 年租约（2013 起算）· 561 单位 · TOP 2017</div>
+  <div class="scorebox"><span class="num">6.80</span><span class="lbl">/ 10 七维综合评分</span></div>
+</header>
+
+<section>
+  <h2>一、项目概览</h2>
+  <div class="grid">
+    <div class="kpi"><div class="v">561</div><div class="k">总单位（12 栋 11-12 层）</div></div>
+    <div class="kpi"><div class="v">$1,185</div><div class="k">历史均价 psf</div></div>
+    <div class="kpi"><div class="v">$1,344</div><div class="k">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="v">216 笔</div><div class="k">累计交易</div></div>
+    <div class="kpi"><div class="v">3.5%</div><div class="k">租金收益率</div></div>
+    <div class="kpi"><div class="v">885m</div><div class="k">距 Woodlands South MRT</div></div>
+  </div>
+  <div class="card">
+    <p><b>BELLEWOODS</b>是青建 Qingjian Realty 在 Woodlands 打造的森林主题 EC，2017 年 TOP，561 单位。项目以"自然之美"为设计哲学，50m 无边泳池 + 水上森林泳池 + 温泉水疗构成度假级设施；<b>步行可达 Woodlands South MRT（TE3），一站即达 Woodlands 北部综合交通枢纽</b>。MOP 已于 2022 年届满。</p>
+    <p class="dim" style="margin-top:8px">地址：Woodlands Avenue 5 / Avenue 6 · 地契：99 年（2013-08-12 起算，剩约 86 年）· 户型：2 房（786 sqft）至 5 房 CoSpace（1,528-1,679 sqft）· ADDP Architects 设计</p>
+  </div>
+</section>
+
+<section>
+  <h2>二、七维评分</h2>
+  <div class="radar">
+    <div class="dimrow"><div class="dn">地段位置</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+    <div class="dimrow"><div class="dn">租金回报</div><div class="bar"><div class="fill" style="width:50%"></div></div><div class="dv">5.0</div></div>
+    <div class="dimrow"><div class="dn">增值潜力</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
+    <div class="dimrow"><div class="dn">开发商实力</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
+    <div class="dimrow"><div class="dn">持有成本</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
+    <div class="dimrow"><div class="dn">流动性</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+    <div class="dimrow"><div class="dn">风险控制</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+  </div>
+  <div class="card">
+    <table>
+      <tr><th>维度</th><th>评分</th><th>点评</th></tr>
+      <tr><td>地段位置</td><td class="up">7.0</td><td>Woodlands South MRT（TE3）885m 步行 10 分钟；一站至 Woodlands 枢纽（NSL+TE+RTS 新柔地铁）；Causeway Point 北部最大商场近在咫尺</td></tr>
+      <tr><td>租金回报</td><td class="up">5.0</td><td>收益约 3.5%，平均租金 $3.9 psf；Woodlands 区域中心发展带动租赁需求</td></tr>
+      <tr><td>增值潜力</td><td class="up">6.5</td><td>2021-2026 从 $980 涨至 $1,335（+36%）；2025-12 创历史新高 $1,390 psf；Woodlands Regional Centre 转型 + RTS 通车是中期催化</td></tr>
+      <tr><td>开发商实力</td><td class="up">7.5</td><td>青建——新加坡 EC 最资深开发商之一；青岛建设承建，交付质量稳定</td></tr>
+      <tr><td>持有成本</td><td class="up">7.5</td><td>99 年租约 2013 起算（剩约 86 年）；561 户分摊物业费</td></tr>
+      <tr><td>流动性</td><td class="up">7.0</td><td>2021-2026 每年 17-92 笔成交；2022 年 MOP 解禁放量后稳定在 20-40 笔/年</td></tr>
+      <tr><td>风险控制</td><td class="up">7.0</td><td>无期房/MOP 风险；主要风险为北部区域供给与价格弹性</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>三、价格分析</h2>
+  <div class="card">
+    <table>
+      <tr><th>年份</th><th>交易量</th><th>均价 psf</th><th>同比</th></tr>
+      <tr><td>2021</td><td>2</td><td>$980</td><td>—</td></tr>
+      <tr><td>2022</td><td>92</td><td>$1,104</td><td class="up">+12.7%（MOP 解禁放量）</td></tr>
+      <tr><td>2023</td><td>43</td><td>$1,177</td><td class="up">+6.6%</td></tr>
+      <tr><td>2024</td><td>37</td><td>$1,238</td><td class="up">+5.2%</td></tr>
+      <tr><td>2025</td><td>25</td><td>$1,336</td><td class="up">+7.9%</td></tr>
+      <tr><td>2026 至今</td><td>17</td><td>$1,335</td><td>-0.1%（高位横盘）</td></tr>
+    </table>
+    <p class="dim" style="margin-top:10px">数据口径：URA 成交记录（contractDate 10/2021 - 07/2026）。2025 年 12 月创下 $1,390 psf 历史高点（1,281 sqft 单位），当前价格处于历史高位平台。</p>
+    <div class="pos"><b>解读：</b>Bellewoods 近 1 年 $1,344 psf 已是开盘价（$7xx）的近两倍，Woodlands 区域中心转型的预期定价充分。2026 年横盘说明短期动能减弱——但相对北部其他 EC（Signature $1,286），其"步行地铁 + 区域中心"的稀缺性支撑了更高定价。</div>
+  </div>
+</section>
+
+<section>
+  <h2>四、配套与设施</h2>
+  <div class="card">
+    <table>
+      <tr><th>类别</th><th>内容</th></tr>
+      <tr><td>轨道交通</td><td>Woodlands South MRT（TE3）885m 步行 10 分钟；一站至 Woodlands 枢纽（NSL+TE+未来 RTS 新柔地铁）；Admiralty MRT（NS10）车程短</td></tr>
+      <tr><td>快速路</td><td>BKE/SLE 便捷接入；未来 North-South Expressway 将节省 CBD 通勤 30%</td></tr>
+      <tr><td>商场</td><td>Causeway Point（北部最大商场，含影院）、Vista Point、Kampung Admiralty、888 Plaza</td></tr>
+      <tr><td>学校</td><td>Greenwood Primary、Innova Primary、Qi Hua Primary；Singapore American School、NYP、Sports School</td></tr>
+      <tr><td>休闲</td><td>Woodlands Waterfront（1.5km 滨海长廊 + 400m 栈桥）、Admiralty Park（7ha 城市公园 + 20ha 自然保护区）、Woodlands Regional Library</td></tr>
+      <tr><td>小区设施</td><td>50m 无边泳池、水上森林泳池、水上乐园、温泉水疗（Hydra Spa）、Clubhouse、网球场、BBQ 露台、慢跑道、冥想草坪、酒窖（20+ 项）</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>五、居民评价与市场声音</h2>
+  <div class="card">
+    <div class="pos"><b>加分项（市场共识）：</b><ul>
+      <li>步行地铁 + 北部最大商场 + 滨海公园，"自足度"在北部 EC 中最高</li>
+      <li>森林水景主题设施品质高：无边泳池 + 水上乐园遛娃友好</li>
+      <li>CoSpace 户型（3-5 房均有变体）灵活适配家庭阶段变化</li>
+    </ul></div>
+    <div class="warn"><b>扣分项（买家反馈）：</b><ul>
+      <li>Woodlands 离市区整体较远，CBD 通勤 40 分钟+</li>
+      <li>2017 TOP 楼龄 9 年，剩余租约 86 年</li>
+      <li>Woodlands 区域工业占比高，生活氛围不如东部/西部成熟住宅区精致</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>六、风险提示</h2>
+  <div class="card">
+    <div class="warn"><b>⚠️ 主要风险：</b><ul>
+      <li><b>高位横盘：</b>2026 年价格停滞，短期追高空间有限；RTS（新柔地铁）通车前的预期已部分定价</li>
+      <li><b>区域供给：</b>Woodlands 一带 BTO/私宅供给持续，转售竞争存在</li>
+      <li><b>通勤距离：</b>物理距离决定了 CBD 通勤的硬上限，影响买家池规模</li>
+      <li><b>楼龄折旧：</b>剩余租约 86 年，10 年后折价显现</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>七、投资建议</h2>
+  <div class="verdict">
+    <h3>综合评定：6.80 / 10 —— 北部自足型社区的稳健之选</h3>
+    <p><b>适合人群：</b>在北部工作/生活的家庭、依赖 Woodlands 区域中心配套的买家、看好 RTS 与区域转型的长持投资者。</p>
+    <p style="margin-top:8px"><b>策略建议：</b></p>
+    <ul>
+      <li><b>自住：</b>推荐——步行地铁 + 商场 + 公园的黄金组合，$1,300-1,380 psf 自住舒适</li>
+      <li><b>投资：</b>中性偏好——3.5% 租金 + 区域中心逻辑扎实，但当前价位安全边际一般；RTS 通车（2030s）前可等回调</li>
+      <li><b>注意：</b>Woodlands 买家以本地 HDB 升级族为主（83.1%），流动性依赖该群体购买力；避免追高 $1,400+</li>
+    </ul>
+  </div>
+</section>
+
+<footer>数据来源：URA 成交记录（本地库 build 2026-08-02）· EdgeProp / Qingjian 官网 / 99.co · 七维投资框架<br>本报告仅供研究参考，不构成投资建议 · 生成于 <span>2026-08-02</span></footer>
+</div>
+</body>
+</html>

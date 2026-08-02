@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>THE TOPIARY — D28 Fernvale EC 深度分析（七维评分 6.80）</title>
+<style>
+:root{--bg:#0f172a;--card:#1e293b;--card2:#273449;--text:#e2e8f0;--muted:#94a3b8;--accent:#f59e0b;--green:#10b981;--red:#ef4444;--border:#334155}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:960px;margin:0 auto;padding:24px 20px 60px}
+header{text-align:center;padding:40px 0 28px;border-bottom:1px solid var(--border);margin-bottom:28px}
+.tag{display:inline-block;background:rgba(245,158,11,.15);color:var(--accent);border:1px solid rgba(245,158,11,.4);padding:3px 12px;border-radius:20px;font-size:13px;margin-bottom:14px}
+h1{font-size:30px;margin-bottom:6px}
+.sub{color:var(--muted);font-size:14px}
+.scorebox{display:inline-flex;align-items:baseline;gap:6px;margin-top:16px;background:var(--card);border:1px solid var(--border);padding:10px 22px;border-radius:12px}
+.scorebox .num{font-size:40px;font-weight:800;color:var(--accent)}
+.scorebox .lbl{color:var(--muted);font-size:13px}
+h2{font-size:20px;margin:36px 0 16px;padding-left:12px;border-left:4px solid var(--accent)}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px 22px;margin-bottom:16px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.kpi{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:14px 16px}
+.kpi .v{font-size:22px;font-weight:700;color:var(--accent)}
+.kpi .k{font-size:12px;color:var(--muted);margin-top:2px}
+table{width:100%;border-collapse:collapse;margin:10px 0}
+th,td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--border);font-size:14px}
+th{color:var(--muted);font-weight:500;background:var(--card2)}
+tr:hover td{background:rgba(245,158,11,.05)}
+.up{color:var(--red)}.down{color:var(--green)}
+.dim{color:var(--muted);font-size:13px}
+.radar{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:20px;margin-bottom:16px}
+.dimrow{display:flex;align-items:center;gap:12px;margin:8px 0}
+.dimrow .dn{width:110px;font-size:13px;color:var(--muted);flex-shrink:0}
+.dimrow .bar{flex:1;height:10px;background:var(--card2);border-radius:6px;overflow:hidden}
+.dimrow .fill{height:100%;background:linear-gradient(90deg,#f59e0b,#f97316);border-radius:6px}
+.dimrow .dv{width:36px;text-align:right;font-weight:700;font-size:14px}
+.verdict{background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(249,115,22,.08));border:1px solid rgba(245,158,11,.35);border-radius:12px;padding:22px;margin-top:20px}
+.verdict h3{color:var(--accent);margin-bottom:10px;font-size:17px}
+ul{padding-left:20px;margin:8px 0}
+li{margin:6px 0;font-size:14px}
+.warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
+.warn b{color:var(--red)}
+.pos{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.3);border-radius:10px;padding:14px 18px;margin:12px 0;font-size:14px}
+.pos b{color:var(--green)}
+footer{text-align:center;color:var(--muted);font-size:12px;margin-top:48px;padding-top:20px;border-top:1px solid var(--border)}
+footer span{color:var(--accent)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div class="tag">🏘️ EC · 执行共管公寓 · ✅ 已私有化（可售外国人）</div>
+  <h1>THE TOPIARY</h1>
+  <div class="sub">D28 Fernvale Lane · 99 年租约（2012 起算）· 700 单位 · TOP 2016</div>
+  <div class="scorebox"><span class="num">6.80</span><span class="lbl">/ 10 七维综合评分</span></div>
+</header>
+
+<section>
+  <h2>一、项目概览</h2>
+  <div class="grid">
+    <div class="kpi"><div class="v">700</div><div class="k">总单位（8 栋）</div></div>
+    <div class="kpi"><div class="v">$1,293</div><div class="k">历史均价 psf</div></div>
+    <div class="kpi"><div class="v">$1,540</div><div class="k">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="v">309 笔</div><div class="k">累计交易</div></div>
+    <div class="kpi"><div class="v">3.6%</div><div class="k">租金收益率</div></div>
+    <div class="kpi"><div class="v">2016</div><div class="k">TOP · 已私有化</div></div>
+  </div>
+  <div class="card">
+    <p><b>THE TOPIARY</b>是庆隆集团（Kheng Leong）旗下 Peak Living 打造的 700 单位大型 EC，2016 年 TOP，以园艺修剪艺术为主题园林闻名。项目已越过 10 年 MOP 里程碑，<b>完成私有化——可自由售予包括外国人在内的任何买家</b>，是进入 Sengkang 私宅市场的低门槛入口。</p>
+    <p class="dim" style="margin-top:8px">地址：11-25 Fernvale Lane · 地契：99 年（2012 起算，剩约 85 年）· 户型：2 房（753 sqft）至 5 房（2,228 sqft）共 37 种 · BCA Green Mark GoldPlus</p>
+  </div>
+</section>
+
+<section>
+  <h2>二、七维评分</h2>
+  <div class="radar">
+    <div class="dimrow"><div class="dn">地段位置</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
+    <div class="dimrow"><div class="dn">租金回报</div><div class="bar"><div class="fill" style="width:55%"></div></div><div class="dv">5.5</div></div>
+    <div class="dimrow"><div class="dn">增值潜力</div><div class="bar"><div class="fill" style="width:65%"></div></div><div class="dv">6.5</div></div>
+    <div class="dimrow"><div class="dn">开发商实力</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+    <div class="dimrow"><div class="dn">持有成本</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
+    <div class="dimrow"><div class="dn">流动性</div><div class="bar"><div class="fill" style="width:75%"></div></div><div class="dv">7.5</div></div>
+    <div class="dimrow"><div class="dn">风险控制</div><div class="bar"><div class="fill" style="width:70%"></div></div><div class="dv">7.0</div></div>
+  </div>
+  <div class="card">
+    <table>
+      <tr><th>维度</th><th>评分</th><th>点评</th></tr>
+      <tr><td>地段位置</td><td class="up">6.5</td><td>Fernvale 成熟社区，Fernvale LRT 约 590m、Thanggam LRT 近邻；依赖 LRT 转乘 Sengkang MRT（NEL），通勤 CBD 约 40-45 分钟</td></tr>
+      <tr><td>租金回报</td><td class="up">5.5</td><td>已私有化可租外国人，需求池最大；租金 $1,000-$5,400，收益率约 3.6%，中位租金约 $3,200</td></tr>
+      <tr><td>增值潜力</td><td class="up">6.5</td><td>2021-2026 从 $1,077 涨至 $1,547（+44%）；私有化已完成，价格与私宅折价收敛至约 2/3，后续靠市场整体</td></tr>
+      <tr><td>开发商实力</td><td class="up">7.0</td><td>Peak Living（庆隆 Kheng Leong 集团系），设计（DP Architects）+ 施工品质稳定，Green Mark GoldPlus</td></tr>
+      <tr><td>持有成本</td><td class="up">7.5</td><td>99 年租约 2012 起算（剩约 85 年）；700 户大型社区分摊物业费</td></tr>
+      <tr><td>流动性</td><td class="up">7.5</td><td>全市场开放（含外国人）+ 700 单位基数，2021-2026 每年 26-74 笔成交，流动性为 EC 中上水平</td></tr>
+      <tr><td>风险控制</td><td class="up">7.0</td><td>私有化消除 EC 限制性风险；主要风险为 LRT 通勤体验与楼龄折旧</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>三、价格分析</h2>
+  <div class="card">
+    <table>
+      <tr><th>年份</th><th>交易量</th><th>均价 psf</th><th>同比</th></tr>
+      <tr><td>2021</td><td>62</td><td>$1,077</td><td>—</td></tr>
+      <tr><td>2022</td><td>74</td><td>$1,169</td><td class="up">+8.5%</td></tr>
+      <tr><td>2023</td><td>41</td><td>$1,265</td><td class="up">+8.2%</td></tr>
+      <tr><td>2024</td><td>40</td><td>$1,402</td><td class="up">+10.8%</td></tr>
+      <tr><td>2025</td><td>66</td><td>$1,484</td><td class="up">+5.8%</td></tr>
+      <tr><td>2026 至今</td><td>26</td><td>$1,547</td><td class="up">+4.2%</td></tr>
+    </table>
+    <p class="dim" style="margin-top:10px">数据口径：URA 成交记录（contractDate 07/2021 - 07/2026）。五年年化涨幅约 9%，2024 年加速（+10.8%）后进入平稳爬坡，符合私有化前后的典型价格形态。</p>
+    <div class="pos"><b>解读：</b>均价 $1,540 psf（近 1 年）约为同区新私宅（Chuan Park $2,596）的 6 成，性价比突出。私有化已完成，价格与纯私宅的折价已基本收敛完毕——未来涨幅将更多跟随大盘而非"身份套利"。</div>
+  </div>
+</section>
+
+<section>
+  <h2>四、配套与设施</h2>
+  <div class="card">
+    <table>
+      <tr><th>类别</th><th>内容</th></tr>
+      <tr><td>轨道交通</td><td>Fernvale LRT（590m）、Thanggam LRT；LRT 接驳 Sengkang MRT（NEL）；未来 CRL 的 Serangoon North 站规划</td></tr>
+      <tr><td>快速路</td><td>TPE/CTE/SLE 均 5 分钟车程内，驾车族便利</td></tr>
+      <tr><td>商场</td><td>Greenwich V（步行可达）、Seletar Mall（700m 约 9 分钟）、Compass One（LRT 数分钟）</td></tr>
+      <tr><td>美食</td><td>Ci Yuan Hawker Centre（40 个摊位）、Fernvale 美食区</td></tr>
+      <tr><td>学校</td><td>Fernvale Primary（780m，1km 内）、North Vista Primary（1.06km）、Sengkang Green Primary、Pei Hwa Secondary</td></tr>
+      <tr><td>医疗</td><td>Sengkang General Hospital（3km）</td></tr>
+      <tr><td>休闲</td><td>Sungei Punggol Park Connector、Sengkang Riverside Park、Jalan Selaseh Park</td></tr>
+      <tr><td>小区设施</td><td>50m 泳池、SPA 池、儿童池、网球场、健身房、Clubhouse（含 KTV/游戏室）、蒸汽房、桑拿、烧烤（20 项）</td></tr>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>五、居民评价与市场声音</h2>
+  <div class="card">
+    <div class="pos"><b>加分项（市场共识）：</b><ul>
+      <li>户型设计高效（减少 planters/飘窗浪费），2 房至 5 房 37 种选择灵活</li>
+      <li>已私有化——全市场买家（含外国人）可购，转售对象池最广</li>
+      <li>园林主题绿化出色，Green Mark GoldPlus 环保认证</li>
+    </ul></div>
+    <div class="warn"><b>扣分项（买家反馈）：</b><ul>
+      <li>LRT 依赖度高、高峰拥挤且频率不稳，通勤者需预留转乘时间</li>
+      <li>楼龄 10 年（2016 TOP），设施老化趋势显现</li>
+      <li>剩余租约 85 年，远期折价将逐步显现</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>六、风险提示</h2>
+  <div class="card">
+    <div class="warn"><b>⚠️ 主要风险：</b><ul>
+      <li><b>私有化利好已兑现：</b>2026 年完成私有化，身份套利空间已充分释放，后续涨幅回归大盘 beta</li>
+      <li><b>楼龄与租约折旧：</b>剩余 85 年租约，未来 10-15 年与其他新盘的价差可能拉大</li>
+      <li><b>通勤短板：</b>LRT 转乘模式对上班族吸引力有限，影响转售与租金天花板</li>
+      <li><b>区域竞争：</b>Fernvale/Sengkang 一带 EC 供给集中（Bellewaters、The Vales 同期盘），转售竞争激烈</li>
+    </ul></div>
+  </div>
+</section>
+
+<section>
+  <h2>七、投资建议</h2>
+  <div class="verdict">
+    <h3>综合评定：6.80 / 10 —— 已私有化的"平价私宅替代"</h3>
+    <p><b>适合人群：</b>预算有限但想要完整私宅体验的自住买家、外国人买家（唯一无需 MOP 限制的入场通道）、追求稳定租金的房东。</p>
+    <p style="margin-top:8px"><b>策略建议：</b></p>
+    <ul>
+      <li><b>自住：</b>强烈推荐——$1,300-1,500 psf 买 700 户完整配套，性价比远超同区新私宅</li>
+      <li><b>投资：</b>中规中矩——租金 3.6% 提供安全垫，但私有化补涨已结束，期望值应锚定大盘涨幅而非超额收益</li>
+      <li><b>注意：</b>避免支付 $1,600 psf 以上溢价；关注 LRT 未来升级（CRL）与区域组屋翻新带来的利好</li>
+    </ul>
+  </div>
+</section>
+
+<footer>数据来源：URA 成交记录（本地库 build 2026-08-02）· 99.co / PropertyGuru / ShiokNest · 七维投资框架<br>本报告仅供研究参考，不构成投资建议 · 生成于 <span>2026-08-02</span></footer>
+</div>
+</body>
+</html>
