@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Otto Place — 新加坡 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D23/D24 Tengah · 新盘</div>
+  <h1>Otto Place</h1>
+  <div class="address">Plantation Close · Tengah New Town · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.45</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,758</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,758</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">596</div><div class="lbl">开盘成交</div></div>
+    <div class="kpi"><div class="val">~600</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Tengah 智能生态镇的第三张 EC 王牌</strong>——Hoi Hup Realty（1983 年老牌）与 Sunway 联合开发，约 600 单位，位于 Plantation Close。2025 年 7 月开盘即售罄（596 笔成交），坐拥新加坡首个"森林镇"、集中供冷系统、无车市中心等未来式规划。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Otto Place 是"Tengah 概念 + 顶级本地开发商组合"的又一张确定性门票。开盘 $1,758 psf 创 Tengah EC 新高（高于 Copen Grand $1,341、接近 Coastal Cabana），说明市场对 Tengah 第二波 EC 的定价已显著抬升。TOP 2028 Q1、MOP 锁定至 2033+，<span class="positive">适合认可 Tengah 长期价值的家庭自住</span>，价格上已透支部分未来涨幅。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Hoi Hup Realty × Sunway</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">约 600 套 · 8 栋 14-20 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">预计 2028 Q1</div></div>
+    <div class="spec-card"><div class="spec-label">土地</div><div class="spec-value">Plantation Close Parcel B · GLS 中标</div></div>
+    <div class="spec-card"><div class="spec-label">地块面积</div><div class="spec-value">约 20,038 平方米</div></div>
+    <div class="spec-card"><div class="spec-label">销售状态</div><div class="spec-value">2025-07 开盘即售罄</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">智能家居 + 绿色节能设计</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th></tr>
+    <tr><td>3 Bedroom Deluxe</td><td>872</td><td>89</td></tr>
+    <tr><td>3 Bedroom Deluxe + Study</td><td>904 - 936</td><td>124</td></tr>
+    <tr><td>3 Bedroom Luxury + Study</td><td>1,012 起</td><td>156</td></tr>
+    <tr><td>4 Bedroom Deluxe + Study</td><td>1,012 - 1,100</td><td>111</td></tr>
+    <tr><td>4 Bedroom Luxury + Study</td><td>1,195</td><td>120</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 全户型带 Study，Luxury 系占比近半——定位比 Copen Grand 更偏高端家庭。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 泳池 + 家庭泳池 + 儿童池</div>
+    <div class="facility-tag"><span class="icon">♨️</span> Jacuzzi 按摩池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房 + 户外健身区</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场 + 多功能球场 ×2</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 屋顶花园（16 层 Sky Garden）</div>
+    <div class="facility-tag"><span class="icon">💼</span> Co-working 共享空间</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区 + 野餐草坪</div>
+    <div class="facility-tag"><span class="icon">🐕</span> 宠物友好区域</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>未来 Tengah MRT（JRL）步行可达；现靠巴士接驳 Chinese Garden（约 760m）</td></tr>
+    <tr><td>🚗 快速路</td><td>KJE / PIE 近邻，通勤 Jurong East 15 分钟</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内 4 校：Jurong、Princess Elizabeth、Yuhua、Pioneer 小学；Dulwich College / River Valley High 车程内</td></tr>
+    <tr><td>🛍️ 商圈</td><td>紧邻未来 Tengah Town Centre / Plantation Plaza；Westgate / JEM / IMM 车程 10-15 分钟</td></tr>
+    <tr><td>🏢 就业</td><td>Jurong Lake District（第二 CBD）+ Jurong Innovation District 双引擎</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Tengah 智能镇 + JRL + 第二 CBD 辐射，配套落地需时间</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">3.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:30%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · TOP 2028 + MOP，至少 5 年无租金收入</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Tengah 第二波 EC 定价显著抬升，稀缺 + 规划利好</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Hoi Hup 1983 年老牌 + Sunway 马来西亚巨头，口碑稳</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · EC 首置无 ABSD；Tengah 集中供冷系统降低能耗</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 596 笔开盘成交，即日售罄；转售待 MOP 后验证</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">5.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:55%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 高价买入 + 2028 TOP + 10 年 MOP</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.45 / 10</strong> —— 加权计算（7.0×20% + 3.0×15% + 7.5×20% + 7.5×10% + 7.5×10% + 7.0×15% + 5.5×10%）。地段与开发商扎实，高价与长等待压制风险与租金维度。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>成交数</th><th>均价 psf</th><th>说明</th></tr>
+    <tr><td>2025（开盘）</td><td>560</td><td>$1,758</td><td>7 月开盘集中签约，即日售罄</td></tr>
+    <tr><td>2026</td><td>36</td><td>$1,768</td><td>余量单位补签，价格微升</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>$1,758 psf 的开盘价在 Tengah EC 序列中居首——对比同区 Copen Grand（$1,341）、NOVO Place（$1,654），反映 2025 年楼市高点 + Tengah 概念成熟后的定价抬升。横向对标 Jurong 次新私宅转售（$1,700-1,900 psf），EC 折价空间已被大幅压缩——<strong>买入时点决定后续收益空间</strong>。
+  </div>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2025-07</div><div class="tl-detail">开盘即售罄</div></div>
+    <div class="tl-item"><div class="tl-year">2028 Q1</div><div class="tl-detail">预计 TOP</div></div>
+    <div class="tl-item"><div class="tl-year">2033</div><div class="tl-detail">5 年 MOP 届满（新框架按 10 年计则至 2038）</div></div>
+    <div class="tl-item"><div class="tl-year">2038-2043</div><div class="tl-detail">私有化窗口开启（新框架 15 年）</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>买家资格</td><td>新加坡公民家庭；月收入上限约束</td></tr>
+    <tr><td>MOP 限制</td><td>不得整间出租、不得转售</td></tr>
+    <tr><td>贷款约束</td><td>受 MSR 30% 上限约束</td></tr>
+    <tr><td>CPF 津贴</td><td>首购家庭最高 $30,000 CPF Housing Grant</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Tengah 是新加坡唯一有集中供冷 + 气动垃圾收集的城镇，智能生态不是概念而是落地设施——住在这样的'未来城市'里，居住体验本身就是卖点。"</div>
+    <div class="review-source">— 项目官方介绍汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Hoi Hup 在新加坡口碑过硬（Sophia Hills、Parc Canberra），Sunway 是马来西亚老牌——本地 + 国际双背景，交房质量让人放心。"</div>
+    <div class="review-source">— 市场代理分析共识</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"$1,758 psf 买 EC 实在太贵——隔壁 Copen Grand 同是 Tengah 只要 $1,341。价格高了两成多，等于放弃了 EC 的性价比本质，把未来涨幅提前付了。"</div>
+    <div class="review-source">— 买家论坛反馈汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"Tengah MRT 还在建，2027-2028 通车前主要靠巴士；周边商业配套成熟度低，日常生活要依赖 Jurong East。等得起是天堂，等不起是煎熬。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 产品定位高端、智能设施超前，扣分在新镇配套等待期与高价预期。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>高价买入</td><td class="num-red">高</td><td>$1,758 psf 开盘价为 Tengah EC 之最，缓冲空间有限</td></tr>
+    <tr><td>长等待期</td><td class="num-red">高</td><td>TOP 2028 + MOP 10 年，约 13 年无转手自由</td></tr>
+    <tr><td>JRL 兑现</td><td class="num-yellow" style="color:#eab308">中</td><td>Tengah 站通车是核心增值逻辑，延期影响兑现</td></tr>
+    <tr><td>配套成熟度</td><td class="num-yellow" style="color:#eab308">中</td><td>新镇商业/学校落地节奏存在不确定性</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（有条件推荐）：</strong>认可 Tengah 智能镇理念、愿意为未来式生活付溢价的家庭——产品力与开发商组合都是顶配，自住体验可预期。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（谨慎）：</strong>开盘价已高企，增值依赖"Tengah 成熟期 + JRL 通车 + 私有化"三连击。同区 Copen Grand 若仍有转售机会，性价比更优；追求回报的买家建议货比三家。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>价格敏感者、需要现金流者、无法接受 13 年锁定者。
+  </div>
+</section>
+
+<footer>
+  Otto Place Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

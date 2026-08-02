@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>North Gaia — 新加坡 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D27 Yishun</div>
+  <h1>North Gaia</h1>
+  <div class="address">25-45 Yishun Close · Yishun · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.35</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,312</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,475</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">615</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">616</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Yishun 七年来首个新 EC，紧邻 Khatib Bongsu 自然公园的"绿色生态盘"</strong>——Sing Holdings 本地上市开发商打造，616 单位、11 栋 14 层，超过 60 项设施（双 50m 泳池、网球场、推杆果岭、儿童冒险乐园），大部分单位北南朝向可望公园或泳池景观。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>North Gaia 是"自然生态 + 超高设施密度"的 Yishun 稀缺 EC。开盘 $1,297 到 2025 年 $1,401 psf（4 年约 +8%），增值表现温和但稳健；TOP 2027 年 6 月、MOP 至 2032，适合<span class="positive">喜欢绿色环境、追求设施品质的北部家庭自住</span>，投资回报依赖 Yishun 整体价值重估。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Sing Holdings（新加坡上市）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">616 套 · 11 栋 14 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2021 起）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">预计 2027-06-30</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">616 个（1:1）+ 103 单车位</div></div>
+    <div class="spec-card"><div class="spec-label">建筑团队</div><div class="spec-value">P&T Consultants · 中建精诚承建</div></div>
+    <div class="spec-card"><div class="spec-label">建筑方式</div><div class="spec-value">PPVC 预制技术，环保高效</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">SmartSpace 灵活空间设计</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th><th>占比</th></tr>
+    <tr><td>3 Bedroom</td><td>958 - 980</td><td>164</td><td>26.6%</td></tr>
+    <tr><td>3 Bedroom + Yard</td><td>1,001 - 1,023</td><td>176</td><td>28.6%</td></tr>
+    <tr><td>3 Bedroom + Yard + Study</td><td>1,055 - 1,076</td><td>178</td><td>28.9%</td></tr>
+    <tr><td>4 Bedroom</td><td>1,313 - 1,389</td><td>84</td><td>13.6%</td></tr>
+    <tr><td>5 Bedroom</td><td>1,593</td><td>14</td><td>2.3%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 超 80% 为 3 房户型，带 Yard/Study 的实用设计——明确瞄准北部家庭自住客群。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施（60+ 项）</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 双 50m 泳池（竞速+休闲）</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场 + 健身径</div>
+    <div class="facility-tag"><span class="icon">⛳</span> 推杆果岭</div>
+    <div class="facility-tag"><span class="icon">🧗</span> 儿童冒险乐园 + 迷你攀岩</div>
+    <div class="facility-tag"><span class="icon">💼</span> Co-working 共享办公</div>
+    <div class="facility-tag"><span class="icon">🧘</span> 瑜伽草坪 + 太极草坪</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 香草园 + 感官花园</div>
+    <div class="facility-tag"><span class="icon">🍢</span> 烧烤亭 ×6（Lotus/Firefly 等）</div>
+    <div class="facility-tag"><span class="icon">♨️</span> 按摩池 + 水疗</div>
+    <div class="facility-tag"><span class="icon">📖</span> 阅读角 + 派对草坪</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Yishun MRT 约 1.4-1.6km（提供 2 年免费穿梭巴士）；SLE/CTE/TPE 快速路，未来 NSE 直通</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内：Chongfu、Xishan 小学；Huamin、Northview、Yishun、Ahmad Ibrahim 等可达</td></tr>
+    <tr><td>🛍️ 商圈</td><td>紧邻 Junction 9 商场；Northpoint City、Sun Plaza、Sembawang 商场车程内</td></tr>
+    <tr><td>🌳 自然</td><td>Khatib Bongsu 自然公园 + Sungei Katib 步道；Sembawang 海滩、Coney Island、新加坡动物园短途可达</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Yishun 成熟区但距 MRT 1.4km，靠接驳车/巴士</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">3.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:35%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · EC MOP 前不得整租</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · $1,297 → $1,401 psf（4 年 +8%），温和但 Yishun 价值重估中</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 本地上市 Sing Holdings，稳健非顶级</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · EC 首置无 ABSD，绿色设计节能</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 615 笔交易，去化扎实</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 10 年 MOP + 北部区域增值节奏偏慢</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.35 / 10</strong> —— 加权计算（6.5×20% + 3.5×15% + 7.0×20% + 7.0×10% + 7.5×10% + 7.0×15% + 6.0×10%）。中规中矩的稳健型 EC，无突出短板也无爆炸亮点。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2022（开盘）</td><td>200</td><td>$1,297</td><td>—</td></tr>
+    <tr><td>2023</td><td>170</td><td>$1,296</td><td class="num-red">-0.1%</td></tr>
+    <tr><td>2024</td><td>215</td><td>$1,327</td><td class="num-green">+2.4%</td></tr>
+    <tr><td>2025</td><td>30</td><td>$1,401</td><td class="num-green">+5.6%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>三年去化节奏均匀（200/170/215 笔），价格从 $1,297 缓步爬升到 $1,401 psf（4 年 +8%，年化约 +2%）——远低于 Copen Grand/Tenet 的涨幅，反映北部区域（Yishun）增值节奏慢于西部新镇。2025 年转售价明显加速（+5.6%），或预示 Yishun 价值重估启动。横向对标：Yishun 私宅转售约 $1,450-1,600 psf，EC 仍有 10-15% 折价空间。
+  </div>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2021</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2022-04</div><div class="tl-detail">开盘</div></div>
+    <div class="tl-item"><div class="tl-year">2027-06</div><div class="tl-detail">预计 TOP</div></div>
+    <div class="tl-item"><div class="tl-year">2032</div><div class="tl-detail">5 年 MOP 届满（新框架按 10 年计则至 2037）</div></div>
+    <div class="tl-item"><div class="tl-year">2037</div><div class="tl-detail">私有化窗口（99.co 标注 PRIVATISED 2037）</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>买家资格</td><td>新加坡公民家庭；月收入上限约束</td></tr>
+    <tr><td>MOP 限制</td><td>不得整间出租、不得转售</td></tr>
+    <tr><td>贷款约束</td><td>受 MSR 30% 上限约束</td></tr>
+    <tr><td>CPF 津贴</td><td>首购家庭最高 $30,000 CPF Housing Grant</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"设施密度远超同级——双 50m 泳池、网球场、推杆果岭、儿童冒险乐园，60 多项设施比很多私人公寓还全，遛娃遛一整天都不重样。"</div>
+    <div class="review-source">— 项目宣传要点汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"紧挨 Khatib Bongsu 自然公园，窗外就是绿意和公园景观，晨跑、骑行、观鸟直接出门——这种'城市里的森林家'在北部很稀缺，自住幸福感很高。"</div>
+    <div class="review-source">— 99.co 项目介绍与买家反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"离 Yishun MRT 1.4-1.6km，走路要 15-20 分钟，免费穿梭巴士只有 2 年——之后通勤主要靠巴士接驳，对上班族不太友好。"</div>
+    <div class="review-source">— 买家论坛反馈汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"Yishun 的增值一直比西部/东部慢半拍，买这里更像是'稳'而不是'快'——适合长期自住，别指望短期暴击。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 环境与设施是王牌，通勤距离是主要短板。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>MOP 锁定</td><td class="num-red">高</td><td>新框架 10 年 MOP，流动性受限时间长</td></tr>
+    <tr><td>增值节奏慢</td><td class="num-yellow" style="color:#eab308">中高</td><td>Yishun 4 年 +8%，跑输同期西部新镇 EC</td></tr>
+    <tr><td>通勤依赖</td><td class="num-yellow" style="color:#eab308">中</td><td>距 MRT 1.4km，穿梭巴士仅 2 年免费</td></tr>
+    <tr><td>开发商规模</td><td class="num-yellow" style="color:#eab308">中低</td><td>Sing Holdings 体量小于顶级开发商</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>北部家庭自住首选之一——绿色环境、设施密度、户型实用度三高，$1,3xx psf 性价比实在。通勤不便可通过穿梭巴士与私家车缓解。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（中性）：</strong>增值温和，适合极长线 + 认可北部重估逻辑的资金；短期回报吸引力弱于西部/东部新镇 EC。若追求涨幅，应优先考虑 Tengah/Tampines 系。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>追求快速增值者、依赖地铁步行通勤者、无法接受 10 年锁定者。
+  </div>
+</section>
+
+<footer>
+  North Gaia Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-02
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>
