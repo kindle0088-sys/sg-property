@@ -13,6 +13,12 @@ import { svy21ToWgs84, projectSlug } from './svy21.js';
 // Lazy-loaded: only read when URA API is actually called, so that
 // --skip-ura builds (HDB refresh on CI) can import this module without a key.
 const __dirname = dirname(fileURLToPath(import.meta.url));
+
+// Manual coordinate overrides for projects where the URA API returns x/y = 0
+// (common for new launches). Keyed by project slug; values are {lat, lng}.
+const COORD_OVERRIDES_FILE = join(__dirname, '..', 'data', 'coord-overrides.json');
+let COORD_OVERRIDES = {};
+try { COORD_OVERRIDES = JSON.parse(readFileSync(COORD_OVERRIDES_FILE, 'utf-8')); } catch (e) { /* no overrides */ }
 function loadAccessKey() {
   if (process.env.URA_ACCESS_KEY) return process.env.URA_ACCESS_KEY;
   const keyFile = join(__dirname, '.ura-key');
@@ -134,6 +140,10 @@ export function processTransactions(rawData) {
     const proj = map.get(slug);
     if (!proj.coord && proj.x != null && proj.y != null && proj.x > 0 && proj.y > 0) {
       try { proj.coord = svy21ToWgs84(proj.x, proj.y); } catch (e) { /* skip */ }
+    }
+    // Fallback: URA sometimes returns x/y = 0 for new launches → use manual override
+    if (!proj.coord && COORD_OVERRIDES[slug]) {
+      proj.coord = COORD_OVERRIDES[slug];
     }
 
     for (const t of entry.transaction) {

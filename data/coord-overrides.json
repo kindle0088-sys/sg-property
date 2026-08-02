@@ -1,0 +1,11 @@
+{
+  "_comment": "Manual coordinate overrides for projects where URA API returns x/y = 0 (new launches). Keyed by project slug. Source: OneMap SG (onemap.gov.sg) address search, 2026-08-02.",
+  "altura": { "lat": 1.359708, "lng": 103.742114 },
+  "aurelle-of-tampines": { "lat": 1.369503, "lng": 103.941033 },
+  "coastal-cabana": { "lat": 1.376619, "lng": 103.956818 },
+  "copen-grand": { "lat": 1.361921, "lng": 103.730461 },
+  "lumina-grand": { "lat": 1.360282, "lng": 103.741282 },
+  "novo-place": { "lat": 1.349138, "lng": 103.73705 },
+  "otto-place": { "lat": 1.347937, "lng": 103.736759 },
+  "rivelle-tampines": { "lat": 1.341859, "lng": 103.940461 }
+}
