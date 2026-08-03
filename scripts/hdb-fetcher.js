@@ -42,19 +42,25 @@ const DATASETS = [
 ];
 
 const API_BASE = 'https://data.gov.sg/api/action/datastore_search';
+const FETCH_TIMEOUT_MS = 30_000;
 
 function ensureDir(p) { if (!existsSync(p)) mkdirSync(p, { recursive: true }); }
 
 function fetchJson(url) {
   return new Promise((resolve, reject) => {
-    https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, res => {
+    const req = https.get(url, { headers: { 'User-Agent': 'Mozilla/5.0' } }, res => {
       let data = '';
       res.on('data', chunk => data += chunk);
       res.on('end', () => {
         try { resolve(JSON.parse(data)); }
         catch (e) { reject(new Error('JSON parse: ' + e.message)); }
       });
-    }).on('error', reject);
+    });
+    // 防止网络挂起卡死构建（本地计划任务没有 CI 的 timeout 兜底）
+    req.setTimeout(FETCH_TIMEOUT_MS, () => {
+      req.destroy(new Error(`Timeout after ${FETCH_TIMEOUT_MS / 1000}s: ${url}`));
+    });
+    req.on('error', reject);
   });
 }
 

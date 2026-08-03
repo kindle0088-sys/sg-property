@@ -11,7 +11,7 @@
  *   node build.js          (full fetch, 4 batches)
  */
 
-import { writeFileSync, mkdirSync, existsSync, readFileSync } from 'fs';
+import { writeFileSync, renameSync, mkdirSync, existsSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { getToken, fetchAllTransactions, fetchTransactions, fetchRentals, processTransactions, processRentals } from './ura-fetcher.js';
@@ -194,9 +194,16 @@ async function main() {
   } else {
     console.log('\n3/5 Fetching rentals...');
     const now = new Date();
-    const q = Math.floor(now.getMonth() / 3) + 1;
-    const y = String(now.getFullYear()).slice(-2);
-    for (const rp of [`${y}Q${q}`, `${y}Q${q - 1 || 4}`, `${String(now.getFullYear() - 1).slice(-2)}Q4`]) {
+    // 从当前季度往前推 3 个季度（跨年安全），直到拉到非空数据。
+    // URA rental 按 refPeriod 返回整季数据，回退顺序：本季 → 上季 → 上上季
+    const quarters = [];
+    for (let i = 0; i < 3; i++) {
+      const m = now.getMonth() - i * 3;
+      const q = Math.floor(((m % 12) + 12) % 12 / 3) + 1;
+      const yy = now.getFullYear() - (m < 0 ? 1 : 0);
+      quarters.push(`${String(yy).slice(-2)}Q${q}`);
+    }
+    for (const rp of quarters) {
       try { rawRent = await fetchRentals(rp); if (rawRent.length) { console.log(`  Found ${rawRent.length} rental records for ${rp}`); break; } }
       catch (e) { console.log(`  ${rp}: ${e.message}`); }
     }
@@ -495,11 +502,16 @@ async function main() {
 }
 
 function writeJSON(path, data) {
-  writeFileSync(path, JSON.stringify(data), 'utf-8');
+  // 原子写：先写临时文件再 rename，构建中断/崩溃时不会留下半截损坏的 JSON
+  const tmp = path + '.tmp';
+  writeFileSync(tmp, JSON.stringify(data), 'utf-8');
+  renameSync(tmp, path);
 }
 
 function buildDistricts(projects, rentals, cutoff) {
   const map = {};
+  // cutoff 为 mmyy，循环外算一次排序键，避免每笔交易重复转换
+  const cutoffSort = cutoff ? toSortableDate(cutoff) : null;
   for (let d = 1; d <= 28; d++) {
     map[d] = { district: d, name: D[d] || `D${d}`, sector: SECT[d] || 'OCR',
       projectCount: 0, totalTransactions: 0, psfArr: [], psfArr1y: [],
@@ -511,10 +523,10 @@ function buildDistricts(projects, rentals, cutoff) {
     map[d].projectCount++;
     map[d].totalTransactions += p.stats.totalTransactions;
     for (const t of p.transactions) {
-      if (t.pricePsf > 0) {
-        map[d].psfArr.push(t.pricePsf);
-        if (cutoff && t.contractDate && toSortableDate(t.contractDate) >= toSortableDate(cutoff)) map[d].psfArr1y.push(t.pricePsf);
-      }
+        if (t.pricePsf > 0) {
+          map[d].psfArr.push(t.pricePsf);
+          if (cutoffSort && t.contractDate && toSortableDate(t.contractDate) >= cutoffSort) map[d].psfArr1y.push(t.pricePsf);
+        }
       const yr = t.contractDate?.length >= 4 ? `20${t.contractDate.substring(2, 4)}` : null;
       if (yr) {
         if (!map[d].byYear[yr]) map[d].byYear[yr] = { count: 0, sum: 0 };

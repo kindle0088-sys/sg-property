@@ -42,7 +42,7 @@ export async function loadData() {
   }
 }
 
-// HDB 索引懒��载（幂等：只拉一次）
+// HDB 索引懒加载（幂等：只拉一次）
 let _hdbPromise = null;
 export function loadHdbIndex() {
   if (state.hdbIndex.length) return Promise.resolve(state.hdbIndex);

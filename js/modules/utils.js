@@ -1,14 +1,16 @@
 /* === Formatting & small helpers (pure functions) === */
 
 export function fmtNum(n) {
+  if (n == null || n === '') return '-';
   const v = Number(n);
-  if (v == null || isNaN(v)) return '-';
+  if (isNaN(v)) return '-';
   return v.toLocaleString();
 }
 
 export function fmtPrice(n) {
+  if (n == null || n === '') return '-';
   const v = Number(n);
-  if (v == null || isNaN(v)) return '-';
+  if (isNaN(v)) return '-';
   return '$' + v.toLocaleString();
 }
 

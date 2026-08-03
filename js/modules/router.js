@@ -59,9 +59,12 @@ export async function routeTo(path) {
     }
 
     if (p === 'project' && r[0]) {
-      const isHdb = r[0].startsWith('hdb-');
-      if (isHdb) await renderHdbProject(r[0]);
-      else await renderProject(r[0]);
+      // 剥离分页 query（pageHdb 用 /project/<id>?page=N 传页号），否则 id 会
+      // 变成 "hdb-xxx?page=2" 导致 find() 永远匹配不上 → "Project not found"
+      const id = r[0].split('?')[0];
+      const isHdb = id.startsWith('hdb-');
+      if (isHdb) await renderHdbProject(id);
+      else await renderProject(id);
     } else if (page === 'compare') {
       // #/compare?a=xxx&b=yyy（URL 参数可分享）
       const sp = new URLSearchParams(p.split('?')[1] || '');
