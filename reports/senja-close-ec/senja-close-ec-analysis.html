@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Senja Close EC — 新加坡 D23 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D23 Bukit Panjang · 即将推出</div>
+  <h1>Senja Close EC</h1>
+  <div class="address">Senja Close · Bukit Panjang · 99-Year Leasehold（预计 Q4 2026 开盘）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.55</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,350*</div><div class="lbl">预估开盘均价 psf</div></div>
+    <div class="kpi"><div class="val">—</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">0</div><div class="lbl">累计交易（未开盘）</div></div>
+    <div class="kpi"><div class="val">~300</div><div class="lbl">总单位数（规划）</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Bukit Panjang 15 年来首个 EC——积压需求 + CDL 品牌 + 地铁通车在即</strong>。地块由城市发展（CDL）以 $771 psf ppr 竞得，位于成熟 HDB 市镇 Bukit Panjang，紧邻拟建 CRL Senja 站与现有 BPLRT 环线。这是西区升级家庭等了近一个世代的新 EC 供给。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Senja Close 是 2026 年下半年最具话题性的新 EC——「15 年首个 + 成熟市镇 + CDL 操盘」三重稀缺。但需注意 2026-05-08 新规生效，该地块适用<span class="negative">10 年 MOP + 15 年私有化</span>，流动性锁定显著长于旧规 EC。适合<span class="positive">长期自住升级</span>，短线投资不适合。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">CDL 城市发展（顶级上市开发商）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">约 300 套（地块规划）</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（GLS 出让）</div></div>
+    <div class="spec-card"><div class="spec-label">土地成本</div><div class="spec-value">$771 psf ppr（2025-11 中标，CDL）</div></div>
+    <div class="spec-card"><div class="spec-label">预计开盘</div><div class="spec-value">Q4 2026</div></div>
+    <div class="spec-card"><div class="spec-label">预计 TOP</div><div class="spec-value">约 2030（新规 10 年 MOP 至 2040）</div></div>
+    <div class="spec-card"><div class="spec-label">政策框架</div><div class="spec-value">2026-05-08 新规：MOP 10 年 / 私有化 15 年</div></div>
+    <div class="spec-card"><div class="spec-label">区域定位</div><div class="spec-value">成熟 HDB 市镇，靠 CRL 新线 + BPLRT</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>预计面积 (sqft)</th><th>占比（参考 CDL 近期 EC）</th></tr>
+    <tr><td>3 Bedroom</td><td>900 - 1,100</td><td>约 60%</td></tr>
+    <tr><td>4 Bedroom</td><td>1,150 - 1,300</td><td>约 30%</td></tr>
+    <tr><td>5 Bedroom</td><td>1,350 - 1,500</td><td>约 10%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 户型分布为推测（未开盘），参考 CDL 旗下 Lumina Grand 与区域 EC 结构——以 3-4 房家庭户型为主。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施（推测，参考 CDL 标准）</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 泳池 + 儿童池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场 / 多功能球场</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+    <div class="facility-tag"><span class="icon">🎮</span> 游戏室 / 会所</div>
+    <div class="facility-tag"><span class="icon">🧘</span> 瑜伽 / 功能房</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 景观花园</div>
+    <div class="facility-tag"><span class="icon">👶</span> 儿童游乐区</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>现有 BPLRT（Senja 站步行可达）；未来 CRL Cross Island Line Senja 站（2030+）就在地块旁</td></tr>
+    <tr><td>🚗 快速路</td><td>KJE / BKE / PIE 快速连接，驾车约 20 分钟到 CBD</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内：Greenridge Primary、West Spring Primary、Senja 多所中小学；Bukit Panjang 素以学区闻名</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Bukit Panjang Plaza、Hillion Mall（地铁直达）步行/短车程</td></tr>
+    <tr><td>🌳 自然</td><td>Bukit Panjang 邻里公园、Saujana 生态保留地近旁</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 成熟市镇 + 未来 CRL 地铁旁，配套成熟但现线偏弱</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">3.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:35%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 新 EC MOP 期间不得整租，短期内零租金收入</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 15 年 EC 供给空白 + CRL 通车利好，稀缺溢价可期</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">9.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · CDL 顶级上市开发商，交付记录优秀</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · EC 首置无 ABSD，CPF 补贴最高 $30,000</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">5.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:55%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 新规 10 年 MOP 锁定至约 2040，退出窗口长</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">5.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:55%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 新规政策锁定期长 + 未开盘定价未明，不确定性偏高</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.55 / 10</strong> —— 加权计算（7.0×20% + 3.5×15% + 8.0×20% + 9.0×10% + 7.5×10% + 5.5×15% + 5.5×10%）。增值与开发商维度强势，租金与流动性受新 EC 制度约束拖累。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>参照项目</th><th>位置</th><th>开盘/地价</th><th>当前均价 psf</th></tr>
+    <tr><td>Lumina Grand EC（CDL）</td><td>Bukit Batok West</td><td>$626 psf ppr 地价</td><td class="num-green">$1,464</td></tr>
+    <tr><td>Altura EC（青建）</td><td>Bukit Batok West</td><td>$662 psf ppr 地价</td><td class="num-green">$1,450</td></tr>
+    <tr><td>Private Condo（Bukit Panjang 周边）</td><td>D23</td><td>—</td><td class="num-green">$1,600 - $1,900</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>定价锚点：</strong>CDL 以 $771 psf ppr 拿地（高于 Bukit Batok 两盘），按 EC 通常加价 80-110% 推算，<strong>预估开盘均价约 $1,350 - $1,450 psf</strong>。若开盘低于 $1,400，相对周边私宅（$1,600+）有 15-25% 折价，具备「开盘折价 + 稀缺供给」双逻辑。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 新 EC 无历史交易数据，本表为区域可比对标。实际开盘价以开发商公布为准。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2025-11</div><div class="tl-detail">CDL 以 $771 psf ppr 中标 Senja Close 地块</div></div>
+    <div class="tl-item"><div class="tl-year">2026-05-08</div><div class="tl-detail">新规生效：该地块适用 10 年 MOP + 15 年私有化（非旧规 5 年/10 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2026-Q4（预计）</div><div class="tl-detail">正式开盘，接受合格买家申请</div></div>
+    <div class="tl-item"><div class="tl-year">~2030（预计）</div><div class="tl-detail">TOP 获临时入伙证</div></div>
+    <div class="tl-item"><div class="tl-year">~2040</div><div class="tl-detail">10 年 MOP 届满 → 可整租 / 转售给符合条件买家</div></div>
+    <div class="tl-item"><div class="tl-year">~2045</div><div class="tl-detail">15 年私有化 → 可转售给外国人 / 公司</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>买家资格</td><td>新加坡公民家庭；月收入上限 $16,000（单身 $12,000）</td></tr>
+    <tr><td>MOP 限制</td><td>新规 10 年：不得整间出租、不得转售（可售回符合条件买家或政府）</td></tr>
+    <tr><td>贷款约束</td><td>受 MSR 30% 上限约束</td></tr>
+    <tr><td>CPF 津贴</td><td>首购家庭最高 $30,000 CPF Housing Grant</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面预期</div>
+    <div class="review-quote">"Bukit Panjang 终于等来 EC 了！从 2011 年后就没有新 EC 供给，周边想升级的家庭只能买私宅或搬走。Senja 这边绿化和社区氛围都很好，Hillion Mall 也够用。"</div>
+    <div class="review-source">— Bukit Panjang 居民论坛反馈汇总，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面预期</div>
+    <div class="review-quote">"CDL 出品品质有保障，Lumina Grand 的口碑摆在那里。地块紧邻未来 CRL 地铁站，2030 年通车后地铁直达 CBD，这是现在 BPLRT 给不了的便利。"</div>
+    <div class="review-source">— 潜在买家看房讨论，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面预期</div>
+    <div class="review-quote">"10 年 MOP 太长了！意味着 2040 年前都不能卖，万一工作有变动想搬家就很被动。对比旧规 EC 5 年就能脱手，持有压力完全不同。"</div>
+    <div class="review-source">— 潜在买家担忧，2026（新规核心顾虑）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"现阶段的 BPLRT 老旧且绕行，实际到市区还是要转 NSL；CRL 通车前的 5 年通勤体验一般。但反过来想，这正是'通车前买入'的增值窗口。"</div>
+    <div class="review-source">— 市场分析共识，2026</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 未开盘项目，基于区域环境与 CDL 品牌推断。成熟市镇配套 + 未来地铁 + 高品牌开发商，产品力预期优秀；扣分项为 10 年流动性锁定与现线通勤短板。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>10 年 MOP 锁定</td><td class="num-red">高</td><td>新规首代地块，2040 年前流动性受限，持有逻辑需极长</td></tr>
+    <tr><td>开盘定价偏高</td><td class="num-red">中高</td><td>$771 psf ppr 地价传导，若开盘 > $1,450 则折价空间收窄</td></tr>
+    <tr><td>CRL 工期延迟</td><td class="num-yellow" style="color:#eab308">中</td><td>Senja 站预计 2030+，延期则地铁利好后置</td></tr>
+    <tr><td>未开盘不确定性</td><td class="num-yellow" style="color:#eab308">中</td><td>户型 / 设施 / 价格均为推测，需以官方资料为准</td></tr>
+    <tr><td>政策调整</td><td class="num-yellow" style="color:#eab308">中</td><td>收入上限 / MSR / EC 资格变动可能影响买家池</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>Bukit Panjang / CCK / 西区 HDB 升级家庭的首选标的。15 年稀缺 + CDL 品质 + 未来地铁，自住体验与长线增值兼顾。必须接受 10 年 MOP 的长期承诺。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>认可「CRL 通车 + 稀缺供给」逻辑的长线投资者可关注，但需等开盘价确认——若 $1,400 以下有安全边际；高于 $1,450 则建议观望。10 年锁定意味着这笔投资是 2040+ 才兑现的慢钱。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>短线投机者、5-7 年内有搬家/换房计划者、依赖租金现金流者——新规 EC 的制度约束不适合你。
+  </div>
+</section>
+
+<footer>
+  Senja Close EC Investment Analysis · 基于 GLS 地块数据 + 公开市场信息 · 生成于 2026-08-04
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。项目尚未开盘，核心参数与评分为推测性质。房产投资有风险，决策需谨慎。数据截至 2026 年 8 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

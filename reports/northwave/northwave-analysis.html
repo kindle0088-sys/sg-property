@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Northwave — 新加坡 D25 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D25 Woodlands · 已过 MOP</div>
+  <h1>Northwave</h1>
+  <div class="address">109 Woodlands View · Woodlands · 99-Year Leasehold（自 2015-05-25）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.73</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,260</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,275</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">147</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">358</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Woodlands 已过 MOP 的高性价比 EC——均价 $1,260 psf 全岛 EC 洼地之一，平均获利 $46.9 万</strong>。Hao Yuan（MCC Land 项目管理）出品，358 套 6 栋 16 层，紧邻 Admiralty MRT（步行可达）。2024 年 MOP 后转售放量 72 笔，平均持有 6.9 年获利 61%。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Northwave 是北部「即买即流动」的成熟 EC——MOP 已过、价格亲民（$1,260）、2024-2026 成交活跃。相对即将开盘的 Woodlands 新 EC（预估 $1,400+），Northwave 提供<span class="positive">约 10-15% 的价格折价 + 即时流动性</span>，是预算有限买家的务实之选。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Hao Yuan (Woodlands) Pte Ltd（MCC Land 项目管理）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">358 套 · 6 栋 16 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2015-05-25 起）</div></div>
+    <div class="spec-card"><div class="spec-label">地块面积</div><div class="spec-value">12,388 sqm · Plot Ratio 2.8</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2019 年 2 月竣工</div></div>
+    <div class="spec-card"><div class="spec-label">MOP</div><div class="spec-value">2024 年届满（已可转售）</div></div>
+    <div class="spec-card"><div class="spec-label">私有化</div><div class="spec-value">预计 2029（TOP + 10 年）</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">362 个（地下）+ 60 个自行车位</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th><th>占比</th></tr>
+    <tr><td>2 Bedroom</td><td>678 - 753</td><td>47</td><td>13.1%</td></tr>
+    <tr><td>3 Bedroom</td><td>893 - 1,001</td><td>121</td><td>33.8%</td></tr>
+    <tr><td>3 Bedroom Premium</td><td>1,097 - 1,130</td><td>138</td><td>38.5%</td></tr>
+    <tr><td>4 Bedroom</td><td>1,270</td><td>31</td><td>8.7%</td></tr>
+    <tr><td>5 Bedroom</td><td>1,463 - 1,496</td><td>15</td><td>4.2%</td></tr>
+    <tr><td>Penthouse</td><td>1,593 - 1,722</td><td>6</td><td>1.7%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 3 房占 72%（含 Premium）——Woodlands 家庭升级主力定位，含少量 2 房与顶层复式。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 泳池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房</div>
+    <div class="facility-tag"><span class="icon">🏀</span> 篮球场 / Futsal</div>
+    <div class="facility-tag"><span class="icon">🧖</span> 水疗泳池（Hydrotherapy）</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+    <div class="facility-tag"><span class="icon">💼</span> 会所 / 功能厅</div>
+    <div class="facility-tag"><span class="icon">🦶</span> 足底反射步道</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 樱花步道 + 香氛廊</div>
+    <div class="facility-tag"><span class="icon">👶</span> 儿童游乐区</div>
+    <div class="facility-tag"><span class="icon">⛲</span> 瀑布水景</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>Admiralty MRT（NSL）步行可达</strong>；Sembawang MRT 亦近旁；未来 Woodlands 区域中心升级</td></tr>
+    <tr><td>🚗 快速路</td><td>SLE / BKE 连接，驾车约 25 分钟到 CBD</td></tr>
+    <tr><td>🏫 学校</td><td>2km 内多所中小学；Sembawang/Woodlands 学区资源丰富</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Causeway Point（Woodlands 最大）、Sun Plaza、Kampung Admiralty 综合设施</td></tr>
+    <tr><td>🌳 自然</td><td>Admiralty Park、Canberra Park、Woodlands Waterfront</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Admiralty MRT 步行 + 区域中心升级，北部成熟段</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 已过 MOP 可整租，基数低回报尚可（约 3.5%）</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 开盘 ~$950 → 现 $1,260，北部区域中心利好持续</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · MCC Land 项目管理，交付中等偏上</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 已过 MOP 税档正常，358 套中型盘管理费可控</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 2024-2026 成交 141 笔，北部 EC 活跃盘</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · MOP 已过风险低，价格洼地提供安全边际</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.73 / 10</strong> —— 加权计算（7.0×20% + 5.0×15% + 7.0×20% + 6.5×10% + 7.0×10% + 7.5×15% + 7.0×10%）。流动性好 + 价格洼地 + 已过 MOP，北部稳健型 EC 代表。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>2</td><td>$916</td><td>—</td></tr>
+    <tr><td>2022</td><td>4</td><td>$1,040</td><td class="num-green">+13.5%</td></tr>
+    <tr><td>2024（MOP 后）</td><td>72</td><td>$1,269</td><td class="num-green">+22.0%</td></tr>
+    <tr><td>2025</td><td>48</td><td>$1,261</td><td class="num-red">-0.6%</td></tr>
+    <tr><td>2026（至今）</td><td>21</td><td>$1,299</td><td class="num-green">+3.0%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2024 年 MOP 后集中放量（72 笔）价格站上 $1,269，2025-2026 稳定在 $1,260-1,300。开盘约 $950 psf（2016 年发售）→ 现 $1,299，<strong>10 年约 +37%</strong>，平均获利 $46.9 万/61%。作为参照，即将开盘的 Woodlands 新 EC 预估 $1,400+，Northwave 提供约 10-15% 折价 + 即时入住，是「新旧同区」对比中最务实的选项。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ URA REALIS 数据。开盘价约 $950 psf（2016 年发售，2021 年后为转售）。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2015-05</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2016</div><div class="tl-detail">开盘发售，均价约 $950 psf</div></div>
+    <div class="tl-item"><div class="tl-year">2019-02</div><div class="tl-detail">TOP 竣工（358 套）</div></div>
+    <div class="tl-item"><div class="tl-year">2024</div><div class="tl-detail">5 年 MOP 届满 → 可转售给 SC / PR、可整租</div></div>
+    <div class="tl-item"><div class="tl-year">2029（预计）</div><div class="tl-detail">10 年私有化 → 可转售给外国人 / 公司</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>当前状态</td><td>已过 MOP，可自由转售给新加坡公民 / PR</td></tr>
+    <tr><td>私有化前限制</td><td>外国人 / 公司暂不可购买，2029 年私有化后解除</td></tr>
+    <tr><td>出租限制</td><td>MOP 已过，可整间出租（无限制）</td></tr>
+    <tr><td>新买家资格</td><td>转售 EC 无收入上限要求（已过 MOP 项目）</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Admiralty MRT 走路 5-6 分钟，Kampung Admiralty 楼上就是熟食中心和超市，生活太方便了。Causeway Point 也近，周末购物不用开车。"</div>
+    <div class="review-source">— 住户反馈汇总，2024-2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"50m 泳池和樱花步道是亮点，公共区域维护得不错。$1,200 出头买进 Woodlands 的 EC，性价比在北部难找第二家。"</div>
+    <div class="review-source">— 2025 年买家评价</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"部分户型临 Woodlands View 大路有噪音，另外 2 房只有 678 sqft 偏小。楼龄 7 年了，部分设备开始老化，管理费在涨。"</div>
+    <div class="review-source">— 住户论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"2029 年私有化是下一个节点，参照其他私有化 EC 的经验，届时价格会有小幅重估。但 Woodlands 新 EC 开盘（$1,400+）可能先一步抬高片区心理价位，对 Northwave 反而是利好。"</div>
+    <div class="review-source">— 市场分析共识，2026</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— MRT 近、生活便利、价格亲民是强项；临路噪音与楼龄是软肋。北部性价比自住盘。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>楼龄增长</td><td class="num-red">中高</td><td>TOP 7 年，设施老化与维护成本上升</td></tr>
+    <tr><td>增值弹性有限</td><td class="num-yellow" style="color:#eab308">中</td><td>价格已平稳，主要靠区域中心自然增值</td></tr>
+    <tr><td>北部供给竞争</td><td class="num-yellow" style="color:#eab308">中</td><td>Woodlands/Sembawang 多块新 EC 土地入市分流需求</td></tr>
+    <tr><td>开发商知名度</td><td class="num-yellow" style="color:#eab308">中</td><td>Hao Yuan 非一线品牌，长期口碑待观察</td></tr>
+    <tr><td>临路噪音</td><td class="num-yellow" style="color:#eab308">低</td><td>特定户型受影响，选房需避让</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>北部自住家庭性价比首选。$1,260 psf 买入已过 MOP 的次新 EC，MRT 近 + 配套全 + 即时入住，比等 3-4 年新 EC 更务实。3 房主力户型（893-1,130 sqft）家庭友好。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>「价格洼地 + 2029 私有化 + 区域中心」三重逻辑，风险收益比好。租金回报约 3.5% 尚可，流动性即时。适合稳健型投资者；私有化重估的想象空间不如年轻盘大，但下行风险也小。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>追求高弹性增值者、对楼龄敏感者、偏好全新房者（建议等新 EC 或选其他年轻盘）。
+  </div>
+</section>
+
+<footer>
+  Northwave Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-04
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 8 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

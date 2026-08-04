@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Treasure Crest — 新加坡 D19 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D19 Sengkang · 已过 MOP</div>
+  <h1>Treasure Crest</h1>
+  <div class="address">50-66 Anchorvale Crescent · Sengkang · 99-Year Leasehold（自 2015-05-05）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">7.10</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,439</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,574</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">186</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">504</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Sengkang 四 EC 涨幅之王——开盘以来价格 +104.7%，平均获利 $72.1 万</strong>。Sim Lian 出品，紧邻 Cheng Lim LRT（步行 2 分钟），2024 年 MOP 后转售放量（2023-2025 累计 175 笔），无一亏损。即将于 2028-2029 私有化，是「私有化前夜」最具题材的 EC。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Treasure Crest 是「涨幅已验证 + 私有化临近」的双题材 EC。近 1 年均价 $1,574 psf 相对 Sengkang 私宅仍有折价，2028-2029 私有化后买家池扩大（外国人可入）大概率带来价格重估。适合<span class="positive">中期持有等私有化</span>的投资者，也是自住家庭的优质选择。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Sim Lian Group（EC 专业户，上市）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">504 套 · 8 栋 15 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2015-05-05 起）</div></div>
+    <div class="spec-card"><div class="spec-label">地块面积</div><div class="spec-value">17,450 sqm · Plot Ratio 3.0</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2019-2020 年竣工</div></div>
+    <div class="spec-card"><div class="spec-label">MOP</div><div class="spec-value">2024-2025 届满（已可转售）</div></div>
+    <div class="spec-card"><div class="spec-label">私有化</div><div class="spec-value">预计 2028-2029（TOP + 10 年）</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">504 个 + 5 个残障车位（1:1）</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th><th>占比</th></tr>
+    <tr><td>3 Bedroom</td><td>958</td><td>84</td><td>16.7%</td></tr>
+    <tr><td>3 Bedroom Premium</td><td>1,076 - 1,249</td><td>364</td><td>72.2%</td></tr>
+    <tr><td>4 Bedroom</td><td>1,345</td><td>56</td><td>11.1%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 仅 3-4 房纯家庭户型——Sengkang 升级家庭主力定位，无小户型稀释。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 泳池（Lap Pool）</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房（Clubhouse）</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤亭</div>
+    <div class="facility-tag"><span class="icon">💼</span> 会所 + 阅览室</div>
+    <div class="facility-tag"><span class="icon">🧖</span> 水疗按摩池（Aqua Massage）</div>
+    <div class="facility-tag"><span class="icon">🦶</span> 足底反射步道</div>
+    <div class="facility-tag"><span class="icon">👶</span> 儿童水上乐园</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 瀑布花园</div>
+    <div class="facility-tag"><span class="icon">🏡</span> 泳池畔 Party Room</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>Cheng Lim LRT 步行约 2 分钟</strong>，1 站接驳 Sengkang MRT（NEL）；Sengkang 巴士总站旁</td></tr>
+    <tr><td>🚗 快速路</td><td>TPE / CTE / KPE 快速连接，驾车约 25 分钟到 CBD</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内：Nan Chiau Primary、Springdale Primary、Compassvale Primary、Anchor Green 等（5 所小学，学区优秀）</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Compass One、Seletar Mall、Rivervale Mall 车程 5-8 分钟</td></tr>
+    <tr><td>🌳 自然</td><td>Sengkang Riverside Park、Sungei Punggol 滨水步道</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · LRT 旁 + 学区优，OCR 成熟镇区</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 已过 MOP 可整租，毛租约 3.5%</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 涨幅 104.7% 四 EC 之最，私有化前夜仍有重估空间</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Sim Lian 30 年 EC 专业户，交付口碑稳定</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 已过 MOP 转私宅税档，成本回归正常</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 2023-2025 成交 175 笔，D19 EC 活跃盘</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · MOP 已过、私有化在即，政策风险低</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：7.10 / 10</strong> —— 加权计算（7.0×20% + 5.0×15% + 8.0×20% + 8.0×10% + 6.5×10% + 8.0×15% + 7.0×10%）。涨幅与私有化题材强势，租金回报是相对短板。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>1</td><td>$1,076</td><td>—</td></tr>
+    <tr><td>2022</td><td>3</td><td>$1,119</td><td class="num-green">+4.0%</td></tr>
+    <tr><td>2023</td><td>59</td><td>$1,392</td><td class="num-green">+24.4%</td></tr>
+    <tr><td>2024（MOP 后）</td><td>82</td><td>$1,434</td><td class="num-green">+3.0%</td></tr>
+    <tr><td>2025</td><td>34</td><td>$1,541</td><td class="num-green">+7.5%</td></tr>
+    <tr><td>2026（至今）</td><td>7</td><td>$1,582</td><td class="num-green">+2.7%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2023 年 MOP 临近放量（59 笔）+24.4% 是第一波跃升，2024-2025 稳步爬升，2026 站稳 $1,582。开盘价约 $770 psf（2016 年发售）→ 现 $1,582，<strong>10 年 +105%</strong>，年化约 7.4%。作为参照，同区 The Vales（$1,560）与 Bellewaters（$1,473）相当，但 Treasure Crest 以最低开盘价跑出最高涨幅，私有化（2028-2029）后对标私宅的折价收敛空间最大。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ URA REALIS 数据，2021 年前为开盘预售。开盘价约 $770-800 psf（2016 年发售）。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2015-05</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2016</div><div class="tl-detail">开盘发售，均价约 $770-800 psf</div></div>
+    <div class="tl-item"><div class="tl-year">2019-2020</div><div class="tl-detail">TOP 竣工</div></div>
+    <div class="tl-item"><div class="tl-year">2024-2025</div><div class="tl-detail">5 年 MOP 届满 → 可转售给 SC / PR、可整租</div></div>
+    <div class="tl-item"><div class="tl-year">2028-2029（预计）</div><div class="tl-detail">10 年私有化 → 可转售给外国人 / 公司</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>当前状态</td><td>已过 MOP，可自由转售给新加坡公民 / PR</td></tr>
+    <tr><td>私有化前限制</td><td>外国人 / 公司暂不可购买，2028-2029 年私有化后解除</td></tr>
+    <tr><td>出租限制</td><td>MOP 已过，可整间出租（无限制）</td></tr>
+    <tr><td>新买家资格</td><td>转售 EC 无收入上限要求（已过 MOP 项目）</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Cheng Lim LRT 就在楼下，下雨天不用打伞，1 站到 Sengkang MRT 换 NEL 进市区很方便。当初 $8xx 买的，2024 年 $1,400+ 卖，三年翻了不少。"</div>
+    <div class="review-source">— EdgeProp 采访卖家，2025</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Sim Lian 户型设计很实用，3 Bedroom Premium 的 1,100+ sqft 住起来宽敞，没有浪费面积。社区家庭氛围浓，孩子们能玩到一起。"</div>
+    <div class="review-source">— 99.co / PropertyGuru 住户评价汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"LRT 是环线，高峰期班次不算密，错过一班要等 10 分钟；另外部分靠 Anchorvale Road 的单位有噪音，选房要注意朝向。"</div>
+    <div class="review-source">— 住户论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"2028-2029 私有化是最大看点——届时可卖给外国人，买家池翻倍。参考 Bellewaters/The Vales 私有化预期，价格通常会提前 1-2 年反应，现在进场吃的是'私有化前最后一波折价'。"</div>
+    <div class="review-source">— 市场分析共识，2026</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.1/5）</strong> —— LRT 近、学区优、户型实用是强项；环线班次与临路噪音是软肋。整体为 Sengkang EC 中的高性价比自住盘。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>私有化预期已部分透支</td><td class="num-red">中高</td><td>2023-2025 涨幅已大，若私有化后重估不及预期则回报收窄</td></tr>
+    <tr><td>LRT 通勤依赖</td><td class="num-yellow" style="color:#eab308">中</td><td>高峰期班次稀，进 CBD 需换乘 NEL</td></tr>
+    <tr><td>楼龄增长</td><td class="num-yellow" style="color:#eab308">中</td><td>TOP 已 6-7 年，十年后设施维护成本上升</td></tr>
+    <tr><td>区域供应</td><td class="num-yellow" style="color:#eab308">中</td><td>Sengkang 周边新 EC/私宅供给影响二手竞争</td></tr>
+    <tr><td>大盘回调</td><td class="num-yellow" style="color:#eab308">中</td><td>高涨幅盘在降温期回调幅度通常更大</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>Sengkang/Hougang 升级家庭首选之一。LRT 近 + 5 所小学学区 + Sim Lian 实用户型，自住舒适度与资产增值双达标。$1,500-1,600 psf 区间合理。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（推荐）：</strong>「私有化前夜」题材明确——2028-2029 年买家池扩大带来的价格重估是可见催化剂。持有至私有化后 1-2 年退出是当前 D19 最具逻辑的 EC 投资路径之一。租金回报 3.5% 中等，但增值弹性优于同区。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>短线投机者（私有化还要等 2-3 年）、依赖地铁直通 CBD 者、对楼龄敏感者。
+  </div>
+</section>
+
+<footer>
+  Treasure Crest Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-04
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 8 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ola EC — 新加坡 D19 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D19 Sengkang · MOP 未满</div>
+  <h1>Ola EC</h1>
+  <div class="address">70-86 Anchorvale Crescent · Sengkang · 99-Year Leasehold</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.10</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,188</div><div class="lbl">均价 psf（含开盘）</div></div>
+    <div class="kpi"><div class="val">$1,706</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">196</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">548</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Anchorvale 四兄弟最年轻一员——Cheng Lim LRT 步行 137 米，5 所小学学区</strong>。Gamuda & Evia 联合开发，2021 年开盘均价约 $1,161 psf（548 套 9 栋 16 层），2023 年底 TOP。作为 MOP 未满的新盘，转售以特殊个案为主，但挂价已反映 $1,700+ psf 的市场预期。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Ola 是 Sengkang EC 板块的「新货」——地铁最近（LRT 137m）、学区最全（5 所 1km）、楼龄最新。但 MOP 未满（2028 才解禁）意味着<span class="negative">当前流动性极低</span>，现价主要反映「未来预期」。自住买家可等待 MOP 后的价格稳定期，投资需耐心持有到 2028。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Gamuda Berhad × Evia Real Estate（马来西亚 + 本地）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">548 套 · 9 栋 16 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年</div></div>
+    <div class="spec-card"><div class="spec-label">土地成本</div><div class="spec-value">$461 psf ppr（开盘价 ~$1,161 psf）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2023 年 12 月竣工</div></div>
+    <div class="spec-card"><div class="spec-label">MOP</div><div class="spec-value">2028 年届满（当前未满）</div></div>
+    <div class="spec-card"><div class="spec-label">私有化</div><div class="spec-value">预计 2033（TOP + 10 年）</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">548 个（地下 1 层，1:1）</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>备注</th></tr>
+    <tr><td>2 Bedroom + Study</td><td>775</td><td>稀缺小户型</td></tr>
+    <tr><td>3 Bedroom</td><td>926 - 947</td><td>主力</td></tr>
+    <tr><td>3 Bedroom Deluxe</td><td>1,001</td><td>—</td></tr>
+    <tr><td>3 Bedroom Premium</td><td>1,055</td><td>—</td></tr>
+    <tr><td>4 Bedroom</td><td>1,389</td><td>—</td></tr>
+    <tr><td>5 Bedroom Penthouse</td><td>1,722</td><td>顶层复式</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 户型梯度完整，从 2 房到顶层复式，覆盖首次升级到大家庭。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 泳池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场 / 多功能球场</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+    <div class="facility-tag"><span class="icon">💼</span> 会所 / 功能厅</div>
+    <div class="facility-tag"><span class="icon">🧘</span> 瑜伽室</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 景观花园</div>
+    <div class="facility-tag"><span class="icon">👶</span> 儿童游乐区</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>Cheng Lim LRT 步行 137 米（约 2 分钟）</strong>，1 站 Sengkang MRT；Sengkang 体育中心 700m</td></tr>
+    <tr><td>🚗 快速路</td><td>TPE / CTE / KPE 连接，驾车约 25 分钟到 CBD</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内 5 所小学：Nan Chiau、Springdale、Compassvale、Punggol Green、Anchor Green——学区最全 EC 之一</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Compass One、Sengkang Grand Mall、Waterway Point 车程 5-10 分钟</td></tr>
+    <tr><td>🌳 自然</td><td>Sengkang Riverside Park、Sungei Punggol 滨水步道、Anchorvale 体育设施</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · LRT 137m + 5 所小学，OCR 顶配</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">3.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:35%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · MOP 未满不得整租，短期无租金</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 开盘 $1,161 → 现挂价 $1,700+，预期涨幅已先行</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 外资 + 本地组合，交付记录一般</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 首购无 ABSD + CPF 补贴，维护费约 $300-440/月</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">4.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:45%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · MOP 未满，2024-2026 仅 6 笔特殊转售</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · MOP 前价格未充分验证，但楼龄新 + 地铁学区基本面扎实</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.10 / 10</strong> —— 加权计算（7.5×20% + 3.5×15% + 7.0×20% + 6.5×10% + 7.5×10% + 4.5×15% + 6.0×10%）。地段维度顶配，但 MOP 未满导致流动性极低、价格未验证。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>说明</th></tr>
+    <tr><td>2021（开盘）</td><td>163</td><td>$1,161</td><td>开盘预售集中签约</td></tr>
+    <tr><td>2022</td><td>27</td><td>$1,243</td><td>续销</td></tr>
+    <tr><td>2024</td><td>2</td><td>$1,597</td><td>特殊转售（个案）</td></tr>
+    <tr><td>2025</td><td>2</td><td>$1,722</td><td>特殊转售（个案）</td></tr>
+    <tr><td>2026（至今）</td><td>2</td><td>$1,690</td><td>特殊转售（个案）</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>开盘 $1,161 → 2025 年特殊转售 $1,722，<strong>4 年 +48%</strong>。但注意 MOP 未满，2024-2026 仅 6 笔个案（离婚/移居等特殊原因获批转售），不具代表性——市场真实锚点要等 2028 年 MOP 后放量。作为参照，同区已 MOP 的 The Vales $1,560、Bellewaters $1,473，Ola 的挂价 $1,700+ 已高于两个「成熟前辈」。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ URA REALIS 数据。MOP 未满期间的转售为特殊个案，价格参考意义有限。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2021-07</div><div class="tl-detail">开盘发售，均价约 $1,161 psf</div></div>
+    <div class="tl-item"><div class="tl-year">2023-12</div><div class="tl-detail">TOP 竣工（548 套）</div></div>
+    <div class="tl-item"><div class="tl-year">2028（预计）</div><div class="tl-detail">5 年 MOP 届满 → 可转售给 SC / PR、可整租</div></div>
+    <div class="tl-item"><div class="tl-year">2033（预计）</div><div class="tl-detail">10 年私有化 → 可转售给外国人 / 公司</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>当前状态</td><td>MOP 未满（2028），不可整租 / 不可转售（特殊个案除外）</td></tr>
+    <tr><td>新买家资格</td><td>新加坡公民家庭；月收入上限 $16,000</td></tr>
+    <tr><td>贷款约束</td><td>受 MSR 30% 上限约束</td></tr>
+    <tr><td>CPF 津贴</td><td>首购家庭最高 $30,000 CPF Housing Grant</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Cheng Lim LRT 真的就在家门口，200 米不到，下雨天太方便了。旁边 Sengkang 体育中心走路就到，孩子课后活动不用接送。"</div>
+    <div class="review-source">— 住户反馈汇总，2024-2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"2023 年底拿钥匙，交付品质不错，装修标准在同价位 EC 里算用心。Nan Chiau 小学 1km 内，学区是当初下单的决定性因素。"</div>
+    <div class="review-source">— 首批住户评价，2024</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"MOP 没到很被动——想换大房子也没法卖，只能干等 2028。另外 4 房 1,389 sqft 相比隔壁 Treasure Crest 的 1,345 sqft 没大多少，空间感一般。"</div>
+    <div class="review-source">— 住户论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"挂价 $1,700+ 已超同区成熟 EC，等 2028 年 MOP 解禁、转售放量后价格会重新校准——届时是冲高回落还是站稳走高，取决于整体市场。现在买入主要买的是'确定性未来'。"</div>
+    <div class="review-source">— 市场分析共识，2026</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 地铁近、学区全、楼龄新，硬件条件 Sengkang EC 最佳；MOP 流动性是唯一大短板。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>MOP 未满</td><td class="num-red">高</td><td>2028 年前流动性极低，特殊转售个案价格不可比</td></tr>
+    <tr><td>价格提前透支</td><td class="num-red">中高</td><td>挂价 $1,700+ 已超同区成熟 EC，MOP 后或现价格校准</td></tr>
+    <tr><td>开发商知名度</td><td class="num-yellow" style="color:#eab308">中</td><td>Gamuda/Evia 非本地一线品牌，长期口碑待验证</td></tr>
+    <tr><td>区域供应</td><td class="num-yellow" style="color:#eab308">中</td><td>Sengkang 周边 EC/私宅供给充裕</td></tr>
+    <tr><td>大盘回调</td><td class="num-yellow" style="color:#eab308">中</td><td>新盘在高位入场，若市场降温回撤空间大</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（有条件推荐）：</strong>Sengkang 自住买家可考虑一手/二手入场——楼龄最新、LRT 最近、学区最全，自住体验是四兄弟中最好。但需接受 2028 年前无法变现的现实。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（谨慎）：</strong>逻辑是「MOP 解禁 + 私有化」双事件驱动，但当前挂价已把预期提前反映。若以 $1,600 以下拿到房源有安全边际，$1,700+ 则建议等 MOP 后价格校准再入。租金回报 2028 年前为零。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>短线投机者、需要流动性的买家、对开发商品牌敏感者。
+  </div>
+</section>
+
+<footer>
+  Ola EC Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-04
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 8 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

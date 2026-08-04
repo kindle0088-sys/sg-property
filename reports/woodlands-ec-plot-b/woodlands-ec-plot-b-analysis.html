@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Woodlands EC Plot B — 新加坡 D25 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D25 Woodlands · 即将推出</div>
+  <h1>Woodlands EC (Plot B)</h1>
+  <div class="address">Woodlands Drive 17 · Woodlands · 99-Year Leasehold（预计 Q2 2027 开盘）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.10</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,400*</div><div class="lbl">预估开盘均价 psf</div></div>
+    <div class="kpi"><div class="val">—</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">0</div><div class="lbl">累计交易（未开盘）</div></div>
+    <div class="kpi"><div class="val">560</div><div class="lbl">总单位数（规划）</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Sim Lian 以 $794 psf ppr 再度刷新 EC 地价纪录——Woodlands 双地块收官之作，560 套为北部 EC 中最大盘</strong>。与 Plot A 同处 Woodlands Drive 17，但由 EC 老牌玩家 Sim Lian 操盘（Treasure Crest、Rivelle Tampines 同门）。开盘时间最晚（Q2 2027），可观察 Plot A 销售去化后再定价。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Woodlands EC Plot B 是北部 EC 供给潮的「压轴盘」——最大体量 + Sim Lian 品牌 + 最晚开盘（可参考先行盘定价）。但 $794 ppr 地价再创新高，<span class="negative">开盘价大概率 $1,400+</span>，叠加 10 年 MOP 新规，属于<span class="positive">谨慎观望型标的</span>。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Sim Lian Group（EC 专业户，上市开发商）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">560 套（规划，北部最大）</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（GLS 出让）</div></div>
+    <div class="spec-card"><div class="spec-label">土地成本</div><div class="spec-value">$794 psf ppr（2026 中标，再度刷新 EC 纪录）</div></div>
+    <div class="spec-card"><div class="spec-label">预计开盘</div><div class="spec-value">Q2 2027（北部 EC 中最晚）</div></div>
+    <div class="spec-card"><div class="spec-label">预计 TOP</div><div class="spec-value">约 2031</div></div>
+    <div class="spec-card"><div class="spec-label">政策框架</div><div class="spec-value">2026-05-08 新规：MOP 10 年 / 私有化 15 年</div></div>
+    <div class="spec-card"><div class="spec-label">区域定位</div><div class="spec-value">Woodlands Regional Centre 北部区域中心</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>预计面积 (sqft)</th><th>占比（Sim Lian 风格）</th></tr>
+    <tr><td>2 Bedroom</td><td>800 - 900</td><td>约 10%</td></tr>
+    <tr><td>3 Bedroom</td><td>950 - 1,150</td><td>约 55%</td></tr>
+    <tr><td>4 Bedroom</td><td>1,200 - 1,350</td><td>约 25%</td></tr>
+    <tr><td>5 Bedroom</td><td>1,400 - 1,550</td><td>约 10%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 户型分布为推测（未开盘），参考 Sim Lian 旗下 EC（Treasure Crest / Rivelle Tampines）结构。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施（推测，Sim Lian 标准）</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 泳池 + 儿童池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场 / 多功能球场</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+    <div class="facility-tag"><span class="icon">💼</span> 会所 / 功能厅</div>
+    <div class="facility-tag"><span class="icon">🧘</span> 瑜伽房</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 景观花园</div>
+    <div class="facility-tag"><span class="icon">👶</span> 儿童游乐区</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>近 Woodlands MRT（NSL + 未来 TEL 延伸）；RTS 跨堤线 2026-2027 通车</td></tr>
+    <tr><td>🚗 快速路</td><td>SLE / BKE 连接，驾车约 25 分钟到 CBD</td></tr>
+    <tr><td>🏫 学校</td><td>Woodlands 学区：2km 内多所中小学</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Causeway Point、Woodlands Civic Centre、Woodlands North Coast 未来商业区</td></tr>
+    <tr><td>🌳 自然</td><td>Admiralty Park、Woodlands Waterfront</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 区域中心 + 地铁枢纽，北部卫星镇属性</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">3.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:35%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 新 EC MOP 期间不得整租，短期零租金</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 区域中心逻辑成立，但地价已把部分增值预期前置</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Sim Lian 深耕 EC 30 年，Treasure Crest 等交付口碑佳</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · EC 首置无 ABSD，CPF 补贴最高 $30,000</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">5.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:55%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 新规 10 年 MOP；大盘转售样本较足但窗口期长</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">5.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 地价纪录 + 北部多盘连拍竞争，定价压力最大</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.10 / 10</strong> —— 加权计算（6.5×20% + 3.5×15% + 7.0×20% + 8.0×10% + 7.5×10% + 5.5×15% + 5.0×10%）。Sim Lian 品牌与区域中心逻辑尚可，但地价纪录与竞争格局压制综合评分。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>参照项目</th><th>位置</th><th>地价 psf ppr</th><th>当前均价 psf</th></tr>
+    <tr><td>Woodlands EC Plot A</td><td>Woodlands Dr 17</td><td>$782</td><td class="num-green">预估 $1,380-1,500</td></tr>
+    <tr><td>Northwave EC（已 MOP）</td><td>Woodlands View</td><td>—</td><td class="num-green">$1,260 - $1,300</td></tr>
+    <tr><td>Private Condo（Woodlands）</td><td>D25</td><td>—</td><td class="num-green">$1,500 - $1,700</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>定价锚点：</strong>$794 psf ppr 为历史最高 EC 地价，按加价 80-100% 推算<strong>预估开盘约 $1,400 - $1,520 psf</strong>。作为最晚开盘地块，Sim Lian 可参考 Plot A（CDL）去化情况定价——若 Plot A 滞销，Plot B 有压价空间；若热销，则大概率追高。买家可把 Plot A 开盘价当作 Plot B 的「先行指标」。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 新 EC 无历史交易，本表为区域可比对标。实际开盘价以开发商公布为准。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2026</div><div class="tl-detail">Sim Lian 以 $794 psf ppr 中标 Woodlands Drive 17 Plot B</div></div>
+    <div class="tl-item"><div class="tl-year">2026-05-08</div><div class="tl-detail">新规生效：适用 10 年 MOP + 15 年私有化</div></div>
+    <div class="tl-item"><div class="tl-year">2027-Q2（预计）</div><div class="tl-detail">正式开盘</div></div>
+    <div class="tl-item"><div class="tl-year">~2031（预计）</div><div class="tl-detail">TOP 获临时入伙证</div></div>
+    <div class="tl-item"><div class="tl-year">~2041</div><div class="tl-detail">10 年 MOP 届满 → 可整租 / 转售</div></div>
+    <div class="tl-item"><div class="tl-year">~2046</div><div class="tl-detail">15 年私有化 → 可转售给外国人 / 公司</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>买家资格</td><td>新加坡公民家庭；月收入上限 $16,000（单身 $12,000）</td></tr>
+    <tr><td>MOP 限制</td><td>新规 10 年：不得整间出租、不得转售</td></tr>
+    <tr><td>贷款约束</td><td>受 MSR 30% 上限约束</td></tr>
+    <tr><td>CPF 津贴</td><td>首购家庭最高 $30,000 CPF Housing Grant</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面预期</div>
+    <div class="review-quote">"Sim Lian 的 EC 我们看过 Treasure Crest，格局和做工都实在，住起来舒服。560 套规模社区活动丰富，比小盘热闹。"</div>
+    <div class="review-source">— 潜在买家讨论，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面预期</div>
+    <div class="review-quote">"Woodlands 区域中心这几年的变化肉眼可见，RTS 通了之后双城通勤也现实了。北部未来的商业就业密度会明显提升。"</div>
+    <div class="review-source">— Woodlands 居民反馈，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面预期</div>
+    <div class="review-quote">"$794 的地价，开盘奔着 $1,400+ 去，加上 10 年 MOP——跟隔壁 Plot A 差不多贵的房子，凭什么选 B 不选 A？竞争太激烈了。"</div>
+    <div class="review-source">— 潜在买家担忧，2026（同区多盘竞争）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"Plot B 最晚开盘其实是优势也是劣势：优势是可参考先行盘定价与市场温度，劣势是若市场转冷，需求可能已被 Plot A 和 Sembawang 提前消化。"</div>
+    <div class="review-source">— 市场分析共识，2026</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（3.7/5）</strong> —— 未开盘项目，基于 Sim Lian 品牌与区域环境推断。大盘社区氛围与开发商口碑是亮点，地价与竞争压力是主要顾虑。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>地价纪录 → 高价开盘</td><td class="num-red">高</td><td>$794 psf ppr 历史最高，定价压力最大</td></tr>
+    <tr><td>北部多盘竞争</td><td class="num-red">高</td><td>Plot A + Sembawang 同档期，需求分流明显</td></tr>
+    <tr><td>10 年 MOP 锁定</td><td class="num-red">高</td><td>2041 年前流动性受限</td></tr>
+    <tr><td>RTS / TEL 兑现周期</td><td class="num-yellow" style="color:#eab308">中</td><td>区域枢纽利好依赖基建落地</td></tr>
+    <tr><td>未开盘不确定性</td><td class="num-yellow" style="color:#eab308">中</td><td>户型 / 设施 / 价格均为推测</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（有条件推荐）：</strong>北部自住家庭可关注，但不必急于入场——等 Plot A 开盘看价格锚点，再对比两家开发商产品。Sim Lian 大盘品质有保障，接受 10 年 MOP 后可考虑。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（不推荐）：</strong>地价纪录 + 多盘竞争 + 最晚开盘 = 三重定价压力。同一区域内有更便宜的 Plot A 或已 MOP 的 Northwave（$1,260）可选，纯投资性价比低。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>短线投机者、预算敏感者、希望尽快入场的买家（Plot A 更早开盘、Sembawang 更便宜）。
+  </div>
+</section>
+
+<footer>
+  Woodlands EC Plot B Investment Analysis · 基于 GLS 地块数据 + 公开市场信息 · 生成于 2026-08-04
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。项目尚未开盘，核心参数与评分为推测性质。房产投资有风险，决策需谨慎。数据截至 2026 年 8 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sembawang Road EC — 新加坡 D27 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D27 Sembawang · 即将推出</div>
+  <h1>Sembawang Road EC</h1>
+  <div class="address">Sembawang Road · Sembawang · 99-Year Leasehold（预计 Q4 2026 开盘）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">5.70</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,280*</div><div class="lbl">预估开盘均价 psf</div></div>
+    <div class="kpi"><div class="val">—</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">0</div><div class="lbl">累计交易（未开盘）</div></div>
+    <div class="kpi"><div class="val">265</div><div class="lbl">总单位数（规划）</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>2026 年北部 EC 供应潮中的小盘选手——265 套低密度、$692 psf ppr 地价最便宜</strong>。由 Oriental Pacific Development 开发，位于 Sembawang Road，是北部五块 EC 地块中地块成本最低、规模最小的项目。小盘稀缺 + 定价优势是核心卖点。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Sembawang Road EC 是「低价地 + 小盘稀缺」型标的，预估开盘价在北部 EC 中最具竞争力（$1,250-1,300 psf 区间）。但 Sembawang 通勤距离较远、区域配套一般，加上<span class="negative">10 年 MOP 新规</span>，适合<span class="positive">预算敏感的自住买家</span>，投资吸引力有限。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Oriental Pacific Development（中型开发商）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">265 套（规划，北部最小盘）</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（GLS 出让）</div></div>
+    <div class="spec-card"><div class="spec-label">土地成本</div><div class="spec-value">$692 psf ppr（北部 EC 中最低）</div></div>
+    <div class="spec-card"><div class="spec-label">预计开盘</div><div class="spec-value">Q4 2026</div></div>
+    <div class="spec-card"><div class="spec-label">预计 TOP</div><div class="spec-value">约 2030</div></div>
+    <div class="spec-card"><div class="spec-label">政策框架</div><div class="spec-value">2026-05-08 新规：MOP 10 年 / 私有化 15 年</div></div>
+    <div class="spec-card"><div class="spec-label">区域定位</div><div class="spec-value">Sembawang 成熟 HDB 镇区</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>预计面积 (sqft)</th><th>占比（小盘参考）</th></tr>
+    <tr><td>2 Bedroom</td><td>750 - 850</td><td>约 10%</td></tr>
+    <tr><td>3 Bedroom</td><td>900 - 1,100</td><td>约 55%</td></tr>
+    <tr><td>4 Bedroom</td><td>1,150 - 1,300</td><td>约 25%</td></tr>
+    <tr><td>5 Bedroom</td><td>1,350 - 1,450</td><td>约 10%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 户型分布为推测（未开盘），小盘通常偏重 3-4 房家庭户型。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施（推测）</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 泳池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+    <div class="facility-tag"><span class="icon">🎮</span> 会所 / 功能厅</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 景观花园</div>
+    <div class="facility-tag"><span class="icon">👶</span> 儿童游乐区</div>
+  </div>
+  <p style="color:#94a3b8;font-size:13px">▶ 小盘设施以基础配置为主，预计无网球场等大型设施。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>近 Sembawang MRT（NSL），巴士接驳；Canberra MRT 亦在附近</td></tr>
+    <tr><td>🚗 快速路</td><td>SLE 连接，驾车约 30 分钟到 CBD</td></tr>
+    <tr><td>🏫 学校</td><td>Sembawang 学区：Canberra Primary、Sembawang Primary 等多所中小学 2km 内</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Sun Plaza、Sembawang Shopping Centre；Canberra Plaza 车程 5 分钟</td></tr>
+    <tr><td>🌳 自然</td><td>Sembawang Park、Canberra 邻里公园、Bukit Canberra 综合社区中心</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">5.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:55%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 成熟镇区但通勤偏远，配套中等</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">3.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:35%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 新 EC MOP 期间不得整租，短期零租金</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 低价地小盘有稀缺性，但区域基本面偏弱，增值靠大盘带动</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Oriental Pacific 中型开发商，品牌号召力弱于 CDL/Sim Lian</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · EC 首置无 ABSD，小盘管理费相对可预测</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">5.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:55%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 新规 10 年 MOP + 小盘成交量天然有限</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 低价地 → 开盘价安全边际相对较好，但中型开发商执行风险略增</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：5.70 / 10</strong> —— 加权计算（5.5×20% + 3.5×15% + 6.5×20% + 6.0×10% + 7.5×10% + 5.5×15% + 6.0×10%）。低价地是最大亮点，地段与开发商维度偏弱，整体中等。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>参照项目</th><th>位置</th><th>地价 psf ppr</th><th>当前均价 psf</th></tr>
+    <tr><td>Northwave EC（已 MOP）</td><td>Woodlands</td><td>—</td><td class="num-green">$1,260 - $1,300</td></tr>
+    <tr><td>Skypark Residences（已 MOP）</td><td>Sembawang</td><td>—</td><td class="num-green">$1,250</td></tr>
+    <tr><td>North Gaia EC（新盘）</td><td>Yishun</td><td>$662 psf ppr</td><td class="num-green">$1,300</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>定价锚点：</strong>$692 psf ppr 是北部五地块中最低，按加价 85% 推算<strong>预估开盘约 $1,250 - $1,300 psf</strong>——这是 2026-2027 北部 EC 中可能最便宜的入场价。相对已 MOP 的 Skypark/Northwave（$1,260+），新盘折价空间小，主要价值在「新盘品质 + 低价地传导」。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 新 EC 无历史交易，本表为区域可比对标。实际开盘价以开发商公布为准。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2026</div><div class="tl-detail">Oriental Pacific 以 $692 psf ppr 中标 Sembawang Road 地块</div></div>
+    <div class="tl-item"><div class="tl-year">2026-05-08</div><div class="tl-detail">新规生效：适用 10 年 MOP + 15 年私有化</div></div>
+    <div class="tl-item"><div class="tl-year">2026-Q4（预计）</div><div class="tl-detail">正式开盘</div></div>
+    <div class="tl-item"><div class="tl-year">~2030（预计）</div><div class="tl-detail">TOP 获临时入伙证</div></div>
+    <div class="tl-item"><div class="tl-year">~2040</div><div class="tl-detail">10 年 MOP 届满 → 可整租 / 转售</div></div>
+    <div class="tl-item"><div class="tl-year">~2045</div><div class="tl-detail">15 年私有化 → 可转售给外国人 / 公司</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>买家资格</td><td>新加坡公民家庭；月收入上限 $16,000（单身 $12,000）</td></tr>
+    <tr><td>MOP 限制</td><td>新规 10 年：不得整间出租、不得转售</td></tr>
+    <tr><td>贷款约束</td><td>受 MSR 30% 上限约束</td></tr>
+    <tr><td>CPF 津贴</td><td>首购家庭最高 $30,000 CPF Housing Grant</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面预期</div>
+    <div class="review-quote">"Sembawang 环境安静、绿化好，Bukit Canberra 开了之后运动设施和食阁都方便多了，性价比在北部算不错。"</div>
+    <div class="review-source">— Sembawang 居民反馈，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面预期</div>
+    <div class="review-quote">"265 套的小盘社区氛围好，住户少、管理简单，不用抢泳池健身房。价格如果真能 $1,280 左右开盘，在北部新 EC 里最亲民。"</div>
+    <div class="review-source">— 潜在买家讨论，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面预期</div>
+    <div class="review-quote">"Sembawang 实在太北了，去市区通勤 1 小时起，周围商场就 Sun Plaza 那种规模的。10 年 MOP 锁在这里，感觉有点被焊死。"</div>
+    <div class="review-source">— 潜在买家担忧，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"Oriental Pacific 的名气一般，虽然低价地给了定价空间，但交付品质要等 TOP 才能验证。小盘转售时买家池也小，退出要靠片区整体热度。"</div>
+    <div class="review-source">— 市场分析共识，2026</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★☆☆（3.5/5）</strong> —— 未开盘项目，基于区域环境推断。安静宜居、价格亲民是亮点；通勤距离、配套规模与 10 年锁定构成短板。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>10 年 MOP 锁定</td><td class="num-red">高</td><td>2040 年前流动性受限</td></tr>
+    <tr><td>区域基本面偏弱</td><td class="num-red">中高</td><td>Sembawang 增值主要靠大盘，缺乏区域级催化剂</td></tr>
+    <tr><td>开发商执行风险</td><td class="num-yellow" style="color:#eab308">中</td><td>Oriental Pacific 中型开发商，交付品质待验证</td></tr>
+    <tr><td>小盘流动性</td><td class="num-yellow" style="color:#eab308">中</td><td>265 套转售样本有限，价格发现不充分</td></tr>
+    <tr><td>未开盘不确定性</td><td class="num-yellow" style="color:#eab308">中</td><td>户型 / 设施 / 价格均为推测</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（有条件推荐）：</strong>预算敏感、在北区工作、不介意通勤的自住家庭。低价地 → 相对亲民的开盘价，是北部 EC 的「入门款」。接受 10 年 MOP 的前提下，自住体验与持有成本可控。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（不推荐）：</strong>区域缺乏增长催化剂、小盘流动性差、10 年锁定——纯投资角度性价比低于 Woodlands 双地块（区域中心逻辑）或已 MOP 的北部盘（即买即流动）。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>追求增值弹性者、通勤依赖地铁进 CBD 者、对开发商品牌敏感者。
+  </div>
+</section>
+
+<footer>
+  Sembawang Road EC Investment Analysis · 基于 GLS 地块数据 + 公开市场信息 · 生成于 2026-08-04
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。项目尚未开盘，核心参数与评分为推测性质。房产投资有风险，决策需谨慎。数据截至 2026 年 8 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

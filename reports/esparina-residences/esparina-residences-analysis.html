@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esparina Residences — 新加坡 D19 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D19 Sengkang · 已私有化</div>
+  <h1>Esparina Residences</h1>
+  <div class="address">Compassvale Bow · Sengkang · 99-Year Leasehold（自 2010-06-02）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">7.30</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,547</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,702</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">182</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">573</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>新加坡离地铁最近的 EC——Buangkok MRT 仅 220 米，Frasers 出品已私有化</strong>。2010 年发售（$749 psf）→ 2026 年 $1,702 psf，16 年 +127%。2019 年过 MOP、现已完全私有化（外国人可购），344 笔盈利交易、最高获利 $133.5 万。Sengkang Grand Mall 就在马路对面。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Esparina 是「地铁最近 + 已私有化 + 成熟配套」的稀缺组合——EC 身份已完全解除，买家池与私宅一致，流动性是同类中最好的。近 1 年均价 $1,702 psf 已充分反映价值，适合<span class="positive">看重通勤与租金回报的自住/稳健投资</span>，爆发力不如年轻盘但下限高。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">FCL Compassvale（Frasers 旗下）· ADDP 设计</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">573 套 · 9 栋 18 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2010-06-02 起）</div></div>
+    <div class="spec-card"><div class="spec-label">地块面积</div><div class="spec-value">19,000 sqm · Plot Ratio 3.0</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2013-2014 年竣工</div></div>
+    <div class="spec-card"><div class="spec-label">MOP</div><div class="spec-value">2019 年届满</div></div>
+    <div class="spec-card"><div class="spec-label">私有化</div><div class="spec-value">已完成（外国人 / 公司可购）</div></div>
+    <div class="spec-card"><div class="spec-label">建筑团队</div><div class="spec-value">Frasers 酒店级配套理念 · Lum Chang 承建</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>备注</th></tr>
+    <tr><td>2 Bedroom</td><td>700 - 900</td><td>—</td></tr>
+    <tr><td>3 Bedroom</td><td>900 - 1,100</td><td>主力</td></tr>
+    <tr><td>4 Bedroom</td><td>1,200 - 1,367</td><td>含 Dual-Key</td></tr>
+    <tr><td>Penthouse</td><td>1,679 - 2,583</td><td>顶层复式（含 2,583 sqft 超大单位）</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 户型梯度完整，含 Dual-Key 与超大顶层——租客与多代同堂家庭均可覆盖。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 泳池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+    <div class="facility-tag"><span class="icon">💼</span> 会所</div>
+    <div class="facility-tag"><span class="icon">🧖</span> 7 处水疗设施（度假风）</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 大面积景观园林</div>
+    <div class="facility-tag"><span class="icon">👶</span> 儿童游乐区</div>
+  </div>
+  <p style="color:#94a3b8;font-size:13px">▶ Frasers 将酒店度假理念引入 EC：7 处水疗设施为当年 EC 罕见配置。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>Buangkok MRT 220 米（步行 3-4 分钟）</strong>——EC 中历史级最近；未来 CRL 也在片区设站</td></tr>
+    <tr><td>🚗 快速路</td><td>CTE / TPE / KPE 连接，驾车约 20 分钟到 CBD</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内 5 所小学：Montfort Junior、North Vista、Palm View、Punggol、Yio Chu Kang Primary</td></tr>
+    <tr><td>🛍️ 商圈</td><td><strong>Sengkang Grand Mall 就在马路对面</strong>（地铁上盖综合商场 + 巴士总站 + 湿巴刹）</td></tr>
+    <tr><td>🌳 自然</td><td>Sengkang Riverside Park、Sungei Punggol 步道</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">8.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:85%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · MRT 220m + 商场对面 + 5 所小学，OCR 顶级</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:55%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 毛租约 3.0-3.5%，地铁+商场支撑出租</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 16 年 +127% 已验证，后续靠区域自然增值</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Frasers 一线开发商，交付与品质优秀</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 已私有化按私宅税档，楼龄 12 年维护成本渐升</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">8.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:85%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 已私有化买家池=私宅，2021-2026 成交 182 笔活跃</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 已私有化无政策风险，地契剩 83 年需留意远期折价</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：7.30 / 10</strong> —— 加权计算（8.5×20% + 5.5×15% + 7.0×20% + 8.0×10% + 6.0×10% + 8.5×15% + 7.0×10%）。地段与流动性双高分，是「成熟稳妥型」EC 代表。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>12</td><td>$1,185</td><td>—</td></tr>
+    <tr><td>2022</td><td>27</td><td>$1,304</td><td class="num-green">+10.0%</td></tr>
+    <tr><td>2023</td><td>32</td><td>$1,502</td><td class="num-green">+15.2%</td></tr>
+    <tr><td>2024</td><td>49</td><td>$1,626</td><td class="num-green">+8.3%</td></tr>
+    <tr><td>2025</td><td>42</td><td>$1,673</td><td class="num-green">+2.9%</td></tr>
+    <tr><td>2026（至今）</td><td>20</td><td>$1,705</td><td class="num-green">+1.9%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2021-2023 年经历 +25% 快涨，2024 年后进入年化 2-3% 的稳定爬升——典型的「成熟盘平稳期」。16 年长周期看，开盘 $749 → 现 $1,702，<strong>+127%，年化约 5.3%</strong>。2026 年最高单笔 $1,820 psf（1,367 sqft）。作为参照，同区已私有化的 The Topiary $1,450，Esparina 因地铁优势溢价约 17%。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ URA REALIS 数据。开盘价 $749 psf（2010 年发售）。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2010-06</div><div class="tl-detail">地契起算（99 年）· 发售 $749 psf</div></div>
+    <div class="tl-item"><div class="tl-year">2013-2014</div><div class="tl-detail">TOP 竣工</div></div>
+    <div class="tl-item"><div class="tl-year">2019</div><div class="tl-detail">5 年 MOP 届满 → 可转售给 SC / PR</div></div>
+    <div class="tl-item"><div class="tl-year">2023-2024</div><div class="tl-detail">10 年私有化完成 → 外国人 / 公司可购，EC 身份解除</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>当前状态</td><td><strong>已完全私有化</strong>，与私宅无异，买家池全开放</td></tr>
+    <tr><td>出租限制</td><td>无限制，可整间出租</td></tr>
+    <tr><td>新买家资格</td><td>无 EC 资格限制（新加坡人 / PR / 外国人 / 公司均可）</td></tr>
+    <tr><td>税费</td><td>外国人购房需付 ABSD（与私宅一致）</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Buangkok MRT 过个马路就到，Sengkang Grand Mall 就在楼下——买菜、搭地铁、去巴刹全部步行解决，这在 EC 里几乎找不到第二个。"</div>
+    <div class="review-source">— 住户反馈汇总，2024-2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Frasers 的度假风设计到现在看也不过时，7 个水疗设施当年很超前。出租很好租，离地铁近的 3 房基本挂出去两周就租掉。"</div>
+    <div class="review-source">— 房东 / 租客评价汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"楼龄 12 年了，部分设施开始显旧，电梯和泳池维护频率变高。物业管理费也在逐年涨，持有成本比新盘明显高。"</div>
+    <div class="review-source">— 住户论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"已私有化是把双刃剑：买家池全开是好事，但也意味着'EC 折价'红利已消失，价格完全按私宅定价，未来增长靠区域基本面。地契剩 83 年，30 年后会开始出现年限折价。"</div>
+    <div class="review-source">— 市场分析共识，2026</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.2/5）</strong> —— 交通与配套满分，度假风设施耐用；楼龄与维护成本是主要扣分项。Sengkang 最宜居 EC 之一。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>楼龄增长</td><td class="num-red">中高</td><td>TOP 12 年，设施维护与翻新成本上升</td></tr>
+    <tr><td>地契年限折价</td><td class="num-yellow" style="color:#eab308">中</td><td>剩 83 年，远期转售有年限折价压力</td></tr>
+    <tr><td>增值趋于平稳</td><td class="num-yellow" style="color:#eab308">中</td><td>近 2 年年化仅 2-3%，爆发力弱于新盘</td></tr>
+    <tr><td>价格已充分反映</td><td class="num-yellow" style="color:#eab308">中</td><td>$1,700+ 含全部利好，安全边际一般</td></tr>
+    <tr><td>竞品供给</td><td class="num-yellow" style="color:#eab308">低</td><td>Sengkang 新 EC/私宅分流部分需求</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>看重通勤与生活便利的家庭首选。地铁 220m + 商场对面 + 成熟社区，是「零痛点」型自住盘。$1,650-1,750 区间合理，长期持有舒适。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>稳字当头——已私有化流动性好、租金 3.0-3.5% 稳定、租客不愁。适合追求确定性现金流的稳健投资者；追求高弹性增值则选年轻盘。出租回报在 EC 中属于中上。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>追求短期暴利者、对楼龄敏感者、期待「EC 折价红利」者（红利已兑现完毕）。
+  </div>
+</section>
+
+<footer>
+  Esparina Residences Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-04
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 8 月。</div>
+</footer>
+
+</div>
+</body>
+</html>
