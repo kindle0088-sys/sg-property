@@ -13,6 +13,9 @@ set "GH=%LOCALAPPDATA%\Programs\GitHub CLI\gh.exe"
 if not exist "%GH%" set "GH=gh"
 
 echo [%date% %time%] Starting daily URA build...
+mkdir "%ROOT%\logs" 2>nul
+set "LOG=%ROOT%\logs\daily-build.log"
+echo [%date% %time%] ===== daily URA build start ===== >> "%LOG%"
 
 REM --- 防 .git 损坏：禁用 git 自动 gc（2026-08-02 事故根因：loose objects 超阈值
 REM     触发 auto-gc，repack 与构建并发中断导致对象丢失）---
@@ -48,9 +51,9 @@ if errorlevel 1 (
 cd /d "%ROOT%\scripts"
 "%NODE%" build.js --skip-hdb
 if errorlevel 1 (
-  echo [%date% %time%] BUILD FAILED
+  echo [%date% %time%] BUILD FAILED >> "%LOG%"
+  "%NODE%" "%ROOT%\scripts\write-status.js" build_failed
   REM --- failure notification: append log + open a GitHub issue (once per failure streak) ---
-  mkdir "%ROOT%\logs" 2>nul
   echo [%date% %time%] BUILD FAILED >> "%ROOT%\logs\build-error.log"
   "%GH%" issue list -R kindle0088-sys/sg-property --state open --search "Daily URA build failed" --json number --jq "length" > "%TEMP%\gh-open.txt" 2>nul
   set /p OPEN_ISSUES=<"%TEMP%\gh-open.txt"
@@ -65,22 +68,34 @@ cd /d "%ROOT%"
 git add data/ .github/
 git diff --cached --name-only | findstr /R "data/projects data/projects-index data/districts data/rentals data/property-index" >nul
 if errorlevel 1 (
+  echo [%date% %time%] Only timestamp/aggregate changes; skipping commit >> "%LOG%"
   echo [%date% %time%] Only timestamp/aggregate changes; skipping commit
   git reset -q
 ) else (
   git -c user.name="kindle0088-sys" -c user.email="kindle0088-sys@users.noreply.github.com" commit -m "chore: daily URA data build"
   if errorlevel 1 (
+    echo [%date% %time%] Commit failed >> "%LOG%"
     echo [%date% %time%] Commit failed
   ) else (
+    for /f "delims=" %%h in ('git rev-parse HEAD') do set "HEAD_SHA=%%h"
+    echo [%date% %time%] Committed >> "%LOG%"
     echo [%date% %time%] Committed
   )
 )
 
-REM --- 对齐 remote 后基于最新数据 commit，push 应为 fast-forward；失败则记录日志 ---
+REM --- 对齐 remote 后基于最新数据 commit，push 应为 fast-forward；失败则记录日志 + 开 issue ---
 git push origin main
 if errorlevel 1 (
-  mkdir "%ROOT%\logs" 2>nul
+  echo [%date% %time%] PUSH FAILED >> "%LOG%"
   echo [%date% %time%] PUSH FAILED >> "%ROOT%\logs\build-error.log"
+  "%NODE%" "%ROOT%\scripts\write-status.js" push_failed "%HEAD_SHA%"
+  REM --- push 失败也开 issue（2026-08-06 事故类型：构建成功但发布失败）---
+  "%GH%" issue list -R kindle0088-sys/sg-property --state open --search "Daily URA push failed" --json number --jq "length" > "%TEMP%\gh-open.txt" 2>nul
+  set /p OPEN_ISSUES=<"%TEMP%\gh-open.txt"
+  if not defined OPEN_ISSUES set OPEN_ISSUES=0
+  if "%OPEN_ISSUES%"=="0" (
+    "%GH%" issue create -R kindle0088-sys/sg-property --title "Daily URA push failed" --body "Local scheduled build succeeded but push failed at %date% %time%. See logs\build-error.log." >nul 2>&1
+  )
   echo [%date% %time%] PUSH FAILED
   exit /b 1
 )
@@ -101,5 +116,7 @@ if not "%LOOSE_NUM%"=="?" if "%LOOSE_NUM%" GTR "6700" (
   echo [%date% %time%] WARN: loose objects %LOOSE_NUM% exceed threshold 6700, run manual gc
 )
 
+"%NODE%" "%ROOT%\scripts\write-status.js" ok "%HEAD_SHA%" true
+echo [%date% %time%] Done. >> "%LOG%"
 echo [%date% %time%] Done.
 endlocal
