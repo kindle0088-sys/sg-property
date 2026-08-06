@@ -19,6 +19,32 @@ REM     触发 auto-gc，repack 与构建并发中断导致对象丢失）---
 git -C "%ROOT%" config gc.auto 0
 if errorlevel 1 echo [%date% %time%] WARN: failed to disable auto-gc
 
+REM --- 2026-08-06 事故预防：检测残留 rebase 状态（上次 pull --rebase 冲突未解决
+REM     会让后续构建在 detached HEAD 上 commit，数据永远推不上去）---
+if exist "%ROOT%\.git\rebase-merge" (
+  echo [%date% %time%] WARN: stale rebase state found, aborting
+  git -C "%ROOT%" rebase --abort
+)
+if exist "%ROOT%\.git\rebase-apply" (
+  echo [%date% %time%] WARN: stale rebase-apply state found, aborting
+  git -C "%ROOT%" rebase --abort
+)
+
+REM --- 2026-08-06 事故预防：构建前先把本地对齐 remote，避免"先 commit 后 rebase"冲突。
+REM     fetch 后若本地落后则 fast-forward（秒级）；若领先/分叉则丢弃本地 commit
+REM     （数据由本次构建重新生成，reflog 可找回）。---
+git -C "%ROOT%" fetch origin
+if errorlevel 1 echo [%date% %time%] WARN: git fetch failed
+git -C "%ROOT%" merge --ff-only origin/main
+if errorlevel 1 (
+  echo [%date% %time%] WARN: local branch diverged from origin/main, discarding local commits (rebuild regenerates data)
+  git -C "%ROOT%" reset --mixed origin/main
+  if errorlevel 1 (
+    echo [%date% %time%] ERROR: reset failed, aborting
+    exit /b 1
+  )
+)
+
 cd /d "%ROOT%\scripts"
 "%NODE%" build.js --skip-hdb
 if errorlevel 1 (
@@ -50,9 +76,11 @@ if errorlevel 1 (
   )
 )
 
-git pull --rebase
+REM --- 对齐 remote 后基于最新数据 commit，push 应为 fast-forward；失败则记录日志 ---
 git push origin main
 if errorlevel 1 (
+  mkdir "%ROOT%\logs" 2>nul
+  echo [%date% %time%] PUSH FAILED >> "%ROOT%\logs\build-error.log"
   echo [%date% %time%] PUSH FAILED
   exit /b 1
 )
