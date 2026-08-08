@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yishun Emerald — 新加坡房产投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.warn-box{background:linear-gradient(135deg,#3b0d0d 0%,#2a0a0a 100%);border-left:4px solid #ef4444;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">Condo · 私宅（非 EC）· D27 Yishun</div>
+  <h1>Yishun Emerald</h1>
+  <div class="address">20-34 Canberra Drive · Yishun · 99-Year Leasehold (from 1998, 剩约 71 年)</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.70</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$971</div><div class="lbl">均价 psf（2021-2026）</div></div>
+    <div class="kpi"><div class="val">$1,113</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">70</div><div class="lbl">累计交易（URA）</div></div>
+    <div class="kpi"><div class="val">436</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="warn-box">
+    <strong>⚠️ 类别纠正：Yishun Emerald 是私宅 Condo，不是 EC！</strong> 新加坡没有名为 "Emerald" 的执行共管公寓（EC）。该项目 99 年地契自 1998 年起算、2002 年竣工、436 个单位，URA 登记物业类型为 Condominium，对买家无 MOP / MSR / 收入上限限制，外国人也可购买。若目标是 Yishun 的 EC（如 The Criterion、Signature at Yishun），请另行分析——本报告按 <strong>私宅 Condo 基准</strong>评估。
+  </div>
+  <div class="highlight-box">
+    <strong>Yishun 北部最实惠的成熟私宅大盘</strong>——436 单位的大户型社区（主力 1,000-1,400 sqft），近 Canberra MRT（直线约 465 米），瀑布景观 + 度假村式园林在同价位段口碑突出。2021-2026 年均价从 $805 涨至 $1,110 psf（约 +38%），转售赢率 94%，毛租金回报约 3.5%。代价是 24 年楼龄与仅剩 71 年的地契。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Yishun Emerald 是"大空间 + 高租金回报 + 亲民单价"的成熟私宅盘，94% 的转售赢率与稳定的 3.5% 租金回报说明它作为<span class="positive">长期收租资产与北部家庭自住升级</span>都有扎实的基本面；但 71 年地契（触发 CPF 支取限制）与 2026 年增速放缓（+1.8%）意味着它更适合"赚租金 + 稳增值"的持有逻辑，而非短线搏价差。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Yishun Land Pte Ltd（Frasers 集团关联）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">436 套 · 8 栋楼（20-34 Canberra Drive）</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 1998-02 起）· 剩约 71 年</div></div>
+    <div class="spec-card"><div class="spec-label">土地规模</div><div class="spec-value">21,039 sqm（约 226,458 sqft）· Plot Ratio 2.50</div></div>
+    <div class="spec-card"><div class="spec-label">TOP / 楼龄</div><div class="spec-value">2002 年 1 月竣工 · 楼龄 24 年</div></div>
+    <div class="spec-card"><div class="spec-label">建筑团队</div><div class="spec-value">P &amp; T Consultants（建筑）· Nakano Singapore（承建）</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">层叠瀑布景观 + 度假村式热带园林</div></div>
+    <div class="spec-card"><div class="spec-label">市场定位</div><div class="spec-value">OCR · 大户型家庭盘 · 同区单价最低私宅之一</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布（基于 URA 交易记录推断）</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>交易占比</th><th>备注</th></tr>
+    <tr><td>2 Bedroom</td><td>958 - 1,033</td><td>约 6%</td><td>交易样本少，紧俏小户型</td></tr>
+    <tr><td>3 Bedroom</td><td>1,023 - 1,206</td><td>约 33%</td><td>1,000-1,200 sqft 主力区间</td></tr>
+    <tr><td>4 Bedroom（主力）</td><td>1,356 - 1,432</td><td>约 54%</td><td>1,200-1,400 sqft 成交最密集</td></tr>
+    <tr><td>大户型（1400+）</td><td>1,432+</td><td>约 7%</td><td>顶层 / 特殊单位</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 近 87% 交易集中在 1,000-1,400 sqft 的 3-4 房——典型家庭盘结构，"花小钱买大空间"是核心卖点。官方完整单元明细以开发商 / MCST 资料为准。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施（12 项）</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 主泳池 + Fun Pool + Wading Pool</div>
+    <div class="facility-tag"><span class="icon">💆</span> Spa Pool 水疗池</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房 Gymnasium</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">⛳</span> 迷你高尔夫 Putting Green</div>
+    <div class="facility-tag"><span class="icon">🏃</span> 环形跑步径 Jogging Track</div>
+    <div class="facility-tag"><span class="icon">🏠</span> 会所 Clubhouse</div>
+    <div class="facility-tag"><span class="icon">🎪</span> 多功能厅 Multi-purpose Hall</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+    <div class="facility-tag"><span class="icon">🎠</span> 儿童游乐场 Playground</div>
+    <div class="facility-tag"><span class="icon">🌊</span> 瀑布景观园林（社区招牌）</div>
+    <div class="facility-tag"><span class="icon">🛡️</span> 安保与门禁系统</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Canberra MRT (NS12) 直线约 <strong>465 米</strong>（实际步行 6-10 分钟，注意部分路段无遮蔽）；Yishun MRT (NS13) 约 1.5 km，巴士接驳</td></tr>
+    <tr><td>🚗 快速路</td><td>SLE（Canberra 匝道）驾车数分钟；往市区约 20-25 分钟（非高峰）</td></tr>
+    <tr><td>🏫 学校（1km）</td><td>Ahmad Ibrahim Primary School · Chongfu School · Yishun Primary School</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Canberra Plaza（约 1km）· Sembawang Shopping Centre · Northpoint City（Yishun，车程约 10 分钟）</td></tr>
+    <tr><td>🌳 自然</td><td>Sembawang Hot Spring Park（车程数分钟）· Lower Seletar Reservoir 公园（约 2km）</td></tr>
+    <tr><td>🛒 超市</td><td>1.5km 内 FairPrice / Cold Storage 多家</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Canberra MRT 步行可达 + 成熟社区配套齐全，但属北部非核心增长区</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 毛回报约 3.5-3.6%（2BR $3,381 / 3BR $4,063 / 4BR $4,250 月租），超 3% 基准</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 2021-2026 均价 +38%（$805→$1,110 psf），但 2026 年增速降至 +1.8%，楼龄压制后续弹性</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Frasers 集团背景开发商，2002 年交付无重大缺陷记录</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 老盘物业费较低，但 24 年楼龄维修基金压力上升；地契 71 年触发 CPF 支取按比例折减</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 年均 12-14 笔成交，买家池无 EC 资格限制（外国人可买），流动性健康</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">5.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:55%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 71 年地契折损 + 北部新盘/新 EC 供应分流 + 5 年 +38% 后的回调风险</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.70 / 10</strong> —— 加权计算（7.0×20% + 7.0×15% + 6.5×20% + 7.5×10% + 6.0×10% + 7.0×15% + 5.5×10%）。租金回报与流动性是核心支撑，地契年限与增值放缓是最明显的减分项——典型的"收租型老盘"画像。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>8</td><td>$805</td><td>—</td></tr>
+    <tr><td>2022</td><td>14</td><td>$864</td><td class="num-green">+7.3%</td></tr>
+    <tr><td>2023</td><td>14</td><td>$952</td><td class="num-green">+10.2%</td></tr>
+    <tr><td>2024</td><td>14</td><td>$1,011</td><td class="num-green">+6.2%</td></tr>
+    <tr><td>2025</td><td>12</td><td>$1,091</td><td class="num-green">+7.8%</td></tr>
+    <tr><td>2026（至今）</td><td>8</td><td>$1,110</td><td class="num-green">+1.8%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2021-2026 年均价从 $805 升至 $1,110 psf（约 <strong>+38%</strong>，年化约 +6.6%），期间每年正增长、无一年回调。但注意 2026 年增速骤降至 +1.8%——5 年大涨后动能明显衰竭。同期 D27 区房价指数年涨 2.0%，Yishun Emerald 已从"补涨"转为"跟随大盘"。参考 ShiokNest 配对交易数据：94% 的转售卖家获利，中位年化回报 10.0%，中位持有期仅 1.1 年——短线进出历史上也能赚钱，但那是 2021-2025 的大行情，不可外推。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 数据源：URA REALIS（本地项目交易记录，2021-08 至 2026-06，共 70 笔）。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">Yishun / Canberra 片区横向对比（近 1 年均价）</h3>
+  <table>
+    <tr><th>项目</th><th>类型</th><th>近 1 年均价 psf</th><th>地契 / 楼龄</th><th>特点</th></tr>
+    <tr><td><strong>Yishun Emerald</strong></td><td>Condo</td><td><strong>$1,113</strong></td><td>99 年自 1998（剩 71 年）· 24 年</td><td>大户型 · 片区单价最低私宅之一</td></tr>
+    <tr><td>Yishun Sapphire</td><td>Condo</td><td>$1,104</td><td>99 年自 1998 · 24 年</td><td>孪生盘（380 户），几乎无差异</td></tr>
+    <tr><td>The Wisteria</td><td>Condo</td><td>$1,385</td><td>99 年自 2016 · 10 年</td><td>次新盘，单价高 24%</td></tr>
+    <tr><td>Nine Residences</td><td>Condo</td><td>$1,334</td><td>99 年自 2017 · 9 年</td><td>次新盘，租约多 19 年，单价高 20%</td></tr>
+    <tr><td>The Criterion</td><td>EC</td><td>$1,368</td><td>99 年自 2015 · 11 年</td><td>EC（有 MOP/资格限制），近 Yishun MRT</td></tr>
+    <tr><td>Signature at Yishun</td><td>EC</td><td>$1,288</td><td>99 年自 2019 · 5 年</td><td>新 EC，2022 年开盘</td></tr>
+    <tr><td>1 Canberra</td><td>EC</td><td>$1,298</td><td>99 年自 2020 · 4 年</td><td>Canberra 新 EC，近 Canberra MRT</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ Yishun Emerald 比同区次新盘便宜 20-25%，比新 EC 便宜 15-20%——"便宜"的代价是 10-15 年楼龄差与 19-24 年的地契差。买它本质上是用年限换面积与单价。</p>
+</section>
+
+<!-- 合规说明 -->
+<section>
+  <div class="section-title">📋 法规与合规说明（Condo · 非 EC）</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">1998-02</div><div class="tl-detail">99 年地契起算 · 开发商 Yishun Land 购地开发</div></div>
+    <div class="tl-item"><div class="tl-year">2002-01</div><div class="tl-detail">TOP 竣工交付，436 单位入伙</div></div>
+    <div class="tl-item"><div class="tl-year">2026</div><div class="tl-detail">剩余地契约 71 年 · 当前均价 $1,110 psf（近 12 月 $1,113）</div></div>
+    <div class="tl-item"><div class="tl-year">2040 年代</div><div class="tl-detail">地契剩余 60 年门槛将逐步逼近——转售买家贷款与 CPF 支取将进一步受限</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>Condo 规则（本项目适用）</th></tr>
+    <tr><td>买家资格</td><td>无限制——本地/外国/公司均可买，无需政府批准（外国人仅付 ABSD）</td></tr>
+    <tr><td>MOP / MSR</td><td><strong>无</strong>——无最低居住年限，无 MSR 月供上限，适用 TDSR 60%</td></tr>
+    <tr><td>CPF 支取</td><td><strong>⚠️ 关键限制：</strong>剩余地契 71 年（&lt; 75 年），CPF 支取额按"剩余年限 vs 最年轻买家年龄"比例折减——年轻人买入可支取的 CPF 比例会显著缩水，需用现金补足首付</td></tr>
+    <tr><td>ABSD / SSD</td><td>本地首套豁免 ABSD；卖家适用标准 SSD（持有 3 年以上豁免）</td></tr>
+    <tr><td>转售对象</td><td>无 EC 式"先售予符合资格买家"限制，直接进公开市场</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>为什么它不是 EC？</strong> EC（执行共管公寓）是政府补贴的"半私宅"——有收入上限、仅限公民家庭购买、5/10 年 MOP、受 MSR 约束。Yishun Emerald 由私企（Yishun Land/Frasers 关联）开发、在公开市场销售、无任何资格限制，URA 类型登记为 Condominium。它与 EC 唯一的共同点是都在 Yishun。若您在考虑 Yishun 的 EC，请参考本仓库的 <a href="../signature-at-yishun/signature-at-yishun-analysis.html">Signature at Yishun</a> 与 <a href="../the-criterion/the-criterion-analysis.html">The Criterion</a> 研报。
+  </div>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"空间感是最大卖点——1,300-1,400 sqft 的四房在现在的市场根本找不到这个价位，房间比例宽敞，装修发挥空间大。小区的层叠瀑布和热带园林维护得不错，有 resort 的感觉，完全不像 $1,1xx psf 的盘。"</div>
+    <div class="review-source">— 综合住户评价（ShiokNest 项目评测、99.co 评论汇总）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"租客需求一直很稳——北部打工族和 Yishun 的家庭租户多，三房 $3,000-3,200 月租基本挂出去一两周就能租掉，3.5% 的回报在 OCR 老盘里算优秀。而且买家池没限制，PR、外国人接手都容易。"</div>
+    <div class="review-source">— 租赁市场反馈（EdgeProp / SRX 租赁数据 + 中介访谈汇总）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"从 Canberra MRT 走过来要 10 分钟以上，最晒的那段没有遮荫，通勤体验一般；而且楼龄摆在这，原始装修基本都要重做，$60,000-100,000 的翻新预算是常态。电梯和公共设施老化也比次新盘明显。"</div>
+    <div class="review-source">— ShiokNest FAQ + 住户论坛反馈（2025-2026）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"它和隔壁 Yishun Sapphire 是同一开发商、同一街道、同一地契年份的'孪生盘'，实际居住体验几乎没有区别，选哪个主要看具体单位朝向和楼层。另外地契剩 71 年，年轻买家要注意 CPF 支取会按比例缩水——这是买老盘最容易被忽略的成本。"</div>
+    <div class="review-source">— 市场分析共识（ShiokNest / 99.co）</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 空间与园林是体验加分项，MRT 步行距离与楼龄老化是主要扣分项；属于"住得宽敞舒服、通勤要忍一忍"的成熟老盘。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>地契折损（71 年）</td><td class="num-red">高</td><td>已触发 CPF 按比例支取限制；剩余年限低于 60 年后，转售买家贷款与估值将加速折损，届时接盘者骤减</td></tr>
+    <tr><td>楼龄老化（24 年）</td><td class="num-red">中高</td><td>电梯/水管/泳池系统进入大修期，物业费与特别评估（Sinking Fund）压力上升</td></tr>
+    <tr><td>增值动能衰减</td><td class="num-yellow" style="color:#eab308">中</td><td>2021-2026 已涨 38%，2026 年增速降至 +1.8%；北部新盘/新 EC（1 Canberra、Signature at Yishun 等）持续分流</td></tr>
+    <tr><td>MRT 步行体验</td><td class="num-yellow" style="color:#eab308">中</td><td>直线 465 米但实际步行 6-10 分钟且无遮荫，与宣传口径有落差，影响部分买家的价值判断</td></tr>
+    <tr><td>翻新成本沉没</td><td class="num-yellow" style="color:#eab308">中</td><td>老盘普遍需 $60-100K 翻新，这笔支出不会线性体现在转售价里</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（有条件推荐）：</strong>追求"花小钱买大空间"的北部家庭值得考虑。$1,1xx psf 买到 1,300+ sqft 大户型 + 度假村园林，性价比在 OCR 无出其右；成熟社区配套（学校 1km 三所、Canberra Plaza、Northpoint City）自住便利。前提：接受 6-10 分钟步行到 MRT、预留 $60-100K 翻新预算、并清楚 CPF 支取受限。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>3.5% 毛租金回报 + 94% 历史赢率 + 无资格限制的宽买家池，是 OCR 少见的"收租型"标的，适合追求稳定现金流的长期持有者。关键纪律：把它当"租金现金流资产"而非"增值引擎"——71 年地契决定了它的增值天花板远低于次新盘，未来 10 年核心收益靠租金而非价差。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>看重地契年限者（剩余 71 年已在 CPF 限制区间）、期待高速增值者（2026 年动能已放缓）、对步行通勤敏感者、以及原本想要 EC 的买家——EC 与 Condo 是两套完全不同的游戏规则，请先确认自己的需求再入场。
+  </div>
+</section>
+
+<footer>
+  Yishun Emerald Investment Analysis · 基于 URA REALIS 交易数据（本地项目库 70 笔成交）+ EdgeProp / 99.co / ShiokNest 公开资料 · 生成于 2026-08-08
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>
