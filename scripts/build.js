@@ -13,6 +13,7 @@
 
 import { writeFileSync, renameSync, mkdirSync, existsSync, readFileSync } from 'fs';
 import { join, dirname } from 'path';
+import { createHash } from 'crypto';
 import { fileURLToPath } from 'url';
 import { getToken, fetchAllTransactions, fetchTransactions, fetchRentals, processTransactions, processRentals } from './ura-fetcher.js';
 import { fetchHdbData, processHdbData } from './hdb-fetcher.js';
@@ -159,6 +160,7 @@ async function main() {
 
   mkdir(DATA); mkdir(PROJ_DIR);
   loadAmenities();
+  invalidateProximityIfAmenitiesChanged();
 
   const skipUra = process.argv.includes('--skip-ura');
 
@@ -329,7 +331,7 @@ async function main() {
       years: p.stats.years,
       proximity: p.proximity
     }));
-    writeJSON(join(DATA, 'projects-index.json'), idx); // 从 committed 重建 + 注入 type + 重算 avgPsf1y
+    writeJSONIfChanged('projects-index.json', idx); // 从 committed 重建 + 注入 type + 重算 avgPsf1y
     console.log(`  projects-index.json (rebuilt + type + avgPsf1y, ${idx.length})`);
   } else {
     idx = projects.map(p => ({
@@ -345,9 +347,9 @@ async function main() {
       propertyTypes: p.stats.propertyTypes,
       tenureTypes: p.stats.tenureTypes,
       years: p.stats.years,
-      proximity: enrichProximity(p.coord)
+      proximity: proxCache(p.coord)
     }));
-    writeJSON(join(DATA, 'projects-index.json'), idx);
+    writeJSONIfChanged('projects-index.json', idx);
     console.log(`  projects-index.json (${idx.length})`);
   }
 
@@ -356,10 +358,10 @@ async function main() {
   if (!skipUra) {
   for (const p of projects) {
     const avg1y = computeAvg1y(p.transactions, 'contractDate', CUTOFF_MMYY);
-    writeJSON(join(PROJ_DIR, `${p.id}.json`), {
+    if (writeJSONIfChanged(`projects/${p.id}.json`, {
       id: p.id, name: p.name, street: p.street,
       marketSegment: p.marketSegment, coord: p.coord,
-      proximity: enrichProximity(p.coord),
+      proximity: proxCache(p.coord),
       stats: { ...p.stats, avgPsf1y: avg1y },
       fmtFirstDate: fmtDate(p.stats.dateRange.min),
       fmtLastDate: fmtDate(p.stats.dateRange.max),
@@ -375,11 +377,10 @@ async function main() {
         tenureType: t.tenure.type,
         tenureYears: t.tenure.years
       }))
-    });
-    n++;
+    })) n++;
   }
   }
-  console.log(`  ${n} project detail files${skipUra ? ' (reused committed)' : ''}`);
+  console.log(`  ${n} project detail files${skipUra ? ' (reused committed)' : ' written (' + (projects.length - n) + ' unchanged, reused)'}`);
 
   // 5c. HDB project index
   let hdbIdx;
@@ -389,13 +390,13 @@ async function main() {
       ...x,
       avgPsf1y: computeAvg1y(loadCommittedTxns(x.id, true), 'month', CUTOFF_HDB)
     }));
-    writeJSON(join(DATA, 'hdb-index.json'), hdbIdx);
+    writeJSONIfChanged('hdb-index.json', hdbIdx);
     console.log(`  hdb-index.json (rebuilt + avgPsf1y, ${hdbIdx.length})`);
   } else {
     hdbIdx = hdbProjects.map(p => ({
       id: p.id, name: p.name, town: p.town, block: p.block, street: p.street,
       type: 'HDB', coord: HDB_COORDS[p.id] || null,
-      proximity: HDB_COORDS[p.id] ? enrichProximity(HDB_COORDS[p.id]) : null,
+      proximity: HDB_COORDS[p.id] ? proxCache(HDB_COORDS[p.id]) : null,
       demolished: !HDB_COORDS[p.id],
       avgPsf: p.stats.avgPsf,
       avgPsf1y: computeAvg1y(p.transactions, 'month', CUTOFF_HDB),
@@ -405,7 +406,7 @@ async function main() {
       years: p.stats.years,
       flatTypes: p.flatTypes
     }));
-    writeJSON(join(DATA, 'hdb-index.json'), hdbIdx);
+    writeJSONIfChanged('hdb-index.json', hdbIdx);
     console.log(`  hdb-index.json (${hdbIdx.length})`);
   }
 
@@ -416,11 +417,11 @@ async function main() {
     mkdir(HDB_DIR);
     for (const p of hdbProjects) {
       const avg1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
-      writeJSON(join(HDB_DIR, `${p.id}.json`), {
+      if (writeJSONIfChanged(`hdb/${p.id}.json`, {
         id: p.id, name: p.name, type: 'HDB',
         town: p.town, street: p.street, block: p.block,
         coord: HDB_COORDS[p.id] || null,
-        proximity: HDB_COORDS[p.id] ? enrichProximity(HDB_COORDS[p.id]) : null,
+        proximity: HDB_COORDS[p.id] ? proxCache(HDB_COORDS[p.id]) : null,
         demolished: !HDB_COORDS[p.id],
         flatTypes: p.flatTypes, flatModels: p.flatModels,
         stats: { ...p.stats, avgPsf1y: avg1y },
@@ -433,8 +434,7 @@ async function main() {
           resalePrice: t.resalePrice, flatModel: t.flatModel,
           remainingLease: t.remainingLease, leaseCommenceDate: t.leaseCommenceDate
         }))
-      });
-      m++;
+      })) m++;
     }
   }
   console.log(`  ${m} HDB block detail files (${skipHdb ? 'skipped — reusing committed' : 'written'})`);
@@ -444,7 +444,7 @@ async function main() {
     ...idx.map(p => ({ ...p, type: p.type || ecType(p) })),
     ...hdbIdx
   ];
-  writeJSON(join(DATA, 'property-index.json'), combinedIdx);
+  writeJSONIfChanged('property-index.json', combinedIdx);
   console.log(`  property-index.json (${combinedIdx.length})`);
 
   // 5f. Districts (URA only, HDB by town instead)
@@ -455,12 +455,12 @@ async function main() {
       console.log(`  districts.json (reused, ${dists.length})`);
     } catch (e) {
       dists = buildDistricts(projects, rentals, CUTOFF_MMYY);
-      writeJSON(join(DATA, 'districts.json'), dists);
+      writeJSONIfChanged('districts.json', dists);
       console.log(`  districts.json (${dists.length})`);
     }
   } else {
     dists = buildDistricts(projects, rentals, CUTOFF_MMYY);
-    writeJSON(join(DATA, 'districts.json'), dists);
+    writeJSONIfChanged('districts.json', dists);
     console.log(`  districts.json (${dists.length})`);
   }
 
@@ -470,13 +470,13 @@ async function main() {
   } else {
     console.log('  Building HDB towns...');
     const hdbTowns = buildHdbTowns(hdbProjects, CUTOFF_HDB);
-    writeJSON(join(DATA, 'hdb-towns.json'), hdbTowns);
+    writeJSONIfChanged('hdb-towns.json', hdbTowns);
     console.log(`  hdb-towns.json (${Object.keys(hdbTowns).length} towns)`);
   }
 
   // 5h. Rentals (skip writing in --skip-ura mode — reuse committed)
   if (!skipUra) {
-    writeJSON(join(DATA, 'rentals.json'), rentals);
+    writeJSONIfChanged('rentals.json', rentals);
   }
   console.log(`  rentals.json (${rentals.length}${skipUra ? ', reused' : ''})`);
 
@@ -498,7 +498,11 @@ async function main() {
   });
   console.log('  build-meta.json');
 
-  console.log(`\n✅ Build complete in ${secs}s`);
+  // 保存增量状态（文件指纹 + proximity 缓存），供下次构建复用
+  saveBuildState();
+  console.log(`  build-state.json (${Object.keys(buildState.files).length} file fingerprints, ${Object.keys(buildState.proximity).length} proximity entries)`);
+
+  console.log(`\n✅ Build complete in ${secs}s (${writtenFiles} files written, ${skippedFiles} unchanged/skipped)`);
 }
 
 function writeJSON(path, data) {
@@ -506,6 +510,71 @@ function writeJSON(path, data) {
   const tmp = path + '.tmp';
   writeFileSync(tmp, JSON.stringify(data), 'utf-8');
   renameSync(tmp, path);
+}
+
+// ──────────────────────────────────────────────────────────────
+// 增量写入 + proximity 缓存（2026-08-08 性能优化）
+// 原理：每次构建把"文件内容指纹"和"坐标→proximity 结果"存进
+//       data/build-state.json（随 git 提交，本地/CI 共享）。
+//       下次构建时内容未变的文件跳过写盘（省 Defender 扫描 IO），
+//       proximity 按坐标缓存（省 940 万次 haversine 重算）。
+// ──────────────────────────────────────────────────────────────
+const BUILD_STATE_FILE = join(DATA, 'build-state.json');
+
+function loadBuildState() {
+  try { return JSON.parse(readFileSync(BUILD_STATE_FILE, 'utf-8')); }
+  catch (e) { return { files: {}, proximity: {}, amenitiesHash: null }; }
+}
+
+let buildState = loadBuildState();
+let stateDirty = false;
+let skippedFiles = 0, writtenFiles = 0;
+
+function sha256(s) { return createHash('sha256').update(s).digest('hex'); }
+
+// 内容指纹：key = 相对 data/ 的文件路径（如 projects/abc.json）
+function writeJSONIfChanged(relPath, data) {
+  const absPath = join(DATA, relPath);
+  const hash = sha256(JSON.stringify(data));
+  if (buildState.files[relPath] === hash && existsSync(absPath)) {
+    skippedFiles++;
+    return false;
+  }
+  writeJSON(absPath, data);
+  buildState.files[relPath] = hash;
+  stateDirty = true;
+  writtenFiles++;
+  return true;
+}
+
+// proximity 缓存：key = 坐标四舍五入到 5 位小数（约 1.1m 精度）
+function proxCache(coord) {
+  if (!coord || !coord.lat || !coord.lng) return null;
+  const key = `${coord.lat.toFixed(5)},${coord.lng.toFixed(5)}`;
+  if (buildState.proximity[key] !== undefined) return buildState.proximity[key];
+  const r = enrichProximity(coord);
+  buildState.proximity[key] = r;
+  stateDirty = true;
+  return r;
+}
+
+// amenities 变化（MRT/学校列表变更）时清空 proximity 缓存
+function invalidateProximityIfAmenitiesChanged() {
+  const h = sha256(JSON.stringify(MRT_STATIONS) + '|' + JSON.stringify(SCHOOLS));
+  if (buildState.amenitiesHash !== h) {
+    buildState.proximity = {};
+    buildState.amenitiesHash = h;
+    stateDirty = true;
+  }
+}
+
+function saveBuildState() {
+  if (!stateDirty) return;
+  writeJSON(BUILD_STATE_FILE, {
+    files: buildState.files,
+    proximity: buildState.proximity,
+    amenitiesHash: buildState.amenitiesHash
+  });
 }
 
 function buildDistricts(projects, rentals, cutoff) {
