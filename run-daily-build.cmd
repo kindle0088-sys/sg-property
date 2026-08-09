@@ -20,7 +20,8 @@ echo [%date% %time%] ===== daily URA build start ===== >> "%LOG%"
 REM --- 防 .git 损坏：禁用 git 自动 gc（2026-08-02 事故根因：loose objects 超阈值
 REM     触发 auto-gc，repack 与构建并发中断导致对象丢失）---
 git -C "%ROOT%" config gc.auto 0
-if errorlevel 1 echo [%date% %time%] WARN: failed to disable auto-gc
+if errorlevel 1 echo [%date% %time%] WARN: failed to disable auto-gc >> "%LOG%"
+echo [%date% %time%] Step: pre-fetch checks done >> "%LOG%"
 
 REM --- 2026-08-06 事故预防：检测残留 rebase 状态（上次 pull --rebase 冲突未解决
 REM     会让后续构建在 detached HEAD 上 commit，数据永远推不上去）---
@@ -37,16 +38,24 @@ REM --- 2026-08-06 事故预防：构建前先把本地对齐 remote，避免"�
 REM     fetch 后若本地落后则 fast-forward（秒级）；若领先/分叉则丢弃本地 commit
 REM     （数据由本次构建重新生成，reflog 可找回）。---
 git -C "%ROOT%" fetch origin
-if errorlevel 1 echo [%date% %time%] WARN: git fetch failed
-git -C "%ROOT%" merge --ff-only origin/main
 if errorlevel 1 (
-  echo [%date% %time%] WARN: local branch diverged from origin/main, discarding local commits (rebuild regenerates data)
-  git -C "%ROOT%" reset --mixed origin/main
+  echo [%date% %time%] WARN: git fetch failed, retrying once >> "%LOG%"
+  git -C "%ROOT%" fetch origin
   if errorlevel 1 (
-    echo [%date% %time%] ERROR: reset failed, aborting
+    echo [%date% %time%] ERROR: git fetch failed twice, aborting >> "%LOG%"
     exit /b 1
   )
 )
+git -C "%ROOT%" merge --ff-only origin/main
+if errorlevel 1 (
+  echo [%date% %time%] WARN: local branch diverged from origin/main, discarding local commits (rebuild regenerates data) >> "%LOG%"
+  git -C "%ROOT%" reset --mixed origin/main
+  if errorlevel 1 (
+    echo [%date% %time%] ERROR: reset failed, aborting >> "%LOG%"
+    exit /b 1
+  )
+)
+echo [%date% %time%] Step: aligned with origin/main >> "%LOG%"
 
 cd /d "%ROOT%\scripts"
 "%NODE%" build.js --skip-hdb
