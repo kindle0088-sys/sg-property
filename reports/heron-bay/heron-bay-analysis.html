@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Heron Bay — 新加坡 D19 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D19 Hougang · 已私有化</div>
+  <h1>Heron Bay</h1>
+  <div class="address">51-63 Upper Serangoon View · Hougang · 99-Year Leasehold（2012 起）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.45</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,213</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,405</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">163</div><div class="lbl">累计交易（2021-）</div></div>
+    <div class="kpi"><div class="val">394</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Serangoon 河畔水岸 EC + 私有化完成</strong>——由 Serangoon EC Pte Ltd（Ho Lee 集团等联合体）开发，394 套 6 栋 16-17 层，东临 Serangoon River、西望 Punggol Park，是 D19 少有的"双水景"EC。2025-2026 年完成私有化（TOP 满 10 年），外国人买家池正式打开。2 房户型毛回报约 4.4%，租金效率全盘最高。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Heron Bay 是"水岸稀缺景观 + 小盘精品 + 租金效率高"的稳健标的。2021-2026 年均价 $963→$1,396 psf（约 +45%），但 2026 年样本显示价格滞涨；毛回报整体约 3.0%、2 房 4.4%。短板是 MRT 距离（Kangkar LRT 800m、Hougang 1.3km）与公共交通依赖。适合<span class="positive">景观导向自住者与 2 房投资客</span>。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Serangoon EC Pte Ltd（Ho Lee 集团 + See Hup Seng + CNH + EVIA）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">394 套 · 6 栋（2×16 层 + 4×17 层）</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2012 起）</div></div>
+    <div class="spec-card"><div class="spec-label">地块</div><div class="spec-value">12,399 sqm · GFA 约 43,397 sqm</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2015-10 / 2016（视楼栋）</div></div>
+    <div class="spec-card"><div class="spec-label">私有化</div><div class="spec-value">2025-2026 年完成（TOP 满 10 年）</div></div>
+    <div class="spec-card"><div class="spec-label">设计</div><div class="spec-value">Surbana International · 河岸园林主题</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">Serangoon River 河景 + Punggol Park 园景双景观</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th><th>占比</th></tr>
+    <tr><td>2 Bedroom</td><td>775</td><td>16</td><td>4.1%</td></tr>
+    <tr><td>3 Bedroom</td><td>1,023 - 1,033</td><td>126</td><td>32.0%</td></tr>
+    <tr><td>4 Bedroom</td><td>1,281</td><td>78</td><td>19.8%</td></tr>
+    <tr><td>3/4/5 Bedroom Dual Key</td><td>1,227 - 1,507</td><td>140</td><td>35.5%</td></tr>
+    <tr><td>5 Bedroom / Penthouse</td><td>1,496 / 1,991-2,841</td><td>34</td><td>8.6%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ Dual Key 占 1/3+、18 套顶层豪宅——兼顾出租灵活性与自住改善，是产品结构上"实用主义"的典型。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 泳池 + 水疗池</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">💪</span> 水畔健身房</div>
+    <div class="facility-tag"><span class="icon">♨️</span> 水上休闲池</div>
+    <div class="facility-tag"><span class="icon">🏢</span> 漂浮式会所</div>
+    <div class="facility-tag"><span class="icon">🧒</span> 水上乐园 + 儿童角</div>
+    <div class="facility-tag"><span class="icon">🍢</span> 铁板烧角落 + 池畔餐厅</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 感官步道 + 蝴蝶观察台</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Kangkar LRT 约 800 米；Ranggung LRT 1.1km；Hougang MRT（NEL）约 1.3km（5 分钟车程）</td></tr>
+    <tr><td>🚗 快速路</td><td>KPE / TPE 近在咫尺，非高峰 20 分钟到 Orchard、30-35 分钟到 CBD</td></tr>
+    <tr><td>🏫 学校</td><td>CHIJ Our Lady of the Nativity 1km 内；Rivervale、Nan Chiau、Sengkang Green 2km 圈</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Hougang Mall · Kovan Heartland Mall · Compass One · NEX（车程 10 分钟）</td></tr>
+    <tr><td>🌳 自然</td><td>Serangoon River 河岸步道 · Punggol Park · 公园连道系统</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 双水景稀缺，但 MRT 800m-1.3km 依赖巴士/LRT</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 整体 3.0%，2 房 4.4%——选对户型回报差一倍</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 5 年 +45% 但 2026 滞涨，私有化重估乏力</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 多家中型联合体，无重大纠纷但品牌力一般</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 小盘摊薄有限，水岸设施维护成本偏高</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 2025-2026 年成交 42 笔，私有化后买家池扩大</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 无 MOP 风险；地契剩 85 年；水岸防洪/维护属常态风险</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.45 / 10</strong> —— 加权计算（6.5×20% + 6.5×15% + 6.5×20% + 6.0×10% + 6.5×10% + 6.5×15% + 6.5×10%）。全组最"平均"的标的——无突出亮点也无致命短板，价值靠景观稀缺性和户型选择兑现。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>26</td><td>$963</td><td>—</td></tr>
+    <tr><td>2022</td><td>31</td><td>$1,071</td><td class="num-green">+11.2%</td></tr>
+    <tr><td>2023</td><td>22</td><td>$1,230</td><td class="num-green">+14.8%</td></tr>
+    <tr><td>2024</td><td>42</td><td>$1,306</td><td class="num-green">+6.2%</td></tr>
+    <tr><td>2025</td><td>32</td><td>$1,364</td><td class="num-green">+4.4%</td></tr>
+    <tr><td>2026（至今）</td><td>10</td><td>$1,396</td><td class="num-green">+2.3%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2023 年 +14.8% 是 D19 老 EC 集体重估的顶峰，此后增速逐年收敛至 2-3%。$1,213 全期均价 vs Sengkang 同代 EC（Riverparc $1,279、Twin Waterfalls $1,342）——Heron Bay 折价约 5-10%，部分是 MRT 劣势的定价。2025-2026 年私有化后价格未现跳涨，说明市场早已price-in解禁预期；真正的重估逻辑要靠 Hougang 区域成熟 + 水岸景观稀缺溢价。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2026 年仅 10 笔样本，价格趋势需结合 2025 年看。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2012</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2013-2014</div><div class="tl-detail">开盘预售</div></div>
+    <div class="tl-item"><div class="tl-year">2015-10 / 2016</div><div class="tl-detail">TOP 获临时入伙证</div></div>
+    <div class="tl-item"><div class="tl-year">2020-2021</div><div class="tl-detail">5 年 MOP 届满，可整租 / 售给 SC+PR</div></div>
+    <div class="tl-item"><div class="tl-year">2025-2026</div><div class="tl-detail">10 年私有化完成 → 外国人可购买</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>当前状态</th></tr>
+    <tr><td>买家资格</td><td class="positive">已解除 — 私有化后无国籍限制</td></tr>
+    <tr><td>MOP / 出租</td><td class="positive">已解除 — 可自由整租、转售</td></tr>
+    <tr><td>贷款约束</td><td class="positive">已切换 TDSR（55%）</td></tr>
+    <tr><td>CPF / 印花税</td><td>按普通私宅规则</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"河景是这盘最值钱的东西——早上沿 Serangoon River 步道跑步，晚上在漂浮会所看水景，Punggol Park 就在隔壁，带娃遛狗一流。这种'双水景'在 EC 里几乎找不到第二家。"</div>
+    <div class="review-source">— 住户评价（99.co / 论坛）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Dual Key 户型太实用了——一边自住一边出租，2 房部分月租 $3,300+，回报率 4%+。家里老人住套内另一侧，隐私和照顾都兼顾。"</div>
+    <div class="review-source">— 中介市场观察（2025-2026）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"公共交通是硬伤——Kangkar LRT 要走 10 分钟，Hougang MRT 更远，通勤族基本离不开巴士或开车。小盘物业费摊得高，水景设施的维护成本不低。"</div>
+    <div class="review-source">— 住户论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"10 年楼龄正值成熟期，水岸设施（栈道、木甲板）需要持续保养，这是水景盘的隐性持有成本——看房时注意公共区域维护状态。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（3.8/5）</strong> —— 景观与 Dual Key 实用性是核心亮点，通勤与物业费是主要扣分。有车、爱自然的家庭体验最佳。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>公共交通</td><td class="num-red">中高</td><td>MRT 800m-1.3km，无车家庭通勤不便，压制租金天花板</td></tr>
+    <tr><td>增值动力不足</td><td class="num-yellow" style="color:#eab308">中</td><td>私有化未带来跳涨，2026 年增速降至 2%，靠区域 Beta</td></tr>
+    <tr><td>水景维护成本</td><td class="num-yellow" style="color:#eab308">中</td><td>河岸栈道/木甲板/水景设施保养开支逐年上升</td></tr>
+    <tr><td>小盘物业费</td><td class="num-yellow" style="color:#eab308">中</td><td>394 户摊薄有限</td></tr>
+    <tr><td>大户型流动性</td><td class="num-yellow" style="color:#eab308">中低</td><td>5 房/顶层 2,000+ sqft 总价高、转售周期长</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（有条件推荐）：</strong>有车 + 热爱水岸自然 + 三代同堂需要 Dual Key 的家庭——双水景与实用性在同价位无替代品。无车家庭慎入。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>买 2 房或 Dual Key 小单元吃租金（4%+），回避 5 房/顶层大户型；增值预期放平，核心收益来自现金流与景观稀缺性的长期保护。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>依赖地铁通勤者、追求私有化套利或高增值弹性的投资者、预算紧张怕物业费的买家。
+  </div>
+</section>
+
+<footer>
+  Heron Bay Investment Analysis · 基于 URA REALIS 交易数据 + EdgeProp / 99.co / ShiokNest 公开信息 · 生成于 2026-08-09
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

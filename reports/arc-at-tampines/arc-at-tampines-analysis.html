@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arc at Tampines — 新加坡 D18 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D18 Tampines · 已私有化</div>
+  <h1>Arc at Tampines</h1>
+  <div class="address">3-23 Tampines Avenue 8 · Tampines · 99-Year Leasehold（2011 起）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.83</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,232</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,393</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">165</div><div class="lbl">累计交易（2021-）</div></div>
+    <div class="kpi"><div class="val">574</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>波浪阳台地标 EC + 2024-2025 年完成私有化</strong>——由 Hoi Hup Realty 与 Sunway Developments 合资开发，574 套 9 栋 16 层，波浪形阳台 + Miami 风格泳池是视觉地标。Tampines West MRT（DTL）约 1.2km，Bedok Reservoir 步行 5 分钟。开发商 2021 年获 EdgeProp 年度最佳开发商——同系项目 Rivercove、Hundred Palms、Parc Canberra 均为口碑盘。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Arc 是"设计独特性 + 顶级开发商 + 已私有化"的差异化标的。2021-2026 年均价 $959→$1,392 psf（约 +45%），私有化后价格仍在低位爬坡；毛回报约 3.5%。最大短板是 MRT 步行 15-18 分钟且露天暴晒。适合<span class="positive">东部自住家庭与中长期投资者</span>——作为 D18 已解禁 EC，与 Tenet、Aurelle 形成直接对标。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Hoi Hup Sunway Tampines（Hoi Hup Realty × Sunway）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">574 套 · 9 栋 16 层十字形楼栋</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2011-02-22 起）</div></div>
+    <div class="spec-card"><div class="spec-label">地块</div><div class="spec-value">20,600 sqm · 含 7 层停车场+屋顶花园住宅</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2014-08-05</div></div>
+    <div class="spec-card"><div class="spec-label">私有化</div><div class="spec-value">2024-2025 年完成（TOP 满 10 年）</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">波浪阳台 + Miami 泳池 + Cabana 平层别墅式 2 房</div></div>
+    <div class="spec-card"><div class="spec-label">户型</div><div class="spec-value">58 种户型 · 2-4 房（775 - 2,282 sqft）</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th><th>占比</th></tr>
+    <tr><td>2 Bedroom（含 Cabana）</td><td>775 - 893 / 1,399-1,410</td><td>94</td><td>16.4%</td></tr>
+    <tr><td>3 Bedroom（含 Utility/Dual Key）</td><td>958 - 1,679</td><td>368</td><td>64.1%</td></tr>
+    <tr><td>4 Bedroom（含 Dual Key）</td><td>1,173 - 2,282</td><td>112</td><td>19.5%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ Dual Key 双钥匙共 64 套、Cabana 平层式 8 套——产品创新是 Arc 的标签，3 房占近 2/3 锚定家庭客群。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 泳池 + Miami 度假泳池</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房 + 蒸汽房</div>
+    <div class="facility-tag"><span class="icon">♨️</span> Jacuzzi</div>
+    <div class="facility-tag"><span class="icon">🏃</span> 慢跑径</div>
+    <div class="facility-tag"><span class="icon">🧒</span> 游乐场 + 戏水池</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ + 会所</div>
+    <div class="facility-tag"><span class="icon">📚</span> 自习室</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Tampines West MRT（DTL）约 1.2km（步行 15-18 分钟，露天）；巴士 8/15/23/129 等在门口</td></tr>
+    <tr><td>🚗 快速路</td><td>TPE / PIE 近在咫尺，25 分钟到 CBD；Bedok Reservoir 步行 5 分钟</td></tr>
+    <tr><td>🏫 学校</td><td>St. Hilda's Primary 1.1km；Springfield Secondary 280m；Junyuan、Poi Ching 车程短</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Tampines Mall / Century Square / Tampines 1（车程 5-8 分钟）· Our Tampines Hub</td></tr>
+    <tr><td>💼 就业</td><td>Changi Business Park / Changi Airport 15 分钟 · Tampines Regional Centre</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Tampines 成熟配套但 MRT 1.2km 露天步行是硬伤</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 已私有化可整租，毛回报约 3.5%</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 5 年 +45%，私有化重估进行中，仍低于 Tampines 私宅</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Hoi Hup Sunway，EdgeProp 2021 年度最佳开发商</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 574 户中盘摊薄合理，税负随单价温和</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 私有化后买家池全开，2025-2026 年成交 48 笔</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 无 MOP 风险，地契剩 84 年，Tampines 基本面扎实</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.83 / 10</strong> —— 加权计算（6.0×20% + 6.5×15% + 7.0×20% + 8.0×10% + 7.0×10% + 7.0×15% + 7.0×10%）。开发商信誉全组最高，地段（地铁远）是全组最低之一——这是 Arc 最鲜明的"产品强、位置弱"画像。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>27</td><td>$959</td><td>—</td></tr>
+    <tr><td>2022</td><td>28</td><td>$1,097</td><td class="num-green">+14.4%</td></tr>
+    <tr><td>2023</td><td>25</td><td>$1,227</td><td class="num-green">+11.9%</td></tr>
+    <tr><td>2024</td><td>37</td><td>$1,338</td><td class="num-green">+9.0%</td></tr>
+    <tr><td>2025</td><td>29</td><td>$1,380</td><td class="num-green">+3.1%</td></tr>
+    <tr><td>2026（至今）</td><td>19</td><td>$1,392</td><td class="num-green">+0.9%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2022-2024 年三年连涨（+14%/+12%/+9%）吃足 Tampines 大盘红利，2025 年后增速放缓至 1-3%。$1,232 全期均价 vs D18 已私有化 EC 群（Tenet $1,386、Rivelle $1,933）——Arc 是 Tampines 已解禁 EC 中价格最低的一档，私有化后仍有追赶空间。同类私有化先例（The Esparis、La Casa）在解禁后均录得两位数 psf 涨幅。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2021 年 27 笔为私有化前夕成交，此后交易结构正常化。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2011-02</div><div class="tl-detail">地契起算（99 年）· 2010 年 GLS 中标</div></div>
+    <div class="tl-item"><div class="tl-year">2011</div><div class="tl-detail">开盘预售</div></div>
+    <div class="tl-item"><div class="tl-year">2014-08</div><div class="tl-detail">TOP 获临时入伙证</div></div>
+    <div class="tl-item"><div class="tl-year">2019</div><div class="tl-detail">5 年 MOP 届满，可整租 / 售给 SC+PR</div></div>
+    <div class="tl-item"><div class="tl-year">2024-2025</div><div class="tl-detail">10 年私有化完成 → 外国人可购买</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>当前状态</th></tr>
+    <tr><td>买家资格</td><td class="positive">已解除 — 私有化后无国籍限制</td></tr>
+    <tr><td>MOP / 出租</td><td class="positive">已解除 — 可自由整租、转售</td></tr>
+    <tr><td>贷款约束</td><td class="positive">已切换 TDSR（55%）</td></tr>
+    <tr><td>CPF / 印花税</td><td>按普通私宅规则</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"波浪阳台是加分项——很多单位能看到 Bedok Reservoir 方向，Miami 泳池度假感十足，58 种户型总有一款适合你。Hoi Hup Sunway 的交付质量确实好，住这么多年没什么大问题。"</div>
+    <div class="review-source">— 住户评价（99.co 综合 4.6 分）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Bedok Reservoir 走路 5 分钟，晨跑遛娃一流；门口巴士多，Springfield Secondary 就在旁边，接送孩子方便。私有化后社区里外国人多了，氛围更国际化。"</div>
+    <div class="review-source">— 住户论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"Tampines West MRT 看着近，走起来 15-18 分钟还全程露天，大太阳和雨季很难受；去 Tampines 商圈必须开车或坐巴士。公共交通是这盘最大的妥协。"</div>
+    <div class="review-source">— 住户与测评机构反馈（ShiokNest MRT 可及性仅 4.0/10）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"12 年楼龄 + 私有化后价格爬坡放缓——现在买入拼的是 Tampines 区域基本面和 Bedok Reservoir 稀缺景观，不再是 EC 解禁套利逻辑。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（3.8/5）</strong> —— 产品力（设计、质量、设施）一流，交通是明显短板。有车家庭体验远超无车家庭。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>地铁距离</td><td class="num-red">中高</td><td>1.2km 露天步行，无车家庭通勤体验差，压制租金与转售溢价</td></tr>
+    <tr><td>私有化溢价兑现</td><td class="num-yellow" style="color:#eab308">中</td><td>2025 年后增速降至 1-3%，解禁红利进入尾声</td></tr>
+    <tr><td>楼龄折旧</td><td class="num-yellow" style="color:#eab308">中</td><td>TOP 12 年，进入常规维护期</td></tr>
+    <tr><td>D18 供应</td><td class="num-yellow" style="color:#eab308">中低</td><td>Tampines 新盘与 EC 陆续入市</td></tr>
+    <tr><td>Cabana 冷门</td><td class="num-yellow" style="color:#eab308">低</td><td>特殊户型受众窄，转售周期可能较长</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（有条件推荐）：</strong>有车家庭 + 看重产品设计与交付质量 + 喜欢水库景观——Arc 是 D18 已解禁 EC 中"花同样的钱买最好产品"的选择。无车家庭请谨慎评估通勤。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>已私有化 + 稳定租金 + Tampines 基本面，适合长期持有；价格已无解禁大肉，回报靠区域 Beta。买入时优先选高楼层水库景观单位，稀缺性溢价更稳。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>依赖地铁通勤者、追逐高增速的短线客、对户型创新无感只重地段的买家。
+  </div>
+</section>
+
+<footer>
+  Arc at Tampines Investment Analysis · 基于 URA REALIS 交易数据 + EdgeProp / 99.co / ShiokNest 公开信息 · 生成于 2026-08-09
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

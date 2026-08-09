@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lake Life — 新加坡 D22 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D22 Jurong West · 2026 已私有化</div>
+  <h1>Lake Life</h1>
+  <div class="address">2-12 Tao Ching Road · Jurong West · 99-Year Leasehold（2013 起）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.70</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,283</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,473</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">157</div><div class="lbl">累计交易（2022-）</div></div>
+    <div class="kpi"><div class="val">546</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>紧邻 Jurong Lake Gardens 的"湖畔 EC"+ 2026 年私有化</strong>——由 Evia Real Estate、BBR、CNH、OKP Land、Ho Lee Group 联合体（Lakehomes）开发，546 套 5 栋 20 层。直接毗邻新加坡第三个国家花园 Jurong Lake Gardens（90 公顷），是 EC 中罕见的"国家公园级"绿肺。MOP 2021 年已过、2026 年完成私有化——外国人买家池刚刚打开。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Lake Life 是"湖畔稀缺景观 + 4.1% 全组最高租金回报 + JLD 概念"的西部攻守标的。2022-2026 年均价 $1,165→$1,478 psf（约 +27%，开盘 2022 年 78 笔大放量后转售稀疏）；毛回报 4.14% 在西部 EC 中一枝独秀。短板是现役地铁远（Lakeside 1.38km）、车依赖型通勤。适合<span class="positive">租金导向投资者与湖畔生活爱好者</span>。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Lakehomes Pte Ltd（Evia + BBR + CNH + OKP Land + Ho Lee）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">546 套 · 5 栋 20 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2013-10-30 起，剩约 86 年）</div></div>
+    <div class="spec-card"><div class="spec-label">地块</div><div class="spec-value">20,206 sqm · GFA 约 60,618 sqm</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2016-12-30（2017 全面入伙）</div></div>
+    <div class="spec-card"><div class="spec-label">私有化</div><div class="spec-value">2026 年完成（TOP 满 10 年）· 外国人可购买</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">20 层 Sky Dining · True Fitness 设计健身房（EC 首创）· 都市农园</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">6 层停车场 + 屋顶花园 · 宠物区/单车棚</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>说明</th></tr>
+    <tr><td>2 Bedroom</td><td>743 - 969</td><td>入门户型，湖景/园景可选</td></tr>
+    <tr><td>3 Bedroom（含 Premium）</td><td>1,023 - 1,324</td><td>主力户型，多数可观湖</td></tr>
+    <tr><td>4 Bedroom（含 Premium）</td><td>1,195 - 1,507</td><td>改善户型</td></tr>
+    <tr><td>5 Bedroom / Penthouse</td><td>1,604 - 1,722</td><td>稀缺大户型</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 湖景（Jurong Lake）与园景（Gardens）朝向是定价分水岭——湖景单位溢价约 10-15%。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 泳池 + 水上健身池</div>
+    <div class="facility-tag"><span class="icon">🏙️</span> 20 层 Sky Dining 观景餐厅</div>
+    <div class="facility-tag"><span class="icon">💪</span> True Fitness 健身房 + 热瑜伽室</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">👨‍🌾</span> 都市农园（蔬果/香料/鲜花）</div>
+    <div class="facility-tag"><span class="icon">🐕</span> 宠物跑道 + 宠物障碍区</div>
+    <div class="facility-tag"><span class="icon">🧒</span> 儿童乐园 + 幼儿戏水池</div>
+    <div class="facility-tag"><span class="icon">🔌</span> 电动车充电桩</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Lakeside MRT（EW）约 1.38km；Chinese Garden MRT 约 1.49km——基本为车依赖型，4 站巴士接驳</td></tr>
+    <tr><td>🚗 快速路</td><td>AYE / PIE 便捷，CBD 约 20-25 分钟（非高峰）；Jurong East 车程 <10 分钟；JRL（2027）改善接驳</td></tr>
+    <tr><td>🏫 学校</td><td>Lakeside Primary 0.95km；Jurong Secondary 0.2km；Fuhua、Shuqun、Rulang 2km 圈；NTU 车程 15 分钟</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Taman Jurong 购物中心 0.5km · Jurong Point 2km · JEM/Westgate 车程 10 分钟</td></tr>
+    <tr><td>🌳 自然</td><td>Jurong Lake Gardens（90 公顷国家花园）· 湖滨步道 · 社区农场</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 湖畔稀缺但现役地铁 1.4km，无车家庭不便</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 毛回报 4.14% 西部 EC 最高，2026 私有化后可租外国人</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 5 年 +27% 温和但稳；JLD 第二 CBD + JRL 提供长线空间</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 五方联合体执行力尚可，无重大纠纷</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 高租金覆盖持有成本，农园/宠物设施降低生活开销</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 2026 解禁后买家池扩大，但西部 EC 市场体量偏小</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 无 MOP 风险；地契 86 年；JRL 延期与车依赖是主要变量</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.70 / 10</strong> —— 加权计算（6.0×20% + 7.5×15% + 7.0×20% + 6.5×10% + 7.0×10% + 6.5×15% + 6.5×10%）。租金回报（全组最高）与湖畔增值概念是核心优势，地段便利度是主要妥协——"用通勤换景观与现金流"的典型标的。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2022（开盘转售）</td><td>78</td><td>$1,165</td><td>—</td></tr>
+    <tr><td>2023</td><td>27</td><td>$1,306</td><td class="num-green">+12.1%</td></tr>
+    <tr><td>2024</td><td>20</td><td>$1,430</td><td class="num-green">+9.5%</td></tr>
+    <tr><td>2025</td><td>19</td><td>$1,446</td><td class="num-green">+1.1%</td></tr>
+    <tr><td>2026（至今）</td><td>13</td><td>$1,478</td><td class="num-green">+2.2%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2023-2024 年吃满西部大盘行情（+12%/+9.5%），之后进入 1-2% 平台期。$1,283 全期均价 vs 同区 Westwood $1,268——两个西部 EC 定价几乎持平，但 Lake Life 靠湖景+高租金回报取胜。对比 Jurong East 私宅（$1,700+），仍有约 25% 折价；JRL 2027 通车 + JLD 第二 CBD 成熟是重估双引擎。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2022 年 78 笔为 MOP 后集中出货；此后年成交 13-27 笔，样本偏稀疏。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2013-10</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2014-11</div><div class="tl-detail">开盘预售（Public Booking）</div></div>
+    <div class="tl-item"><div class="tl-year">2016-12</div><div class="tl-detail">TOP 获临时入伙证</div></div>
+    <div class="tl-item"><div class="tl-year">2021</div><div class="tl-detail">5 年 MOP 届满，可整租 / 售给 SC+PR</div></div>
+    <div class="tl-item"><div class="tl-year">2026</div><div class="tl-detail">10 年私有化完成 → 外国人可购买</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>当前状态</th></tr>
+    <tr><td>买家资格</td><td class="positive">已解除 — 私有化后无国籍限制</td></tr>
+    <tr><td>MOP / 出租</td><td class="positive">已解除 — 可自由整租、转售</td></tr>
+    <tr><td>贷款约束</td><td class="positive">已切换 TDSR（55%）</td></tr>
+    <tr><td>CPF / 印花税</td><td>按普通私宅规则</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"Jurong Lake Gardens 就是后花园——90 公顷的国家花园，晨跑、遛娃、周末野餐全在家门口。20 层 Sky Dining 看湖景吃饭，这种体验全岛 EC 独一份。"</div>
+    <div class="review-source">— 住户评价（PropertyLimBrothers 测评 + 99.co）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"租金回报是真的高——3 房月租 $3,800+，买价 $1.4M 左右，毛回报 4%+，西部找不出第二家。NTU 学生、西部工业区外派员工都是稳定租客。"</div>
+    <div class="review-source">— 中介市场访谈（2025-2026）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"没车基本没法住——Lakeside MRT 走 20 分钟，巴士 4 站接驳，去 Jurong East 都要开车。Taman Jurong 商场规模小，日常大采购得跑 Jurong Point。"</div>
+    <div class="review-source">— 住户论坛反馈（ShiokNest MRT 可及性 3.5/10）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"2026 年私有化 + JRL 2027 通车，未来两年是'利好落地期'——市场已在预期内定价，实际涨幅取决于第二 CBD 的兑现速度，别指望一蹴而就。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（3.8/5）</strong> —— 湖畔环境与社区设施一流，通勤是唯一硬伤。有车、爱自然、重生活品质的家庭会非常满意。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>车依赖型区位</td><td class="num-red">中高</td><td>地铁 1.4km，无车家庭不适用，限制买家池上限</td></tr>
+    <tr><td>JRL 延期</td><td class="num-yellow" style="color:#eab308">中</td><td>2027 通车预期若延后，接驳改善延后</td></tr>
+    <tr><td>增值已兑现大半</td><td class="num-yellow" style="color:#eab308">中</td><td>2025-2026 年增速降至 1-2%，JLD 概念需长线兑现</td></tr>
+    <tr><td>转售样本稀疏</td><td class="num-yellow" style="color:#eab308">中</td><td>年成交 13-27 笔，价格发现不充分</td></tr>
+    <tr><td>西部市场体量</td><td class="num-yellow" style="color:#eab308">中低</td><td>与 Westwood 同质竞争，买家池较东部小</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（有条件推荐）：</strong>有车 + 热爱湖畔自然 + 家庭生活导向——国家花园后花园 + 高性价比的湖畔生活方式，在 OCR 独此一家。无车家庭请直接跳过。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（推荐）：</strong>10 篇中租金回报最高（4.1%）+ 2026 刚解禁 + JLD/JRL 双概念——"现金流覆盖 + 长线增值"的教科书组合。买入优先湖景单位，稀缺性溢价最稳；租客画像明确（NTU/西部园区）。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>依赖公共交通者、追求短期高增速者、预算有限怕持有成本的买家。
+  </div>
+</section>
+
+<footer>
+  Lake Life Investment Analysis · 基于 URA REALIS 交易数据 + EdgeProp / 99.co / ShiokNest 公开信息 · 生成于 2026-08-09
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

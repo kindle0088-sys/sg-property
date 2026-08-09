@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Westwood Residences — 新加坡 D22 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D22 Jurong West · MOP 已过</div>
+  <h1>Westwood Residences</h1>
+  <div class="address">188 Westwood Avenue · Jurong West · 99-Year Leasehold（2014 起）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.85</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,268</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,399</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">176</div><div class="lbl">累计交易（2021-）</div></div>
+    <div class="kpi"><div class="val">480</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>新加坡首个自行车主题 EC + Jurong 西部稀缺盘</strong>——由 Koh Brothers（许兄弟）与 Heeton Homes 合资的 KBD Westwood 开发，480 套 9 栋，内含 traffic garden 与 velodrome 场地。MOP 于 2022 年届满、私有化预计 2027 年——正处在"可整租、快解禁"的甜蜜窗口。租金毛回报 4.4% 为西部 EC 最高档，Jurong Lake District 第二 CBD 与 JRL（2027-2029 通车）双重利好在前。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Westwood 是"西部空白区 + 4.4% 高回报 + JLD 概念"的攻守兼备标的。2021-2026 年均价 $970→$1,408 psf（约 +45%），增值与租金双优；唯一短板是现役地铁（Pioneer 1.6km）较远，通勤依赖巴士——但 JRL Gek Poh 站（步行 6 分钟）建成后将彻底改变格局。适合<span class="positive">西部上班族自住 + 租金导向投资者</span>。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">KBD Westwood（Koh Brothers × Heeton Homes）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">480 套 · 9 栋 11-14 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2014-04-14 起）</div></div>
+    <div class="spec-card"><div class="spec-label">地块</div><div class="spec-value">17,550 sqm · Plot Ratio 2.8 · GFA 49,140 sqm</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2017-10-24</div></div>
+    <div class="spec-card"><div class="spec-label">MOP / 私有化</div><div class="spec-value">MOP 2022 已过 · 私有化预计 2027</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">新加坡首个自行车主题 EC（Traffic Garden + Velodrome）</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">1:1 车位配比 · 面向有地住宅景观</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>说明</th></tr>
+    <tr><td>2 Bedroom</td><td>689 起</td><td>入门户型，租金回报最高</td></tr>
+    <tr><td>3 Bedroom / Premium</td><td>900 - 1,100</td><td>主力户型，2015 开盘 $699k-750k 起</td></tr>
+    <tr><td>4 Bedroom / Premium</td><td>1,150 - 1,300</td><td>改善户型</td></tr>
+    <tr><td>5 Bedroom</td><td>1,518</td><td>稀缺大户型</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 28 种户型图，2-5 房全覆盖；开盘时 90% 单位低于 $1M，主打首次升级家庭。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 泳池 + 戏水池</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场 + 篮球场</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房 + 水下健身站</div>
+    <div class="facility-tag"><span class="icon">♨️</span> Spa + 水景庭院</div>
+    <div class="facility-tag"><span class="icon">🚴</span> 自行车主题园 + 环道</div>
+    <div class="facility-tag"><span class="icon">🧒</span> 儿童游乐场 + 户外餐厅</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+    <div class="facility-tag"><span class="icon">🏢</span> 多功能厅 + 会所</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Gek Poh MRT（JRL，预计 2029 通车）步行约 6 分钟；现役 Pioneer / Boon Lay MRT 巴士接驳（约 1.6km）</td></tr>
+    <tr><td>🚗 快速路</td><td>PIE / AYE / KJE 便捷，22 分钟到 Orchard、22 分钟到 CBD（非高峰）</td></tr>
+    <tr><td>🏫 学校</td><td>West Grove、Westwood Primary 1km 内；Pioneer Primary、River Valley High、NTU 车程短</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Gek Poh Shopping Centre · Jurong Point（两站地铁）· Taman Jurong</td></tr>
+    <tr><td>💼 就业</td><td>Jurong Lake District（第二 CBD）· Jurong Innovation District · Tuas Mega Port</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · JRL 前景好但现役地铁远，今日便利度打折扣</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 毛回报 4.4%，西部 EC 最高档，MOP 已过可整租</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 5 年 +45% 西部领先；JRL+JLD 提供后续想象空间</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Koh Brothers 老牌上市建筑商 + Heeton，交付口碑良好</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 单价低税负轻，物业费中等</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 2021-2026 年 176 笔成交，西部 EC 池偏小但稳定</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · MOP 已过无出租限制；私有化 2027 尚有一年窗口</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.85 / 10</strong> —— 加权计算（6.5×20% + 7.5×15% + 7.0×20% + 7.0×10% + 7.0×10% + 6.5×15% + 6.5×10%）。租金回报与增值双高是核心优势，地段现状（地铁远）是主要扣分——JRL 通车后评分有望上修。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>3</td><td>$970</td><td>—</td></tr>
+    <tr><td>2022</td><td>27</td><td>$1,131</td><td class="num-green">+16.6%</td></tr>
+    <tr><td>2023</td><td>60</td><td>$1,228</td><td class="num-green">+8.6%</td></tr>
+    <tr><td>2024</td><td>25</td><td>$1,313</td><td class="num-green">+6.9%</td></tr>
+    <tr><td>2025</td><td>46</td><td>$1,349</td><td class="num-green">+2.7%</td></tr>
+    <tr><td>2026（至今）</td><td>15</td><td>$1,408</td><td class="num-green">+4.4%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2023 年放量 60 笔（MOP 后出货高峰），价格五年连涨 +45%。$1,268 均价 vs 同区 Lake Life $1,283——两个西部 EC 价格咬得很紧，但 Westwood 更近 NTU/JRL 站点。对比 Jurong East 私宅（J Gateway $1,700+），仍有约 25% 折价；JRL Gek Poh 站（2029）与 JLD 成熟是后续重估的两大引擎。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2021 年仅 3 笔样本（MOP 未满+疫情），年度对比以 2022 起为准更稳妥。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2014-04</div><div class="tl-detail">地契起算（99 年）· GLS 中标</div></div>
+    <div class="tl-item"><div class="tl-year">2015-05</div><div class="tl-detail">开盘预售，3 房 $699k 起（$727 psf 起）</div></div>
+    <div class="tl-item"><div class="tl-year">2017-10</div><div class="tl-detail">TOP 获临时入伙证</div></div>
+    <div class="tl-item"><div class="tl-year">2022</div><div class="tl-detail">5 年 MOP 届满 → 可整租 / 售给 SC+PR</div></div>
+    <div class="tl-item"><div class="tl-year">2027（预计）</div><div class="tl-detail">10 年私有化 → 外国人可购买</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>当前状态</th></tr>
+    <tr><td>买家资格</td><td>SC / PR（私有化前）· 外国人需待 2027</td></tr>
+    <tr><td>MOP / 出租</td><td class="positive">MOP 已过 — 可整租（租客无国籍限制）</td></tr>
+    <tr><td>贷款约束</td><td>MSR 30%（私有化前）→ 2027 后转 TDSR</td></tr>
+    <tr><td>CPF 津贴</td><td>首购家庭最高 $30,000 CPF Housing Grant（二手 EC）</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"自行车主题社区很特别——孩子能在小区里的交通园学骑车，环道绕园一周很舒服。周边是有地住宅区，视野开阔不压抑，环境安静。"</div>
+    <div class="review-source">— 住户评价（99.co / PropertyGuru 评论）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"租金回报实打实的高——3 房月租 $3,500+，对比买入价回报率 4%+，在西部 EC 里数一数二。NTU 学生和西部工业区上班族租客不断。"</div>
+    <div class="review-source">— 中介市场访谈（2025-2026）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"现在去 Pioneer MRT 要走 20 分钟或搭巴士，JRL Gek Poh 站还要等几年——公共交通是目前最大痛点。周边商业少，吃喝基本靠 Gek Poh 中心和 Jurong Point。"</div>
+    <div class="review-source">— 住户论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"JRL 通车前的这几年就是买入窗口——一旦 Gek Poh 站（2029）落成，Westwood 会从'巴士接驳盘'变成'地铁盘'，参考 TEL 通车后北部 EC 的涨幅，重估空间可观。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（3.8/5）</strong> —— 环境、社区、租金体验优秀；公共交通与商业配套是当下短板，但属于"可预期改善"型（JRL 2029）。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>JRL 延期风险</td><td class="num-red">中</td><td>Gek Poh 站预计 2029，若延期，通勤劣势拉长</td></tr>
+    <tr><td>现役地铁远</td><td class="num-yellow" style="color:#eab308">中</td><td>Pioneer 1.6km，无车家庭通勤依赖巴士</td></tr>
+    <tr><td>私有化窗口</td><td class="num-yellow" style="color:#eab308">低</td><td>2027 解禁前买家池仍限 SC/PR，退出渠道略窄</td></tr>
+    <tr><td>西部大盘竞争</td><td class="num-yellow" style="color:#eab308">中低</td><td>Jurong 新 EC/私宅供应陆续入市</td></tr>
+    <tr><td>商业配套密度</td><td class="num-yellow" style="color:#eab308">中低</td><td>周边商场规模小，依赖 Jurong Point</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>西部上班族 / NTU 教职 / 喜欢安静环境与骑行家庭的首选——4.4% 回报率级别的居住成本 + 有地景观 + 未来地铁盘预期，自住体验与资产增值双赢。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（推荐）：</strong>"JRL 通车前买入"是西部最清晰的逻辑——毛回报 4.4% 覆盖持有成本，2027 私有化 + 2029 地铁通车构成双催化剂。长线持有至 2030 年，重估空间预计 15-25%。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>依赖现役地铁通勤的上班族（等不起 2029）、追求 CCR 流动性的投资者、短线客。
+  </div>
+</section>
+
+<footer>
+  Westwood Residences Investment Analysis · 基于 URA REALIS 交易数据 + EdgeProp / 99.co 公开信息 · 生成于 2026-08-09
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

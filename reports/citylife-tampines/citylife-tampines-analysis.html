@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CityLife@Tampines — 新加坡 D18 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D18 Tampines · 已私有化</div>
+  <h1>CityLife@Tampines</h1>
+  <div class="address">53-57 Tampines Central 7 · Tampines · 99-Year Leasehold（2012 起）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">7.15</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,350</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,674</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">162</div><div class="lbl">累计交易（2021-）</div></div>
+    <div class="kpi"><div class="val">514</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>新加坡首个"酒店式"EC + 首个 100 米无边泳池</strong>——由 Amara Holdings（40%）+ SingXpress Land（30%）+ Kay Lim Holdings（30%）合资开发，514 套 10 栋 15 层。2013 年开盘 1,800+ 申请、三个月售罄，创当年 EC 抢购纪录。Tampines MRT 双线换乘站步行约 850 米，Our Tampines Hub 1 公里。MOP 2021 年已过、已完全私有化。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>CityLife 是"区域中心核心位 + 酒店式产品力 + 已私有化"的 D18 标杆。2021-2026 年均价 $1,076→$1,621 psf（约 +51%），近 1 年 $1,674 全组最高增速之一；毛回报约 3.2%。Tampines Regional Centre + Changi 就业圈的区位护城河是长期价值锚。适合<span class="positive">自住改善与中长线投资</span>——D18 已解禁 EC 中的"头部盘"。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Tampines EC Pte Ltd（Amara 40% + SingXpress 30% + Kay Lim 30%）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">514 套 · 10 栋 15 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2012-08-13 起，剩约 85 年）</div></div>
+    <div class="spec-card"><div class="spec-label">地块</div><div class="spec-value">20,751 sqm · GFA 约 58,101 sqm</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2016-05-13</div></div>
+    <div class="spec-card"><div class="spec-label">私有化</div><div class="spec-value">已完全私有化（MOP 2021 + 10 年满）</div></div>
+    <div class="spec-card"><div class="spec-label">设计</div><div class="spec-value">Surbana International · 酒店式大堂 + 礼宾服务</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">首个 100m Infinity Pool EC · 竹径大道 · 香薰花园</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th><th>占比</th></tr>
+    <tr><td>2 Bedroom</td><td>786</td><td>24</td><td>4.7%</td></tr>
+    <tr><td>3 Bedroom（含 Dual Key）</td><td>1,098 - 1,518</td><td>307</td><td>59.7%</td></tr>
+    <tr><td>4 Bedroom（含 Dual Key）</td><td>1,313 - 1,701</td><td>161</td><td>31.3%</td></tr>
+    <tr><td>Skysuite / Penthouse</td><td>2,228 - 4,349</td><td>22</td><td>4.3%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 92 种户型图，最大 Penthouse 达 4,349 sqft——酒店式定位催生全岛 EC 罕见的"空中豪宅"产品线。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 100m 无边泳池（EC 首创）</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房</div>
+    <div class="facility-tag"><span class="icon">🛎️</span> Home Concierge 礼宾服务</div>
+    <div class="facility-tag"><span class="icon">🌇</span> 空中花园</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 竹径大道 + 香薰花园</div>
+    <div class="facility-tag"><span class="icon">🧒</span> 儿童游乐区</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Tampines MRT（EW+DT 双线）约 850 米（10-12 分钟步行/短驳巴士）；CRL Tampines North 未来接驳</td></tr>
+    <tr><td>🚗 快速路</td><td>TPE 直通，Changi Airport 车程约 10 分钟，CBD 约 25 分钟</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内 4 所：Angsana、Gongshang、Poi Ching、Tampines North Primary；Temasek Poly、SUTD 车程内</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Tampines 1 / Tampines Mall / Century Square（500,000+ sqft 零售）· Our Tampines Hub 1km</td></tr>
+    <tr><td>💼 就业</td><td>Tampines Regional Centre · Changi Business Park · ITE / TP / SUTD 教育集群</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · Tampines 区域中心核心，双线地铁 + 三大商场 + 大就业圈</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 已私有化可整租，毛回报约 3.2%，酒店式配套推高持有成本</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 5 年 +51% 全组领先，近 1 年 $1,674 保持 6.9% 增速</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · Amara 酒店集团背书，酒店式定位执行到位</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 礼宾+无边泳池等酒店式设施物业费偏高</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · D18 核心盘成交活跃，私有化后买家池全开</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 无 MOP 风险；地契 85 年；区域中心基本面稳固</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：7.15 / 10</strong> —— 加权计算（7.5×20% + 6.5×15% + 7.5×20% + 7.0×10% + 6.5×10% + 7.5×15% + 7.0×10%）。地段、增值、流动性三维高分支撑全组最高综合分；酒店式设施的持有成本是唯一明显代价。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>25</td><td>$1,076</td><td>—</td></tr>
+    <tr><td>2022</td><td>39</td><td>$1,224</td><td class="num-green">+13.8%</td></tr>
+    <tr><td>2023</td><td>20</td><td>$1,301</td><td class="num-green">+6.3%</td></tr>
+    <tr><td>2024</td><td>29</td><td>$1,446</td><td class="num-green">+11.1%</td></tr>
+    <tr><td>2025</td><td>31</td><td>$1,516</td><td class="num-green">+4.8%</td></tr>
+    <tr><td>2026（至今）</td><td>18</td><td>$1,621</td><td class="num-green">+6.9%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>五年 +51%、2026 年仍保持 +6.9%——CityLife 是 10 篇中价格动能最强的盘，靠的是"Tampines 区域中心 + 私有化 + 酒店式稀缺性"三重驱动。$1,674 近 1 年均价 vs D18 其他已解禁 EC（Tenet $1,790、Rivelle $1,933）仍有 10-15% 折价；对比 Tampines 新私宅（$2,000+），EC 溢价收敛空间依旧存在。租金回报 3.2% 偏低是唯一需要接受的现实。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2021 年 25 笔含私有化前成交；2024 年 +11.1% 与 D18 大盘普涨同步。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2012-08</div><div class="tl-detail">地契起算（99 年）</div></div>
+    <div class="tl-item"><div class="tl-year">2013-02</div><div class="tl-detail">开盘预售，1,800+ 申请，三个月售罄</div></div>
+    <div class="tl-item"><div class="tl-year">2016-05</div><div class="tl-detail">TOP 获临时入伙证</div></div>
+    <div class="tl-item"><div class="tl-year">2021</div><div class="tl-detail">5 年 MOP 届满，可整租 / 售给 SC+PR</div></div>
+    <div class="tl-item"><div class="tl-year">2026</div><div class="tl-detail">10 年私有化完成 → 外国人可购买</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>当前状态</th></tr>
+    <tr><td>买家资格</td><td class="positive">已解除 — 私有化后无国籍限制</td></tr>
+    <tr><td>MOP / 出租</td><td class="positive">已解除 — 可自由整租、转售</td></tr>
+    <tr><td>贷款约束</td><td class="positive">已切换 TDSR（55%）</td></tr>
+    <tr><td>CPF / 印花税</td><td>按普通私宅规则</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"100 米无边泳池配酒店式大堂，住着真有度假感——在 EC 里体验天花板级别的存在。礼宾服务收快递、订餐厅都很方便，家里来客人也体面。"</div>
+    <div class="review-source">— 住户评价（99.co / ShiokNest 设施评分 8.5/10）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"位置无敌——Tampines 三大商场加 Our Tampines Hub 都在步行/短驳范围，Changi 上班 10 分钟。学校、医院、体育馆全在区域中心里，生活半径可以压到 2 公里。"</div>
+    <div class="review-source">— 住户论坛反馈</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"酒店式配套是要花钱的——物业费明显高于普通 EC，礼宾和泳池维护是长期开支。3.2% 的租金回报在同组偏低，靠增值补。"</div>
+    <div class="review-source">— 住户与中介反馈汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"10 年楼龄 + 高度酒店化 = 设施老化成本前置——无边泳池、水景、大堂的翻新周期会比普通盘更早到来，这是持有体验的隐形变量。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.2/5）</strong> —— 全组居住体验最高分：产品力、地段便利度、社区氛围俱佳；代价是物业费与租金回报。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>物业费偏高</td><td class="num-red">中</td><td>酒店式设施维护成本长期高于普通 EC，侵蚀净回报</td></tr>
+    <tr><td>设施老化前置</td><td class="num-yellow" style="color:#eab308">中</td><td>无边泳池/水景/大堂进入大修周期，可能触发特别评估（S&CC）</td></tr>
+    <tr><td>租金回报偏低</td><td class="num-yellow" style="color:#eab308">中</td><td>3.2% 毛回报，现金流导向投资者需谨慎</td></tr>
+    <tr><td>估值偏高</td><td class="num-yellow" style="color:#eab308">中低</td><td>价格已处 D18 EC 高位，安全边际较其他盘薄</td></tr>
+    <tr><td>区域供应</td><td class="num-yellow" style="color:#eab308">低</td><td>Tampines 成熟区新增供应有限，基本面稳固</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>预算充足、追求居住品质与地段便利的改善家庭——全组最佳综合体验，Tampines 区域中心的便利度无可替代。愿意为酒店式体验付物业费者首选。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>增值动能全组最强（+51%/5 年），适合"增值优先、接受低租金"的长线投资者；私有化后买家池已全开。买入时优先 3 房标准户型（流动性最好），回避超大 Penthouse。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>现金流导向的租金投资者、对物业费敏感者、追求"最低价入场"的保守买家。
+  </div>
+</section>
+
+<footer>
+  CityLife@Tampines Investment Analysis · 基于 URA REALIS 交易数据 + EdgeProp / 99.co / ShiokNest 公开信息 · 生成于 2026-08-09
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

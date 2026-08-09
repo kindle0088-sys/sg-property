@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prive — 新加坡 D19 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · Executive Condominium · D19 Punggol · 已私有化</div>
+  <h1>Prive</h1>
+  <div class="address">31-39 Punggol Field · Punggol Town · 99-Year Leasehold（2010 起）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">7.43</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,346</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,581</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">213</div><div class="lbl">累计交易（2021-）</div></div>
+    <div class="kpi"><div class="val">680</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Punggol 水岸稀缺 EC + 2024 年已完成私有化</strong>——由 NTUC Choice Homes 与 CEL Development 合资开发，680 套大社区，Cove LRT 仅 260 米、Punggol MRT 换乘站约 420 米，是新加坡少有的"EC 价格、私宅级地铁距离"项目。紧邻 Punggol Digital District（28,000 就业岗位），2024 年私有化后已完全解除 HDB 限制，转售市场向外国人开放。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Prive 是"水岸大社区 + 步行级 LRT + 已私有化"三要素齐备的成熟 EC。2021 年至今均价从 $1,081 涨到 $1,589 psf（约 +47%），私有化红利已部分兑现但相对 OCR 私宅仍有折价；当前租金毛回报约 3.5%，适合<span class="positive">自住升级 + 中长线持有</span>，短线套利窗口已过。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Punggol Field EC Pte Ltd（NTUC Choice Homes × CEL Development）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">680 套 · 5 栋 17 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2010-09-14 起，剩约 83 年）</div></div>
+    <div class="spec-card"><div class="spec-label">地块</div><div class="spec-value">22,497 sqm（约 242,161 sqft）· 4 栋 + 地下停车场</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2014 年（2017 年完成法律交割）</div></div>
+    <div class="spec-card"><div class="spec-label">私有化</div><div class="spec-value">2024 年完成（TOP 满 10 年）· 已可售外国人</div></div>
+    <div class="spec-card"><div class="spec-label">建筑团队</div><div class="spec-value">ADDP Architects · 水岸灵感设计</div></div>
+    <div class="spec-card"><div class="spec-label">特色</div><div class="spec-value">一楼花园/鱼池庭院单位、双层大堂、滨水景观</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>说明</th></tr>
+    <tr><td>2 Bedroom / 2+Study</td><td>775 - 950</td><td>小户型入门，出租流动性最好</td></tr>
+    <tr><td>3 Bedroom</td><td>1,000 - 1,200</td><td>主力户型，家庭自住核心</td></tr>
+    <tr><td>4 Bedroom</td><td>1,350 - 1,772</td><td>大面积改善，稀缺性好</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 共 51 种户型图、40 个 stack，2-4 房全覆盖——典型的家庭导向大社区。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 竞赛池 + 泻湖泳池</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房（Fitness Corner）</div>
+    <div class="facility-tag"><span class="icon">🧒</span> 儿童游乐场</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+    <div class="facility-tag"><span class="icon">🚗</span> 地下停车场</div>
+    <div class="facility-tag"><span class="icon">🌿</span> 水岸园林景观</div>
+    <div class="facility-tag"><span class="icon">🏡</span> 一楼花园/鱼池庭院</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td>Cove LRT 约 260 米（3 分钟）；Punggol MRT 换乘站约 420 米，NEL 22 分钟到 Dhoby Ghaut</td></tr>
+    <tr><td>🚗 快速路</td><td>TPE / KPE 近在咫尺，非高峰约 25 分钟到 CBD；2032 年 CRL Punggol Extension 直连 Pasir Ris</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内 8 所：Edgefield、Horizon、Mee Toh、Oasis、Punggol Green Primary 等</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Waterway Point（Punggol MRT 旁）· Punggol Town Centre · SAFRA Punggol</td></tr>
+    <tr><td>💼 就业</td><td>Punggol Digital District（28,000 岗位）· Seletar Aerospace Park · Changi 车程 15 分钟</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 水岸 + LRT 260 米 + PDD 就业引擎，OCR 顶级地段</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 已私有化可整租，毛回报约 3.5%，2 房户型更高</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 2021-2026 均价 $1,081→$1,589（+47%），私有化红利兑现中</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · NTUC Choice Homes + CEL，工会背景实力雄厚</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 大社区摊薄物业费；私有化后需缴全额房产税</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 买家池已含外国人，2025-2026 年成交活跃</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 无 MOP 锁定、无政策窗口风险；地契剩余 83 年无忧</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：7.43 / 10</strong> —— 加权计算（8.0×20% + 7.0×15% + 7.5×20% + 7.5×10% + 7.0×10% + 7.5×15% + 7.0×10%）。地段与增值双高分，租金回报是唯一短板（EC 资产共性）；私有化后风险维度显著改善，是 10 篇研报中"已解禁"梯队里性价比最高的盘之一。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>27</td><td>$1,081</td><td>—</td></tr>
+    <tr><td>2022</td><td>37</td><td>$1,186</td><td class="num-green">+9.7%</td></tr>
+    <tr><td>2023</td><td>36</td><td>$1,285</td><td class="num-green">+8.3%</td></tr>
+    <tr><td>2024</td><td>48</td><td>$1,407</td><td class="num-green">+9.5%</td></tr>
+    <tr><td>2025</td><td>46</td><td>$1,514</td><td class="num-green">+7.6%</td></tr>
+    <tr><td>2026（至今）</td><td>19</td><td>$1,589</td><td class="num-green">+5.0%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>Prive 走出"年年正增长"的教科书曲线——2021 年 $1,081 → 2026 年 $1,589 psf，5 年年化约 +8%。2024 年私有化前后成交量明显放大（48 笔），证明解禁打开了买家池。作为参照，Punggol 同区私宅 Watertown 转售 $1,749 psf、Parc Centros $1,650 psf——Prive 仍存在约 10-15% 的 EC 折价，但差距较 2019 年（约 30%）已大幅收窄。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2021 年 27 笔为私有化前夕的提前布局；私有化完成后交易结构更贴近普通私宅。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2010-09</div><div class="tl-detail">地契起算（99 年）· GLS 地块中标</div></div>
+    <div class="tl-item"><div class="tl-year">2011</div><div class="tl-detail">开盘预售，$6xx-7xx psf 起步</div></div>
+    <div class="tl-item"><div class="tl-year">2014-07</div><div class="tl-detail">TOP 获临时入伙证（2017 完成法律交割）</div></div>
+    <div class="tl-item"><div class="tl-year">2019</div><div class="tl-detail">5 年 MOP 届满，可整租 / 售给 SC+PR</div></div>
+    <div class="tl-item"><div class="tl-year">2024</div><div class="tl-detail">10 年私有化完成 → 转售市场对所有人开放（含外国人）</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>当前状态</th></tr>
+    <tr><td>买家资格</td><td class="positive">已解除 — 私有化后无国籍限制，外国人可购买</td></tr>
+    <tr><td>MOP / 出租</td><td class="positive">已解除 — 可自由整租、转售</td></tr>
+    <tr><td>贷款约束</td><td class="positive">已切换 TDSR（55%）— 不再受 MSR 30% 约束</td></tr>
+    <tr><td>CPF / 印花税</td><td>按普通私宅规则（SC 首套 0% ABSD；SSD 持 3 年以上 0%）</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"在 EC 里几乎是独一无二的地铁盘——Cove LRT 3 分钟、Punggol MRT 5 分钟，Waterway Point 就在换乘站旁，日常生活完全不用开车。水岸散步道和 4.2km Waterway Park 就是自家后花园。"</div>
+    <div class="review-source">— 99.co 买家评论 / PropertyLimBrothers 实地测评</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"大社区设施齐全，泳池、网球场、儿童区维护得不错，住家氛围浓——Punggol 一带年轻家庭多，社区活动丰富。私有化之后外国人也能进场，挂牌价肉眼可见地抬起来了。"</div>
+    <div class="review-source">— 中介访谈与市场分析（2025-2026）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"2014 年交付至今近 12 年，部分公共设施开始显旧，个别楼栋外墙和泳池瓷砖有修补痕迹；一楼庭院单位蚊虫偏多，靠近水道尤其明显。"</div>
+    <div class="review-source">— 住户论坛反馈汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"私有化红利正在兑现但已过半——2019 年 MOP 后到 2024 年私有化，价格已经涨了一大截。现在的买家买的是'成熟 Punggol + PDD 就业'的长线逻辑，而不是解禁套利了。"</div>
+    <div class="review-source">— 市场分析共识</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 位置和社区氛围是最大加分项，楼龄带来的设施老化是主要扣分点，属于"住得方便、住得热闹"的成熟大社区。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>楼龄折旧</td><td class="num-red">中</td><td>TOP 12 年，设施老化进入常态维护期，与次新盘价差可能拉大</td></tr>
+    <tr><td>私有化红利兑现</td><td class="num-yellow" style="color:#eab308">中</td><td>2024 年解禁后价格已重估，未来增速回归 Punggol 基本面</td></tr>
+    <tr><td>PDD 落地节奏</td><td class="num-yellow" style="color:#eab308">中</td><td>就业园区建设进度若放缓，租金与增值支撑减弱</td></tr>
+    <tr><td>供应压力</td><td class="num-yellow" style="color:#eab308">中低</td><td>Punggol 新 EC/私宅陆续入市，次新盘竞争加剧</td></tr>
+    <tr><td>政策风险</td><td class="num-yellow" style="color:#eab308">低</td><td>已私有化，ABSD/SSD 按私宅规则，无 EC 政策窗口</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>HDB 升级家庭的理想选择。步行级双轨（LRT+MRT）、水岸生态、成熟社区、完整设施——$1,4xx psf 在 Punggol 买水岸大社区，性价比显著优于同区次新私宅。12 年楼龄的折价换来的是地段成熟度。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>已私有化、无 MOP 锁定、毛回报 3.5%——对"看多 Punggol Digital District + CRL 2032"的长线投资者是 OCR 最稳的标的之一。核心赌注是 PDD 28,000 就业落地后的租金与转售双升。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>追逐"私有化套利"的短线客——窗口已在 2024-2025 年关闭；偏好全新盘/低楼龄的买家——请看向次新 EC 或新盘。
+  </div>
+</section>
+
+<footer>
+  Prive Investment Analysis · 基于 URA REALIS 交易数据 + EdgeProp / 99.co 公开信息 · 生成于 2026-08-09
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>
