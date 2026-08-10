@@ -39,10 +39,13 @@ REM     fetch 后若本地落后则 fast-forward（秒级）；若领先/分叉�
 REM     （数据由本次构建重新生成，reflog 可找回）。---
 git -C "%ROOT%" fetch origin
 if errorlevel 1 (
-  echo [%date% %time%] WARN: git fetch failed, retrying once >> "%LOG%"
+  echo [%date% %time%] WARN: git fetch failed, waiting 60s before retry >> "%LOG%"
+  REM --- ping 做延时：timeout 命令在计划任务(无控制台)下不支持 stdin 重定向会秒退 ---
+  ping -n 61 127.0.0.1 >nul
   git -C "%ROOT%" fetch origin
   if errorlevel 1 (
     echo [%date% %time%] ERROR: git fetch failed twice, aborting >> "%LOG%"
+    echo [%date% %time%] FETCH FAILED: git fetch origin failed twice (likely network) >> "%ROOT%\logs\build-error.log"
     exit /b 1
   )
 )
