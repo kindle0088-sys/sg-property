@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SG Property Dashboard · 架构与时序图</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --surface: #f7f6f1;
+    --text: #1a1a1a;
+    --text-muted: #5f5e5a;
+    --border: #d3d1c7;
+    --accent: #185fa5;
+    --accent-warm: #854f0b;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container { max-width: 880px; margin: 0 auto; padding: 40px 24px 80px; }
+  h1 { font-size: 28px; font-weight: 500; margin: 0 0 8px; }
+  .subtitle { color: var(--text-muted); font-size: 14px; margin: 0 0 32px; }
+  h2 { font-size: 20px; font-weight: 500; margin: 48px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 16px; font-weight: 500; margin: 24px 0 8px; color: var(--accent); }
+  p { margin: 12px 0; }
+  .meta { color: var(--text-muted); font-size: 13px; margin-bottom: 8px; }
+  ul { padding-left: 24px; }
+  li { margin: 6px 0; }
+  figure { margin: 24px 0; padding: 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; }
+  figure img { display: block; width: 100%; height: auto; }
+  figcaption { color: var(--text-muted); font-size: 13px; text-align: center; margin-top: 12px; }
+  .note { padding: 12px 16px; border-left: 3px solid var(--accent-warm); background: #faf2e2; border-radius: 4px; font-size: 14px; margin: 16px 0; }
+  .tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 12px; margin-right: 6px; }
+  .tag-blue { background: #e6f1fb; color: #0c447c; }
+  .tag-teal { background: #e1f5ee; color: #085041; }
+  .tag-amber { background: #faeeda; color: #633806; }
+  footer { margin-top: 64px; padding-top: 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 13px; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #1a1a1a; --surface: #2c2c2a; --text: #f1efe8; --text-muted: #b4b2a9; --border: #444441; --accent: #85b7eb; --accent-warm: #fac775; }
+    .note { background: #2c2519; }
+    .tag-blue { background: #042c53; color: #b5d4f4; }
+    .tag-teal { background: #04342c; color: #9fe1cb; }
+    .tag-amber { background: #412402; color: #fac775; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<h1>SG Property Dashboard</h1>
+<p class="subtitle">新加坡房产数据看板 · 架构与自动化时序图</p>
+
+<p>
+  <span class="tag tag-blue">数据管道</span>
+  <span class="tag tag-teal">自动化</span>
+  <span class="tag tag-amber">冲突对策</span>
+</p>
+
+<p>本页用两张图说明整个项目的结构与每日运维流程。所有图均与 <code>README.md</code> 共享同一份源文件（SVG 可二次编辑）。</p>
+
+<h2>一、数据管道架构</h2>
+
+<p class="meta">五层：数据源 → 采集 → 构建 → 产物 → 展示</p>
+
+<figure>
+  <img src="architecture.png" alt="数据管道架构图">
+  <figcaption>图 1：从 URA/HDB/SLA 等数据源到 GitHub Pages 站点的完整管道</figcaption>
+</figure>
+
+<h3>要点</h3>
+<ul>
+  <li><strong>URA 受地域限制</strong>，必须本地（新加坡 IP）拉取；HDB 用 data.gov.sg 无地域限制。</li>
+  <li><strong>构建入口</strong>：<code>scripts/build.js</code>，支持 <code>--skip-hdb</code> / <code>--skip-ura</code> / <code>--fresh</code> 三种模式。</li>
+  <li><strong>产物分类</strong>：楼盘明细（<code>data/projects/*.json</code>）、聚合索引（<code>market-summary</code> / <code>property-index</code>）、HDB 系列（<code>hdb-*.json</code>）。</li>
+  <li><strong>展示出口</strong>：GitHub Pages 站点（每日更新）+ <code>reports/</code> 研报（独立发布到 sg-property 仓库）。</li>
+</ul>
+
+<h2>二、每日自动化时序</h2>
+
+<p class="meta">两条流水线：本地 06:00 URA 构建 · CI 04:00 HDB 增量</p>
+
+<figure>
+  <img src="automation-flow.png" alt="自动化时序图">
+  <figcaption>图 2：双流水线协同与共享聚合文件冲突对策</figcaption>
+</figure>
+
+<h3>本地计划任务（06:00 SGT）</h3>
+<p><code>run-daily-build.cmd</code>，由 Windows 任务计划程序触发，5 个步骤串行执行：</p>
+<ol>
+  <li>禁 <code>git auto-gc</code>，清除残留 rebase 状态。</li>
+  <li><code>fetch</code> → <code>merge --ff-only origin/main</code>（分叉则 <code>reset --mixed</code>）。</li>
+  <li><code>node build.js --skip-hdb</code>（仅 URA 数据构建）。</li>
+  <li>仅真实变更才 <code>commit</code> → <code>push origin main</code>。</li>
+  <li>显式 <code>git gc --quiet</code>，loose objects 超 6700 告警。</li>
+</ol>
+
+<h3>GitHub Actions CI（04:00 SGT）</h3>
+<p><code>.github/workflows/hdb-refresh.yml</code>，<code>cron: '0 20 * * *'</code> UTC：</p>
+<ol>
+  <li>每日 04:00 SGT 触发。</li>
+  <li>HDB 增量拉取（<code>_id</code> 锚点 + <code>data/hdb_cache</code> 缓存复用）。</li>
+  <li><code>node build.js --skip-ura</code>。</li>
+  <li>仅 <code>hdb*</code> / <code>property-index</code> 等真实变更才 <code>commit</code> → <code>push</code>。</li>
+</ol>
+
+<div class="note">
+<strong>冲突风险源</strong>：两条流水线都向 <code>market-summary.json</code> / <code>property-index.json</code> / <code>hdb-index.json</code> 这三个聚合文件写入。历史教训（2026-08-06）：本地脚本原"先 commit 后 pull --rebase"，冲突残留 → 次日构建在 detached HEAD 上 commit，数据永远推不上去。
+</div>
+
+<h3>对策</h3>
+<p><strong>先对齐远程再构建</strong>。已固化在 <code>run-daily-build.cmd</code>：</p>
+<ul>
+  <li><code>git fetch origin</code></li>
+  <li><code>git merge --ff-only origin/main</code>（落后快进）</li>
+  <li>分叉则 <code>git reset --mixed origin/main</code>（丢弃本地 commit，数据由本次构建重新生成，reflog 可找回）</li>
+  <li>之后才执行 <code>build.js</code></li>
+</ul>
+<p>这样 push 必为 fast-forward，不会出现非快进冲突。失败处理：写 <code>logs/build-error.log</code> + 自动开 GitHub issue（去重，避免重复告警）。</p>
+
+<footer>
+  <p>仓库位置：<code>property-dashboard/docs/architecture.html</code></p>
+  <p>源文件：<code>architecture.svg</code> · <code>automation-flow.svg</code>（可二次编辑）</p>
+</footer>
+
+</div>
+</body>
+</html>

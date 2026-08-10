@@ -1,0 +1,60 @@
+<svg viewBox="0 0 680 640" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
+<title>sg-property 每日自动化时序图</title>
+<desc>本地计划任务 06:00 URA 构建与 GitHub Actions 04:00 HDB 增量的双流水线协同</desc>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</marker>
+</defs>
+<rect x="40" y="20" width="280" height="48" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="180" y="37" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#0C447C">本地计划任务 · 06:00 SGT</text>
+<text x="180" y="54" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#185FA5">run-daily-build.cmd · URA 日更</text>
+<rect x="360" y="20" width="280" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="500" y="37" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#085041">GitHub Actions · 04:00 SGT</text>
+<text x="500" y="54" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0F6E56">hdb-refresh.yml · HDB 增量</text>
+<g>
+<rect x="40" y="96" width="280" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="180" y="115" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#0C447C">防护预处理</text>
+<text x="180" y="133" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#185FA5">禁 auto-gc · 清残留 rebase</text>
+<rect x="40" y="168" width="280" height="52" rx="8" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="180" y="187" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#0C447C">对齐远程</text>
+<text x="180" y="205" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0C447C">fetch → merge --ff-only</text>
+<rect x="40" y="240" width="280" height="52" rx="8" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="180" y="259" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#0C447C">URA 构建</text>
+<text x="180" y="277" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0C447C">build.js --skip-hdb</text>
+<rect x="40" y="312" width="280" height="52" rx="8" fill="#B5D4F4" stroke="#185FA5" stroke-width="0.5"/>
+<text x="180" y="331" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#0C447C">提交推送</text>
+<text x="180" y="349" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0C447C">commit → push origin main</text>
+<rect x="40" y="384" width="280" height="52" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
+<text x="180" y="403" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#0C447C">收尾监控</text>
+<text x="180" y="421" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#185FA5">显式 gc · loose 数量告警</text>
+</g>
+<g>
+<rect x="360" y="96" width="280" height="52" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="500" y="115" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#085041">定时触发</text>
+<text x="500" y="133" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0F6E56">cron '0 20 * * *' = 04:00 SGT</text>
+<rect x="360" y="168" width="280" height="52" rx="8" fill="#9FE1CB" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="500" y="187" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#085041">增量拉取</text>
+<text x="500" y="205" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#085041">_id 锚点 · 缓存复用</text>
+<rect x="360" y="240" width="280" height="52" rx="8" fill="#9FE1CB" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="500" y="259" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#085041">HDB 构建</text>
+<text x="500" y="277" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#085041">build.js --skip-ura</text>
+<rect x="360" y="312" width="280" height="52" rx="8" fill="#9FE1CB" stroke="#0F6E56" stroke-width="0.5"/>
+<text x="500" y="331" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#085041">提交推送</text>
+<text x="500" y="349" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#085041">commit → push origin main</text>
+</g>
+<line x1="180" y1="148" x2="180" y2="164" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="180" y1="220" x2="180" y2="236" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="180" y1="292" x2="180" y2="308" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="180" y1="364" x2="180" y2="380" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="500" y1="148" x2="500" y2="164" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="500" y1="220" x2="500" y2="236" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+<line x1="500" y1="292" x2="500" y2="308" stroke="#888780" stroke-width="1" marker-end="url(#arrow)"/>
+<rect x="40" y="480" width="600" height="112" rx="12" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text x="340" y="502" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#633806">共用聚合文件 · 冲突风险源</text>
+<text x="340" y="524" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#854F0B">market-summary / property-index / hdb-index（双流水线同写）</text>
+<text x="340" y="548" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#633806">对策：先对齐远程再构建 — fetch → merge --ff-only，分叉则 reset --mixed</text>
+<text x="340" y="570" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#854F0B">失败处理：logs/build-error.log + 自动开 GitHub issue</text>
+<line x1="180" y1="436" x2="180" y2="476" stroke="#A32D2D" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+<line x1="500" y1="364" x2="500" y2="476" stroke="#A32D2D" stroke-width="1" stroke-dasharray="4 3" marker-end="url(#arrow)"/>
+</svg>
