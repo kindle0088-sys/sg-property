@@ -100,8 +100,18 @@ select:focus{border-color:#fbbf24}
 .chip .n{opacity:.6;font-size:11px;margin-left:3px}
 .result-count{font-size:12.5px;color:#64748b;margin-bottom:14px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
-.card{display:flex;flex-direction:column;background:#1e293b;border:1px solid #26334a;border-radius:12px;padding:16px 16px 13px;transition:all .16s;position:relative}
-.card:hover{background:#26334a;border-color:#3b4a66;transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.card{display:flex;flex-direction:column;background:#1e293b;border:1px solid #26334a;border-radius:12px;padding:16px 16px 13px;transition:all .16s;position:relative;overflow:hidden}
+.card::before{content:'';position:absolute;inset:0 0 auto 0;height:3px}
+.card.type-condo::before{background:linear-gradient(90deg,#3b82f6,#60a5fa)}
+.card.type-ec::before{background:linear-gradient(90deg,#f59e0b,#fbbf24)}
+.card.type-hdb::before{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.card.type-condo{background:linear-gradient(145deg,rgba(59,130,246,.10),rgba(30,41,59,.6) 55%)}
+.card.type-ec{background:linear-gradient(145deg,rgba(245,158,11,.10),rgba(30,41,59,.6) 55%)}
+.card.type-hdb{background:linear-gradient(145deg,rgba(34,197,94,.10),rgba(30,41,59,.6) 55%)}
+.card.type-condo:hover{background:linear-gradient(145deg,rgba(59,130,246,.20),rgba(38,51,70,.9) 55%);border-color:#3b82f6}
+.card.type-ec:hover{background:linear-gradient(145deg,rgba(245,158,11,.20),rgba(38,51,70,.9) 55%);border-color:#f59e0b}
+.card.type-hdb:hover{background:linear-gradient(145deg,rgba(34,197,94,.20),rgba(38,51,70,.9) 55%);border-color:#22c55e}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
 .card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
 .card-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800;flex-shrink:0;letter-spacing:.5px}
 .score{font-size:16px;font-weight:800;padding:3px 10px;border-radius:8px;line-height:1.4}
@@ -222,7 +232,7 @@ function render() {
   }
   $('grid').innerHTML = list.map(r => {
     const desc = r.title.replace(/^.*?\\s*[—–-]\\s/, '').replace(/（七维评分\\s*[\\d.]+）$/, '').trim();
-    return \`<a class="card" href="\${esc(r.href)}">
+    return \`<a class="card type-\${r.type}" href="\${esc(r.href)}">
       <div class="card-top">
         <div class="card-icon" style="background:\${esc(r.color)};">\${esc(r.icon)}</div>
         \${r.score != null ? \`<span class="score \${scoreClass(r.score)}">\${r.score.toFixed(2)}</span>\` : ''}
