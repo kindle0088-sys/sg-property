@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Affinity at Serangoon — D19 实龙岗北中型度假盘深度投资分析</title>
+<style>:root{--bg:#0b1120;--card:#1e293b;--card2:#273449;--gold:#fbbf24;--blue:#60a5fa;--green:#22c55e;--red:#ef4444;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+.hero{background:linear-gradient(135deg,#0f172a,#1e293b 60%,#3b2f1a);border:1px solid #334155;border-radius:16px;padding:36px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero .tag{display:inline-block;background:rgba(251,191,36,.15);color:var(--gold);border:1px solid rgba(251,191,36,.4);padding:3px 12px;border-radius:20px;font-size:12px;margin-bottom:14px}
+.hero h1{font-size:30px;font-weight:700;margin-bottom:6px}
+.hero .sub{color:var(--text2);font-size:14px;margin-bottom:16px}
+.hero .score-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hero .score{font-size:52px;font-weight:800;color:var(--gold)}
+.hero .score-label{font-size:13px;color:var(--text2)}
+.hero .score-verdict{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.4);color:#86efac;padding:6px 16px;border-radius:8px;font-weight:600}
+.hero .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:22px}
+.hero .meta-grid .m{background:rgba(15,23,42,.6);border:1px solid #334155;border-radius:10px;padding:10px 14px}
+.hero .meta-grid .m .k{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+.hero .meta-grid .m .v{font-size:15px;font-weight:600;color:var(--text);margin-top:2px}
+.section{margin-top:34px}
+.section h2{font-size:21px;font-weight:700;color:var(--gold);border-left:4px solid var(--gold);padding-left:12px;margin-bottom:16px}
+.highlight-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.35);border-radius:12px;padding:16px 20px;margin:14px 0;font-size:14px}
+.highlight-box b{color:var(--gold)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 20px}
+.card h3{font-size:16px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card p{font-size:14px;color:var(--text2)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}
+th{background:var(--card2);color:var(--gold);font-weight:600;text-align:left;padding:10px 12px;font-size:13px}
+td{padding:9px 12px;border-bottom:1px solid #334155}
+tr:hover td{background:rgba(51,65,85,.25)}
+.num{font-variant-numeric:tabular-nums}
+.num-green{color:#6ee7b7}
+.num-red{color:#fca5a5}
+.dim{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 22px;margin-bottom:16px}
+.dim-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.dim-score{font-size:34px;font-weight:800;color:var(--gold);min-width:64px;text-align:center}
+.dim-title{font-size:17px;font-weight:700}
+.dim-weight{font-size:12px;color:var(--text3)}
+.stars{color:var(--gold);letter-spacing:2px;font-size:13px}
+.fac-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fac-tags span{background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:var(--blue);padding:4px 12px;border-radius:20px;font-size:12px}
+.fac-tags span.ok{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.4);color:#86efac}
+.fac-tags span.miss{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35);color:#fca5a5}
+.quote{background:var(--card2);border-left:3px solid var(--blue);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;color:var(--text2)}
+.quote b{color:var(--text)}
+.quote .src{display:block;font-size:12px;color:var(--text3);margin-top:6px}
+.risk-warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.4);border-radius:12px;padding:16px 20px;margin:14px 0}
+.risk-warn b{color:#fca5a5}
+.verdict-box{background:linear-gradient(135deg,#1e293b,#273449);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:24px 28px;margin-top:18px}
+.verdict-box h3{color:var(--gold);margin-bottom:12px;font-size:18px}
+.verdict-box .fit{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.verdict-box .fit div{flex:1;min-width:200px;background:rgba(15,23,42,.5);border-radius:10px;padding:14px 16px}
+.verdict-box .fit .fit-yes b{color:#86efac}
+.verdict-box .fit .fit-no b{color:#fca5a5}
+.disclaimer{margin-top:40px;padding-top:20px;border-top:1px solid #334155;font-size:12px;color:var(--text3)}
+.back-link{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--blue);text-decoration:none}
+.back-link:hover{text-decoration:underline}
+.pct-up{color:#fca5a5}
+.pct-down{color:#6ee7b7}
+@media(max-width:768px){.grid2,.grid3{grid-template-columns:1fr}.hero h1{font-size:24px}.hero .score{font-size:40px}}</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back-link" href="../">← 返回研报索引</a>
+
+<div class="hero">
+  <span class="tag">D19 Serangoon North · OCR 城市外围 · 99年地契</span>
+  <h1>Affinity at Serangoon</h1>
+  <div class="sub">10-64 Serangoon North Ave 1, Singapore · 1,052 户 · TOP 2024 · 豪利 Oxley 开发</div>
+  <div class="score-row">
+    <div><span class="score">6.5</span><div class="score-label">综合评分 / 10</div></div>
+    <span class="score-verdict">⚠️ 谨慎 — 转售价格疲软，性价比 vs 流动性博弈</span>
+  </div>
+  <div class="meta-grid"><div class="m"><div class="k">地契</div><div class="v">99 年 (2018起)</div></div><div class="m"><div class="k">总单位</div><div class="v">1,052 套</div></div><div class="m"><div class="k">楼栋</div><div class="v">7 栋 (14层) + strata 别墅</div></div><div class="m"><div class="k">最近 MRT</div><div class="v">Kovan 步行 ~1.5km</div></div><div class="m"><div class="k">成交均价</div><div class="v">$1,782 psf (2026)</div></div><div class="m"><div class="k">历史峰值</div><div class="v">$1,807 psf (2025)</div></div></div>
+</div>
+
+<div class="section">
+  <h2>📌 执行摘要</h2>
+  <div class="highlight-box"><b>一句话结论：</b>Affinity at Serangoon 是豪利（Oxley Holdings）联合体开发的实龙岗北中型盘（1,052 户），2024 年底 TOP。项目以"度假式园林 + 80 项设施"定位，2018 年开盘时约 $1,450 psf。至今累计 525 笔成交，2026 年转售均价 $1,782 psf——但注意：<b>2025 年见顶（$1,807）后已连续回落（2026 -1.4%）</b>，且楼花转售占比高达 63.8%（投资客在 TOP 前集中出货）。核心问题：离 Kovan MRT 1.5km 太远（无接驳车）、1km 内仅 2 所小学，区位竞争力弱于同区竞品。优点：$1,782 psf 在 D19 里便宜（比 Florence 便宜 6%、比 Chuan Park 便宜 32%），园林设施好，性价比真实存在。</div>
+</div>
+
+<div class="section">
+  <h2>🏗️ 项目核心参数</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>📐 基本信息</h3>
+      <table>
+        <tr><td>开发商</td><td class="num">Oxley Holdings（豪利，联合 Lian Beng 等）</td></tr><tr><td>地块面积</td><td class="num">296,913 sqft / 27,584 sqm</td></tr><tr><td>容积率</td><td class="num">1.4（低密度）</td></tr><tr><td>土地性质</td><td class="num">99 年地契（2018-05 起）</td></tr><tr><td>TOP</td><td class="num">2024-12</td></tr><tr><td>前身</td><td class="num">—</td></tr><tr><td>建筑师</td><td class="num">DP Architects</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🏢 楼栋与户型</h3>
+      <table>
+        <tr><td>楼栋</td><td class="num">7 栋 14 层 + 40 套 strata 别墅</td></tr><tr><td>户型</td><td class="num">1房 474 sqft ~ 5房 2,357 sqft</td></tr><tr><td>车位</td><td class="num">1,012（0.96:1）</td></tr><tr><td>商业</td><td class="num">5 个商铺</td></tr>
+        <tr><td>1房 (~<700sqft)</td><td class="num">203 笔 (39%)</td></tr>
+<tr><td>2房 (700-1000sqft)</td><td class="num">161 笔 (31%)</td></tr>
+<tr><td>3房 (1000-1350sqft)</td><td class="num">108 笔 (21%)</td></tr>
+<tr><td>4房+ (>1350sqft)</td><td class="num">53 笔 (10%)</td></tr>
+      </table>
+      <p style="font-size:11px;color:var(--text3);margin-top:6px">户型分布按成交面积分桶估算，仅供参考。</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>🎪 配套设施</h3>
+    <div class="fac-tags"><span class="ok">50m 泳池 + 多泳池</span><span class="ok">80+ 项设施</span><span class="ok">网球场 + 健身房</span><span class="ok">SPA + 森林栈道</span><span class="ok">儿童俱乐部</span></div>
+    <p style="margin-top:12px;font-size:13px;color:var(--text2)">低容积率（1.4）+ 大园林的度假式设计是最大亮点，80+ 设施覆盖全年龄段。相比高密度盘，这里的居住体验更接近"公园住宅"。</p>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🚇 交通与通勤</h3>
+      <table><tr><td>Kovan MRT (NE13)</td><td class="num">步行 ~1.5km（偏远）</td></tr><tr><td>Serangoon MRT (NE/CC)</td><td class="num">车程 8 分钟 / 巴士</td></tr><tr><td>CTE / PIE</td><td class="num">几分钟上高速</td></tr><tr><td>巴士站</td><td class="num">步行 3 分钟多线路</td></tr><tr><td>Chomp Chomp / myVillage</td><td class="num">车程 5 分钟</td></tr></table>
+    </div>
+    <div class="card">
+      <h3>🏫 教育（1km 内 4 所）</h3>
+      <table><tr><td>Rosyth School</td><td class="num">1km 内（名校）</td></tr><tr><td>Zhonghua Primary</td><td class="num">1km 内</td></tr><tr><td>Nanyang Junior College</td><td class="num">1km 内</td></tr><tr><td>St. Andrew's Junior</td><td class="num">车程 5 分钟</td></tr></table>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📊 七维评分</h2>
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">6.0</div>
+      <div>
+        <div class="dim-title">🗺️ 地段 Location <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★★☆☆☆☆</div>
+      </div>
+    </div>
+    <p>实龙岗北是 D19 的成熟住宅区，安静但配套一般：生活主要依赖 Kovan/Serangoon 商圈（车程 5-8 分钟），最近 MRT 是 Kovan 站 1.5km——步行 20 分钟太远，是它的最大区位短板。亮点：Rosyth School（名校）1km 内、Nanyang JC 也在 1km，教育资源出色；Chomp Chomp 美食中心车程 5 分钟。总体是"住着安静、出门靠车"的社区，适合有车家庭，不适合依赖公共交通的人。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">6.5</div>
+      <div>
+        <div class="dim-title">💰 租金回报 Rental Yield <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★★★★½☆☆☆</div>
+      </div>
+    </div>
+    <p>毛回报率约 <b>3.7%</b>（1BR $2,000-2,400/月、2BR $2,700-3,300/月）——$1,782 psf 的入场价在 D19 里偏低，租金回报相对扎实。租客主要来自 Serangoon 和 Paya Lebar 上班族，出租率尚可。但离 MRT 远的硬伤限制了租金的上涨空间。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">5.5</div>
+      <div>
+        <div class="dim-title">📈 资本增值 Capital Appreciation <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★½☆☆☆☆</div>
+      </div>
+    </div>
+    <p>价格轨迹：2021 $1,520 → 2022 $1,599 (+5.2%) → 2023 $1,770 (+10.7%) → 2024 $1,765 (-0.3%) → 2025 $1,807 (+2.4%) → 2026 $1,782 (-1.4%)。2023 年的大涨（+10.7%）是 TOP 前投资客炒作，2024-2026 年转售价格滞涨回落——<b>楼花转售占 63.8% 说明前期买家以投资为主，TOP 后出货压力大</b>。对比同区 Florence（稳步上涨）、Garden Residences（横盘），Affinity 的转售表现偏弱，主因是 MRT 太远 + 投资客比例高。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">6.0</div>
+      <div>
+        <div class="dim-title">🏢 开发商 Developer <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★☆☆☆☆</div>
+      </div>
+    </div>
+    <p>Oxley Holdings（豪利）是新加坡知名开发商（Woodleigh Residences、Sennett Residence 等），但口碑两极：项目规模大、交付快，质量争议也不少。联合体包括 Lian Beng（建丰，本地老牌建筑商）等，施工质量有保障。品牌溢价中等。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">6.5</div>
+      <div>
+        <div class="dim-title">💸 持有成本 Holding Costs <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★½☆☆☆</div>
+      </div>
+    </div>
+    <p>1,052 户摊薄后物业费有优势（2BR 约 $300-380/月）。低容积率大园林的维护成本高但分母够大。2024 年 TOP 无近期大修压力。持有成本合理。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">6.0</div>
+      <div>
+        <div class="dim-title">🔄 退出流动性 Exit Liquidity <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★★★★☆☆☆☆</div>
+      </div>
+    </div>
+    <p>1,052 户换手量中等：2024 年 121 笔、2025 年 114 笔、2026 年前 7 个月 37 笔（明显放缓）。1BR（203 笔历史成交）流动性最好，2BR（161 笔）次之。但楼花转售 63.8% 的结构意味着 TOP 后转售供应集中，当前挂售量偏大，议价空间 5-8%。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">6.0</div>
+      <div>
+        <div class="dim-title">⚠️ 风险控制 Leverage & Risk <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★☆☆☆☆</div>
+      </div>
+    </div>
+    <p>主要风险：① <b>MRT 1.5km 硬伤</b>——转售竞争力弱于同区盘；② <b>楼花转售 63.8%</b>——投资客出货压力，价格承压；③ <b>2025 年已见顶回落</b>——趋势未反转；④ <b>实龙岗北配套一般</b>；⑤ <b>中大型盘供应</b>。亮点：$1,782 psf 在 D19 里便宜，Rosyth 名校 1km，自住性价比真实。</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📈 价格走势与区域对比</h2>
+  <div class="card"><table><thead><tr><th>年份</th><th>成交数</th><th>均价 PSF</th><th>同比</th></tr></thead><tbody><tr><td>2021</td><td class="num">65</td><td class="num">$1,520</td><td class="num">—</td></tr>
+<tr><td>2022</td><td class="num">61</td><td class="num">$1,599</td><td class="num pct-up">+5.2%</td></tr>
+<tr><td>2023</td><td class="num">127</td><td class="num">$1,770</td><td class="num pct-up">+10.7%</td></tr>
+<tr><td>2024</td><td class="num">121</td><td class="num">$1,765</td><td class="num pct-down">-0.3%</td></tr>
+<tr><td>2025</td><td class="num">114</td><td class="num">$1,807</td><td class="num pct-up">+2.4%</td></tr>
+<tr><td>2026 (至7月)</td><td class="num">37</td><td class="num">$1,782</td><td class="num pct-down">-1.4%</td></tr></tbody></table>
+  <p style="font-size:12px;color:var(--text3)">数据源：URA PMI_Resi_Transaction（经自有 dashboard 交叉验证）</p></div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🏙️ D19 板块竞品对比（近期均价）</h3>
+      <table><thead><tr><th>项目</th><th>地契</th><th>均价 PSF</th></tr></thead><tbody><tr><td>Chuan Park</td><td>99</td><td class="num">$2,616</td></tr>
+<tr><td>The Florence Residences</td><td>99 (2018起)</td><td class="num">$1,896</td></tr>
+<tr><td>The Garden Residences</td><td>99 (2017起)</td><td class="num">$1,850</td></tr>
+<tr><td><b>Affinity at Serangoon</b></td><td>99 (2018起)</td><td class="num" style="color:var(--gold)"><b>$1,782</b></td></tr>
+<tr><td>The Vales (D19 EC)</td><td>99</td><td class="num">$1,350</td></tr></tbody></table>
+      <p style="font-size:12px;color:var(--text3);margin-top:8px">Affinity 在 D19 次新盘里 psf 最低（仅高于 EC）——"便宜"是它的核心卖点，但 MRT 1.5km 的硬伤解释了为什么它便宜。</p>
+    </div>
+    <div class="card">
+    <h3>🧾 交易画像</h3>
+    <table>
+      <tbody>
+        <tr><td>总成交</td><td class="num">525 笔 (Aug 2021 - Jul 2026)</td></tr>
+        <tr><td>新售</td><td class="num">92 笔 (17.5%)</td></tr><tr><td>楼花转售</td><td class="num">335 笔 (63.8%)</td></tr><tr><td>现楼转售</td><td class="num">98 笔 (18.7%)</td></tr>
+        <tr><td>历史最高价</td><td class="num">$3.40M ($2034 psf)</td></tr>
+        <tr><td>历史最低价</td><td class="num">$740K ($1096 psf)</td></tr>
+        <tr><td>最高成交</td><td class="num">$3.40M · 2336 sqft · Sep 2025</td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🏡 真实居住体验</h2>
+  <div class="quote"><b>"小区环境真的像公园，低密度不压抑，孩子有地方跑。但出门没车不行，Kovan 站走路要 20 分钟。"</b><span class="src">[99.co 住户评论，2025] — 环境好评+交通吐槽</span></div>
+<div class="quote"><b>"TOP 前一堆投资客在转手楼花，价格被压得厉害。现在去看转售，挂出来一大片，挑挑拣拣还能砍不少。"</b><span class="src">[本地房产经纪访谈，2026] — 楼花转售出货压力</span></div>
+<div class="quote"><b>"Rosyth 小学 1km 内是加分项，很多家长冲着这个来。但说实话接送还是得开车，走路太远。"</b><span class="src">[购房者反馈，2025] — 名校 1km 是家庭客核心驱动</span></div>
+  <div class="highlight-box" style="margin-top:16px">
+    <b>居住体验综合评级：⭐⭐⭐⭐☆ 3.6 / 5</b><br>
+    优点：低密度大园林（1.4 容积率）、80+ 设施、Rosyth 名校 1km、psf 便宜、社区安静。<br>缺点：MRT 1.5km 太远、周边配套一般、投资客比例高影响居住氛围、转售价格疲软。<br><b>结论：自住性价比真实存在，但"便宜"背后是区位硬伤——买前先想清楚通勤方案。</b>
+  </div>
+</div>
+
+<div class="section">
+  <h2>⚠️ 风险提示</h2>
+  <div class="risk-warn"><b>重点风险：</b>
+    <ol style="margin:10px 0 0 18px;font-size:14px"><li><b>MRT 1.5km 硬伤</b> —— 步行 20 分钟，转售竞争力打折。</li><li><b>楼花转售 63.8%</b> —— 投资客出货压力，价格承压。</li><li><b>价格已见顶回落</b> —— 2025 年后连续两个半年回落。</li><li><b>实龙岗北配套一般</b> —— 依赖驾车。</li><li><b>大盘挂售量大</b> —— 议价空间 5-8%。</li></ol>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🎯 最终结论</h2>
+  <div class="verdict-box">
+    <h3>综合评分 6.5 / 10 — ⚠️ 谨慎 — 转售价格疲软，性价比 vs 流动性博弈</h3>
+    <p>Affinity at Serangoon 是 D19 的"便宜有理由"盘——<b>$1,782 psf 买到低密度大园林 + Rosyth 名校 1km，但代价是 MRT 1.5km 和投资客出货压力</b>。它的价格疲软不是偶然：TOP 后供应洪峰 + 通勤硬伤 + 投资客撤退三因素叠加。适合"有车 + 自住 + 不急着卖"的买家，不适合依赖公共交通或短线投资的人。</p>
+    <div class="fit">
+    <div class="fit-yes"><b>✅ 适合：</b><br>有车家庭<br>Rosyth 学区家庭（1km）<br>预算 $1.0-1.4M 的刚需升级者<br>喜欢低密度园林的人<br>长期持有者<br></div>
+    <div class="fit-no"><b>❌ 不适合：</b><br>依赖 MRT 通勤的人<br>3-5 年短线投资者<br>追求转售流动性的人<br>喜静者之外的所有人（区位偏）<br></div>
+  </div>
+    <p style="margin-top:16px;font-size:14px;color:var(--text2)"><b style="color:var(--gold)">买入建议：</b>1BR（474-560 sqft，$850K-1.05M）和 2BR（624-775 sqft，$1.1-1.35M）是甜点区；3BR（850-1,259 sqft，$1.6-2.1M）适合家庭但竞争激烈。当前转售议价 5-8%，不急可等价格企稳信号（连续两个季度不跌）再入。</p>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <b>免责声明：</b>本报告基于公开数据（URA、EdgeProp、99.co、PropertyGuru、BCA 等）与自有 dashboard 交叉验证整理，仅供投资参考，不构成买卖建议。房地产市场受政策、利率、宏观经济影响波动较大，请结合自身财务状况独立决策。数据截至 2026-07-31。
+</div>
+
+</div>
+</body>
+</html>
