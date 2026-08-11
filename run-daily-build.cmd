@@ -113,11 +113,20 @@ if errorlevel 1 (
 )
 
 REM --- 错峰显式 gc：构建+推送全部完成后主动打包 loose objects ---
+REM --- 2026-08-11 事故教训：.git\info 缺失时 gc --quiet 会清空整个对象库且返回 exit 0，
+REM     必须先确保 .git\info 目录存在，再跑 gc ---
+if not exist "%ROOT%\.git\info" mkdir "%ROOT%\.git\info"
 git -C "%ROOT%" gc --quiet
 if errorlevel 1 (
   echo [%date% %time%] WARN: git gc reported an error
 ) else (
   echo [%date% %time%] GC done
+)
+REM --- gc 后对象库完整性校验：防止 gc 静默清空对象（2026-08-11 事故）---
+git -C "%ROOT%" fsck --quick --no-dangling >nul 2>&1
+if errorlevel 1 (
+  echo [%date% %time%] CRITICAL: git fsck failed after gc, object store corrupt! >> "%LOG%"
+  echo [%date% %time%] CRITICAL: git fsck failed after gc, object store corrupt! >> "%ROOT%\logs\build-error.log"
 )
 
 REM --- loose objects 数量监控（超阈值提醒，防止再次堆积）---
