@@ -49,16 +49,20 @@ if errorlevel 1 (
     exit /b 1
   )
 )
-git -C "%ROOT%" merge --ff-only origin/main
+REM --- 2026-08-13: 改用 FETCH_HEAD 对齐远程。原因：本机对 git 写 refs/remotes/origin/* 的
+REM     loose ref 有静默拦截（update-ref 返回 0 但文件不落地，fetch 反复重建的
+REM     refs/remotes/origin/ 目录也会被清掉），origin/main 无法解析；FETCH_HEAD 是
+REM     fetch 直接产物，不依赖 remote-tracking ref。 ---
+git -C "%ROOT%" merge --ff-only FETCH_HEAD
 if errorlevel 1 (
-  echo [%date% %time%] WARN: local branch diverged from origin/main, discarding local commits (rebuild regenerates data) >> "%LOG%"
-  git -C "%ROOT%" reset --mixed origin/main
+  echo [%date% %time%] WARN: local branch diverged from remote, discarding local commits (rebuild regenerates data) >> "%LOG%"
+  git -C "%ROOT%" reset --mixed FETCH_HEAD
   if errorlevel 1 (
     echo [%date% %time%] ERROR: reset failed, aborting >> "%LOG%"
     exit /b 1
   )
 )
-echo [%date% %time%] Step: aligned with origin/main >> "%LOG%"
+echo [%date% %time%] Step: aligned with remote >> "%LOG%"
 
 cd /d "%ROOT%\scripts"
 "%NODE%" build.js --skip-hdb
