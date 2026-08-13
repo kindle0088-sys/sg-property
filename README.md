@@ -37,7 +37,7 @@
 脚本：`run-daily-build.cmd`，由 Windows 任务计划程序触发。
 
 1. **防护预处理**：禁 `git auto-gc`、清除残留 rebase 状态
-2. **对齐远程**：`git fetch origin` → `merge --ff-only origin/main`（分叉则 `reset --mixed`，数据由本次构建重新生成）
+2. **对齐远程**：`git fetch origin` → `merge --ff-only FETCH_HEAD`（分叉则 `reset --mixed`，数据由本次构建重新生成）。注意：不用 `origin/main`——本机对 git 写 `refs/remotes/origin/*` loose ref 存在静默拦截（update-ref 返回 0 但文件不落地），`FETCH_HEAD` 是 fetch 直接产物，不依赖 remote-tracking ref
 3. **URA 构建**：`node build.js --skip-hdb`
 4. **提交推送**：`git add data/ .github/` → 仅真实变更才 `commit` → `push origin main`
 5. **收尾监控**：显式 `git gc --quiet`，loose objects 超 6700 告警
