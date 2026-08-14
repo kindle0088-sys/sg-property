@@ -1,9 +1,11 @@
 @echo off
 REM ============================================================
-REM SG Property Dashboard - Daily URA Build (run via Task Scheduler)
+REM SG Property Dashboard - Monthly URA Build (run via Task Scheduler)
 REM Runs from Singapore local machine (URA API is geo-restricted:
 REM it times out from GitHub Actions' US runners).
-REM Scheduled: 06:00 Singapore time (daily URA refresh)
+REM Scheduled: monthly on the 16th, 09:00 Singapore time.
+REM URA data publishes monthly around the 15th; 16th leaves a buffer.
+REM HDB is handled by GitHub Actions CI (daily), not here.
 REM ============================================================
 
 setlocal
@@ -12,10 +14,10 @@ set "NODE=C:\Users\jiali\.workbuddy\binaries\node\versions\22.22.2\node.exe"
 set "GH=%LOCALAPPDATA%\Programs\GitHub CLI\gh.exe"
 if not exist "%GH%" set "GH=gh"
 
-echo [%date% %time%] Starting daily URA build...
+echo [%date% %time%] Starting monthly URA build...
 mkdir "%ROOT%\logs" 2>nul
 set "LOG=%ROOT%\logs\daily-build.log"
-echo [%date% %time%] ===== daily URA build start ===== >> "%LOG%"
+echo [%date% %time%] ===== monthly URA build start ===== >> "%LOG%"
 
 REM --- 防 .git 损坏：禁用 git 自动 gc（2026-08-02 事故根因：loose objects 超阈值
 REM     触发 auto-gc，repack 与构建并发中断导致对象丢失）---
@@ -71,11 +73,11 @@ if errorlevel 1 (
   "%NODE%" "%ROOT%\scripts\write-status.js" build_failed
   REM --- failure notification: append log + open a GitHub issue (once per failure streak) ---
   echo [%date% %time%] BUILD FAILED >> "%ROOT%\logs\build-error.log"
-  "%GH%" issue list -R kindle0088-sys/sg-property --state open --search "Daily URA build failed" --json number --jq "length" > "%TEMP%\gh-open.txt" 2>nul
+  "%GH%" issue list -R kindle0088-sys/sg-property --state open --search "Monthly URA build failed" --json number --jq "length" > "%TEMP%\gh-open.txt" 2>nul
   set /p OPEN_ISSUES=<"%TEMP%\gh-open.txt"
   if not defined OPEN_ISSUES set OPEN_ISSUES=0
   if "%OPEN_ISSUES%"=="0" (
-    "%GH%" issue create -R kindle0088-sys/sg-property --title "Daily URA build failed" --body "Local scheduled build failed at %date% %time%. See logs\build-error.log." >nul 2>&1
+    "%GH%" issue create -R kindle0088-sys/sg-property --title "Monthly URA build failed" --body "Local scheduled build failed at %date% %time%. See logs\build-error.log." >nul 2>&1
   )
   exit /b 1
 )
@@ -88,7 +90,7 @@ if errorlevel 1 (
   echo [%date% %time%] Only timestamp/aggregate changes; skipping commit
   git reset -q
 ) else (
-  git -c user.name="kindle0088-sys" -c user.email="kindle0088-sys@users.noreply.github.com" commit -m "chore: daily URA data build"
+  git -c user.name="kindle0088-sys" -c user.email="kindle0088-sys@users.noreply.github.com" commit -m "chore: monthly URA data build"
   if errorlevel 1 (
     echo [%date% %time%] Commit failed >> "%LOG%"
     echo [%date% %time%] Commit failed
@@ -106,11 +108,11 @@ if errorlevel 1 (
   echo [%date% %time%] PUSH FAILED >> "%ROOT%\logs\build-error.log"
   "%NODE%" "%ROOT%\scripts\write-status.js" push_failed "%HEAD_SHA%"
   REM --- push 失败也开 issue（2026-08-06 事故类型：构建成功但发布失败）---
-  "%GH%" issue list -R kindle0088-sys/sg-property --state open --search "Daily URA push failed" --json number --jq "length" > "%TEMP%\gh-open.txt" 2>nul
+  "%GH%" issue list -R kindle0088-sys/sg-property --state open --search "Monthly URA push failed" --json number --jq "length" > "%TEMP%\gh-open.txt" 2>nul
   set /p OPEN_ISSUES=<"%TEMP%\gh-open.txt"
   if not defined OPEN_ISSUES set OPEN_ISSUES=0
   if "%OPEN_ISSUES%"=="0" (
-    "%GH%" issue create -R kindle0088-sys/sg-property --title "Daily URA push failed" --body "Local scheduled build succeeded but push failed at %date% %time%. See logs\build-error.log." >nul 2>&1
+    "%GH%" issue create -R kindle0088-sys/sg-property --title "Monthly URA push failed" --body "Local scheduled build succeeded but push failed at %date% %time%. See logs\build-error.log." >nul 2>&1
   )
   echo [%date% %time%] PUSH FAILED
   exit /b 1

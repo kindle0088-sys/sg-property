@@ -32,9 +32,11 @@
 
 ![自动化时序图](docs/automation-flow.png)
 
-### 流水线 A：本地计划任务 · 06:00 SGT
+### 流水线 A：本地计划任务 · 每月 16 日 09:00 SGT
 
 脚本：`run-daily-build.cmd`，由 Windows 任务计划程序触发。
+
+> URA 私宅数据为**月度发布**（每月 15 号前后），故本地任务改为月更。HDB 由 CI（流水线 B）日更，本脚本只跑 URA（`--skip-hdb`）。
 
 1. **防护预处理**：禁 `git auto-gc`、清除残留 rebase 状态
 2. **对齐远程**：`git fetch origin` → `merge --ff-only FETCH_HEAD`（分叉则 `reset --mixed`，数据由本次构建重新生成）。注意：不用 `origin/main`——本机对 git 写 `refs/remotes/origin/*` loose ref 存在静默拦截（update-ref 返回 0 但文件不落地），`FETCH_HEAD` 是 fetch 直接产物，不依赖 remote-tracking ref
