@@ -19,7 +19,7 @@
 | 层 | 内容 | 说明 |
 |----|------|------|
 | 数据源 | URA 成交、HDB data.gov.sg、SLA GeoSpace、学校/地铁 | 海外拉取受限，URA 仅本地 |
-| 采集脚本 | ura-fetcher / hdb-fetcher / fetch-schools / coords 构建 | 每个脚本对应一个数据源 |
+| 采集脚本 | ura-fetcher / hdb-fetcher | 每个脚本对应一个数据源 |
 | 构建 | `scripts/build.js` | 参数：`--skip-hdb` / `--skip-ura` / `--fresh` |
 | 产物 | projects/\*.json、market-summary、property-index、hdb-index | 聚合 JSON，供前端直接消费 |
 | 展示 | GitHub Pages 静态站点 + reports/ 研报 | 每日自动发布 |
@@ -78,9 +78,6 @@ node scripts/build.js --skip-hdb
 
 # CI 风格构建（跳过 URA，仅 HDB）
 node scripts/build.js --skip-ura
-
-# 测试 HDB 增量（隔离环境）
-HDB_CACHE_DIR=/tmp/hdb-test node scripts/hdb-incremental-test.mjs
 ```
 
 ---
