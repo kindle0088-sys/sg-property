@@ -38,7 +38,7 @@
 
 > URA 私宅数据为**月度发布**（每月 15 号前后），故本地任务改为月更。HDB 由 CI（流水线 B）日更，本脚本只跑 URA（`--skip-hdb`）。
 >
-> 2026-08-15 起由 cmd 迁移到 node：原 cmd 版在计划任务环境有三坑（PATH 无 git、stdout 管道阻塞、cmd 语法笨拙），node 版用绝对路径 + `spawnSync` 捕获输出全部绕开。旧 `run-daily-build.cmd` 保留作参考。
+> 2026-08-15 起由 cmd 迁移到 node：原 cmd 版在计划任务环境有三坑（PATH 无 git、stdout 管道阻塞、cmd 语法笨拙），node 版用绝对路径 + `spawnSync` 捕获输出全部绕开。
 
 1. **防护预处理**：禁 `git auto-gc`、清除残留 rebase 状态
 2. **对齐远程**：`git fetch origin` → `merge --ff-only FETCH_HEAD`（分叉则 `reset --mixed`，数据由本次构建重新生成）。注意：不用 `origin/main`——本机对 git 写 `refs/remotes/origin/*` loose ref 存在静默拦截（update-ref 返回 0 但文件不落地），`FETCH_HEAD` 是 fetch 直接产物，不依赖 remote-tracking ref
@@ -102,13 +102,11 @@ property-dashboard/
 │   ├── build.js        # 主构建入口
 │   ├── ura-fetcher.js  # URA 数据采集
 │   ├── hdb-fetcher.js  # HDB 增量采集
-│   ├── build-hdb-coords.mjs
 │   └── ...
 ├── reports/            # EC 研报（独立发布到 sg-property）
 ├── logs/               # 每日构建日志（不提交）
 ├── .github/workflows/  # CI 配置
 ├── run-all.mjs         # 本地月更编排脚本（node，计划任务直跑）
-├── run-daily-build.cmd # 旧 cmd 版脚本（保留作参考）
 └── docs/               # 文档与图表
     ├── architecture.svg
     ├── architecture.png
