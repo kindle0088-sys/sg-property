@@ -14,6 +14,12 @@ set "NODE=C:\Users\jiali\.workbuddy\binaries\node\versions\22.22.2\node.exe"
 set "GH=%LOCALAPPDATA%\Programs\GitHub CLI\gh.exe"
 if not exist "%GH%" set "GH=gh"
 
+REM --- 2026-08-15 根因修复：计划任务(cmd)环境 PATH 不含 WorkBuddy 内置 git
+REM     （用户 PATH 里的 hermes\git 路径已失效），导致所有 git 命令"不是内部命令"。
+REM     手动把内置 PortableGit 的 bin 加入 PATH 顶部。 ---
+set "GIT=C:\Users\jiali\.workbuddy\binaries\PortableGit\versions\1.2.0\mingw64\bin"
+if exist "%GIT%\git.exe" set "PATH=%GIT%;%PATH%"
+
 echo [%date% %time%] Starting monthly URA build...
 mkdir "%ROOT%\logs" 2>nul
 set "LOG=%ROOT%\logs\daily-build.log"
@@ -39,12 +45,13 @@ if exist "%ROOT%\.git\rebase-apply" (
 REM --- 2026-08-06 事故预防：构建前先把本地对齐 remote，避免"先 commit 后 rebase"冲突。
 REM     fetch 后若本地落后则 fast-forward（秒级）；若领先/分叉则丢弃本地 commit
 REM     （数据由本次构建重新生成，reflog 可找回）。---
-git -C "%ROOT%" fetch origin
+REM --- fetch stdout/stderr 全部重定向到文件，防止计划任务(无控制台)下 stdout 管道阻塞 ---
+git -C "%ROOT%" fetch origin >> "%ROOT%\logs\git-output.log" 2>&1
 if errorlevel 1 (
   echo [%date% %time%] WARN: git fetch failed, waiting 60s before retry >> "%LOG%"
   REM --- ping 做延时：timeout 命令在计划任务(无控制台)下不支持 stdin 重定向会秒退 ---
   ping -n 61 127.0.0.1 >nul
-  git -C "%ROOT%" fetch origin
+  git -C "%ROOT%" fetch origin >> "%ROOT%\logs\git-output.log" 2>&1
   if errorlevel 1 (
     echo [%date% %time%] ERROR: git fetch failed twice, aborting >> "%LOG%"
     echo [%date% %time%] FETCH FAILED: git fetch origin failed twice (likely network) >> "%ROOT%\logs\build-error.log"
@@ -55,7 +62,7 @@ REM --- 2026-08-13: 改用 FETCH_HEAD 对齐远程。原因：本机对 git 写 
 REM     loose ref 有静默拦截（update-ref 返回 0 但文件不落地，fetch 反复重建的
 REM     refs/remotes/origin/ 目录也会被清掉），origin/main 无法解析；FETCH_HEAD 是
 REM     fetch 直接产物，不依赖 remote-tracking ref。 ---
-git -C "%ROOT%" merge --ff-only FETCH_HEAD
+git -C "%ROOT%" merge --ff-only FETCH_HEAD >> "%ROOT%\logs\git-output.log" 2>&1
 if errorlevel 1 (
   echo [%date% %time%] WARN: local branch diverged from remote, discarding local commits (rebuild regenerates data) >> "%LOG%"
   git -C "%ROOT%" reset --mixed FETCH_HEAD
@@ -67,7 +74,7 @@ if errorlevel 1 (
 echo [%date% %time%] Step: aligned with remote >> "%LOG%"
 
 cd /d "%ROOT%\scripts"
-"%NODE%" build.js --skip-hdb
+"%NODE%" build.js --skip-hdb >> "%ROOT%\logs\build-output.log" 2>&1
 if errorlevel 1 (
   echo [%date% %time%] BUILD FAILED >> "%LOG%"
   "%NODE%" "%ROOT%\scripts\write-status.js" build_failed
@@ -90,7 +97,7 @@ if errorlevel 1 (
   echo [%date% %time%] Only timestamp/aggregate changes; skipping commit
   git reset -q
 ) else (
-  git -c user.name="kindle0088-sys" -c user.email="kindle0088-sys@users.noreply.github.com" commit -m "chore: monthly URA data build"
+  git -c user.name="kindle0088-sys" -c user.email="kindle0088-sys@users.noreply.github.com" commit -m "chore: monthly URA data build" >> "%ROOT%\logs\git-output.log" 2>&1
   if errorlevel 1 (
     echo [%date% %time%] Commit failed >> "%LOG%"
     echo [%date% %time%] Commit failed
@@ -102,7 +109,7 @@ if errorlevel 1 (
 )
 
 REM --- 对齐 remote 后基于最新数据 commit，push 应为 fast-forward；失败则记录日志 + 开 issue ---
-git push origin main
+git push origin main >> "%ROOT%\logs\git-output.log" 2>&1
 if errorlevel 1 (
   echo [%date% %time%] PUSH FAILED >> "%LOG%"
   echo [%date% %time%] PUSH FAILED >> "%ROOT%\logs\build-error.log"
@@ -129,7 +136,8 @@ if errorlevel 1 (
   echo [%date% %time%] GC done
 )
 REM --- gc 后对象库完整性校验：防止 gc 静默清空对象（2026-08-11 事故）---
-git -C "%ROOT%" fsck --quick --no-dangling >nul 2>&1
+REM     注：git 2.55 无 --quick 选项（用了会 usage 报错误判损坏），改用 --connectivity-only。
+git -C "%ROOT%" fsck --connectivity-only --no-dangling >nul 2>&1
 if errorlevel 1 (
   echo [%date% %time%] CRITICAL: git fsck failed after gc, object store corrupt! >> "%LOG%"
   echo [%date% %time%] CRITICAL: git fsck failed after gc, object store corrupt! >> "%ROOT%\logs\build-error.log"
