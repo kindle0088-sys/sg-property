@@ -82,21 +82,21 @@
 
 <h2>二、每日自动化时序</h2>
 
-<p class="meta">两条流水线：本地 06:00 URA 构建 · CI 04:00 HDB 增量</p>
+<p class="meta">两条流水线：本地每月16日 URA 构建 · CI 04:00 HDB 增量</p>
 
 <figure>
   <img src="automation-flow.png" alt="自动化时序图">
   <figcaption>图 2：双流水线协同与共享聚合文件冲突对策</figcaption>
 </figure>
 
-<h3>本地计划任务（06:00 SGT）</h3>
-<p><code>run-daily-build.cmd</code>，由 Windows 任务计划程序触发，5 个步骤串行执行：</p>
+<h3>本地计划任务（每月 16 日 09:00 SGT）</h3>
+<p><code>run-all.mjs</code>（node 编排），由 Windows 任务计划程序直接执行 <code>node.exe run-all.mjs</code>，5 个步骤串行执行：</p>
 <ol>
   <li>禁 <code>git auto-gc</code>，清除残留 rebase 状态。</li>
-  <li><code>fetch</code> → <code>merge --ff-only origin/main</code>（分叉则 <code>reset --mixed</code>）。</li>
+  <li><code>fetch</code> → <code>merge --ff-only FETCH_HEAD</code>（分叉则 <code>reset --mixed</code>；不用 <code>origin/main</code>，本机 remote-tracking ref 写入被静默拦截）。</li>
   <li><code>node build.js --skip-hdb</code>（仅 URA 数据构建）。</li>
   <li>仅真实变更才 <code>commit</code> → <code>push origin main</code>。</li>
-  <li>显式 <code>git gc --quiet</code>，loose objects 超 6700 告警。</li>
+  <li>显式 <code>git gc --quiet</code> + <code>fsck --connectivity-only</code> 校验，loose objects 超 6700 告警。</li>
 </ol>
 
 <h3>GitHub Actions CI（04:00 SGT）</h3>
@@ -113,11 +113,11 @@
 </div>
 
 <h3>对策</h3>
-<p><strong>先对齐远程再构建</strong>。已固化在 <code>run-daily-build.cmd</code>：</p>
+<p><strong>先对齐远程再构建</strong>。已固化在 <code>run-all.mjs</code>：</p>
 <ul>
   <li><code>git fetch origin</code></li>
-  <li><code>git merge --ff-only origin/main</code>（落后快进）</li>
-  <li>分叉则 <code>git reset --mixed origin/main</code>（丢弃本地 commit，数据由本次构建重新生成，reflog 可找回）</li>
+  <li><code>git merge --ff-only FETCH_HEAD</code>（落后快进）</li>
+  <li>分叉则 <code>git reset --mixed FETCH_HEAD</code>（丢弃本地 commit，数据由本次构建重新生成，reflog 可找回）</li>
   <li>之后才执行 <code>build.js</code></li>
 </ul>
 <p>这样 push 必为 fast-forward，不会出现非快进冲突。失败处理：写 <code>logs/build-error.log</code> + 自动开 GitHub issue（去重，避免重复告警）。</p>

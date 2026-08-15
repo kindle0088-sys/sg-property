@@ -1,14 +1,14 @@
 <svg viewBox="0 0 680 640" width="100%" role="img" xmlns="http://www.w3.org/2000/svg">
 <title>sg-property 每日自动化时序图</title>
-<desc>本地计划任务 06:00 URA 构建与 GitHub Actions 04:00 HDB 增量的双流水线协同</desc>
+<desc>本地计划任务 每月16日 URA 构建与 GitHub Actions 04:00 HDB 增量的双流水线协同</desc>
 <defs>
 <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
 <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </marker>
 </defs>
 <rect x="40" y="20" width="280" height="48" rx="8" fill="#E6F1FB" stroke="#185FA5" stroke-width="0.5"/>
-<text x="180" y="37" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#0C447C">本地计划任务 · 06:00 SGT</text>
-<text x="180" y="54" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#185FA5">run-daily-build.cmd · URA 日更</text>
+<text x="180" y="37" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#0C447C">本地计划任务 · 每月16日 09:00 SGT</text>
+<text x="180" y="54" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#185FA5">run-all.mjs · URA 月更</text>
 <rect x="360" y="20" width="280" height="48" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
 <text x="500" y="37" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="500" fill="#085041">GitHub Actions · 04:00 SGT</text>
 <text x="500" y="54" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#0F6E56">hdb-refresh.yml · HDB 增量</text>
