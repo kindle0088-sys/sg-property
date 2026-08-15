@@ -20,7 +20,6 @@ REM     手动把内置 PortableGit 的 bin 加入 PATH 顶部。 ---
 set "GIT=C:\Users\jiali\.workbuddy\binaries\PortableGit\versions\1.2.0\mingw64\bin"
 if exist "%GIT%\git.exe" set "PATH=%GIT%;%PATH%"
 
-echo [%date% %time%] Starting monthly URA build...
 mkdir "%ROOT%\logs" 2>nul
 set "LOG=%ROOT%\logs\daily-build.log"
 echo [%date% %time%] ===== monthly URA build start ===== >> "%LOG%"
@@ -34,11 +33,11 @@ echo [%date% %time%] Step: pre-fetch checks done >> "%LOG%"
 REM --- 2026-08-06 事故预防：检测残留 rebase 状态（上次 pull --rebase 冲突未解决
 REM     会让后续构建在 detached HEAD 上 commit，数据永远推不上去）---
 if exist "%ROOT%\.git\rebase-merge" (
-  echo [%date% %time%] WARN: stale rebase state found, aborting
+  echo [%date% %time%] WARN: stale rebase state found, aborting >> "%LOG%"
   git -C "%ROOT%" rebase --abort
 )
 if exist "%ROOT%\.git\rebase-apply" (
-  echo [%date% %time%] WARN: stale rebase-apply state found, aborting
+  echo [%date% %time%] WARN: stale rebase-apply state found, aborting >> "%LOG%"
   git -C "%ROOT%" rebase --abort
 )
 
@@ -73,56 +72,50 @@ if errorlevel 1 (
 )
 echo [%date% %time%] Step: aligned with remote >> "%LOG%"
 
+REM --- HEAD_SHA 初始化：无新数据跳过 commit 时，状态文件也能记录当前 HEAD（否则为空）---
+for /f "delims=" %%h in ('git -C "%ROOT%" rev-parse HEAD') do set "HEAD_SHA=%%h"
+
 cd /d "%ROOT%\scripts"
+echo [%date% %time%] Step: build start >> "%LOG%"
 "%NODE%" build.js --skip-hdb >> "%ROOT%\logs\build-output.log" 2>&1
 if errorlevel 1 (
   echo [%date% %time%] BUILD FAILED >> "%LOG%"
   "%NODE%" "%ROOT%\scripts\write-status.js" build_failed
-  REM --- failure notification: append log + open a GitHub issue (once per failure streak) ---
   echo [%date% %time%] BUILD FAILED >> "%ROOT%\logs\build-error.log"
-  "%GH%" issue list -R kindle0088-sys/sg-property --state open --search "Monthly URA build failed" --json number --jq "length" > "%TEMP%\gh-open.txt" 2>nul
-  set /p OPEN_ISSUES=<"%TEMP%\gh-open.txt"
-  if not defined OPEN_ISSUES set OPEN_ISSUES=0
-  if "%OPEN_ISSUES%"=="0" (
-    "%GH%" issue create -R kindle0088-sys/sg-property --title "Monthly URA build failed" --body "Local scheduled build failed at %date% %time%. See logs\build-error.log." >nul 2>&1
-  )
+  call :open_issue "Monthly URA build failed" "Local scheduled build failed at %date% %time%. See logs\build-error.log."
   exit /b 1
 )
+echo [%date% %time%] Step: build done >> "%LOG%"
 
 cd /d "%ROOT%"
 git add data/ .github/
 git diff --cached --name-only | findstr /R "data/projects data/projects-index data/districts data/rentals data/property-index" >nul
 if errorlevel 1 (
   echo [%date% %time%] Only timestamp/aggregate changes; skipping commit >> "%LOG%"
-  echo [%date% %time%] Only timestamp/aggregate changes; skipping commit
+  set "SKIP_PUSH=1"
   git reset -q
 ) else (
   git -c user.name="kindle0088-sys" -c user.email="kindle0088-sys@users.noreply.github.com" commit -m "chore: monthly URA data build" >> "%ROOT%\logs\git-output.log" 2>&1
   if errorlevel 1 (
     echo [%date% %time%] Commit failed >> "%LOG%"
-    echo [%date% %time%] Commit failed
   ) else (
     for /f "delims=" %%h in ('git rev-parse HEAD') do set "HEAD_SHA=%%h"
     echo [%date% %time%] Committed >> "%LOG%"
-    echo [%date% %time%] Committed
   )
 )
 
 REM --- 对齐 remote 后基于最新数据 commit，push 应为 fast-forward；失败则记录日志 + 开 issue ---
-git push origin main >> "%ROOT%\logs\git-output.log" 2>&1
-if errorlevel 1 (
-  echo [%date% %time%] PUSH FAILED >> "%LOG%"
-  echo [%date% %time%] PUSH FAILED >> "%ROOT%\logs\build-error.log"
-  "%NODE%" "%ROOT%\scripts\write-status.js" push_failed "%HEAD_SHA%"
-  REM --- push 失败也开 issue（2026-08-06 事故类型：构建成功但发布失败）---
-  "%GH%" issue list -R kindle0088-sys/sg-property --state open --search "Monthly URA push failed" --json number --jq "length" > "%TEMP%\gh-open.txt" 2>nul
-  set /p OPEN_ISSUES=<"%TEMP%\gh-open.txt"
-  if not defined OPEN_ISSUES set OPEN_ISSUES=0
-  if "%OPEN_ISSUES%"=="0" (
-    "%GH%" issue create -R kindle0088-sys/sg-property --title "Monthly URA push failed" --body "Local scheduled build succeeded but push failed at %date% %time%. See logs\build-error.log." >nul 2>&1
+REM --- 无新数据(skip commit)时本地无新提交，跳过 push ---
+if not defined SKIP_PUSH (
+  git push origin main >> "%ROOT%\logs\git-output.log" 2>&1
+  if errorlevel 1 (
+    echo [%date% %time%] PUSH FAILED >> "%LOG%"
+    echo [%date% %time%] PUSH FAILED >> "%ROOT%\logs\build-error.log"
+    "%NODE%" "%ROOT%\scripts\write-status.js" push_failed "%HEAD_SHA%"
+    call :open_issue "Monthly URA push failed" "Local scheduled build succeeded but push failed at %date% %time%. See logs\build-error.log."
+    exit /b 1
   )
-  echo [%date% %time%] PUSH FAILED
-  exit /b 1
+  echo [%date% %time%] Step: push done >> "%LOG%"
 )
 
 REM --- 错峰显式 gc：构建+推送全部完成后主动打包 loose objects ---
@@ -131,9 +124,9 @@ REM     必须先确保 .git\info 目录存在，再跑 gc ---
 if not exist "%ROOT%\.git\info" mkdir "%ROOT%\.git\info"
 git -C "%ROOT%" gc --quiet
 if errorlevel 1 (
-  echo [%date% %time%] WARN: git gc reported an error
+  echo [%date% %time%] WARN: git gc reported an error >> "%LOG%"
 ) else (
-  echo [%date% %time%] GC done
+  echo [%date% %time%] Step: gc done >> "%LOG%"
 )
 REM --- gc 后对象库完整性校验：防止 gc 静默清空对象（2026-08-11 事故）---
 REM     注：git 2.55 无 --quick 选项（用了会 usage 报错误判损坏），改用 --connectivity-only。
@@ -146,12 +139,24 @@ if errorlevel 1 (
 REM --- loose objects 数量监控（超阈值提醒，防止再次堆积）---
 for /f "tokens=2 delims= " %%b in ('git -C "%ROOT%" count-objects -v ^| findstr /b "count:"') do set "LOOSE_NUM=%%b"
 if not defined LOOSE_NUM set "LOOSE_NUM=?"
-echo [%date% %time%] Loose objects: %LOOSE_NUM%
+echo [%date% %time%] Loose objects: %LOOSE_NUM% >> "%LOG%"
 if not "%LOOSE_NUM%"=="?" if "%LOOSE_NUM%" GTR "6700" (
-  echo [%date% %time%] WARN: loose objects %LOOSE_NUM% exceed threshold 6700, run manual gc
+  echo [%date% %time%] WARN: loose objects %LOOSE_NUM% exceed threshold 6700, run manual gc >> "%LOG%"
 )
 
 "%NODE%" "%ROOT%\scripts\write-status.js" ok "%HEAD_SHA%" true
 echo [%date% %time%] Done. >> "%LOG%"
-echo [%date% %time%] Done.
 endlocal
+exit /b 0
+
+REM --- 子过程：开 GitHub issue（同一失败 streak 只开一次，按标题查重）---
+:open_issue
+  set "ISSUE_TITLE=%~1"
+  set "ISSUE_BODY=%~2"
+  "%GH%" issue list -R kindle0088-sys/sg-property --state open --search "%ISSUE_TITLE%" --json number --jq "length" > "%TEMP%\gh-open.txt" 2>nul
+  set /p OPEN_ISSUES=<"%TEMP%\gh-open.txt"
+  if not defined OPEN_ISSUES set OPEN_ISSUES=0
+  if "%OPEN_ISSUES%"=="0" (
+    "%GH%" issue create -R kindle0088-sys/sg-property --title "%ISSUE_TITLE%" --body "%ISSUE_BODY%" >nul 2>&1
+  )
+exit /b 0
