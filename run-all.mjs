@@ -93,6 +93,32 @@ function writeStatus(status, commit, pushed) {
   run(NODE, args, { cwd: SCRIPTS });
 }
 
+// ---------- 依赖自愈：node_modules 缺失/不完整时自动 npm ci ----------
+// 2026-08-16：月更构建曾因 scripts/node_modules 丢失（proj4 不可解析）而 BUILD FAILED。
+const NPM_CLI = 'C:/Users/jiali/.workbuddy/binaries/node/versions/22.22.2/node_modules/npm/bin/npm-cli.js';
+
+// 需要存在的关键依赖（node_modules 完整性的最小探针）
+const REQUIRED_DEPS = ['proj4', 'node-fetch', 'acorn', 'csv-parse'];
+
+function depsReady() {
+  if (!fs.existsSync(path.join(SCRIPTS, 'node_modules'))) return false;
+  return REQUIRED_DEPS.every((d) => fs.existsSync(path.join(SCRIPTS, 'node_modules', d)));
+}
+
+function ensureDeps() {
+  if (depsReady()) return true;
+  log('WARN: node_modules missing/incomplete, running npm ci');
+  const r = spawnSync(NODE, [NPM_CLI, 'ci', '--no-audit', '--no-fund'],
+    { cwd: SCRIPTS, encoding: 'utf8', timeout: 600000 });
+  if (r.status !== 0) {
+    log(`ERROR: npm ci failed (exit ${r.status})`);
+    if (r.stderr) fs.appendFileSync(BUILD_OUT, r.stderr);
+    return false;
+  }
+  log('Deps restored via npm ci');
+  return true;
+}
+
 // ---------- fetch 带重试 ----------
 async function fetchWithRetry() {
   if (git(['fetch', 'origin']) === 0) return true;
@@ -137,6 +163,15 @@ async function main() {
 
   // --- 构建（HDB 由 CI 日更，本地只跑 URA）---
   log('Step: build start');
+  // 2026-08-16 防御：node_modules 丢失会自动 npm ci，避免 proj4 不可解析导致 BUILD FAILED
+  if (!ensureDeps()) {
+    log('BUILD FAILED');
+    appendError('BUILD FAILED: node_modules missing and npm ci failed');
+    writeStatus('build_failed');
+    openIssue('Monthly URA build failed',
+      `Local scheduled build failed at ${now()}: node_modules missing, npm ci failed. See logs\\build-error.log.`);
+    process.exit(1);
+  }
   const buildStatus = run(NODE, [path.join(SCRIPTS, 'build.js'), '--skip-hdb'],
     { cwd: SCRIPTS, logTo: BUILD_OUT });
   if (buildStatus !== 0) {
