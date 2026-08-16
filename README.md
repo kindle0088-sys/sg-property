@@ -4,7 +4,7 @@
 
 - 在线预览：https://kindle0088-sys.github.io/sg-property/
 - 报告发布仓库：kindle0088-sys/sg-property
-- 数据仓库：当前项目（property-dashboard）
+- 数据仓库：当前项目（sg-property）
 
 ---
 
@@ -85,7 +85,7 @@ node scripts/build.js --skip-ura
 ## 四、目录结构
 
 ```
-property-dashboard/
+sg-property/
 ├── index.html          # 入口页面
 ├── js/                 # 前端模块
 ├── css/                # 样式
