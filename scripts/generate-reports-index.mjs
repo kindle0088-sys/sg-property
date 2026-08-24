@@ -55,6 +55,45 @@ if (dataM) {
 const districtFix = { 'Clementi Crest 金文泰景': 'D5', 'Bidadari Estate': 'D22' };
 for (const r of REPORTS) if (districtFix[r.name]) r.district = districtFix[r.name];
 
+// 从研报 HTML 同步综合分（覆盖硬编码旧值，保证主页与最新研报一致）
+const { existsSync } = await import('fs');
+function extractScore(txt) {
+  // 优先"综合评分：X.XX / 10"（score-card / dim 模板）
+  let m = txt.match(/综合评分[：:]\s*([\d.]+)\s*\/\s*10/);
+  if (m) return +m[1];
+  // val 标签（KPI 区）
+  m = txt.match(/<div class="val">([\d.]+)<\/div><div class="lbl">七维综合评分/);
+  if (m) return +m[1];
+  // hero score
+  m = txt.match(/<span class="score">([\d.]+)<\/span>/);
+  if (m) return +m[1];
+  // value num-gold（One Canberra 表格式模板）
+  m = txt.match(/<div class="value num-gold">([\d.]+)</);
+  if (m) return +m[1];
+  // score-ring
+  m = txt.match(/score-ring[^>]*>\s*([\d.]+)/);
+  if (m) return +m[1];
+  // 兜底：裸综合评分
+  m = txt.match(/综合评分[：:]\s*([\d.]+)/);
+  if (m) return +m[1];
+  return null;
+}
+const reportDir = join(__dirname, '..', 'reports');
+let synced = 0, missingScore = [];
+for (const r of REPORTS) {
+  const p = join(reportDir, r.href);
+  if (!existsSync(p)) { missingScore.push(`${r.name}(no-file)`); continue; }
+  const s = extractScore(readFileSync(p, 'utf8'));
+  if (s == null) { missingScore.push(r.name); continue; }
+  if (Math.abs(s - (r.score ?? -1)) > 0.001) {
+    r.score = s;
+    r.title = r.title.replace(/[（(]七维评分\s*[\d.]+\s*[)）]/, `（七维评分 ${s.toFixed(2)}）`);
+    synced++;
+  }
+}
+if (synced) console.log(`synced ${synced} scores from report HTML`);
+if (missingScore.length) console.log('no-score (kept legacy):', missingScore.join(', '));
+
 // 排序稳定化：按 type 分组顺序 + 原序
 const typeOrder = { condo: 0, ec: 1, hdb: 2 };
 REPORTS.sort((a, b) => typeOrder[a.type] - typeOrder[b.type] || REPORTS.indexOf(a) - REPORTS.indexOf(b));
