@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J'Den — 新加坡私宅投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">私宅 · 集成开发 · D22 Jurong Gateway</div>
+  <h1>J'Den</h1>
+  <div class="address">2 Jurong East Central 1 · Jurong Gateway · 99-Year Leasehold (from 2023)</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">7.00</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$2,412</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$2,442</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">362</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">368</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>CapitaLand 打造 · Jurong East MRT 零距离 · Jurong Lake District 核心新盘</strong>——J'Den 是原 JCube 地段重建的 40 层集成开发（住宅+零售），2023 年 11 月开盘即 87% 去化，如今已售 96%（余 13 套多为 4BR 大户）。通过全遮蔽 J-Walk 连廊 4 分钟直达换乘站，Westgate / JEM / IMM 就在脚下，是全岛位置最核心的 OCR 新盘之一。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>J'Den 把"第二 CBD 核心 + 三线换乘 + 顶级开发商"拉到满配，但 $2,400+ psf 的单价已透支部分 JLD 预期——对比 J Gateway 有 18% 溢价，预售阶段租金回报难上 3%。适合<span class="positive">资金充裕的自住者与认同 JLD 十年叙事的长线买家</span>；追求现金流和短线回报者要谨慎。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">CapitaLand Development（Tanglin R.E. Holdings）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">368 套 · 单塔 40 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 2023-08 起，剩余约 96 年）</div></div>
+    <div class="spec-card"><div class="spec-label">土地参数</div><div class="spec-value">7,771 sqm · GFA 32,639 sqm · Plot Ratio 4.20</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">预计 2028 Q4（2023-11 开盘）</div></div>
+    <div class="spec-card"><div class="spec-label">项目特色</div><div class="spec-value">集成开发：住宅 + 2 层零售裙楼 · 原 JCube 地段 · BCA Green Mark Platinum</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">294 个（含 EV）< 368 户——车位紧张</div></div>
+    <div class="spec-card"><div class="spec-label">建筑团队</div><div class="spec-value">Surbana Jurong Consultants</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th><th>占比</th></tr>
+    <tr><td>1 Bedroom</td><td>527 - 624</td><td>74</td><td>20.1%</td></tr>
+    <tr><td>2 Bedroom</td><td>710 - 850</td><td>148</td><td>40.2%</td></tr>
+    <tr><td>3 Bedroom</td><td>1,141 - 1,259</td><td>110</td><td>29.9%</td></tr>
+    <tr><td>4 Bedroom Premium</td><td>1,485</td><td>37</td><td>10.1%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 1-2BR 占六成——投资/小家庭导向；3BR 是自住主力。剩余 13 套集中在 3BR（2 套）与 4BR（11 套），门槛 $310 万起。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 湖景泳池 (Lake Pool)</div>
+    <div class="facility-tag"><span class="icon">🌊</span> Lazy River + 儿童泳池 + Bubble Pool</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房 + Parkour Gym + Cardio Corner</div>
+    <div class="facility-tag"><span class="icon">🏙️</span> 24 层 Sky Terrace 空中花园</div>
+    <div class="facility-tag"><span class="icon">🎉</span> Party House + 多功能房</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ Pavilion</div>
+    <div class="facility-tag"><span class="icon">💼</span> Social Lounge 社交空间</div>
+    <div class="facility-tag"><span class="icon">🛝</span> Nature Playground</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>Jurong East MRT（NS1/EW24）约 180-230m，J-Walk 全遮蔽连廊 4 分钟</strong>；未来 JRL（2027+）三线交汇，CRL 终点站在侧</td></tr>
+    <tr><td>🛍️ 商圈</td><td>楼下自有 2 层零售 · Westgate / JEM / IMM 经 J-Walk 直达 · 未来 Jurong East ITH 综合交通枢纽</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内：Fuhua Primary（580m）、Yuhua Primary（1.1km）；2km 内 9 所中小学</td></tr>
+    <tr><td>🏥 医疗</td><td>Ng Teng Fong 综合医院 + Jurong Community Hospital（J-Walk 约 10 分钟）</td></tr>
+    <tr><td>🌳 生态</td><td>Jurong Lake Gardens 湖畔公园 · 裕廊东 ITH 规划文体设施</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">9.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · MRT 换乘站 230m + 未来三线交汇，JLD 第二 CBD 核心，商场群零距离</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">3.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:35%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 预售阶段无租金数据；按 $2,400 psf 买入价与 D22 租金水平估算，毛回报约 2.5-3%</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · JLD 十年叙事 + 稀缺新盘身份，但单价已高企，2025 年曾回调 6.9%</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">9.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · CapitaLand 亚洲顶级开发商，Sky Habitat / One Pearl Bank 等交付口碑优秀</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 首套无 ABSD，持有超 3 年无 SSD；高单价对应高物业税与高层塔楼管理费</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 去化 96% 需求强劲；但转售市场 2028 后才形成，4BR $350 万+ 大户流动性弱</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 3 年建筑等待期 · 车位 294:368 紧张 · JLD 兑现节奏 · 高单价对利率敏感</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：7.00 / 10</strong> —— 加权计算（9.0×20% + 3.5×15% + 7.5×20% + 9.0×10% + 7.0×10% + 6.5×15% + 6.0×10%）。地段与开发商维度接近满分，是 OCR 新盘中的天花板级配置；租金回报与风险维度拉低总分——高单价新盘在预售阶段的共同特征。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>均价 psf</th><th>环比</th></tr>
+    <tr><td>2023（开盘）</td><td>327</td><td>$2,474</td><td>—</td></tr>
+    <tr><td>2024</td><td>14</td><td>$2,571</td><td class="num-green">+3.9%</td></tr>
+    <tr><td>2025</td><td>14</td><td>$2,393</td><td class="num-red">-6.9%</td></tr>
+    <tr><td>2026（至今）</td><td>3</td><td>$2,499</td><td class="num-green">+4.4%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>2023-11 开盘 327 笔放量，之后开发商逐季小幅调价出货。近 12 个月中位价 $2,442 psf，处于 D22 第 97 百分位。对比参照：<strong>J Gateway（2017）$2,115 psf · Lake Grande（2018）$1,818 psf</strong>——J'Den 较次新盘溢价 15-25%，溢价来自"直接入站 + 全新地契 + JLD 核心"三重身份。2025 年 6.9% 回调说明高价盘对市场情绪敏感。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2024 起成交多为开发商尾盘定价，转售（Subsale）市场尚未形成——真实"市场价"要等 2028 TOP 后才有充分样本。</p>
+</section>
+
+<!-- 合规说明 -->
+<section>
+  <div class="section-title">📋 合规与持有政策（私宅）</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2023-08</div><div class="tl-detail">地契起算（99 年）· 原 JCube 拆除重建</div></div>
+    <div class="tl-item"><div class="tl-year">2023-11</div><div class="tl-detail">开盘，首周末售出 87-88%，一个月去化 89.4%</div></div>
+    <div class="tl-item"><div class="tl-year">2027-2028</div><div class="tl-detail">预计 TOP · 彼时 JRL 裕廊东换乘站同步启用（2027-2029）</div></div>
+    <div class="tl-item"><div class="tl-year">2032</div><div class="tl-detail">Jurong Lake District MRT（JLD 站）开通，步行约 10 分钟</div></div>
+    <div class="tl-item"><div class="tl-year">2028+</div><div class="tl-detail">转售市场形成，SSD 窗口（3 年内转售有税）倒计时</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>买家资格</td><td>无限制（SC / PR / 外国人均可，外国买家适用 ABSD 60%）</td></tr>
+    <tr><td>印花税</td><td>SC 首套 0% ABSD · PR 首套 5% · 外国人 60%；BSD 按梯度 1-6%</td></tr>
+    <tr><td>贷款约束</td><td>TDSR 55%（私宅标准）；首套 LTV 75%</td></tr>
+    <tr><td>转售税</td><td>持有 <3 年转售有 SSD（12%/8%/4%）——短线退出成本高</td></tr>
+    <tr><td>出租</td><td>完全自由（无 MOP 限制）</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"位置是无可争议的全岛 top 级：J-Walk 全程有盖走到换乘站不到 5 分钟，下雨天从地铁口到家不用撑伞；楼下就是超市、诊所、咖啡店，Westgate 和 JEM 过个天桥就到。Fuhua 小学在 1km 内，孩子报名有优先级。"</div>
+    <div class="review-source">— PLB New Launch 实地探访 + PropertyGuru 项目页，2024-2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"CapitaLand 把 JCube 那块地重做成集成开发的思路很完整——楼下零售裙楼直接消化了日常需求，楼上 40 层的单位大多有湖景或城景，24 层 sky terrace 的视野在裕廊东没有对手。90%+ 去化本身就说明市场对这套配置的认可。"</div>
+    <div class="review-source">— EdgeProp / ShiokNest 报道，2024-2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"$2,400+ psf 真的不便宜——比旁边 J Gateway 贵 18%，1BR 都要 $144 万起，4BR 站上 $350 万。车位只有 294 个对 368 户，双车家庭要等租位。而且 2028 才 TOP，等入伙的三年里裕廊东核心一直是个大工地。"</div>
+    <div class="review-source">— 买家论坛 / Two Homes 评分（Profit 5.5 偏谨慎）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"预售阶段谈租金回报还太早——参考 J Gateway 现在约 3.9% 的回报率，J'Den 以高出 18% 的成本买入，即便租金随 JLD 提升，初期回报率大概率仍低于 3%。这盘的逻辑是资本增值叙事，不是现金流叙事。"</div>
+    <div class="review-source">— 市场分析共识（ShiokNest / Two Homes / hiva.sg）</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5）</strong> —— 居住便利度、视野、开发商交付预期都是标杆级；扣分项是车位、高单价带来的持有压力，以及入伙前还需忍受工地期。作为"住"是满分地段，作为"投资品"要另算账。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>单价透支</td><td class="num-red">高</td><td>$2,400+ psf 已较次新盘溢价 15-25%，转售市场若不能支撑则价格发现承压</td></tr>
+    <tr><td>建筑等待期</td><td class="num-yellow" style="color:#eab308">中高</td><td>2028 TOP，期间利率/政策/市场变化存在不确定性</td></tr>
+    <tr><td>车位不足</td><td class="num-yellow" style="color:#eab308">中高</td><td>294 车位 vs 368 户，双车家庭受影响</td></tr>
+    <tr><td>租金回报偏低</td><td class="num-yellow" style="color:#eab308">中</td><td>预售估算毛回报 2.5-3%，现金流型投资者需重新评估</td></tr>
+    <tr><td>JLD 兑现节奏</td><td class="num-yellow" style="color:#eab308">中</td><td>办公/商业集群与 JRL 通车均在 2027-2030s，利好兑现存在延迟可能</td></tr>
+    <tr><td>SSD 窗口</td><td class="num-yellow" style="color:#eab308">中</td><td>TOP 后 3 年内转售需缴 SSD，短线策略成本高</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（有条件推荐）：</strong>在裕廊东上班、预算充足（1BR $144 万起）、看重通勤与生活便利的家庭或专业人士。这是 OCR 地段配置的天花板，买到的是"不用开车、下楼进商场、走路进地铁"的生活方式——前提是接受 2028 年 TOP 和车位限制。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（谨慎）：</strong>只适合认同 JLD 十年重估叙事、愿意持有 5-10 年的长线资金。短期看租金回报不划算（<3%），转售溢价能否兑现取决于 2028 年后裕廊东写字楼集群的实际落地。可对标 J Gateway 2017-2026 的路径（年均增值约 3-4%）。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>依赖租金现金流的投资者、预算敏感者、希望即买即住者、短线轮动选手——高单价 + 3 年等待期 + SSD 窗口的组合不适合你。
+  </div>
+</section>
+
+<footer>
+  J'Den Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-24
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>

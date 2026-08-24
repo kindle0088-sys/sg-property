@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Westmere — 新加坡 EC 投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">EC · 已完全私有化 · D22 Jurong East</div>
+  <h1>Westmere</h1>
+  <div class="address">71-77 Jurong East Street 13 · Jurong East · 99-Year Leasehold (from 1996)</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">7.28</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,154</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,167</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">41</div><div class="lbl">近 5 年累计交易</div></div>
+    <div class="kpi"><div class="val">280</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>已私有化老 EC + Jurong East 核心区 + 3.7-4% 稳定租金回报</strong>——Westmere 是 1999 年 TOP 的 EC，2009 年完全私有化，如今与普通私宅无异：任何人（含外国人）可买、可自由出租、无 MOP 约束。以约 $1,154 psf 的单价，比 D22 平均（$1,454 psf）低 22%，是进入裕廊东核心区的最低门槛之一。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Westmere 的吸引力=「私有化 EC 的价格折扣 + 裕廊东/JLD 的地段 + 成熟的租金现金流」。5 年转售均价从 $869 涨到 $1,161 psf（+33.6%），租金回报稳定在 3.7-4%。代价是 27 年楼龄（需预留 $5-10 万翻新）和仅剩 69 年的地契——对<span class="positive">自住升级家庭与长线收租投资者</span>值得认真考虑，短线投机与追求新设施者不适合。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Pidemco Land / CapitaLand Residential（现 CapitaLand Group）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">280 套 · 2 栋 20 层</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年（自 1996-06-26 起，剩余约 69 年）</div></div>
+    <div class="spec-card"><div class="spec-label">土地参数</div><div class="spec-value">13,800 sqm · GFA 38,639 sqm · Plot Ratio 2.80</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">1999 年（楼龄约 27 年）</div></div>
+    <div class="spec-card"><div class="spec-label">EC 状态</div><div class="spec-value">2004 年 MOP 届满 · 2009 年完全私有化（现无买家限制）</div></div>
+    <div class="spec-card"><div class="spec-label">主力户型</div><div class="spec-value">3 Bedroom（1,098 - 1,625 sqft）· 少量 4BR</div></div>
+    <div class="spec-card"><div class="spec-label">买家画像</div><div class="spec-value">HDB 升级买家 79.3% · 私宅买家 20.7%</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布（转售交易样本）</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>交易占比</th><th>均价 psf</th></tr>
+    <tr><td>3 Bedroom</td><td>1,098 - 1,625</td><td>≈97%</td><td>$1,031</td></tr>
+    <tr><td>4 Bedroom</td><td>1,432 - 1,539</td><td>≈3%</td><td>$1,034</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 户型设计属 1990s"慷慨面积"风格：客厅餐厅宽大、卧室方正，3BR 起步 1,098 sqft——比当代新盘同级户型大 15-20%。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 泳池 + 儿童浅水池</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房 + 健身角</div>
+    <div class="facility-tag"><span class="icon">🧖</span> 桑拿房</div>
+    <div class="facility-tag"><span class="icon">🏌️</span> 迷你果岭 (Putting Green)</div>
+    <div class="facility-tag"><span class="icon">🏃</span> 慢跑径</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤区</div>
+    <div class="facility-tag"><span class="icon">🏢</span> 多功能厅 + Clubhouse</div>
+    <div class="facility-tag"><span class="icon">🛝</span> 儿童游乐场</div>
+    <div class="facility-tag"><span class="icon">🚗</span> 有盖停车场 + 24h 保安</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>Chinese Garden MRT（EW25）约 650-880m</strong> · Jurong East 换乘站（NS1/EW24）约 920m，步行约 12 分钟</td></tr>
+    <tr><td>🛍️ 商圈</td><td>Westgate 838m · <strong>JEM 929m</strong> · IMM 1.23km——裕廊东三巨头步行可达</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内 6 所小学：Yuhua、Fuhua、South View、CHIJ Our Lady、Dazhong、Jurong Primary</td></tr>
+    <tr><td>🚗 快速路</td><td>AYE 车程 20 分钟到市中心/乌节路</td></tr>
+    <tr><td>🌳 未来利好</td><td>Jurong Lake District 第二 CBD 规划 · Jurong Region Line 2027+ 接入 Jurong East</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 裕廊东核心区，双 MRT 步行 12 分钟，JLD 第二 CBD 规划加持</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 毛回报约 3.7-4.0%，3BR 月租平均 $3,900+，租客家庭为主，需求稳定</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">7.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 5 年 +33.6%（年化约 6%），JLD 长期利好，但 69 年地契压制远期上限</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · CapitaLand Group 前身（Pidemco Land）开发，品牌与交付信誉一流</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">8.0 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 已私有化无 EC 约束，管理费低于新盘，无 ABSD 窗口（首套），自住税负适中</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 年均成交约 8-10 笔，买家池因地契剩余年限与楼龄收窄，成交周期偏长</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">6.5 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 地契衰减（接近 60 年时 CPF/贷款受限）、楼龄翻新成本、JLD 兑现需 5-10 年</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：7.28 / 10</strong> —— 加权计算（8.0×20% + 7.0×15% + 7.0×20% + 8.0×10% + 8.0×10% + 6.5×15% + 6.5×10%）。地段、开发商、持有成本三个维度撑起基本面；租金与增值处于中上水平；流动性与风险受"老楼龄 + 69 年地契"拖累——这是所有高龄 leasehold 盘的共同特征。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>均价 psf</th><th>环比</th><th>备注</th></tr>
+    <tr><td>2021</td><td>~$880</td><td>—</td><td>最低 $821 psf</td></tr>
+    <tr><td>2022</td><td>~$900</td><td class="num-green">+2.3%</td><td>区间 $847-978</td></tr>
+    <tr><td>2023</td><td>~$1,032</td><td class="num-green">+14.7%</td><td>区间 $1,002-1,057</td></tr>
+    <tr><td>2024</td><td>~$1,075</td><td class="num-green">+4.2%</td><td>区间 $1,006-1,121</td></tr>
+    <tr><td>2025</td><td>~$1,155</td><td class="num-green">+7.4%</td><td>历史最高 $1,294（2025-04）</td></tr>
+    <tr><td>2026（至今）</td><td>~$1,137</td><td class="num-red">-1.6%</td><td>样本少，2026-01 一笔 $1,137</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>5 年转售均价 $869 → $1,161 psf，累计 <strong>+33.6%（年化约 6%）</strong>，跑赢同期多数 OCR 老盘。2023 年跳涨 14.7% 是裕廊东新盘（J'Den）带动区域重估的直接体现——新盘 $2,400+ psf 与 Westmere $1,0xx psf 的价差为老盘提供了"补涨"逻辑。目前 Westmere 比 D22 平均低 21.8%，比 J'Den 低约 55%。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 2026 年至今仅 1-2 笔成交，价格变动不具统计意义；转售样本偏少是此类老盘的普遍现象。</p>
+</section>
+
+<!-- EC 合规说明 -->
+<section>
+  <div class="section-title">📋 EC 私有化时间线与合规</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">1996-06</div><div class="tl-detail">地契起算（99 年）· Pidemco Land 开发</div></div>
+    <div class="tl-item"><div class="tl-year">1999</div><div class="tl-detail">TOP 获临时入伙证 · 首批买家入住</div></div>
+    <div class="tl-item"><div class="tl-year">2004</div><div class="tl-detail">5 年 MOP 届满 · 可整间出租 / 转售给 SC+PR</div></div>
+    <div class="tl-item"><div class="tl-year">2009</div><div class="tl-detail">完全私有化（TOP 起 10 年）· 任何买家（含外国人）可购</div></div>
+    <div class="tl-item"><div class="tl-year">现在</div><div class="tl-detail">与普通私宅无异：无 MOP、无买家限制、无 EC 资格约束</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>当前状态</th></tr>
+    <tr><td>买家资格</td><td>无限制（SC / PR / 外国人 / 公司均可购买）</td></tr>
+    <tr><td>出租</td><td>完全自由（无 MOP 限制）</td></tr>
+    <tr><td>贷款约束</td><td>适用 TDSR 55%（与私宅同），不适用 MSR</td></tr>
+    <tr><td>CPF 使用</td><td>地契剩余 69 年——30-40 岁买家通常可全数使用；45 岁以上需先核实年龄+地契覆盖规则</td></tr>
+    <tr><td>转售税</td><td>持有超 3 年无 SSD · 首套无 ABSD</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"3BR 面积真的够大方——1,200+ sqft 的卧室能放 queen 床还有余，客厅宽度放得下整套沙发茶几。26 年树龄的绿化区比新盘那种刚种的小树苗有味道太多，泳池和网球场在 280 户的小区里基本不用排队。"</div>
+    <div class="review-source">— ShiokNest Westmere 评测，2026</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"租金一直很稳，3BR 平均 $3,900/月上下，租客多是附近上班的家庭和学校相关的 expat。已私有化的 EC 意味着想卖就卖、想租就租，没有任何 HDB 那套条条框框——当年花 EC 价买的，现在享受的是完整私宅自由。"</div>
+    <div class="review-source">— ShiokNest 租约数据 188 笔 + 业主反馈汇总</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"27 年楼龄是硬伤——水管、电路、厨卫基本都是 1999 年原装，翻新没有 $50,000-100,000 下不来；层高只有 2.6m（新盘普遍 2.8-3.0m），装吊灯会很压抑。没有 PES 私家院子、没有 yard，设施也缺新盘那种 sky terrace 和 co-working。"</div>
+    <div class="review-source">— ShiokNest 翻新成本分析 + 买家论坛</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"地契剩 69 年是个隐形时钟——未来 10 年逼近 60 年大关时，CPF 能用的买家池会变窄，退出价可能受压。反过来说，只要 JLD 写字楼群 2030s 落地，这个位置的需求逻辑只会更强。买它是赌长期，不是赌短期。"</div>
+    <div class="review-source">— 市场分析共识（ShiokNest / 多篇 D22 研报）</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★☆☆（3.5/5）</strong> —— 空间、绿化、管理费、租金确定性是真优势；楼龄、设施老度、层高是客观短板。适合"重地段轻设施、重租金轻新度"的务实买家。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>地契衰减</td><td class="num-red">高</td><td>剩 69 年；10 年内逼近 60 年线，CPF 买家池与贷款条件逐步收窄</td></tr>
+    <tr><td>楼龄老化</td><td class="num-red">中高</td><td>27 年楼龄，翻新成本 $5-10 万；电梯/外墙维护进入高频期</td></tr>
+    <tr><td>转售流动性</td><td class="num-yellow" style="color:#eab308">中</td><td>年成交仅 8-10 笔，挂牌周期长于新盘</td></tr>
+    <tr><td>JLD 兑现延迟</td><td class="num-yellow" style="color:#eab308">中</td><td>商业/办公集群落地在 2030s，利好兑现节奏不可控</td></tr>
+    <tr><td>区域供应</td><td class="num-yellow" style="color:#eab308">中</td><td>裕廊湖区规划 20,000 套住宅，远期供应量不可忽视</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>预算 110-150 万、看重裕廊东地段与 JLD 前景、不介意装修一次的家庭。同样的钱在裕廊东新盘只能买 1BR，在这里能拿 1,200 sqft 3BR。单位面积大方 + 成熟配套 + 低管理费，自住性价比突出。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>毛回报 3.7-4%、租客稳定，是裕廊东租金现金流最扎实的标的之一。核心前提是接受长线（5-10 年）并正确计算翻新成本后的真实净回报。地契 69 年意味着不适用于"买入-翻新-快出"的短期轮动打法。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>短线投机者、对设施新度有要求者、40 岁以上且地契覆盖有 CPF 顾虑者、无法接受较长成交周期者——这盘不适合你。
+  </div>
+</section>
+
+<footer>
+  Westmere Investment Analysis · 基于 URA REALIS 交易数据 + 公开市场信息 · 生成于 2026-08-24
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>
