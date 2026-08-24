@@ -1,0 +1,618 @@
+{
+ "generated": "2026-08-24",
+ "method": "report-extract + web + knowledge",
+ "count": 82,
+ "ecs": [
+  {
+   "id": "1-canberra",
+   "name": "1 CANBERRA",
+   "topYear": 2015,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "altura",
+   "name": "ALTURA",
+   "topYear": 2027,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "arc-at-tampines",
+   "name": "ARC AT TAMPINES",
+   "topYear": 2014,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "aurelle-of-tampines",
+   "name": "AURELLE OF TAMPINES",
+   "topYear": 2028,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "austville-residences",
+   "name": "AUSTVILLE RESIDENCES",
+   "topYear": 2014,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "bellewaters",
+   "name": "BELLEWATERS",
+   "topYear": 2017,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "bellewoods",
+   "name": "BELLEWOODS",
+   "topYear": 2017,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "belysa",
+   "name": "BELYSA",
+   "topYear": 2015,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "bishan-loft",
+   "name": "BISHAN LOFT",
+   "topYear": 2003,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "blossom-residences",
+   "name": "BLOSSOM RESIDENCES",
+   "topYear": 2015,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "chestervale",
+   "name": "CHESTERVALE",
+   "topYear": 2008,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "citylifetampines",
+   "name": "CITYLIFE@TAMPINES",
+   "topYear": 2016,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "coastal-cabana",
+   "name": "COASTAL CABANA",
+   "topYear": 2029,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "copen-grand",
+   "name": "COPEN GRAND",
+   "topYear": 2025,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "eastvale",
+   "name": "EASTVALE",
+   "topYear": 2003,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "ecopolitan",
+   "name": "ECOPOLITAN",
+   "topYear": 2016,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "esparina-residences",
+   "name": "ESPARINA RESIDENCES",
+   "topYear": 2013,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "forestville",
+   "name": "FORESTVILLE",
+   "topYear": 2016,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "heron-bay",
+   "name": "HERON BAY",
+   "topYear": 2015,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "hundred-palms-residences",
+   "name": "HUNDRED PALMS RESIDENCES",
+   "topYear": 2020,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "inz-residence",
+   "name": "INZ RESIDENCE",
+   "topYear": 2015,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "la-casa",
+   "name": "LA CASA",
+   "topYear": 2013,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "lake-life",
+   "name": "LAKE LIFE",
+   "topYear": 2016,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "lilydale",
+   "name": "LILYDALE",
+   "topYear": 2009,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "lumina-grand",
+   "name": "LUMINA GRAND",
+   "topYear": 2027,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "lush-acres",
+   "name": "LUSH ACRES",
+   "topYear": 2015,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "north-gaia",
+   "name": "NORTH GAIA",
+   "topYear": 2027,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "northoaks",
+   "name": "NORTHOAKS",
+   "topYear": 2008,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "northwave",
+   "name": "NORTHWAVE",
+   "topYear": 2019,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "novo-place",
+   "name": "NOVO PLACE",
+   "topYear": 2026,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "nuovo",
+   "name": "NUOVO",
+   "topYear": 2017,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "ola",
+   "name": "OLA",
+   "topYear": 2023,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "otto-place",
+   "name": "OTTO PLACE",
+   "topYear": 2028,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "parc-canberra",
+   "name": "PARC CANBERRA",
+   "topYear": 2016,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "parc-central-residences",
+   "name": "PARC CENTRAL RESIDENCES",
+   "topYear": 2012,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "parc-greenwich",
+   "name": "PARC GREENWICH",
+   "topYear": 2026,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "parc-life",
+   "name": "PARC LIFE",
+   "topYear": 2018,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "park-green",
+   "name": "PARK GREEN",
+   "topYear": 2006,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "piermont-grand",
+   "name": "PIERMONT GRAND",
+   "topYear": 2023,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "pinevale",
+   "name": "PINEVALE",
+   "topYear": 2008,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "prive",
+   "name": "PRIVE",
+   "topYear": 2014,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "provence-residence",
+   "name": "PROVENCE RESIDENCE",
+   "topYear": 2025,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "rivelle-tampines",
+   "name": "RIVELLE TAMPINES",
+   "topYear": 2029,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "rivercove-residences",
+   "name": "RIVERCOVE RESIDENCES",
+   "topYear": 2020,
+   "source": "web",
+   "conf": "high",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "riverparc-residence",
+   "name": "RIVERPARC RESIDENCE",
+   "topYear": 2014,
+   "source": "web",
+   "conf": "high",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "sea-horizon",
+   "name": "SEA HORIZON",
+   "topYear": 2015,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "signature-at-yishun",
+   "name": "SIGNATURE AT YISHUN",
+   "topYear": 2018,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "simei-green-condominium",
+   "name": "SIMEI GREEN CONDOMINIUM",
+   "topYear": 2001,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "skypark-residences",
+   "name": "SKYPARK RESIDENCES",
+   "topYear": 2016,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "sol-acres",
+   "name": "SOL ACRES",
+   "topYear": 2019,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "summerdale",
+   "name": "SUMMERDALE",
+   "topYear": 2005,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "tenet",
+   "name": "TENET",
+   "topYear": 2026,
+   "source": "report",
+   "ecStage": "mop1"
+  },
+  {
+   "id": "the-amore",
+   "name": "THE AMORE",
+   "topYear": 2017,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "the-brownstone",
+   "name": "THE BROWNSTONE",
+   "topYear": 2017,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "the-canopy",
+   "name": "THE CANOPY",
+   "topYear": 2007,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-criterion",
+   "name": "THE CRITERION",
+   "topYear": 2018,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "the-dew",
+   "name": "THE DEW",
+   "topYear": 2016,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-eden-at-tampines",
+   "name": "THE EDEN AT TAMPINES",
+   "topYear": 2011,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-esparis",
+   "name": "THE ESPARIS",
+   "topYear": 2012,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-floravale",
+   "name": "THE FLORAVALE",
+   "topYear": 2000,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-florida",
+   "name": "THE FLORIDA",
+   "topYear": 2009,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-quintet",
+   "name": "THE QUINTET",
+   "topYear": 2012,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-rainforest",
+   "name": "THE RAINFOREST",
+   "topYear": 2015,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-rivervale",
+   "name": "THE RIVERVALE",
+   "topYear": 2006,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-tampines-trilliant",
+   "name": "THE TAMPINES TRILLIANT",
+   "topYear": 2015,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-terrace",
+   "name": "THE TERRACE",
+   "topYear": 2018,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "the-topiary",
+   "name": "THE TOPIARY",
+   "topYear": 2016,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "the-vales",
+   "name": "THE VALES",
+   "topYear": 2018,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "the-visionaire",
+   "name": "THE VISIONAIRE",
+   "topYear": 2018,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "treasure-crest",
+   "name": "TREASURE CREST",
+   "topYear": 2019,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "twin-fountains",
+   "name": "TWIN FOUNTAINS",
+   "topYear": 2016,
+   "source": "web",
+   "conf": "high",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "twin-waterfalls",
+   "name": "TWIN WATERFALLS",
+   "topYear": 2015,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "wandervale",
+   "name": "WANDERVALE",
+   "topYear": 2016,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "waterbay",
+   "name": "WATERBAY",
+   "topYear": 2016,
+   "source": "web",
+   "conf": "high",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "watercolours",
+   "name": "WATERCOLOURS",
+   "topYear": 2013,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "waterwoods",
+   "name": "WATERWOODS",
+   "topYear": 2015,
+   "source": "web",
+   "conf": "high",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "westmere",
+   "name": "WESTMERE",
+   "topYear": 2009,
+   "source": "report",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "westwood-residences",
+   "name": "WESTWOOD RESIDENCES",
+   "topYear": 2017,
+   "source": "report",
+   "ecStage": "mop2"
+  },
+  {
+   "id": "whitewater",
+   "name": "WHITEWATER",
+   "topYear": 2013,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "windermere",
+   "name": "WINDERMERE",
+   "topYear": 2007,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "woodsvale",
+   "name": "WOODSVALE",
+   "topYear": 2005,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  },
+  {
+   "id": "yew-mei-green",
+   "name": "YEW MEI GREEN",
+   "topYear": 2007,
+   "source": "knowledge",
+   "conf": "medium",
+   "ecStage": "privatized"
+  }
+ ],
+ "updated": "2026-08-24"
+}
