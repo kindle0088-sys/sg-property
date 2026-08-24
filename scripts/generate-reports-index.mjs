@@ -112,13 +112,12 @@ select:focus{border-color:#fbbf24}
 .card.type-ec:hover{background:linear-gradient(145deg,rgba(245,158,11,.20),rgba(38,51,70,.9) 55%);border-color:#f59e0b}
 .card.type-hdb:hover{background:linear-gradient(145deg,rgba(34,197,94,.20),rgba(38,51,70,.9) 55%);border-color:#22c55e}
 .card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.35)}
-.card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:10px}
-.card-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:800;flex-shrink:0;letter-spacing:.5px}
-.score{font-size:16px;font-weight:800;padding:3px 10px;border-radius:8px;line-height:1.4}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px}
+.card-top h3{font-size:16.5px;font-weight:800;color:#fff;line-height:1.35;flex:1}
+.score{font-size:16px;font-weight:800;padding:3px 10px;border-radius:8px;line-height:1.4;flex-shrink:0}
 .score.s-gold{background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.4)}
 .score.s-blue{background:rgba(96,165,250,.14);color:#60a5fa;border:1px solid rgba(96,165,250,.38)}
 .score.s-slate{background:rgba(148,163,184,.13);color:#94a3b8;border:1px solid rgba(148,163,184,.35)}
-.card h3{font-size:14.5px;font-weight:700;color:#f1f5f9;margin-bottom:4px;line-height:1.4}
 .badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px}
 .badge{font-size:10.5px;font-weight:700;padding:2px 8px;border-radius:5px;letter-spacing:.3px}
 .badge-ec{background:rgba(245,158,11,.14);color:#fbbf24;border:1px solid rgba(245,158,11,.38)}
@@ -188,7 +187,7 @@ const html = `<!DOCTYPE html>
   <div class="grid" id="grid"></div>
 
   <footer>
-    <a href="https://kindle0088-sys.github.io/sg-property/">← Back to Dashboard</a> · Property Reports · Updated 2026-08-11
+    <a href="https://kindle0088-sys.github.io/sg-property/">← Back to Dashboard</a> · Property Reports · Updated ${new Date().toISOString().slice(0, 10)}
   </footer>
 </div>
 
@@ -234,10 +233,9 @@ function render() {
     const desc = r.title.replace(/^.*?\\s*[—–-]\\s/, '').replace(/（七维评分\\s*[\\d.]+）$/, '').trim();
     return \`<a class="card type-\${r.type}" href="\${esc(r.href)}">
       <div class="card-top">
-        <div class="card-icon" style="background:\${esc(r.color)};">\${esc(r.icon)}</div>
+        <h3>\${esc(r.name)}</h3>
         \${r.score != null ? \`<span class="score \${scoreClass(r.score)}">\${r.score.toFixed(2)}</span>\` : ''}
       </div>
-      <h3>\${esc(r.name)}</h3>
       <div class="badges">
         <span class="badge \${TYPE_CLASS[r.type]}">\${TYPE_LABEL[r.type]}</span>
         \${r.district ? \`<span class="badge badge-dist">\${esc(r.district)}</span>\` : ''}
