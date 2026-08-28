@@ -17,6 +17,7 @@ import { createHash } from 'crypto';
 import { fileURLToPath } from 'url';
 import { getToken, fetchAllTransactions, fetchTransactions, fetchRentals, processTransactions, processRentals } from './ura-fetcher.js';
 import { fetchHdbData, processHdbData } from './hdb-fetcher.js';
+import { toSortableDate, computeAvg1y } from './lib/txstats.js';
 
 // ── Amenities (MRT stations + schools) for proximity enrichment ──
 let MRT_STATIONS = [];
@@ -55,12 +56,6 @@ function enrichProximity(coord) {
     schools1km,
     schoolCount1km: SCHOOLS.filter(s => haversineM(coord.lat, coord.lng, s.lat, s.lng) <= 1000).length
   };
-}
-
-// Helper: convert "mmyy" (e.g. "1225") to sortable "20yy-mm" ("2025-12")
-function toSortableDate(d) {
-  if (!d || d.length < 4) return '';
-  return `20${d.substring(2,4)}-${d.substring(0,2)}`;
 }
 
 // Helper: display format "mmyy" → "Mon YYYY"
@@ -105,34 +100,6 @@ const SECT = { 1:'CCR',2:'CCR',3:'RCR',4:'CCR',5:'CCR',6:'CCR',7:'CCR',8:'RCR',9
   21:'OCR',22:'OCR',23:'OCR',24:'OCR',25:'OCR',26:'OCR',27:'OCR',28:'OCR' };
 
 function mkdir(p) { if (!existsSync(p)) mkdirSync(p, { recursive: true }); }
-
-// Compute average PSF from transactions filtered by date >= cutoff
-// Handles both mmyy (URA) and yyyy-mm (HDB) date formats.
-// Median ± 3 × 1.4826 × MAD outlier rejection: protects the average
-// against single bad floor-area records skewing PSF.
-function computeAvg1y(txns, dateField, cutoff) {
-  if (!cutoff) return 0;
-  const isMmyy = /^\d{4}$/.test(cutoff); // mmyy is 4 digits, yyyy-mm is 7
-  const cutoffSort = isMmyy ? toSortableDate(cutoff) : cutoff;
-  const filtered = txns.filter(t => {
-    const v = t[dateField];
-    if (!v) return false;
-    const vSort = isMmyy ? toSortableDate(v) : v;
-    return vSort >= cutoffSort;
-  });
-  const psfs = filtered.map(t => t.pricePsf).filter(Boolean);
-  if (!psfs.length) return 0;
-  if (psfs.length < 5) return Math.round(psfs.reduce((a, b) => a + b, 0) / psfs.length); // 小样本不过滤
-  const sorted = [...psfs].sort((a, b) => a - b);
-  const median = sorted[Math.floor(sorted.length / 2)];
-  const devs = sorted.map(v => Math.abs(v - median)).sort((a, b) => a - b);
-  const mad = devs[Math.floor(devs.length / 2)] || 0;
-  const lo = median - 3 * 1.4826 * mad;
-  const hi = median + 3 * 1.4826 * mad;
-  const clean = psfs.filter(v => v >= lo && v <= hi);
-  if (!clean.length) return Math.round(median);
-  return Math.round(clean.reduce((a, b) => a + b, 0) / clean.length);
-}
 
 // 读取已提交详情 JSON 里的交易数据（skip 模式下重算 avgPsf1y 用），带内存缓存
 // HDB 详情文件是 sortDate(yyyy-mm) 格式，归一化回 month 字段供 computeAvg1y 使用
@@ -384,6 +351,7 @@ async function main() {
 
   // 5c. HDB project index
   let hdbIdx;
+  let hdbAvg1yCache = null; // avgPsf1y 缓存：index 与 per-block detail 共用，避免每项目算两次
   if (skipHdb && hdbIdxCommitted.length) {
     // 从 committed 重建，但重算 avgPsf1y（MAD 过滤）
     hdbIdx = hdbIdxCommitted.map(x => ({
@@ -393,22 +361,35 @@ async function main() {
     writeJSONIfChanged('hdb-index.json', hdbIdx);
     console.log(`  hdb-index.json (rebuilt + avgPsf1y, ${hdbIdx.length})`);
   } else {
-    hdbIdx = hdbProjects.map(p => ({
-      id: p.id, name: p.name, town: p.town, block: p.block, street: p.street,
-      type: 'HDB', coord: HDB_COORDS[p.id] || null,
-      proximity: HDB_COORDS[p.id] ? proxCache(HDB_COORDS[p.id]) : null,
-      demolished: !HDB_COORDS[p.id],
-      avgPsf: p.stats.avgPsf,
-      avgPsf1y: computeAvg1y(p.transactions, 'month', CUTOFF_HDB),
-      minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
-      totalTxns: p.stats.totalTransactions,
-      dateRange: p.stats.dateRange,
-      years: p.stats.years,
-      flatTypes: p.flatTypes
-    }));
+    // avgPsf1y 每项目只算一次（index 与 per-block detail 共用）
+    const avg1yCache = new Map();
+    hdbIdx = hdbProjects.map(p => {
+      const avg1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
+      avg1yCache.set(p.id, avg1y);
+      return {
+        id: p.id, name: p.name, town: p.town, block: p.block, street: p.street,
+        type: 'HDB', coord: HDB_COORDS[p.id] || null,
+        proximity: HDB_COORDS[p.id] ? proxCache(HDB_COORDS[p.id]) : null,
+        demolished: !HDB_COORDS[p.id],
+        avgPsf: p.stats.avgPsf,
+        avgPsf1y: avg1y,
+        minPsf: p.stats.minPsf, maxPsf: p.stats.maxPsf,
+        totalTxns: p.stats.totalTransactions,
+        dateRange: p.stats.dateRange,
+        years: p.stats.years,
+        flatTypes: p.flatTypes
+      };
+    });
+    hdbAvg1yCache = avg1yCache;
     writeJSONIfChanged('hdb-index.json', hdbIdx);
     console.log(`  hdb-index.json (${hdbIdx.length})`);
   }
+
+  // 5c'. 轻量搜索索引：搜索/地图/对比/HDB 概览用，town 详情才加载完整 hdb-index
+  const hdbSearchIdx = hdbIdx.map(({ id, name, town, street, type, coord, avgPsf, avgPsf1y, totalTxns, years }) =>
+    ({ id, name, town, street, type, coord, avgPsf, avgPsf1y, totalTxns, years }));
+  writeJSONIfChanged('hdb-search-index.json', hdbSearchIdx);
+  console.log(`  hdb-search-index.json (${hdbSearchIdx.length})`);
 
   // 5d. Per-block HDB files (skip when reusing committed artifacts)
   let m = 0;
@@ -416,7 +397,7 @@ async function main() {
     const HDB_DIR = join(DATA, 'hdb');
     mkdir(HDB_DIR);
     for (const p of hdbProjects) {
-      const avg1y = computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
+      const avg1y = hdbAvg1yCache?.get(p.id) ?? computeAvg1y(p.transactions, 'month', CUTOFF_HDB);
       if (writeJSONIfChanged(`hdb/${p.id}.json`, {
         id: p.id, name: p.name, type: 'HDB',
         town: p.town, street: p.street, block: p.block,
@@ -438,14 +419,6 @@ async function main() {
     }
   }
   console.log(`  ${m} HDB block detail files (${skipHdb ? 'skipped — reusing committed' : 'written'})`);
-
-  // 5e. Combined index (URA + HDB)
-  const combinedIdx = [
-    ...idx.map(p => ({ ...p, type: p.type || ecType(p) })),
-    ...hdbIdx
-  ];
-  writeJSONIfChanged('property-index.json', combinedIdx);
-  console.log(`  property-index.json (${combinedIdx.length})`);
 
   // 5f. Districts (URA only, HDB by town instead)
   let dists;

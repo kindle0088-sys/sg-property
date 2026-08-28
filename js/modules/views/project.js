@@ -108,7 +108,8 @@ export async function renderProject(id) {
 
 // ── HDB project detail view ──
 export async function renderHdbProject(id) {
-  const p = state.projectsIndex.find(x => x.id === id) || state.hdbIndex.find(x => x.id === id);
+  const p = state.projectsIndex.find(x => x.id === id)
+    || state.hdbSearchIndex.find(x => x.id === id) || state.hdbIndex.find(x => x.id === id);
   if (!p) { document.getElementById('main').innerHTML = '<div class="error">⚠️ Project not found</div>'; return; }
 
   try {

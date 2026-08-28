@@ -7,7 +7,8 @@
     "fetch-test": "node fetch-ura.js --batch 1",
     "fetch-full": "node fetch-ura.js --full",
     "build": "node build.js",
-    "build:demo": "node build.js --demo"
+    "build:demo": "node build.js --demo",
+    "test": "node --test test/txstats.test.mjs test/hdb-normalize.test.mjs test/ura-tenure.test.mjs"
   },
   "dependencies": {
     "acorn": "^8.18.0",

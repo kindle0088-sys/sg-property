@@ -54,12 +54,29 @@ export function loadHdbIndex() {
   return _hdbPromise;
 }
 
+// 轻量搜索索引（~1MB）：搜索/地图/对比/HDB 概览用，避免拉 6.6MB 完整版
+let _hdbSearchPromise = null;
+export function loadHdbSearchIndex() {
+  if (state.hdbSearchIndex.length) return Promise.resolve(state.hdbSearchIndex);
+  if (!_hdbSearchPromise) {
+    _hdbSearchPromise = fetchJSON('hdb-search-index.json')
+      .then(idx => { state.hdbSearchIndex = idx; return idx; })
+      .catch(err => { _hdbSearchPromise = null; throw err; });
+  }
+  return _hdbSearchPromise;
+}
+
+// 项目详情缓存：翻页走 navigate() 全量重渲染，避免每次翻页重复 fetch 同一 JSON
+const _projectCache = new Map();
 export async function fetchProject(id) {
+  if (_projectCache.has(id)) return _projectCache.get(id);
   // HDB projects are in data/hdb/ directory
   const prefix = id.startsWith('hdb-') ? 'hdb/' : 'projects/';
   const resp = await fetch(`${DATA}${prefix}${id}.json`);
   if (!resp.ok) throw new Error(`Project not found: ${id}`);
-  return resp.json();
+  const json = await resp.json();
+  _projectCache.set(id, json);
+  return json;
 }
 
 export function showLoading() {

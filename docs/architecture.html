@@ -76,7 +76,7 @@
 <ul>
   <li><strong>URA 受地域限制</strong>，必须本地（新加坡 IP）拉取；HDB 用 data.gov.sg 无地域限制。</li>
   <li><strong>构建入口</strong>：<code>scripts/build.js</code>，支持 <code>--skip-hdb</code> / <code>--skip-ura</code> / <code>--fresh</code> 三种模式。</li>
-  <li><strong>产物分类</strong>：楼盘明细（<code>data/projects/*.json</code>）、聚合索引（<code>market-summary</code> / <code>property-index</code>）、HDB 系列（<code>hdb-*.json</code>）。</li>
+  <li><strong>产物分类</strong>：楼盘明细（<code>data/projects/*.json</code>）、聚合索引（<code>market-summary</code>）、HDB 系列（<code>hdb-*.json</code>）。</li>
   <li><strong>展示出口</strong>：GitHub Pages 站点（每日更新）+ <code>reports/</code> 研报（独立发布到 sg-property 仓库）。</li>
 </ul>
 
@@ -105,11 +105,11 @@
   <li>每日 04:00 SGT 触发。</li>
   <li>HDB 增量拉取（<code>_id</code> 锚点 + <code>data/hdb_cache</code> 缓存复用）。</li>
   <li><code>node build.js --skip-ura</code>。</li>
-  <li>仅 <code>hdb*</code> / <code>property-index</code> 等真实变更才 <code>commit</code> → <code>push</code>。</li>
+  <li>仅 <code>hdb*</code> 等真实变更才 <code>commit</code> → <code>push</code>。</li>
 </ol>
 
 <div class="note">
-<strong>冲突风险源</strong>：两条流水线都向 <code>market-summary.json</code> / <code>property-index.json</code> / <code>hdb-index.json</code> 这三个聚合文件写入。历史教训（2026-08-06）：本地脚本原"先 commit 后 pull --rebase"，冲突残留 → 次日构建在 detached HEAD 上 commit，数据永远推不上去。
+<strong>冲突风险源</strong>：两条流水线都向 <code>market-summary.json</code> / <code>hdb-index.json</code> 这两个聚合文件写入。历史教训（2026-08-06）：本地脚本原"先 commit 后 pull --rebase"，冲突残留 → 次日构建在 detached HEAD 上 commit，数据永远推不上去。
 </div>
 
 <h3>对策</h3>

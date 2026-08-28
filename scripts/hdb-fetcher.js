@@ -100,7 +100,7 @@ function parseRemainingLease(text) {
   return m ? parseInt(m[1]) : null;
 }
 
-function normalizeRow(row, hasRemainingLease) {
+export function normalizeRow(row, hasRemainingLease) {
   const price = parseFloat(row.resale_price);
   if (!price || isNaN(price)) return null;
 

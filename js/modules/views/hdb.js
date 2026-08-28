@@ -8,12 +8,12 @@ export function renderHdbDashboard() {
   const sm = state.marketSummary;
   const towns = state.hdbTownsData;
   const townEntries = Object.entries(towns);
-  const hdbCount = state.hdbIndex.length;
-  const hdbTxns = state.hdbIndex.reduce((s, p) => s + (p.totalTxns || 0), 0);
+  const hdbCount = state.hdbSearchIndex.length;
+  const hdbTxns = state.hdbSearchIndex.reduce((s, p) => s + (p.totalTxns || 0), 0);
   const hdbAvg = sm.hdbAvgPsf1y || sm.hdbAvgPsf || 0;
 
   // Town-level aggregates
-  const ys = hdbYearSpan(townsData);
+  const ys = hdbYearSpan(towns);
   const hdbSpan = ys.min ? `${ys.min} - ${ys.max}` : '1990 -';
   const sortedTowns = [...townEntries].sort((a, b) => b[1].totalTransactions - a[1].totalTransactions);
   const rents = state.hdbRentals?.byTown || {};

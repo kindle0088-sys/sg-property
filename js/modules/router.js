@@ -1,6 +1,6 @@
 /* === Router: navigation, routing, tabs, pagination === */
 import { state } from './state.js';
-import { loadData, loadHdbIndex, showLoading } from './data.js';
+import { loadData, loadHdbIndex, loadHdbSearchIndex, showLoading } from './data.js';
 import { setFilter, searchProjects, clearSearch } from './search.js';
 import { renderOverview } from './views/overview.js';
 import { renderPrivateDashboard, renderDistrict } from './views/private.js';
@@ -52,10 +52,12 @@ export async function routeTo(path) {
       document.querySelectorAll('nav a')[navIdx]?.classList.add('nav-active');
     }
 
-    // HDB 索引懒加载：HDB 页 / 市镇 / 地图 / HDB 楼栋详情 / 对比页才拉 7MB 索引
+    // HDB 索引懒加载：town 详情才拉完整 6.6MB 索引；hdb 概览/地图/对比/楼栋详情用轻量 search-index
     const page = p.split('?')[0];
-    if (page === 'hdb' || page === 'town' || page === 'map' || page === 'compare' || (page === 'project' && r[0]?.startsWith('hdb-'))) {
+    if (page === 'town') {
       await loadHdbIndex().catch(() => {});
+    } else if (page === 'hdb' || page === 'map' || page === 'compare' || (page === 'project' && r[0]?.startsWith('hdb-'))) {
+      await loadHdbSearchIndex().catch(() => {});
     }
 
     if (p === 'project' && r[0]) {

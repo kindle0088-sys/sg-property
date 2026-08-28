@@ -4,7 +4,8 @@ export const state = {
   projectsIndex: [],
   districtsData: [],
   marketSummary: null,
-  hdbIndex: [],
+  hdbIndex: [],         // 完整索引（6.6MB，仅 town 详情懒加载）
+  hdbSearchIndex: [],   // 轻量索引（~1MB，搜索/地图/对比/HDB 概览懒加载）
   hdbTownsData: {},
   hdbRentals: null,     // data/hdb-rentals.json（town + 楼栋租金）
   hdbLeaseCurve: null,  // data/hdb-lease-curve.json（剩余租约折价曲线）
@@ -30,6 +31,3 @@ export function setState(patch) {
   Object.assign(state, patch);
 }
 
-export function getHdbIndex() {
-  return state.hdbIndex;
-}

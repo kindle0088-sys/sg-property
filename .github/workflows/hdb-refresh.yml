@@ -44,6 +44,10 @@ jobs:
         working-directory: scripts
         run: npm ci
 
+      - name: Run unit tests
+        working-directory: scripts
+        run: npm test
+
       - name: Run incremental build (active dataset only, ~seconds)
         working-directory: scripts
         run: node build.js --skip-ura
@@ -60,7 +64,7 @@ jobs:
             # 1) core HDB/index files, or
             # 2) market-summary changed beyond its buildTime timestamp
             #    (i.e. URA/HDB aggregate numbers actually moved).
-            REAL=$(git diff --cached --name-only | grep -E 'data/(hdb|hdb-index|hdb-towns|property-index)' || true)
+            REAL=$(git diff --cached --name-only | grep -E 'data/(hdb|hdb-index|hdb-towns)' || true)
             if git diff --cached --name-only | grep -q '^data/market-summary\.json$'; then
               if ! git show HEAD:data/market-summary.json 2>/dev/null | jq -S 'del(.buildTime)' | diff -q - <(jq -S 'del(.buildTime)' data/market-summary.json) >/dev/null 2>&1; then
                 REAL="${REAL} data/market-summary.json"

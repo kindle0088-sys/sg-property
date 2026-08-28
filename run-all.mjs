@@ -206,7 +206,7 @@ async function main() {
   const stagedList = gitOut(['diff', '--cached', '--name-only']).split('\n').map((l) => l.trim()).filter(Boolean);
   let hasDataChange = stagedList.some((l) => {
     return l.startsWith('data/projects') || l.startsWith('data/districts') ||
-           l.startsWith('data/rentals') || l.startsWith('data/property-index');
+           l.startsWith('data/rentals') || l.startsWith('data/hdb');
   });
   if (!hasDataChange && stagedList.includes('data/market-summary.json')) {
     hasDataChange = summaryChangedBeyondBuildTime();

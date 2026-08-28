@@ -1,6 +1,6 @@
 /* === A/B Project Comparison view === */
 import { state } from '../state.js';
-import { loadHdbIndex, fetchProject } from '../data.js';
+import { loadHdbSearchIndex, fetchProject } from '../data.js';
 import { fmtNum, showPsf, psfLabel } from '../utils.js';
 import { renderCompareChart } from '../charts.js';
 
@@ -43,9 +43,9 @@ export function compareSuggest(side, q) {
   if (!el) return;
   const ql = (q || '').trim().toLowerCase();
   if (!ql) { el.innerHTML = ''; el.classList.remove('open'); return; }
-  if (!state.hdbIndex.length) loadHdbIndex().catch(() => {});
+  if (!state.hdbSearchIndex.length) loadHdbSearchIndex().catch(() => {});
 
-  const all = [...state.projectsIndex, ...state.hdbIndex];
+  const all = [...state.projectsIndex, ...state.hdbSearchIndex];
   const hits = all
     .filter(p => (p.name || '').toLowerCase().includes(ql) || (p.street || p.town || '').toLowerCase().includes(ql))
     .slice(0, 8);
@@ -69,7 +69,7 @@ export async function selectCompare(side, id) {
   const key = side === 'a' ? 'A' : 'B';
   const input = document.getElementById('cmp-input-' + key.toLowerCase());
   const suggest = document.getElementById('cmp-suggest-' + key.toLowerCase());
-  const all = [...state.projectsIndex, ...state.hdbIndex];
+  const all = [...state.projectsIndex, ...state.hdbSearchIndex];
   const idx = all.find(x => x.id === id);
   if (!idx) return;
   state.compare[key] = { id, index: idx };

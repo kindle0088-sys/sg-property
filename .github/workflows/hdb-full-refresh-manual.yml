@@ -41,6 +41,10 @@ jobs:
         working-directory: scripts
         run: npm ci
 
+      - name: Run unit tests
+        working-directory: scripts
+        run: npm test
+
       - name: Run full refresh (--fresh pulls all HDB datasets, --skip-ura reuses committed URA)
         working-directory: scripts
         run: node build.js --fresh --skip-ura
@@ -55,7 +59,7 @@ jobs:
           else
             # Same REAL rules as hdb-refresh.yml (core files or real
             # market-summary change beyond buildTime).
-            REAL=$(git diff --cached --name-only | grep -E 'data/(hdb|hdb-index|hdb-towns|property-index)' || true)
+            REAL=$(git diff --cached --name-only | grep -E 'data/(hdb|hdb-index|hdb-towns)' || true)
             if git diff --cached --name-only | grep -q '^data/market-summary\.json$'; then
               if ! git show HEAD:data/market-summary.json 2>/dev/null | jq -S 'del(.buildTime)' | diff -q - <(jq -S 'del(.buildTime)' data/market-summary.json) >/dev/null 2>&1; then
                 REAL="${REAL} data/market-summary.json"

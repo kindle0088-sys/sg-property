@@ -9,7 +9,7 @@ const TYPE_META = {
   HDB:     { color: '#f59e0b', label: 'HDB' }
 };
 
-// 判定项目类型（property-index 已带 type: Private/EC/HDB，兜底判断）
+// 判定项目类型（索引带 type: Private/EC/HDB，兜底判断）
 function mapType(p) {
   if (p.type === 'EC') return 'EC';
   if (p.type === 'HDB') return 'HDB';
@@ -49,7 +49,7 @@ function markerColor(m) {
 
 // ── Map view ──
 export function renderMapView() {
-  const withCoord = [...state.projectsIndex, ...state.hdbIndex].filter(p => p.coord).length;
+  const withCoord = [...state.projectsIndex, ...state.hdbSearchIndex].filter(p => p.coord).length;
   document.getElementById('main').innerHTML = `
     <div class="project-hero">
       <a href="#" onclick="navigate('/private');return false" style="font-size:13px">&larr; Back to Private</a>
@@ -292,7 +292,7 @@ export function renderFullMap() {
   let count = 0;
   const counts = { Private: 0, EC: 0, HDB: 0 };
   let minYear = 9999, maxYear = 0;
-  const all = [...state.projectsIndex, ...state.hdbIndex];
+  const all = [...state.projectsIndex, ...state.hdbSearchIndex];
   all.forEach(p => {
     if (!p.coord) return;
     const type = mapType(p);
