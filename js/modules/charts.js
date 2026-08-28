@@ -247,8 +247,18 @@ export function renderCompareChart(sA, sB, nameA, nameB) {
       },
       scales: {
         x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(42,58,84,0.5)' } },
-        // 共享同一根 y 轴：同为 $PSF，双轴各自缩放会让两条线失去可比性
-        y: { beginAtZero: false, position: 'left', ticks: { color: '#94a3b8', font: { size: 10 }, callback: v => '$' + v }, grid: { color: 'rgba(42,58,84,0.3)' }, title: { display: true, text: 'PSF ($)', color: '#94a3b8', font: { size: 10 } } }
+        // 共享同一缩放：右轴仅镜像左轴刻度（afterBuildTicks 同步），保证两条线可比
+        y: { beginAtZero: false, position: 'left', ticks: { color: '#94a3b8', font: { size: 10 }, callback: v => '$' + v }, grid: { color: 'rgba(42,58,84,0.3)' }, title: { display: true, text: 'PSF ($)', color: '#94a3b8', font: { size: 10 } } },
+        y1: {
+          position: 'right', grid: { drawOnChartArea: false },
+          ticks: { color: '#94a3b8', font: { size: 10 }, callback: v => '$' + v },
+          afterBuildTicks(axis) {
+            const y = axis.chart.scales.y;
+            if (!y || !y.ticks?.length) return;
+            axis.min = y.min; axis.max = y.max;
+            axis.ticks = y.ticks;
+          }
+        }
       }
     }
     });
