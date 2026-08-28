@@ -1,6 +1,6 @@
 /* === HDB dashboard + Town detail views === */
 import { state } from '../state.js';
-import { fmtNum, fmtPrice, slugifyTown, showPsf, psfLabel } from '../utils.js';
+import { fmtNum, fmtPrice, slugifyTown, showPsf, psfLabel, hdbYearSpan } from '../utils.js';
 import { renderLeaseCurveChart } from '../charts.js';
 
 // ── HDB Dashboard view ──
@@ -13,6 +13,8 @@ export function renderHdbDashboard() {
   const hdbAvg = sm.hdbAvgPsf1y || sm.hdbAvgPsf || 0;
 
   // Town-level aggregates
+  const ys = hdbYearSpan(townsData);
+  const hdbSpan = ys.min ? `${ys.min} - ${ys.max}` : '1990 -';
   const sortedTowns = [...townEntries].sort((a, b) => b[1].totalTransactions - a[1].totalTransactions);
   const rents = state.hdbRentals?.byTown || {};
 
@@ -25,7 +27,7 @@ export function renderHdbDashboard() {
         <div class="kpi"><div class="val">${fmtNum(hdbCount)}</div><div class="lbl">Blocks</div></div>
         <div class="kpi"><div class="val">${fmtNum(hdbTxns)}</div><div class="lbl">Transactions</div></div>
         <div class="kpi"><div class="val">$${fmtNum(hdbAvg)}</div><div class="lbl">Avg PSF</div></div>
-        <div class="kpi"><div class="val">1990 - 2026</div><div class="lbl">Data Span</div></div>
+        <div class="kpi"><div class="val">${hdbSpan}</div><div class="lbl">Data Span</div></div>
       </div>
     </div>
 
@@ -39,7 +41,7 @@ export function renderHdbDashboard() {
     <div id="search-results" class="search-results"></div>
 
     ${state.hdbLeaseCurve?.buckets ? `
-    <div class="section-title">剩余租约折价曲线（近 ${state.hdbLeaseCurve.period ? '' : ''}3 年成交 · 全岛中位）</div>
+    <div class="section-title">剩余租约折价曲线（近 3 年成交 · 全岛中位）</div>
     <div class="chart-wrap" style="height:280px"><canvas id="leaseCurveChart"></canvas></div>
     <div class="text-muted" style="font-size:12px;margin:6px 0 18px">HDB 为 99 年租约，剩余年限越短折价越大（Bala's Curve 效应）。未控制地段与房型差异，仅供参考。</div>
     ` : ''}

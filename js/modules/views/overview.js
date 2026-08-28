@@ -1,6 +1,6 @@
 /* === Overview (compact landing) view === */
 import { state } from '../state.js';
-import { fmtNum } from '../utils.js';
+import { fmtNum, hdbYearSpan } from '../utils.js';
 
 export function renderOverview() {
   const sm = state.marketSummary;
@@ -9,6 +9,8 @@ export function renderOverview() {
   const hdbTownsArr = Object.keys(state.hdbTownsData);
   const hdbAvg = sm.hdbAvgPsf1y || sm.hdbAvgPsf || 0;
   const dists = state.districtsData.filter(d => d.projectCount > 0);
+  const ys = hdbYearSpan(state.hdbTownsData);
+  const hdbSpan = ys.min ? `${ys.min}-${ys.max}` : '1990-';
 
   document.getElementById('main').innerHTML = `
     <div class="hero">
@@ -54,7 +56,7 @@ export function renderOverview() {
         <div class="ov-stat"><span class="ov-label">Blocks</span><span class="ov-val">${fmtNum(hdbCount)}</span></div>
         <div class="ov-stat"><span class="ov-label">Transactions</span><span class="ov-val">${fmtNum(hdbTxns)}</span></div>
         <div class="ov-stat"><span class="ov-label">Avg PSF</span><span class="ov-val">$${fmtNum(hdbAvg)}</span></div>
-        <div class="ov-stat"><span class="ov-label">Data Span</span><span class="ov-val">35 years (1990-2026)</span></div>
+        <div class="ov-stat"><span class="ov-label">Data Span</span><span class="ov-val">${hdbSpan} (HDB resale)</span></div>
         <div class="ov-stat"><span class="ov-label">Towns</span><span class="ov-val">${hdbTownsArr.length}</span></div>
         <div class="overview-btn" style="background:linear-gradient(135deg,#22c55e,#15803d)">Explore HDB &rarr;</div>
       </div>

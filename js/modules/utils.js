@@ -58,3 +58,15 @@ export function highlight(text, query) {
   if (idx === -1) return text;
   return text.slice(0, idx) + '<strong style="color:var(--gold)">' + text.slice(idx, idx + query.length) + '</strong>' + text.slice(idx + query.length);
 }
+
+// HDB 数据年份跨度（从 towns 聚合数据推导，避免页面写死过时年份）
+export function hdbYearSpan(townsData) {
+  let min = null, max = null;
+  for (const t of Object.values(townsData || {})) {
+    for (const y of t.years || []) {
+      if (!min || y < min) min = y;
+      if (!max || y > max) max = y;
+    }
+  }
+  return { min, max };
+}

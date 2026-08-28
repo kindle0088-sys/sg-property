@@ -12,16 +12,12 @@ export async function renderProject(id) {
   const t = p.transactions || [];
 
   // Stats
-  const psfArr = t.map(x => x.pricePsf).filter(Boolean);
   const txPage = (state.txPages && state.txPages[p.id]) || 0;
   const pageStart = txPage * PAGE_SIZE;
   const pageRows = t.slice(pageStart, pageStart + PAGE_SIZE);
   const totalPages = Math.ceil(t.length / PAGE_SIZE);
   const byType = {};
-  const byYear = {};
   t.forEach(x => {
-    const yr = (x.sortDate || '').substring(0, 4) || (x.contractDate || '').substring(0, 4);
-    if (yr) { byYear[yr] = (byYear[yr] || 0) + 1; }
     const pt = x.propertyType || 'Unknown';
     if (!byType[pt]) byType[pt] = { count: 0, sumPsf: 0 };
     byType[pt].count++;
@@ -121,21 +117,8 @@ export async function renderHdbProject(id) {
     const st = data.stats;
     const blockRent = state.hdbRentals?.byBlock?.[id];
 
-    // Stats
-    const psfArr = tx.map(x => x.pricePsf).filter(Boolean);
-    const byYear = {};
-    tx.forEach(x => {
-      const yr = (x.month || '').substring(0, 4);
-      if (yr) byYear[yr] = (byYear[yr] || 0) + 1;
-    });
-
     // Pagination
     let currentPage = parseInt(new URLSearchParams(window.location.hash.split('?')[1]).get('page')) || 0;
-
-    function goToPage(page) {
-      currentPage = page;
-      window.navigate('/project/' + id + '?page=' + page);
-    }
 
     function renderTable(page) {
       const start = page * PAGE_SIZE;

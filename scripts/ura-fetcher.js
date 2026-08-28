@@ -33,20 +33,23 @@ let _token = null;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 // URA gateway is flaky from overseas (504 timeouts). Retry with backoff.
+// 4xx (except 429) are permanent — fail fast; 5xx/429/network errors — retry.
 async function fetchWithRetry(url, opts, { retries = 4, baseDelay = 3000, label = 'URA' } = {}) {
   let lastErr;
   for (let i = 0; i < retries; i++) {
     try {
       const resp = await fetch(url, opts);
       if (resp.ok) return resp;
-      // 504 / 5xx are transient — retry; 4xx are permanent — fail fast
       if (resp.status >= 400 && resp.status < 500 && resp.status !== 429) {
-        throw new Error(`${label} failed: ${resp.status}`);
+        // permanent error — mark and rethrow through catch below
+        const err = new Error(`${label} failed: ${resp.status}`);
+        err.permanent = true;
+        throw err;
       }
       lastErr = new Error(`${label} failed: ${resp.status}`);
       console.log(`  ⚠ ${label} ${resp.status} (attempt ${i + 1}/${retries}), retrying in ${baseDelay / 1000}s...`);
     } catch (e) {
-      if (!(e instanceof Error && e.message.startsWith(`${label} failed:`))) throw e; // network error
+      if (e.permanent) throw e;
       lastErr = e;
       console.log(`  ⚠ ${label} network error (attempt ${i + 1}/${retries}), retrying in ${baseDelay / 1000}s...`);
     }

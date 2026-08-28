@@ -111,7 +111,7 @@ function normalizeRow(row, hasRemainingLease) {
   const leaseCommence = parseInt(row.lease_commence_date || row.lease_commencement_date || 0);
   const remainingYears = hasRemainingLease
     ? parseRemainingLease(row.remaining_lease)
-    : (leaseCommence ? Math.max(0, 99 - (parseInt(row.month?.substring(0, 4) || '2026') - leaseCommence)) : null);
+    : (leaseCommence ? Math.max(0, 99 - (parseInt(row.month?.substring(0, 4) || new Date().getFullYear()) - leaseCommence)) : null);
 
   return {
     _id: row._id, // keep upstream row id — incremental anchor for active dataset

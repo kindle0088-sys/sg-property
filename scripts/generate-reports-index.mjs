@@ -94,9 +94,12 @@ for (const r of REPORTS) {
 if (synced) console.log(`synced ${synced} scores from report HTML`);
 if (missingScore.length) console.log('no-score (kept legacy):', missingScore.join(', '));
 
-// 排序稳定化：按 type 分组顺序 + 原序
+// 排序稳定化：按 type 分组顺序 + 原序（先记录原索引——sort 比较器里
+// 调 indexOf 会随数组重排而漂移，导致同类型报告相对顺序被打乱）
 const typeOrder = { condo: 0, ec: 1, hdb: 2 };
-REPORTS.sort((a, b) => typeOrder[a.type] - typeOrder[b.type] || REPORTS.indexOf(a) - REPORTS.indexOf(b));
+REPORTS.forEach((r, i) => { r._origIdx = i; });
+REPORTS.sort((a, b) => typeOrder[a.type] - typeOrder[b.type] || a._origIdx - b._origIdx);
+for (const r of REPORTS) delete r._origIdx;
 
 const avg = (REPORTS.reduce((s, r) => s + (r.score ?? 0), 0) / REPORTS.length).toFixed(2);
 const count = { condo: 0, ec: 0, hdb: 0 };

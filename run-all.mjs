@@ -130,6 +130,23 @@ async function fetchWithRetry() {
   return false;
 }
 
+// ---------- market-summary 实质变更检测 ----------
+// market-summary 由 URA/HDB 聚合而成。若只看核心文件变更，本地月更的 URA
+// 数字变化可能因 CI 无 HDB 实质变更而长期滞留工作区不发布。此处对
+// market-summary 做去 buildTime 的内容级比较：数字动了才算实质变更。
+function summaryChangedBeyondBuildTime() {
+  const strip = (s) => { const o = JSON.parse(s); delete o.buildTime; return JSON.stringify(o); };
+  const oldRes = spawnSync(GIT, ['show', 'HEAD:data/market-summary.json'],
+    { cwd: ROOT, encoding: 'utf8', maxBuffer: 10 * 1024 * 1024, env: makeEnv() });
+  // HEAD 上不存在（首次提交）视为有变化
+  if (oldRes.status !== 0) return true;
+  try {
+    return strip(oldRes.stdout) !== strip(fs.readFileSync(path.join(ROOT, 'data', 'market-summary.json'), 'utf8'));
+  } catch (e) {
+    return true; // 解析失败，保守视为有变化
+  }
+}
+
 // ---------- 主流程 ----------
 async function main() {
   fs.mkdirSync(LOGS, { recursive: true });
@@ -186,12 +203,15 @@ async function main() {
 
   // --- 判断是否有实质数据变更（仅时间戳/聚合变化则跳过 commit）---
   git(['add', 'data/', '.github/']);
-  const staged = gitOut(['diff', '--cached', '--name-only']);
-  const hasDataChange = staged.split('\n').some((l) => {
-    const t = l.trim();
-    return t.startsWith('data/projects') || t.startsWith('data/districts') ||
-           t.startsWith('data/rentals') || t.startsWith('data/property-index');
+  const stagedList = gitOut(['diff', '--cached', '--name-only']).split('\n').map((l) => l.trim()).filter(Boolean);
+  let hasDataChange = stagedList.some((l) => {
+    return l.startsWith('data/projects') || l.startsWith('data/districts') ||
+           l.startsWith('data/rentals') || l.startsWith('data/property-index');
   });
+  if (!hasDataChange && stagedList.includes('data/market-summary.json')) {
+    hasDataChange = summaryChangedBeyondBuildTime();
+    if (hasDataChange) log('market-summary changed beyond buildTime — counting as real change');
+  }
 
   let skipPush = false;
   if (!hasDataChange) {

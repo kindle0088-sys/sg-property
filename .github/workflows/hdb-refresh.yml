@@ -56,9 +56,16 @@ jobs:
           if git diff --cached --quiet; then
             echo "No data changes; skipping commit"
           else
-            # Commit only when real HDB data files changed (not buildTime-only
-            # churn in market-summary/build-meta aggregates).
+            # Commit only when real data changed (not buildTime-only churn):
+            # 1) core HDB/index files, or
+            # 2) market-summary changed beyond its buildTime timestamp
+            #    (i.e. URA/HDB aggregate numbers actually moved).
             REAL=$(git diff --cached --name-only | grep -E 'data/(hdb|hdb-index|hdb-towns|property-index)' || true)
+            if git diff --cached --name-only | grep -q '^data/market-summary\.json$'; then
+              if ! git show HEAD:data/market-summary.json 2>/dev/null | jq -S 'del(.buildTime)' | diff -q - <(jq -S 'del(.buildTime)' data/market-summary.json) >/dev/null 2>&1; then
+                REAL="${REAL} data/market-summary.json"
+              fi
+            fi
             if [ -z "$REAL" ]; then
               echo "Only timestamp/aggregate changes; skipping commit"
               git reset -q
