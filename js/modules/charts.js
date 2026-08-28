@@ -231,26 +231,26 @@ export function renderCompareChart(sA, sB, nameA, nameB) {
       data: {
         labels,
         datasets: [
-          { ...mk(sA, '#fbbf24', nameA), yAxisID: 'y', order: 1 },
-          { ...mk(sB, '#60a5fa', nameB), yAxisID: 'y1', order: 2 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: {
-          legend: { labels: { color: '#94a3b8', font: { size: 11 } } },
-          tooltip: {
-            callbacks: {
-              label: ctx => `${ctx.dataset.label}: $${ctx.parsed.y}`
-            }
+        { ...mk(sA, '#fbbf24', nameA), yAxisID: 'y', order: 1 },
+        { ...mk(sB, '#60a5fa', nameB), yAxisID: 'y', order: 2 }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: {
+        legend: { labels: { color: '#94a3b8', font: { size: 11 } } },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.dataset.label}: $${ctx.parsed.y}`
           }
-        },
-        scales: {
-          x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(42,58,84,0.5)' } },
-          y: { beginAtZero: false, position: 'left', ticks: { color: '#fbbf24', font: { size: 10 }, callback: v => '$' + v }, grid: { color: 'rgba(42,58,84,0.3)' }, title: { display: true, text: 'A (左轴)', color: '#fbbf24', font: { size: 10 } } },
-          y1: { beginAtZero: false, position: 'right', ticks: { color: '#60a5fa', font: { size: 10 }, callback: v => '$' + v }, grid: { display: false }, title: { display: true, text: 'B (右轴)', color: '#60a5fa', font: { size: 10 } } }
         }
+      },
+      scales: {
+        x: { ticks: { color: '#64748b', font: { size: 10 } }, grid: { color: 'rgba(42,58,84,0.5)' } },
+        // 共享同一根 y 轴：同为 $PSF，双轴各自缩放会让两条线失去可比性
+        y: { beginAtZero: false, position: 'left', ticks: { color: '#94a3b8', font: { size: 10 }, callback: v => '$' + v }, grid: { color: 'rgba(42,58,84,0.3)' }, title: { display: true, text: 'PSF ($)', color: '#94a3b8', font: { size: 10 } } }
       }
+    }
     });
   } catch(e) { /* chart fail silently */ }
 }
