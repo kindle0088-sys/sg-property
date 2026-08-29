@@ -32,13 +32,19 @@ jobs:
       - name: Compute cache key
         run: echo "DAY_KEY=$(date +%Y%m%d)" >> $GITHUB_ENV
 
-      - name: Cache HDB raw data (255MB, rolling daily)
-        uses: actions/cache@v6
+      - name: Restore HDB raw data cache (255MB, rolling)
+        uses: actions/cache/restore@v6
         with:
           path: data/hdb_cache
           key: hdb-cache-${{ env.DAY_KEY }}
           restore-keys: |
             hdb-cache-
+
+      # Baseline checksum: only save a new 255MB cache entry when the build
+      # actually pulled new HDB data into data/hdb_cache (otherwise the
+      # 10GB cache quota would fill with identical daily copies).
+      - name: Baseline HDB cache checksum
+        run: find data/hdb_cache -type f 2>/dev/null | sort | xargs sha256sum 2>/dev/null | sha256sum > /tmp/hdb-cache-baseline.txt
 
       - name: Install dependencies
         working-directory: scripts
@@ -51,6 +57,25 @@ jobs:
       - name: Run incremental build (active dataset only, ~seconds)
         working-directory: scripts
         run: node build.js --skip-ura
+
+      - name: Detect new HDB data
+        id: cachecheck
+        run: |
+          NEW=$(find data/hdb_cache -type f 2>/dev/null | sort | xargs sha256sum 2>/dev/null | sha256sum | awk '{print $1}')
+          OLD=$(awk '{print $1}' /tmp/hdb-cache-baseline.txt 2>/dev/null)
+          if [ -n "$NEW" ] && [ "$NEW" != "$OLD" ]; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No new HDB data pulled; skipping cache save"
+          fi
+
+      - name: Save HDB cache
+        if: steps.cachecheck.outputs.changed == 'true'
+        uses: actions/cache/save@v6
+        with:
+          path: data/hdb_cache
+          key: hdb-cache-${{ env.DAY_KEY }}
 
       - name: Commit and push data updates
         run: |
