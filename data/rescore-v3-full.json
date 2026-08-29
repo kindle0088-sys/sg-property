@@ -133,7 +133,47 @@
  },
  {
   "dir": "aurelle-tampines",
-  "note": "CUSTOM_SYSTEM"
+  "type": "EC",
+  "stage": "mop1",
+  "old": [
+   6.5,
+   3,
+   9,
+   8,
+   7,
+   3,
+   5
+  ],
+  "nf": [
+   6.5,
+   3,
+   9,
+   8,
+   7,
+   3,
+   5
+  ],
+  "diff": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "w": [
+   20,
+   8,
+   27,
+   10,
+   10,
+   15,
+   10
+  ],
+  "oldComp": 6.42,
+  "newComp": 6.42,
+  "reportComp": 6.42
  },
  {
   "dir": "austville-residences",
@@ -1061,7 +1101,47 @@
  },
  {
   "dir": "lentor-central",
-  "note": "CUSTOM_SYSTEM"
+  "type": "Private",
+  "stage": "",
+  "old": [
+   7,
+   5,
+   7.5,
+   7,
+   7,
+   7,
+   7
+  ],
+  "nf": [
+   7,
+   5,
+   7.5,
+   7,
+   7,
+   7,
+   7
+  ],
+  "diff": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "w": [
+   20,
+   15,
+   20,
+   10,
+   10,
+   15,
+   10
+  ],
+  "oldComp": 6.8,
+  "newComp": 6.8,
+  "reportComp": 6.8
  },
  {
   "dir": "lumina-grand",
@@ -2473,7 +2553,47 @@
  },
  {
   "dir": "the-terrace",
-  "note": "CUSTOM_SYSTEM"
+  "type": "EC",
+  "stage": "mop2",
+  "old": [
+   7.5,
+   5.5,
+   7,
+   8,
+   7,
+   6.5,
+   6.5
+  ],
+  "nf": [
+   7.5,
+   5.5,
+   7,
+   8,
+   7,
+   6.5,
+   6.5
+  ],
+  "diff": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "w": [
+   20,
+   15,
+   20,
+   10,
+   10,
+   15,
+   10
+  ],
+  "oldComp": 6.85,
+  "newComp": 6.85,
+  "reportComp": 6.85
  },
  {
   "dir": "the-topiary",
@@ -2609,7 +2729,7 @@
  },
  {
   "dir": "the-watergardens-at-canberra",
-  "type": "EC",
+  "type": "Private",
   "stage": "",
   "old": [
    7.5,
@@ -2741,7 +2861,47 @@
  },
  {
   "dir": "twin-waterfalls",
-  "note": "CUSTOM_SYSTEM"
+  "type": "EC",
+  "stage": "privatized",
+  "old": [
+   7,
+   5,
+   7,
+   6.5,
+   6.5,
+   7,
+   8
+  ],
+  "nf": [
+   7,
+   5,
+   7,
+   6.5,
+   6.5,
+   7,
+   8
+  ],
+  "diff": [
+   0,
+   0,
+   0,
+   0,
+   0,
+   0,
+   0
+  ],
+  "w": [
+   20,
+   15,
+   20,
+   10,
+   10,
+   15,
+   10
+  ],
+  "oldComp": 6.7,
+  "newComp": 6.7,
+  "reportComp": 6.7
  },
  {
   "dir": "westmere",
