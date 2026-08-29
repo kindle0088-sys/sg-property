@@ -167,7 +167,7 @@ function render(c, d) {
   <h1>${c.h1}</h1>
   <div class="sub">${c.sub}</div>
   <div class="score-row">
-    <div><span class="score">${c.score.toFixed(1)}</span><div class="score-label">综合评分 / 10</div></div>
+    <div><span class="score">${c.score2.toFixed(2)}</span><div class="score-label">综合评分 / 10</div></div>
     <span class="score-verdict">${c.verdictLabel}</span>
   </div>
   ${metaGrid(c.meta)}

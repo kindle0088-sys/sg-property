@@ -42,13 +42,19 @@ function parseLegacy(html) {
 // 首次迁移：若目标文件仍是旧格式，则解析旧文件取数据；否则读取内嵌 REPORTS
 let REPORTS;
 const existing = readFileSync(OUT, 'utf8');
-const dataM = existing.match(/const REPORTS = (\[[\s\S]*?\]);\n/);
+const dataM = existing.match(/const REPORTS = (\[[\s\S]*?\]);\r?\n/);
 if (dataM) {
   REPORTS = JSON.parse(dataM[1].replace(/,\s*([}\]])/g, '$1'));
   console.log('read', REPORTS.length, 'from embedded data');
 } else {
   REPORTS = parseLegacy(existing);
   console.log('parsed', REPORTS.length, 'from legacy layout');
+}
+
+// 安全网：解析结果为空时禁止覆写 index.html（防止误清空线上卡片）
+if (!REPORTS.length) {
+  console.error('FATAL: 未读取到任何研报数据，中止生成，保留现有 index.html');
+  process.exit(1);
 }
 
 // 手动补区域（原标题缺失）
