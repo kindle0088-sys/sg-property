@@ -2,9 +2,10 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { CONTENTS } from './condo-report-content.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// 研报内容配置：纯数据走 JSON（10 份 condo 研报，公开资料 + 自有 URA 数据交叉验证）
+const CONTENTS = JSON.parse(fs.readFileSync(path.join(__dirname, 'condo-report-content.json'), 'utf8'));
 const root = path.resolve(__dirname, '..');
 const dataDir = path.join(root, 'reports', '_data');
 const outBase = path.join(root, 'reports');
@@ -107,7 +108,7 @@ function dimsHTML(dims) {
       <div class="dim-score">${d.score.toFixed(1)}</div>
       <div>
         <div class="dim-title">${d.title} <span style="font-size:12px;color:var(--text3)">(权重 ${d.weight}%)</span></div>
-        <div class="stars">${stars(d.score)}</div>
+        <div class="stars">${d.stars || stars(d.score)}</div>
       </div>
     </div>
     <p>${d.text}</p>
@@ -246,12 +247,18 @@ function render(c, d) {
   <div class="risk-warn"><b>重点风险：</b>
     <ol style="margin:10px 0 0 18px;font-size:14px">${c.risks.map(r => `<li>${r}</li>`).join('')}</ol>
   </div>
+  <div class="highlight-box" style="margin-top:16px">
+    <b>📋 购买合规（2026 现行）：</b><br>
+    ABSD —— SC 首套 0% / 第二套 20% / 第三套+ 30%；PR 首套 5% / 第二套 30%；外国人 60%（实体/信托 65%）。
+    <br>贷款 —— 银行首套 LTV 75%（第三套+ 55%）；TDSR 全部债务月供 ≤ 月收入 55%。
+    <br>SSD —— 私人住宅持有 ≤3 年出售按 12%/8%/4% 征收，满 3 年 0%。
+  </div>
 </div>
 
 <div class="section">
   <h2>🎯 最终结论</h2>
   <div class="verdict-box">
-    <h3>综合评分 ${c.score.toFixed(1)} / 10 — ${c.verdictLabel}</h3>
+    <h3>综合评分：${c.score2.toFixed(2)} / 10 — ${c.verdictLabel}</h3>
     <p>${c.verdict}</p>
     ${fitHTML(c.fit)}
     <p style="margin-top:16px;font-size:14px;color:var(--text2)"><b style="color:var(--gold)">买入建议：</b>${c.buyAdvice}</p>
