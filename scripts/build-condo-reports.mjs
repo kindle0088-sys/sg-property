@@ -105,7 +105,7 @@ function metaGrid(meta) {
 function dimsHTML(dims) {
   return dims.map(d => `<div class="dim">
     <div class="dim-head">
-      <div class="dim-score">${d.score.toFixed(1)}</div>
+      <div class="dim-score">${d.score.toFixed(2)}</div>
       <div>
         <div class="dim-title">${d.title} <span style="font-size:12px;color:var(--text3)">(权重 ${d.weight}%)</span></div>
         <div class="stars">${d.stars || stars(d.score)}</div>
