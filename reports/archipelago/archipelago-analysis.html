@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Archipelago — 新加坡私宅投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.positive{color:#22c55e}
+.negative{color:#ef4444}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">Condo · 私人公寓 · D16 Bedok Reservoir</div>
+  <h1>Archipelago</h1>
+  <div class="address">501-583 Bedok Reservoir Road · D16 Bedok · 99-Year Leasehold（自 2011 年起）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">7.28</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$1,396</div><div class="lbl">均价 psf</div></div>
+    <div class="kpi"><div class="val">$1,572</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">145</div><div class="lbl">累计交易</div></div>
+    <div class="kpi"><div class="val">577</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Bedok 水库边"度假村式"低密度大盘</strong>——UOL Group 与 Singapore Land Partnership 合资开发（United Venture Development），43 栋最高 5 层、绿化率极高的横向社区，自带后门直通 Bedok Reservoir 公园连道。距 Bedok North MRT（DTL）仅约 460 米，24/7 Sheng Siong 与 FairPrice 就在隔壁，Damai / Bedok West / East Coast 三所小学 1km 内——是 D16 少有的"自然环境 + 生活配套 + 名校圈"兼得的楼盘。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Archipelago 是"水库景观 + 低密度宜居 + 成熟配套"型自住盘。2021 年以来中位价从 $1,225 涨到 $1,614 psf（约 +32%），毛租金回报约 3.5%，稳中有升；但楼龄已 10 年（2015 TOP）、99 年地契消耗 15 年，适合<span class="positive">偏好自然环境与成熟地段的家庭自住 + 稳健长持</span>，短线博价差的空间有限。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">United Venture Development (Bedok) Pte Ltd（UOL Group × Singapore Land Partnership 合资）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">577 套 · 43 栋 · 最高 5 层（低密度横向社区）</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年 Leasehold（自 2011 年起，剩余约 84 年）</div></div>
+    <div class="spec-card"><div class="spec-label">土地规模</div><div class="spec-value">约 491,098 sqft（45,623 sqm）· GFA 63,873 sqm</div></div>
+    <div class="spec-card"><div class="spec-label">TOP</div><div class="spec-value">2015 年 11 月（已满 10 年楼龄）</div></div>
+    <div class="spec-card"><div class="spec-label">建筑设计</div><div class="spec-value">ONG &amp; ONG Pte Ltd · 度假村式景观规划</div></div>
+    <div class="spec-card"><div class="spec-label">买家构成</div><div class="spec-value">SC 77.2% / PR 19.1% / 外国人 3.5%（自住为主）</div></div>
+    <div class="spec-card"><div class="spec-label">物业类型</div><div class="spec-value">Condominium + Strata Semi-detached（大户型混合）</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>成交占比</th></tr>
+    <tr><td>1 Bedroom</td><td>527 - 667</td><td>约 19%</td></tr>
+    <tr><td>2 Bedroom</td><td>829 - 950</td><td>约 26%</td></tr>
+    <tr><td>3 Bedroom</td><td>980 - 1,184</td><td>约 21%</td></tr>
+    <tr><td>4 Bedroom / 3BR 大户型</td><td>1,184 - 1,432</td><td>约 7%</td></tr>
+    <tr><td>Strata Semi-D / 大户型</td><td>1,539 - 3,099+（最大成交 4,413）</td><td>约 27%</td></tr>
+  </table>
+  <p style="color:#94a3b8;font-size:13px">▶ 33 种户型方案（Type A-PH），1 至 5 房 + 顶层公寓全覆盖；近 1/4 为超大户型（Strata Semi-D），拉低整体 psf 均价但抬高单价总价门槛。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m + 30m 双泳池 + Fun Pool</div>
+    <div class="facility-tag"><span class="icon">🛁</span> Jacuzzi / Hot Tubs / Steam Room</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房 + Aqua Gym 水疗健身</div>
+    <div class="facility-tag"><span class="icon">🏃</span> 慢跑径 + 健身站</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ 烧烤台 + Party Deck</div>
+    <div class="facility-tag"><span class="icon">🏠</span> 主会所 + 多功能厅</div>
+    <div class="facility-tag"><span class="icon">🛝</span> 儿童游乐场 + Play Lawn</div>
+    <div class="facility-tag"><span class="icon">🌳</span> Bio-Pond + 森林步道 + 香草园</div>
+    <div class="facility-tag"><span class="icon">🚗</span> 地下停车场（含 EV 充电桩）</div>
+    <div class="facility-tag"><span class="icon">🔒</span> 24 小时保安</div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>Bedok North MRT（DT29）约 460 米 / 步行 5-6 分钟</strong>；Bedok Reservoir（DT30）约 1.4km；Kaki Bukit（DT28）约 1.3km</td></tr>
+    <tr><td>🚗 快速路</td><td>PIE 出入口近在咫尺，驾车约 20-30 分钟到 CBD，15 分钟到 Changi Airport</td></tr>
+    <tr><td>🏫 学校</td><td>1km 内：<strong>Damai Primary（0.3km）、Bedok West Primary（0.27km）、East Coast Primary（0.97km）</strong>；NPS International 0.88km；Red Swastika 约 1.6km</td></tr>
+    <tr><td>🛍️ 商圈</td><td>24/7 Sheng Siong 与 FairPrice 紧邻社区入口；Guardian / McDonald's / Refuel 咖啡等步行可达；Bedok Mall + 巴士总站车程 10 分钟</td></tr>
+    <tr><td>🌳 自然</td><td><strong>背靠 87 公顷 Bedok Reservoir 公园 + 4.5km 公园连道</strong>，后门直达；Outdoor Play Corridor 连接东海岸</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">6.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · OCR + DTL 地铁 460m + 1km 内 3 所小学（+0.5）</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">5.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:55%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 毛回报约 3.5%（EdgeProp），D16 中位月租 $3,300-5,600 随户型</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">8.00 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 20% · 2021 $1,225 → 2026 $1,614 psf，5 年约 +32%</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">9.00 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · UOL 顶级上市开发商背书，交付质量口碑良好</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">7.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:75%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 低层社区管理费适中；自住为主税负轻；无 ABSD/SSD 窗口风险</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">7.00 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:70%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 15% · 近 12 个月 31 笔成交，Bedok 成熟地段承接力好</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">8.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:85%"></div></div><p style="font-size:13px;color:#94a3b8;margin-top:8px">权重 10% · 私宅无 MOP/ABSD/SSD 锁定（SSD 3 年已过），地契剩余 84 年充足</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：7.28 / 10</strong> —— 加权计算（6.5×20% + 5.5×15% + 8.0×20% + 9.0×10% + 7.5×10% + 7.0×15% + 8.5×10%）。增值与开发商是强项，租金回报与地段处于中等——"住着舒服、涨得稳、赚得不快"的成熟自住盘画像。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>年份</th><th>交易数</th><th>中位价 psf</th><th>环比</th></tr>
+    <tr><td>2021</td><td>18</td><td>$1,225</td><td>—</td></tr>
+    <tr><td>2022</td><td>33</td><td>$1,322</td><td class="num-green">+7.9%</td></tr>
+    <tr><td>2023</td><td>19</td><td>$1,460</td><td class="num-green">+10.4%</td></tr>
+    <tr><td>2024</td><td>29</td><td>$1,520</td><td class="num-green">+4.1%</td></tr>
+    <tr><td>2025</td><td>25</td><td>$1,595</td><td class="num-green">+4.9%</td></tr>
+    <tr><td>2026（至今）</td><td>21</td><td>$1,614</td><td class="num-green">+1.2%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：</strong>5 年累计约 +32%（年化约 5.7%），2021-2023 是主升浪（+7.9%/+10.4%），2024 年起涨幅收窄至 4-5%，2026 年回落到 +1.2%——价格进入平台期，短期追涨空间有限。近 12 个月中位 psf 约 $1,595，最低成交 $1,252、最高 $1,786（2026-02，829 sqft 2 房）。作为参照，D16 整体次新私宅中位约 $1,700-1,800 psf，Archipelago 因楼龄 + 大户型占比高存在约 10-15% 折价，属合理定价区间。
+  </div>
+  <p style="color:#94a3b8;font-size:13px">※ 数据来源：URA REALIS 私人住宅交易（2021-08 至 2026-07），本地管道聚合 145 笔；转售占比约 2/3（近 12 个月 31 笔以转售为主）。</p>
+</section>
+
+<!-- 政策与合规说明 -->
+<section>
+  <div class="section-title">📋 政策与合规说明</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2011</div><div class="tl-detail">地契起算（99 年）· United Venture Development 中标开发</div></div>
+    <div class="tl-item"><div class="tl-year">2015-11</div><div class="tl-detail">TOP 竣工，次年起陆续入伙</div></div>
+    <div class="tl-item"><div class="tl-year">2018-11</div><div class="tl-detail">SSD（3 年）窗口届满 → 转售无额外税负</div></div>
+    <div class="tl-item"><div class="tl-year">2026-08</div><div class="tl-detail">当前节点：剩余地契约 84 年，可自由转售 / 出租（无 MOP 限制）</div></div>
+  </div>
+  <table>
+    <tr><th>约束</th><th>说明</th></tr>
+    <tr><td>买家资格</td><td>私宅无国籍 / 身份限制，外国人可购（但须缴 ABSD 60%）</td></tr>
+    <tr><td>ABSD</td><td>SC 首套 0% / 二套 20% / 三套+ 30%；PR 首套 5%；外国人 60%</td></tr>
+    <tr><td>SSD</td><td>已过 3 年持有期，当前无转售印花税约束</td></tr>
+    <tr><td>贷款约束</td><td>银行房贷 LTV 最高 75%，受 TDSR 55% 约束（非 EC 的 MSR）</td></tr>
+    <tr><td>地契衰减</td><td>99 年地契自 2011 年计，剩余约 84 年；至剩余 60 年时贷款 / CPF 使用受限（约 2051 年）</td></tr>
+    <tr><td>物业税</td><td>自住按 Owner-Occupier 累进税率（AV 首 $8,000 免税）；出租按非自住税率</td></tr>
+  </table>
+</section>
+
+<!-- 居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"住在这里 6 年半了。后门直达水库公园，几个泳池 + 按摩浴缸 + 健身房 + 会所 + 烧烤台，整个小区绿得像公园，散步还能听到水库的鸟叫。24/7 的 Sheng Siong 和 FairPrice 就在隔壁，Refuel 咖啡、日料店都在转角——自然和便利居然能兼得。"</div>
+    <div class="review-source">— Google Review（1 年前，6.5 年住户）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面评价</div>
+    <div class="review-quote">"绿色低密度度假式居住，背靠 Bedok Reservoir。小区维护得不错，景观绿化很好，保安很友好。孩子可以在社区里安全玩耍，离 Bedok North MRT 步行可达，学校选择也多。"</div>
+    <div class="review-source">— SingaporeExpats 住户评分 4.8/5（2018）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面评价</div>
+    <div class="review-quote">"建筑质量没有达到预期——雨季部分单位卧室、厨房有渗水问题；临 Bedok Reservoir Road 的单位有灰尘困扰。另外除了泳池，孩子的活动空间不算特别丰富。"</div>
+    <div class="review-source">— Google Review（2 年前住户）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性观察</div>
+    <div class="review-quote">"Archipelago 有 43 栋但最高只有 5 层，单位朝向差异大：靠水库的单位有景观溢价，靠马路的单位受噪音灰尘影响。买二手房务必实地看朝向，同小区价差可达 20%+。大户型（Strata Semi-D）挂牌周期普遍较长。"</div>
+    <div class="review-source">— EdgeProp 评论区 + 中介反馈汇总</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.2/5）</strong> —— 环境、配套、社区氛围是公认亮点；交付质量零星扣分（渗水/灰尘个案），选房时认准水库朝向、避开临街单位即可。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>地契消耗</td><td class="num-yellow" style="color:#eab308">中</td><td>99 年地契已消耗 15 年（剩 84 年），40 年后贷款 / CPF 使用将受限</td></tr>
+    <tr><td>楼龄老化</td><td class="num-yellow" style="color:#eab308">中</td><td>2015 TOP 已 10 年，渗水 / 设施维护成本将逐年上升</td></tr>
+    <tr><td>大户型流动性</td><td class="num-yellow" style="color:#eab308">中</td><td>Strata Semi-D 总价高、买家池窄，挂牌周期长</td></tr>
+    <tr><td>临街干扰</td><td class="num-yellow" style="color:#eab308">中低</td><td>Bedok Reservoir Road 沿线单位有噪音与灰尘问题</td></tr>
+    <tr><td>涨幅收窄</td><td class="num-yellow" style="color:#eab308">中低</td><td>2026 年环比仅 +1.2%，进入平台期，短线价差空间有限</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>追求自然环境 + 成熟配套 + 名校圈的大家庭首选。$1,4xx-$1,6xx psf 在 D16 买到水库景观低密度大盘，性价比突出；地铁 460 米 + 三所小学 1km + 超市便利店贴身，生活品质有保证。选房策略：优先水库朝向中高楼层。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>毛回报约 3.5%（D16 中位月租 $3,300-5,600），增值年化约 5.7% 稳中有升，出租需求以 Bedok 成熟社区家庭租客为主，空置风险低。适合稳健型长持（7-10 年）；短期转售博价差不划算（楼龄 + 地契消耗 + 涨幅收窄）。1BR/2BR 小户型出租流动性最好。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>对建筑质量零容忍者（先查渗水记录）、依赖短期高杠杆炒作者、以及要求"新盘 + 满额地契"的买家——这类需求更适合看 2020 年后新 TOP 的次新盘。
+  </div>
+</section>
+
+<footer>
+  Archipelago Investment Analysis · 基于 URA REALIS 交易数据 + EdgeProp / 99.co / SingaporeExpats 公开信息 · 生成于 2026-09-01
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。数据截至 2026 年 7 月。</div>
+</footer>
+
+</div>
+</body>
+</html>
