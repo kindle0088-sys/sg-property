@@ -27,7 +27,7 @@ const BUILD_OUT = path.join(LOGS, 'build-output.log');
 const ERROR_LOG = path.join(LOGS, 'build-error.log');
 
 // 计划任务环境 PATH 不可靠，全部用绝对路径
-const NODE = 'C:/Users/jiali/.workbuddy/binaries/node/versions/22.22.2/node.exe';
+const NODE = 'C:/Users/jiali/.workbuddy/binaries/node/versions/22.22.2-2/node.exe';
 const GIT = 'C:/Users/jiali/.workbuddy/binaries/PortableGit/versions/1.2.0/mingw64/bin/git.exe';
 const GH = 'C:/Program Files/GitHub CLI/gh.exe';
 const GIT_BIN_DIR = path.dirname(GIT);
@@ -95,7 +95,7 @@ function writeStatus(status, commit, pushed) {
 
 // ---------- 依赖自愈：node_modules 缺失/不完整时自动 npm ci ----------
 // 2026-08-16：月更构建曾因 scripts/node_modules 丢失（proj4 不可解析）而 BUILD FAILED。
-const NPM_CLI = 'C:/Users/jiali/.workbuddy/binaries/node/versions/22.22.2/node_modules/npm/bin/npm-cli.js';
+const NPM_CLI = 'C:/Users/jiali/.workbuddy/binaries/node/versions/22.22.2-2/node_modules/npm/bin/npm-cli.js';
 
 // 需要存在的关键依赖（node_modules 完整性的最小探针）
 const REQUIRED_DEPS = ['proj4', 'node-fetch', 'acorn', 'csv-parse'];
@@ -218,6 +218,9 @@ async function main() {
     log('Only timestamp/aggregate changes; skipping commit');
     skipPush = true;
     git(['reset', '-q']);
+    // 还原 build 改动的工作区文件，避免 timestamp-only 变更残留为 modified，
+    // 脏工作区会挡掉下次 fetch 后的 merge --ff-only（2026-09-03 教训）
+    git(['checkout', '--', 'data/', '.github/']);
   } else {
     const commitStatus = git(['-c', `user.name=${COMMIT_USER}`, '-c', `user.email=${COMMIT_EMAIL}`,
       'commit', '-m', 'chore: monthly URA data build']);
