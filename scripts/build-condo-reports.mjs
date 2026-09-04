@@ -83,11 +83,20 @@ function yoyCell(y) {
   return `<td class="num ${cls}">${sign}${y.toFixed(1)}%</td>`;
 }
 
-function priceTable(ph) {
+const MONTHS = { Jan: 1, Feb: 2, Mar: 3, Apr: 4, May: 5, Jun: 6, Jul: 7, Aug: 8, Sep: 9, Oct: 10, Nov: 11, Dec: 12 };
+
+function lastMonthLabel(fmtLastDate) {
+  // fmtLastDate 形如 "Aug 2026"
+  const m = MONTHS[(fmtLastDate || '').slice(0, 3)] || 12;
+  const y = (fmtLastDate || '').slice(-4);
+  return { m, y };
+}
+
+function priceTable(ph, fmtLastDate) {
   const last = ph[ph.length - 1];
-  const label = `2026 (至${last.year === '2026' ? '7' : '12'}月)`;
+  const { m } = lastMonthLabel(fmtLastDate);
   const rows = ph.map(r => {
-    const yLabel = r.year === '2026' ? '2026 (至7月)' : r.year;
+    const yLabel = r.year === last.year ? `${r.year} (至${m}月)` : r.year;
     return `<tr><td>${yLabel}</td><td class="num">${r.n}</td><td class="num">$${r.avgPsf.toLocaleString()}</td>${yoyCell(r.yoy)}</tr>`;
   }).join('\n');
   return `<div class="card"><table><thead><tr><th>年份</th><th>成交数</th><th>均价 PSF</th><th>同比</th></tr></thead><tbody>${rows}</tbody></table>
@@ -222,7 +231,7 @@ function render(c, d) {
 
 <div class="section">
   <h2>📈 价格走势与区域对比</h2>
-  ${priceTable(d.priceHistory)}
+  ${priceTable(d.priceHistory, d.fmtLastDate)}
   <div class="grid2" style="margin-top:16px">
     <div class="card">
       <h3>🏙️ ${c.compTitle}</h3>
@@ -266,7 +275,7 @@ function render(c, d) {
 </div>
 
 <div class="disclaimer">
-  <b>免责声明：</b>本报告基于公开数据（URA、EdgeProp、99.co、PropertyGuru、BCA 等）与自有 dashboard 交叉验证整理，仅供投资参考，不构成买卖建议。房地产市场受政策、利率、宏观经济影响波动较大，请结合自身财务状况独立决策。数据截至 2026-07-31。
+  <b>免责声明：</b>本报告基于公开数据（URA、EdgeProp、99.co、PropertyGuru、BCA 等）与自有 dashboard 交叉验证整理，仅供投资参考，不构成买卖建议。房地产市场受政策、利率、宏观经济影响波动较大，请结合自身财务状况独立决策。数据截至 ${d.fmtLastDate}。
 </div>
 
 </div>

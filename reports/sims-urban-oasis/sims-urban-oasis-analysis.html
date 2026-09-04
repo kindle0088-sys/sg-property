@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sims Urban Oasis — D14 Aljunied RCR GuocoLand 品质通勤盘深度投资分析</title>
+<style>:root{--bg:#0b1120;--card:#1e293b;--card2:#273449;--gold:#fbbf24;--blue:#60a5fa;--green:#22c55e;--red:#ef4444;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+.hero{background:linear-gradient(135deg,#0f172a,#1e293b 60%,#3b2f1a);border:1px solid #334155;border-radius:16px;padding:36px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero .tag{display:inline-block;background:rgba(251,191,36,.15);color:var(--gold);border:1px solid rgba(251,191,36,.4);padding:3px 12px;border-radius:20px;font-size:12px;margin-bottom:14px}
+.hero h1{font-size:30px;font-weight:700;margin-bottom:6px}
+.hero .sub{color:var(--text2);font-size:14px;margin-bottom:16px}
+.hero .score-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hero .score{font-size:52px;font-weight:800;color:var(--gold)}
+.hero .score-label{font-size:13px;color:var(--text2)}
+.hero .score-verdict{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.4);color:#86efac;padding:6px 16px;border-radius:8px;font-weight:600}
+.hero .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:22px}
+.hero .meta-grid .m{background:rgba(15,23,42,.6);border:1px solid #334155;border-radius:10px;padding:10px 14px}
+.hero .meta-grid .m .k{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+.hero .meta-grid .m .v{font-size:15px;font-weight:600;color:var(--text);margin-top:2px}
+.section{margin-top:34px}
+.section h2{font-size:21px;font-weight:700;color:var(--gold);border-left:4px solid var(--gold);padding-left:12px;margin-bottom:16px}
+.highlight-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.35);border-radius:12px;padding:16px 20px;margin:14px 0;font-size:14px}
+.highlight-box b{color:var(--gold)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 20px}
+.card h3{font-size:16px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card p{font-size:14px;color:var(--text2)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}
+th{background:var(--card2);color:var(--gold);font-weight:600;text-align:left;padding:10px 12px;font-size:13px}
+td{padding:9px 12px;border-bottom:1px solid #334155}
+tr:hover td{background:rgba(51,65,85,.25)}
+.num{font-variant-numeric:tabular-nums}
+.num-green{color:#6ee7b7}
+.num-red{color:#fca5a5}
+.dim{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 22px;margin-bottom:16px}
+.dim-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.dim-score{font-size:34px;font-weight:800;color:var(--gold);min-width:64px;text-align:center}
+.dim-title{font-size:17px;font-weight:700}
+.dim-weight{font-size:12px;color:var(--text3)}
+.stars{color:var(--gold);letter-spacing:2px;font-size:13px}
+.fac-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fac-tags span{background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:var(--blue);padding:4px 12px;border-radius:20px;font-size:12px}
+.fac-tags span.ok{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.4);color:#86efac}
+.fac-tags span.miss{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35);color:#fca5a5}
+.quote{background:var(--card2);border-left:3px solid var(--blue);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;color:var(--text2)}
+.quote b{color:var(--text)}
+.quote .src{display:block;font-size:12px;color:var(--text3);margin-top:6px}
+.risk-warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.4);border-radius:12px;padding:16px 20px;margin:14px 0}
+.risk-warn b{color:#fca5a5}
+.verdict-box{background:linear-gradient(135deg,#1e293b,#273449);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:24px 28px;margin-top:18px}
+.verdict-box h3{color:var(--gold);margin-bottom:12px;font-size:18px}
+.verdict-box .fit{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.verdict-box .fit div{flex:1;min-width:200px;background:rgba(15,23,42,.5);border-radius:10px;padding:14px 16px}
+.verdict-box .fit .fit-yes b{color:#86efac}
+.verdict-box .fit .fit-no b{color:#fca5a5}
+.disclaimer{margin-top:40px;padding-top:20px;border-top:1px solid #334155;font-size:12px;color:var(--text3)}
+.back-link{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--blue);text-decoration:none}
+.back-link:hover{text-decoration:underline}
+.pct-up{color:#fca5a5}
+.pct-down{color:#6ee7b7}
+@media(max-width:768px){.grid2,.grid3{grid-template-columns:1fr}.hero h1{font-size:24px}.hero .score{font-size:40px}}</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back-link" href="../">← 返回研报索引</a>
+
+<div class="hero">
+  <span class="tag">D14 Aljunied · RCR 城市边缘 · 99年地契</span>
+  <h1>Sims Urban Oasis</h1>
+  <div class="sub">2-16 Sims Drive, Singapore · 1,024 户 · TOP 2017 · GuocoLand 开发</div>
+  <div class="score-row">
+    <div><span class="score">7.32</span><div class="score-label">综合评分 / 10</div></div>
+    <span class="score-verdict">✅ 可考虑 — 顶级开发商品质 + 双 MRT 通勤盘</span>
+  </div>
+  <div class="meta-grid"><div class="m"><div class="k">地契</div><div class="v">99 年 (2014起)</div></div><div class="m"><div class="k">总单位</div><div class="v">1,024 套</div></div><div class="m"><div class="k">楼栋</div><div class="v">8 座 (12-25层)</div></div><div class="m"><div class="k">最近 MRT</div><div class="v">Aljunied 步行 ~406m</div></div><div class="m"><div class="k">成交均价</div><div class="v">$1,941 psf (近1年)</div></div><div class="m"><div class="k">1km 学校</div><div class="v">2 所小学</div></div></div>
+</div>
+
+<div class="section">
+  <h2>📌 执行摘要</h2>
+  <div class="highlight-box"><b>一句话结论：</b>Sims Urban Oasis 是 GuocoLand 在 Aljunied 的 1,024 户中型大盘，2014 年 GLS 地块、2017 年 TOP，是五个研究对象里<b>楼龄最成熟、开发商背书最强</b>的（顶级上市档 9 分）。近一年转售均价 <b>$1,941 psf</b>——比同区 Parc Esta 便宜 16%，买的是 Aljunied MRT 406 米 + Paya Lebar 区域中心步行圈 + 双 50 米泳池的均衡配置。短板：加权毛回报约 2.8% 与同区一样被老旧租金存量稀释，物业费 $290-327/月 是五盘中唯一进 $300+ 档的，且 2014 年起算的地契比其余四盘少 4 年。<b>自住 7.5 分、投资 7 分。</b></div>
+</div>
+
+<div class="section">
+  <h2>🏗️ 项目核心参数</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>📐 基本信息</h3>
+      <table>
+        <tr><td>开发商</td><td class="num">GuocoLand Limited（国浩地产）</td></tr><tr><td>地块来源</td><td class="num">2014 年 GLS 政府售地</td></tr><tr><td>容积率</td><td class="num">2.8</td></tr><tr><td>土地性质</td><td class="num">99 年地契（2014 起）</td></tr><tr><td>TOP</td><td class="num">2017-10</td></tr><tr><td>规模</td><td class="num">1,024 户 + 6 商铺 + 托儿所</td></tr><tr><td>总包</td><td class="num">—</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🏢 楼栋与户型</h3>
+      <table>
+        <tr><td>楼栋</td><td class="num">8 座塔楼（12-25 层）</td></tr><tr><td>户型</td><td class="num">1房 ~ 5房（部分顶层 4.3m 挑高 + loft）</td></tr><tr><td>车位</td><td class="num">地库充足（含商业/托儿所配套）</td></tr>
+        <tr><td>2房 (700-1000sqft)</td><td class="num">91 笔 (27%)</td></tr>
+<tr><td>1房 (~<700sqft)</td><td class="num">184 笔 (54%)</td></tr>
+<tr><td>4房+ (>1350sqft)</td><td class="num">9 笔 (3%)</td></tr>
+<tr><td>3房 (1000-1350sqft)</td><td class="num">56 笔 (16%)</td></tr>
+      </table>
+      <p style="font-size:11px;color:var(--text3);margin-top:6px">户型分布按成交面积分桶估算，仅供参考。</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>🎪 配套设施</h3>
+    <div class="fac-tags"><span class="ok">双 50m 标准泳池（共 4 个泳池）</span><span class="ok">屋顶空中公园（Sky Park）</span><span class="ok">网球场 + 健身房</span><span class="ok">会所 + 商务中心 + 多功能室</span><span class="ok">慢跑道 + 烧烤区 + 游乐场</span><span class="ok">小区内设托儿所 + 6 间商铺</span><span class="ok">20 万 sqft 公共空间</span></div>
+    <p style="margin-top:12px;font-size:13px;color:var(--text2)">GuocoLand 把做 Wallich Residence 的景观功力下放到了中端盘：双 50 米泳池 + 屋顶空中公园 + 20 万 sqft 公共空间，交付 8 年后公区维护状态仍是同楼龄标杆（第三方 7.9/10）。MCST 月费约 $290-327，是五盘中唯一站上 $300+ 档的——为品质付的合理溢价。</p>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🚇 交通与通勤</h3>
+      <table><tr><td>Aljunied MRT (EW9)</td><td class="num">步行 ~406m（6-8 分钟，部分有遮蔽）</td></tr><tr><td>Paya Lebar 换乘 (EW/CC)</td><td class="num">1 站</td></tr><tr><td>Mountbatten MRT (CC7)</td><td class="num">步行 ~15 分钟</td></tr><tr><td>CBD (Raffles Place)</td><td class="num">MRT 直达 <10 分钟</td></tr><tr><td>PIE / KPE / Nicoll Hwy</td><td class="num">5 分钟车程</td></tr></table>
+    </div>
+    <div class="card">
+      <h3>🏫 教育（1km 内 5 所）</h3>
+      <table><tr><td>Geylang Methodist (Primary)</td><td class="num">~0.6km</td></tr><tr><td>Canossa Catholic Primary</td><td class="num">1km 内</td></tr><tr><td>Geylang Methodist (Sec)</td><td class="num">~0.7km</td></tr><tr><td>James Cook University</td><td class="num">~1.2km</td></tr><tr><td>Nexus International</td><td class="num">步行圈</td></tr></table>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📊 七维评分</h2>
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.00</div>
+      <div>
+        <div class="dim-title">🗺️ 地段 Location <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>RCR 基础 7 分；MRT 406m 以 6 米之差错过 ≤400m 的 +1 档，但 1km 内 2 所小学 +0.5 → 7.5；再按同区同分规则（与 Parc Esta 同属 D14、MRT 距离差 228m≤250m）取同档较高分 = 8 分。Aljunied-Paya Lebar 是东区通勤效率最高的走廊之一，PLQ 办公+商圈步行可达，EWL 直达 CBD 无需换乘。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">3.80</div>
+      <div>
+        <div class="dim-title">💰 租金回报 Rental Yield <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★½☆☆☆☆☆☆</div>
+      </div>
+    </div>
+    <p>分户型加权毛回报约 2.81%：1房 2.92%（中位价 $1.19M / 月租 $2,900）、2房 2.52%、3房 2.68%。锚点公式 3.8 分。注意口径差异：D14 租金中位数含大量 Geylang 老旧公寓，第三方用本盘真实租约算得约 3.9%（1房 $3,210、2房 $3,907）——本盘实际租值显著高于片区中位，但按框架机械口径记 3.8 分并在文字中说明。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">7.00</div>
+      <div>
+        <div class="dim-title">📈 资本增值 Appreciation <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★★★☆☆☆</div>
+      </div>
+    </div>
+    <p>2021→2026 均价 $1,622→$1,952 psf，年化约 3.8% → 锚点 7 分（2-4% 档，逼近 4%）。逐年节奏健康（2024 +6.3% 最强）。前瞻：Paya Lebar 区域中心利好已大部兑现，无新增重大基建，不加减。2014 年起算的地契比同期新盘少约 4 年，长线持有需纳入折旧曲线考量。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">9.00</div>
+      <div>
+        <div class="dim-title">🏗️ 开发商信誉 Developer <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★★★★☆</div>
+      </div>
+    </div>
+    <p>GuocoLand 属顶级上市档（9 分）：Wallich Residence、Leedon Residence 等高端交付记录，资金与品控体系成熟。交付 8 年后公区维护与二手口碑依然在线，是五盘中唯一「楼龄越长越能证明品质」的样本。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">7.00</div>
+      <div>
+        <div class="dim-title">💵 持有成本 Holding Cost <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★★☆☆☆</div>
+      </div>
+    </div>
+    <p>MCST 月费约 $290-327（3房约 $290-327，大户型更高），落入 $300-500 档 → 锚点 7 分。1,024 户摊薄力度不及 1,400+ 户级别对手，但换来了更高的公区人均密度与维护品质，属合理的品质溢价。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">9.00</div>
+      <div>
+        <div class="dim-title">🔄 退出流动性 Exit Liquidity <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★★★★★★★☆</div>
+      </div>
+    </div>
+    <p>近 12 个月转售 61 笔（>50 → 9 分），且是五盘中唯一 100% 现楼转售的项目——成交结构最干净（无楼花换手噪音），每一笔都是真实二手供需。1房占 54%，$1.1-1.9M 总价带正对专业人士与升级者预算。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.00</div>
+      <div>
+        <div class="dim-title">🛡️ 风险控制 Risk <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>二手现楼、无政策窗口 → 锚点 8。地契剩约 87 年（2014 起算），比其余四盘少 4 年但仍远离 60 年融资红线。租客池深厚（PLQ 办公群 + CBD 通勤）降低空置风险；利率敏感性为标准敞口。</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📈 价格走势与区域对比</h2>
+  <div class="card"><table><thead><tr><th>年份</th><th>成交数</th><th>均价 PSF</th><th>同比</th></tr></thead><tbody><tr><td>2021</td><td class="num">20</td><td class="num">$1,622</td><td class="num">—</td></tr>
+<tr><td>2022</td><td class="num">91</td><td class="num">$1,665</td><td class="num pct-up">+2.7%</td></tr>
+<tr><td>2023</td><td class="num">54</td><td class="num">$1,742</td><td class="num pct-up">+4.6%</td></tr>
+<tr><td>2024</td><td class="num">60</td><td class="num">$1,852</td><td class="num pct-up">+6.3%</td></tr>
+<tr><td>2025</td><td class="num">77</td><td class="num">$1,908</td><td class="num pct-up">+3.0%</td></tr>
+<tr><td>2026 (至8月)</td><td class="num">38</td><td class="num">$1,952</td><td class="num pct-up">+2.3%</td></tr></tbody></table>
+  <p style="font-size:12px;color:var(--text3)">数据源：URA PMI_Resi_Transaction（经自有 dashboard 交叉验证）</p></div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🏙️ D14 同区可比项目（近1年均价）</h3>
+      <table><thead><tr><th>项目</th><th>地契</th><th>均价 PSF</th></tr></thead><tbody><tr><td><b>Sims Urban Oasis（本盘）</b></td><td>99年 (2014)</td><td class="num" style="color:var(--gold)"><b>$1,941</b></td></tr>
+<tr><td>Parc Esta</td><td>99年 (2018)</td><td class="num">$2,317</td></tr>
+<tr><td>Park Place Residences @ PLQ</td><td>99年</td><td class="num">$2,262</td></tr>
+<tr><td>Penrose</td><td>99年</td><td class="num">$2,154</td></tr>
+<tr><td>Urban Treasures</td><td>永久</td><td class="num">$1,978</td></tr></tbody></table>
+      <p style="font-size:12px;color:var(--text3);margin-top:8px">本盘比 Parc Esta 便宜 16%、比永久地契的 Urban Treasures 还低 2%——楼龄多 5 年换来的折价，对看重 GuocoLand 品质与成熟社区的买家是性价比入口。数据源：URA。</p>
+    </div>
+    <div class="card">
+    <h3>🧾 交易画像</h3>
+    <table>
+      <tbody>
+        <tr><td>总成交</td><td class="num">340 笔 (Sep 2021 - Aug 2026)</td></tr>
+        <tr><td>现楼转售</td><td class="num">340 笔 (100%)</td></tr>
+        <tr><td>历史最高价</td><td class="num">$3.05M ($2272 psf)</td></tr>
+        <tr><td>历史最低价</td><td class="num">$700K ($1371 psf)</td></tr>
+        <tr><td>最高成交</td><td class="num">$3.05M · 2034 sqft · Jul 2024</td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🏡 真实居住体验</h2>
+  <div class="quote"><b>"双 50 米泳池、设备齐全的健身房、社交会所、儿童游乐区、全景屋顶空中公园——超过 20 万 sqft 的公共空间，让住户有地方透气，这在这种体量的项目里很难得。"</b><span class="src">👍 ShiokNest 项目评测 (7.9/10), 2026</span></div>
+<div class="quote"><b>"EWL 一线直达 City Hall、Raffles Place、Tanjong Pagar，不开车也能真通勤；Mountbatten 环线站步行 15 分钟是第二选择，比只靠 Aljunied 的 Geylang 项目多一条腿。"</b><span class="src">👍 ShiokNest 项目评测, 2026</span></div>
+<div class="quote"><b>"租约结构明显偏向紧凑户型——1-2 房占租约大头，意味着租客以单身专业人士与合租为主，换手更频繁；如果你买来自己住、希望邻居稳定，这一点要有预期。"</b><span class="src">👎 ShiokNest 租约结构分析, 2026</span></div>
+<div class="quote"><b>"Geylang 片区的夜间氛围与刻板印象是部分家庭买家的心理门槛；项目本身在 Sims Drive 内侧，与闹区有缓冲，但片区标签仍影响部分转售买家池。"</b><span class="src">⚠️ 市场共识 / 片区分析</span></div>
+  <div class="highlight-box" style="margin-top:16px">
+    <b>居住体验综合评级：★★★★☆ (4.0/5)</b><br>
+    交付 8 年后的 Sims Urban Oasis 是「时间验证过」的盘：公区维护、通勤效率、开发商口碑全部在线，第三方给到 7.9/10。负面集中在两处：租客换手频繁带来的邻居流动感（1-2 房投资者占比高的必然结果），以及 Geylang 片区标签对家庭买家的心理影响。自住建议选 3 房以上自住率高的楼栋；投资则享受它深厚的租客池。
+  </div>
+</div>
+
+<div class="section">
+  <h2>⚠️ 风险提示</h2>
+  <div class="risk-warn"><b>重点风险：</b>
+    <ol style="margin:10px 0 0 18px;font-size:14px"><li>加权毛回报约 2.8%（机械口径），依赖本盘真实租值（约 3.9%）才有投资意义，买入价纪律必须严格</li><li>2014 年起算地契比次新盘少 4 年，超长线（20 年+）持有的折旧曲线略陡</li><li>租客换手率高 → 邻居流动性大，纯自住买家需选楼栋选户型规避</li><li>Geylang 片区标签长期压制部分家庭买家池</li><li>MCST $300+ 档，五盘中持有成本最高（品质溢价，但收租现金流需计入）</li></ol>
+  </div>
+  <div class="highlight-box" style="margin-top:16px">
+    <b>📋 购买合规（2026 现行）：</b><br>
+    ABSD —— SC 首套 0% / 第二套 20% / 第三套+ 30%；PR 首套 5% / 第二套 30%；外国人 60%（实体/信托 65%）。
+    <br>贷款 —— 银行首套 LTV 75%（第三套+ 55%）；TDSR 全部债务月供 ≤ 月收入 55%。
+    <br>SSD —— 私人住宅持有 ≤3 年出售按 12%/8%/4% 征收，满 3 年 0%。
+  </div>
+</div>
+
+<div class="section">
+  <h2>🎯 最终结论</h2>
+  <div class="verdict-box">
+    <h3>综合评分：7.32 / 10 — ✅ 可考虑 — 顶级开发商品质 + 双 MRT 通勤盘</h3>
+    <p>Sims Urban Oasis 是「均衡派」：地段 8、开发商 9、流动性 9，没有一项短板掉进 5 分以下——代价也没有一项惊喜（回报 3.8、增值 7）。它比 Parc Esta 便宜 16%，用楼龄和 4 年地契换 GuocoLand 的品质确定性，对计划持有 10 年左右的买家是划算交易。综合 7.32 分居「可考虑」区间：不是让人兴奋的选择，但很难买错。</p>
+    <div class="fit">
+    <div class="fit-yes"><b>✅ 适合：</b><br>看重开发商品质与社区成熟度的自住家庭<br>CBD/PLQ 通勤族（EWL 直达 + 环线备选）<br>预算 $1.1-1.9M 的专业人士首套私宅<br>信任真实租值（~3.9%）的 1-2 房收租投资者<br></div>
+    <div class="fit-no"><b>❌ 不适合：</b><br>追求最低物业费的长线持有者<br>对 Geylang 片区标签敏感的家庭<br>希望邻居以自住家庭为主的买家（1-2 房楼栋）<br>博短期价差的新盘偏好者<br></div>
+  </div>
+    <p style="margin-top:16px;font-size:14px;color:var(--text2)"><b style="color:var(--gold)">买入建议：</b>优先中高层内园景 2-3 房（自住率与转手纵深最好）；与 Parc Esta 比价是本盘核心谈判逻辑——折价维持在 15% 左右属合理，折价收窄到 10% 以内则说明报价偏高；验房重点查 8 年楼龄的空调/厨卫设备更换状态。</p>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <b>免责声明：</b>本报告基于公开数据（URA、EdgeProp、99.co、PropertyGuru、BCA 等）与自有 dashboard 交叉验证整理，仅供投资参考，不构成买卖建议。房地产市场受政策、利率、宏观经济影响波动较大，请结合自身财务状况独立决策。数据截至 Aug 2026。
+</div>
+
+</div>
+</body>
+</html>

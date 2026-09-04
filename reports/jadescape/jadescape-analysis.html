@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jadescape — D20 Bishan-Marymount RCR 智能家居大盘深度投资分析</title>
+<style>:root{--bg:#0b1120;--card:#1e293b;--card2:#273449;--gold:#fbbf24;--blue:#60a5fa;--green:#22c55e;--red:#ef4444;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+.hero{background:linear-gradient(135deg,#0f172a,#1e293b 60%,#3b2f1a);border:1px solid #334155;border-radius:16px;padding:36px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero .tag{display:inline-block;background:rgba(251,191,36,.15);color:var(--gold);border:1px solid rgba(251,191,36,.4);padding:3px 12px;border-radius:20px;font-size:12px;margin-bottom:14px}
+.hero h1{font-size:30px;font-weight:700;margin-bottom:6px}
+.hero .sub{color:var(--text2);font-size:14px;margin-bottom:16px}
+.hero .score-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hero .score{font-size:52px;font-weight:800;color:var(--gold)}
+.hero .score-label{font-size:13px;color:var(--text2)}
+.hero .score-verdict{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.4);color:#86efac;padding:6px 16px;border-radius:8px;font-weight:600}
+.hero .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:22px}
+.hero .meta-grid .m{background:rgba(15,23,42,.6);border:1px solid #334155;border-radius:10px;padding:10px 14px}
+.hero .meta-grid .m .k{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+.hero .meta-grid .m .v{font-size:15px;font-weight:600;color:var(--text);margin-top:2px}
+.section{margin-top:34px}
+.section h2{font-size:21px;font-weight:700;color:var(--gold);border-left:4px solid var(--gold);padding-left:12px;margin-bottom:16px}
+.highlight-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.35);border-radius:12px;padding:16px 20px;margin:14px 0;font-size:14px}
+.highlight-box b{color:var(--gold)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 20px}
+.card h3{font-size:16px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card p{font-size:14px;color:var(--text2)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}
+th{background:var(--card2);color:var(--gold);font-weight:600;text-align:left;padding:10px 12px;font-size:13px}
+td{padding:9px 12px;border-bottom:1px solid #334155}
+tr:hover td{background:rgba(51,65,85,.25)}
+.num{font-variant-numeric:tabular-nums}
+.num-green{color:#6ee7b7}
+.num-red{color:#fca5a5}
+.dim{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 22px;margin-bottom:16px}
+.dim-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.dim-score{font-size:34px;font-weight:800;color:var(--gold);min-width:64px;text-align:center}
+.dim-title{font-size:17px;font-weight:700}
+.dim-weight{font-size:12px;color:var(--text3)}
+.stars{color:var(--gold);letter-spacing:2px;font-size:13px}
+.fac-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fac-tags span{background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:var(--blue);padding:4px 12px;border-radius:20px;font-size:12px}
+.fac-tags span.ok{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.4);color:#86efac}
+.fac-tags span.miss{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35);color:#fca5a5}
+.quote{background:var(--card2);border-left:3px solid var(--blue);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;color:var(--text2)}
+.quote b{color:var(--text)}
+.quote .src{display:block;font-size:12px;color:var(--text3);margin-top:6px}
+.risk-warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.4);border-radius:12px;padding:16px 20px;margin:14px 0}
+.risk-warn b{color:#fca5a5}
+.verdict-box{background:linear-gradient(135deg,#1e293b,#273449);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:24px 28px;margin-top:18px}
+.verdict-box h3{color:var(--gold);margin-bottom:12px;font-size:18px}
+.verdict-box .fit{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.verdict-box .fit div{flex:1;min-width:200px;background:rgba(15,23,42,.5);border-radius:10px;padding:14px 16px}
+.verdict-box .fit .fit-yes b{color:#86efac}
+.verdict-box .fit .fit-no b{color:#fca5a5}
+.disclaimer{margin-top:40px;padding-top:20px;border-top:1px solid #334155;font-size:12px;color:var(--text3)}
+.back-link{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--blue);text-decoration:none}
+.back-link:hover{text-decoration:underline}
+.pct-up{color:#fca5a5}
+.pct-down{color:#6ee7b7}
+@media(max-width:768px){.grid2,.grid3{grid-template-columns:1fr}.hero h1{font-size:24px}.hero .score{font-size:40px}}</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back-link" href="../">← 返回研报索引</a>
+
+<div class="hero">
+  <span class="tag">D20 Bishan/Thomson · RCR 城市边缘 · 99年地契</span>
+  <h1>Jadescape</h1>
+  <div class="sub">2-16 Shunfu Road, Singapore · 1,206 户 · TOP 2023 · Qingjian Realty 开发</div>
+  <div class="score-row">
+    <div><span class="score">7.27</span><div class="score-label">综合评分 / 10</div></div>
+    <span class="score-verdict">⚠️ 可考虑 — 地段增值亮眼，交付品质需验收把关</span>
+  </div>
+  <div class="meta-grid"><div class="m"><div class="k">地契</div><div class="v">99 年 (2018起)</div></div><div class="m"><div class="k">总单位</div><div class="v">1,206 套</div></div><div class="m"><div class="k">楼栋</div><div class="v">7 栋 (21-23层)</div></div><div class="m"><div class="k">最近 MRT</div><div class="v">Marymount 步行 ~371m</div></div><div class="m"><div class="k">成交均价</div><div class="v">$2,318 psf (近1年)</div></div><div class="m"><div class="k">学校</div><div class="v">Catholic High 0.75km</div></div></div>
+</div>
+
+<div class="section">
+  <h2>📌 执行摘要</h2>
+  <div class="highlight-box"><b>一句话结论：</b>Jadescape 是 Bishan-Marymount 板块的 1,206 户智能家居住宅，前身 Shunfu Ville HUDC 集售（$6.38 亿，当年最大宗）。近一年转售均价 <b>$2,318 psf</b>，2021→2026 年化涨幅约 <b>5.2%</b> 为五盘最高，2024 年 72+ 笔转售据称全部获利。地段硬实力强：Marymount MRT 371 米、Catholic High 0.75km、RI/RGS 2km 圈。但硬币反面同样醒目：<b>交付品质投诉集中</b>（白蚁、室内用料廉价、瓷砖易刮花、物业管理响应慢），开发商维度被机械扣至 4.5 分；加权毛回报仅约 2.8%。<b>自住 7 分、投资 6.5 分。</b></div>
+</div>
+
+<div class="section">
+  <h2>🏗️ 项目核心参数</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>📐 基本信息</h3>
+      <table>
+        <tr><td>开发商</td><td class="num">Qingjian Realty (Marymount) Pte Ltd</td></tr><tr><td>地块面积</td><td class="num">~398,114 sqft</td></tr><tr><td>土地成本</td><td class="num">$747 psf ppr（2016 集售 $638M）</td></tr><tr><td>土地性质</td><td class="num">99 年地契（2018-06-19 起）</td></tr><tr><td>TOP</td><td class="num">2023-01</td></tr><tr><td>建筑师</td><td class="num">Tange Associates × Ong&Ong</td></tr><tr><td>总包</td><td class="num">China Construction (South Pacific)</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🏢 楼栋与户型</h3>
+      <table>
+        <tr><td>楼栋</td><td class="num">7 栋（21-23 层）</td></tr><tr><td>户型</td><td class="num">1房 527 sqft 起 ~ 5房 2,099 sqft（另 6 商铺）</td></tr><tr><td>车位</td><td class="num">1,206 + 8 无障碍</td></tr>
+        <tr><td>4房+ (>1350sqft)</td><td class="num">42 笔 (12%)</td></tr>
+<tr><td>2房 (700-1000sqft)</td><td class="num">154 笔 (44%)</td></tr>
+<tr><td>3房 (1000-1350sqft)</td><td class="num">63 笔 (18%)</td></tr>
+<tr><td>1房 (~<700sqft)</td><td class="num">88 笔 (25%)</td></tr>
+      </table>
+      <p style="font-size:11px;color:var(--text3);margin-top:6px">户型分布按成交面积分桶估算，仅供参考。</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>🎪 配套设施</h3>
+    <div class="fac-tags"><span class="ok">50m 无边际泳池 + 50m 天际泳池</span><span class="ok">下沉式网球场 ×2</span><span class="ok">双健身房 + 山顶健身房</span><span class="ok">桑拿 + 蒸汽房 + 水疗</span><span class="ok">影院/KTV + 虚拟高尔夫</span><span class="ok">13层空中露台 + 儿童探险乐园</span><span class="ok">全屋智能家居（人脸门禁/HiLIFE App）</span></div>
+    <p style="margin-top:12px;font-size:13px;color:var(--text2)">100+ 项设施 + 全新加坡首个全屋智能家居概念（面部识别、二维码访客、HiLIFE 物业 App），硬件规格在 RCR 大盘里数一数二，并拿下 EdgeProp 2023 唯一 Top Mega Development 奖。但要警惕：设施光环与交付用料口碑存在落差（见居住体验章节）。MCST 1房 $233、2-3房 $280、4房 $326、5房 $373/月。</p>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🚇 交通与通勤</h3>
+      <table><tr><td>Marymount MRT (CC16)</td><td class="num">步行 ~371m（4-5 分钟）</td></tr><tr><td>Bishan 换乘 (NS/CC)</td><td class="num">1 站</td></tr><tr><td>Upper Thomson MRT (TEL)</td><td class="num">~0.76km</td></tr><tr><td>CTE / PIE</td><td class="num">数分钟接入</td></tr><tr><td>未来 NSC 南北交通廊道</td><td class="num">2027+</td></tr></table>
+    </div>
+    <div class="card">
+      <h3>🏫 教育（1km 内 5 所）</h3>
+      <table><tr><td>Catholic High School</td><td class="num">0.75km</td></tr><tr><td>Ai Tong School</td><td class="num">1.16km</td></tr><tr><td>Raffles Institution</td><td class="num">2km 内</td></tr><tr><td>Raffles Girls' School</td><td class="num">2km 内</td></tr><tr><td>Guangyang Primary</td><td class="num">1.37km</td></tr></table>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📊 七维评分</h2>
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.00</div>
+      <div>
+        <div class="dim-title">🗺️ 地段 Location <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>RCR 基础 7 分 + MRT 371m（≤400m +1）= 8 分。Bishan-Marymount 是中部最成熟居住带之一：Shunfu 巴刹正对门、Thomson 美食带、MacRitchie 水库步行可达，1 站到 Bishan 换乘南北线。学校数据口径提示：本所 pipeline 的 1km 小学清单为空（故无 +0.5 加成），但公开口径 Catholic High 距 0.75km、RI/RGS 在 2km 圈——学区实际是加分项，按机械口径保守计 8 分。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">3.80</div>
+      <div>
+        <div class="dim-title">💰 租金回报 Rental Yield <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★½☆☆☆☆☆☆</div>
+      </div>
+    </div>
+    <p>分户型加权毛回报约 2.77%：1房 3.59%（中位价 $1.07M / 月租 $3,200）、2房 2.70%、3房 2.13%。锚点公式 3+(2.77-2.0)=3.8 分。第三方口径约 3.2%（新净溢价）。3 房以上户型买入价已站上 $2.9M，收租逻辑不成立；只有 1 房适合收租。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.00</div>
+      <div>
+        <div class="dim-title">📈 资本增值 Appreciation <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>2021→2026 均价 $1,799→$2,315 psf，年化约 5.2% → 锚点 8 分（>4% 档）。2023 单年 +11.2% 是 TOP 兑现段；2024 年 72+ 笔转售全部获利（第三方统计），获利盘一致性极强。前瞻无新增 MRT 利好（Marymount 已通车、NSC 为道路工程不计），维持 8 分。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">4.50</div>
+      <div>
+        <div class="dim-title">🏗️ 开发商信誉 Developer <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★½☆☆☆☆☆</div>
+      </div>
+    </div>
+    <p>Qingjian Realty 属中型档（5-6 分，Bellewoods/Bellewaters 曾获 BCA CONQUAS Star 是亮点），但按框架硬规则「有 defect 集体投诉记录 −1」：本项目交付后出现白蚁反复、室内用料与瓷砖易损等业主集中投诉（PropertyGuru 多条低分评价 + 管理响应慢），机械扣减后 4.5 分——这是五盘中开发商维度最低分，也是本报告最重要的风险提示。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">9.00</div>
+      <div>
+        <div class="dim-title">💵 持有成本 Holding Cost <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★★★★☆</div>
+      </div>
+    </div>
+    <p>MCST 月费 1房 $233 / 2-3房 $280 / 4房 $326 / 5房 $373，主力户型 <$300 → 锚点 9 分。1,206 户分摊 + 智能家居降低部分管理人力，持有成本健康。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">9.00</div>
+      <div>
+        <div class="dim-title">🔄 退出流动性 Exit Liquidity <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★★★★★★★☆</div>
+      </div>
+    </div>
+    <p>近 12 个月转售 70 笔（>50 → 9 分）。更难得的是获利一致性——2024 年以来转售据称全数获利，说明二手接盘价稳步抬升、卖方无割肉压力。1-2 房占成交 67%，$1.0-1.8M 总价带流动性最好；4 房以上（$2.9M+）换手明显变慢。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.00</div>
+      <div>
+        <div class="dim-title">🛡️ 风险控制 Risk <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>二手现楼、无政策窗口 → 锚点 8。地契剩约 91 年。本维度的政策/杠杆/合规口径下无额外扣分项；交付品质问题按框架归入居住体验与开发商维度，不在此重复扣减——但买家应知：defect 纠纷若长期未决，会间接影响二手议价。</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📈 价格走势与区域对比</h2>
+  <div class="card"><table><thead><tr><th>年份</th><th>成交数</th><th>均价 PSF</th><th>同比</th></tr></thead><tbody><tr><td>2021</td><td class="num">20</td><td class="num">$1,799</td><td class="num">—</td></tr>
+<tr><td>2022</td><td class="num">38</td><td class="num">$1,915</td><td class="num pct-up">+6.4%</td></tr>
+<tr><td>2023</td><td class="num">62</td><td class="num">$2,130</td><td class="num pct-up">+11.2%</td></tr>
+<tr><td>2024</td><td class="num">85</td><td class="num">$2,172</td><td class="num pct-up">+2.0%</td></tr>
+<tr><td>2025</td><td class="num">103</td><td class="num">$2,289</td><td class="num pct-up">+5.4%</td></tr>
+<tr><td>2026 (至8月)</td><td class="num">39</td><td class="num">$2,315</td><td class="num pct-up">+1.1%</td></tr></tbody></table>
+  <p style="font-size:12px;color:var(--text3)">数据源：URA PMI_Resi_Transaction（经自有 dashboard 交叉验证）</p></div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🏙️ D20 同区可比项目（近1年均价）</h3>
+      <table><thead><tr><th>项目</th><th>地契</th><th>均价 PSF</th></tr></thead><tbody><tr><td><b>Jadescape（本盘）</b></td><td>99年 (2018)</td><td class="num" style="color:var(--gold)"><b>$2,318</b></td></tr>
+<tr><td>AMO Residence</td><td>99年</td><td class="num">$2,515</td></tr>
+<tr><td>Sky Vue</td><td>99年</td><td class="num">$2,203</td></tr>
+<tr><td>Thomson Three</td><td>99年</td><td class="num">$2,118</td></tr>
+<tr><td>The Panorama</td><td>99年</td><td class="num">$2,084</td></tr></tbody></table>
+      <p style="font-size:12px;color:var(--text3);margin-top:8px">本盘比 Bishan 核心的 Sky Vue 贵 5%、比 AMO Residence（新盘余量）便宜 8%，是板块内「次核心、次新、近地铁」的标准定价。Thomson Three/Panorama 楼龄差距约 5-10 年，折价 9-10% 属正常楼龄曲线。数据源：URA。</p>
+    </div>
+    <div class="card">
+    <h3>🧾 交易画像</h3>
+    <table>
+      <tbody>
+        <tr><td>总成交</td><td class="num">347 笔 (Sep 2021 - Aug 2026)</td></tr>
+        <tr><td>现楼转售</td><td class="num">243 笔 (70%)</td></tr><tr><td>楼花转售</td><td class="num">78 笔 (22.5%)</td></tr><tr><td>新售</td><td class="num">26 笔 (7.5%)</td></tr>
+        <tr><td>历史最高价</td><td class="num">$10.15M ($2653 psf)</td></tr>
+        <tr><td>历史最低价</td><td class="num">$948K ($1561 psf)</td></tr>
+        <tr><td>最高成交</td><td class="num">$10.15M · 4230 sqft · Dec 2024</td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🏡 真实居住体验</h2>
+  <div class="quote"><b>"Mega development 里室内设施最全的：大健身房媲美商业健身房，泳池与凉亭设计出色，选址也极佳——对面就是巴刹，几分钟走到 Marymount MRT。"</b><span class="src">👍 PropertyGuru 业主评价 (5分), 2023-07</span></div>
+<div class="quote"><b>"Google 4.4 分（97 条）：小区里有 7-11 和理发店很方便，绿化和泳池很棒，智能门禁对讲系统很有安全感。"</b><span class="src">👍 Google Reviews 汇总, 2025</span></div>
+<div class="quote"><b>"白蚁问题失控、多个单位出现；室内用料廉价不耐用，瓷砖超级容易刮花；管理方处理白蚁毫无紧迫感。"</b><span class="src">👎 PropertyGuru 业主评价 (1.3分/1.2分), 2023-04 ~ 2024-05</span></div>
+<div class="quote"><b>"1,206 户密度高，朝快速路方向的单元会有路噪；没有大型商场在步行圈内（最近 Thomson Plaza 1.2km）。"</b><span class="src">⚠️ Noam Nathan 评测汇总 / 市场共识</span></div>
+  <div class="highlight-box" style="margin-top:16px">
+    <b>居住体验综合评级：★★★☆☆ (3.5/5)</b><br>
+    评价呈明显两极：设施、地段、智能系统几乎零差评（EdgeProp 大奖背书）；但交付用料与物业管理是集中火力区——白蚁、瓷砖刮花、维修响应慢被多名业主点名。这不是结构性烂尾级问题，却实实在在影响居住体验与二手看房印象。买二手务必实地验房（重点：地板瓷砖、墙角渗水、询问白蚁处理记录），并把 MCST 管理状态问清。
+  </div>
+</div>
+
+<div class="section">
+  <h2>⚠️ 风险提示</h2>
+  <div class="risk-warn"><b>重点风险：</b>
+    <ol style="margin:10px 0 0 18px;font-size:14px"><li>交付品质投诉集中（白蚁/用料/物业响应），二手看房印象分受损，议价时既是风险也是筹码</li><li>加权毛回报仅约 2.8%，3 房以上总价段（$2.9M+）收租逻辑不成立</li><li>1,206 户高密度 + 板块内无大型商场，租客更偏好 AMK/Bishan 站周边（第三方评测观点）</li><li>2024 年转售全获利意味着当前买家入场成本已抬升，短期安全边际变薄</li><li>朝快速路单元路噪 + 高密度，部分户型居住体验打折</li></ol>
+  </div>
+  <div class="highlight-box" style="margin-top:16px">
+    <b>📋 购买合规（2026 现行）：</b><br>
+    ABSD —— SC 首套 0% / 第二套 20% / 第三套+ 30%；PR 首套 5% / 第二套 30%；外国人 60%（实体/信托 65%）。
+    <br>贷款 —— 银行首套 LTV 75%（第三套+ 55%）；TDSR 全部债务月供 ≤ 月收入 55%。
+    <br>SSD —— 私人住宅持有 ≤3 年出售按 12%/8%/4% 征收，满 3 年 0%。
+  </div>
+</div>
+
+<div class="section">
+  <h2>🎯 最终结论</h2>
+  <div class="verdict-box">
+    <h3>综合评分：7.27 / 10 — ⚠️ 可考虑 — 地段增值亮眼，交付品质需验收把关</h3>
+    <p>Jadescape 是五盘里「反差感」最强的：5.2% 年化涨幅第一、设施规格第一、地段 8 分——但开发商维度 4.5 分也是第一（倒数）。它适合的是「会验房、重地段、买 1-2 房」的精明买家：用投诉噪音换来的议价空间，买入一个基本面（地段+流动性+学区）其实很强的盘。综合 7.27 分落「可考虑」区间——分数被开发商维度机械拉低，若你相信 defect 问题会随 MCST 成熟而消化，实际风险低于纸面。</p>
+    <div class="fit">
+    <div class="fit-yes"><b>✅ 适合：</b><br>看重中部地段 + 学区的自住家庭（Catholic High/RI 圈）<br>会验房、善用负面信息议价的精明买家<br>1 房收租投资者（3.6% 回报 + 近地铁）<br>智能家居/设施密度爱好者<br></div>
+    <div class="fit-no"><b>❌ 不适合：</b><br>对交付品质零容忍的买家<br>追求省心物业管理的业主<br>3 房以上大户型收租投资者（回报 2.1%）<br>需要大型商场步行可达的家庭<br></div>
+  </div>
+    <p style="margin-top:16px;font-size:14px;color:var(--text2)"><b style="color:var(--gold)">买入建议：</b>只买 1-2 房（流动性与回报唯一成立的户型段）；看房必查白蚁处理记录、瓷砖/地板损耗与渗水痕迹，把验房发现折算进报价（当前市场普遍有 2-4% 议价空间）；优先内园景或中高层避开路噪单元。</p>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <b>免责声明：</b>本报告基于公开数据（URA、EdgeProp、99.co、PropertyGuru、BCA 等）与自有 dashboard 交叉验证整理，仅供投资参考，不构成买卖建议。房地产市场受政策、利率、宏观经济影响波动较大，请结合自身财务状况独立决策。数据截至 Aug 2026。
+</div>
+
+</div>
+</body>
+</html>

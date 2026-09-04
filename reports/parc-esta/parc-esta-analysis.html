@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parc Esta — D14 Eunos RCR 地铁口大盘深度投资分析</title>
+<style>:root{--bg:#0b1120;--card:#1e293b;--card2:#273449;--gold:#fbbf24;--blue:#60a5fa;--green:#22c55e;--red:#ef4444;--text:#e2e8f0;--text2:#94a3b8;--text3:#64748b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.7}
+.wrap{max-width:980px;margin:0 auto;padding:28px 20px 60px}
+.hero{background:linear-gradient(135deg,#0f172a,#1e293b 60%,#3b2f1a);border:1px solid #334155;border-radius:16px;padding:36px 32px;margin-bottom:24px;position:relative;overflow:hidden}
+.hero .tag{display:inline-block;background:rgba(251,191,36,.15);color:var(--gold);border:1px solid rgba(251,191,36,.4);padding:3px 12px;border-radius:20px;font-size:12px;margin-bottom:14px}
+.hero h1{font-size:30px;font-weight:700;margin-bottom:6px}
+.hero .sub{color:var(--text2);font-size:14px;margin-bottom:16px}
+.hero .score-row{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+.hero .score{font-size:52px;font-weight:800;color:var(--gold)}
+.hero .score-label{font-size:13px;color:var(--text2)}
+.hero .score-verdict{background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.4);color:#86efac;padding:6px 16px;border-radius:8px;font-weight:600}
+.hero .meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:22px}
+.hero .meta-grid .m{background:rgba(15,23,42,.6);border:1px solid #334155;border-radius:10px;padding:10px 14px}
+.hero .meta-grid .m .k{font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px}
+.hero .meta-grid .m .v{font-size:15px;font-weight:600;color:var(--text);margin-top:2px}
+.section{margin-top:34px}
+.section h2{font-size:21px;font-weight:700;color:var(--gold);border-left:4px solid var(--gold);padding-left:12px;margin-bottom:16px}
+.highlight-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.35);border-radius:12px;padding:16px 20px;margin:14px 0;font-size:14px}
+.highlight-box b{color:var(--gold)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.card{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 20px}
+.card h3{font-size:16px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.card p{font-size:14px;color:var(--text2)}
+table{width:100%;border-collapse:collapse;font-size:14px;margin:12px 0}
+th{background:var(--card2);color:var(--gold);font-weight:600;text-align:left;padding:10px 12px;font-size:13px}
+td{padding:9px 12px;border-bottom:1px solid #334155}
+tr:hover td{background:rgba(51,65,85,.25)}
+.num{font-variant-numeric:tabular-nums}
+.num-green{color:#6ee7b7}
+.num-red{color:#fca5a5}
+.dim{background:var(--card);border:1px solid #334155;border-radius:12px;padding:18px 22px;margin-bottom:16px}
+.dim-head{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.dim-score{font-size:34px;font-weight:800;color:var(--gold);min-width:64px;text-align:center}
+.dim-title{font-size:17px;font-weight:700}
+.dim-weight{font-size:12px;color:var(--text3)}
+.stars{color:var(--gold);letter-spacing:2px;font-size:13px}
+.fac-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.fac-tags span{background:rgba(96,165,250,.12);border:1px solid rgba(96,165,250,.35);color:var(--blue);padding:4px 12px;border-radius:20px;font-size:12px}
+.fac-tags span.ok{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.4);color:#86efac}
+.fac-tags span.miss{background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.35);color:#fca5a5}
+.quote{background:var(--card2);border-left:3px solid var(--blue);border-radius:8px;padding:12px 16px;margin:10px 0;font-size:14px;color:var(--text2)}
+.quote b{color:var(--text)}
+.quote .src{display:block;font-size:12px;color:var(--text3);margin-top:6px}
+.risk-warn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.4);border-radius:12px;padding:16px 20px;margin:14px 0}
+.risk-warn b{color:#fca5a5}
+.verdict-box{background:linear-gradient(135deg,#1e293b,#273449);border:1px solid rgba(251,191,36,.3);border-radius:14px;padding:24px 28px;margin-top:18px}
+.verdict-box h3{color:var(--gold);margin-bottom:12px;font-size:18px}
+.verdict-box .fit{display:flex;gap:14px;flex-wrap:wrap;margin-top:12px}
+.verdict-box .fit div{flex:1;min-width:200px;background:rgba(15,23,42,.5);border-radius:10px;padding:14px 16px}
+.verdict-box .fit .fit-yes b{color:#86efac}
+.verdict-box .fit .fit-no b{color:#fca5a5}
+.disclaimer{margin-top:40px;padding-top:20px;border-top:1px solid #334155;font-size:12px;color:var(--text3)}
+.back-link{display:inline-block;margin-bottom:16px;font-size:13px;color:var(--blue);text-decoration:none}
+.back-link:hover{text-decoration:underline}
+.pct-up{color:#fca5a5}
+.pct-down{color:#6ee7b7}
+@media(max-width:768px){.grid2,.grid3{grid-template-columns:1fr}.hero h1{font-size:24px}.hero .score{font-size:40px}}</style>
+</head>
+<body>
+<div class="wrap">
+<a class="back-link" href="../">← 返回研报索引</a>
+
+<div class="hero">
+  <span class="tag">D14 Eunos · RCR 城市边缘 · 99年地契</span>
+  <h1>Parc Esta</h1>
+  <div class="sub">900-916 Sims Avenue, Singapore · 1,399 户 · TOP 2022 · MCL Land 开发</div>
+  <div class="score-row">
+    <div><span class="score">7.37</span><div class="score-label">综合评分 / 10</div></div>
+    <span class="score-verdict">✅ 可考虑 — 地铁口 + 低物业费的自住友好型大盘</span>
+  </div>
+  <div class="meta-grid"><div class="m"><div class="k">地契</div><div class="v">99 年 (2018起)</div></div><div class="m"><div class="k">总单位</div><div class="v">1,399 套</div></div><div class="m"><div class="k">楼栋</div><div class="v">9 栋 (18层)</div></div><div class="m"><div class="k">最近 MRT</div><div class="v">Eunos 步行 ~178m</div></div><div class="m"><div class="k">成交均价</div><div class="v">$2,317 psf (近1年)</div></div><div class="m"><div class="k">1km 学校</div><div class="v">Haig Girls' 等</div></div></div>
+</div>
+
+<div class="section">
+  <h2>📌 执行摘要</h2>
+  <div class="highlight-box"><b>一句话结论：</b>Parc Esta 是 Eunos 地铁口（步行约 178 米、大部分有遮蔽）的 1,399 户度假式大盘，2018 年开盘均价约 $1,700 psf，近一年转售均价已到 <b>$2,317 psf</b>，五年年化涨幅约 3.1%。它的核心卖点是<b>通勤与持有成本双低</b>：EWL 一站到 Paya Lebar 换乘环线、物业费仅 $170-230/月（1,399 户摊薄效应），近 12 个月 110 笔转售的流动性在 D14 数一数二。短板同样清晰：分户型加权毛回报仅约 2.8%（D14 租金被老旧存量稀释、2-3 房总价偏高），Sims Avenue/Changi Road 沿线路噪需要适应，且 1,399 户的体量意味着转售永远不缺竞争对手。<b>自住 8 分、投资 6.5 分。</b></div>
+</div>
+
+<div class="section">
+  <h2>🏗️ 项目核心参数</h2>
+  <div class="grid2">
+    <div class="card">
+      <h3>📐 基本信息</h3>
+      <table>
+        <tr><td>开发商</td><td class="num">MCL Land (Everbright) Pte Ltd</td></tr><tr><td>地块面积</td><td class="num">376,713 sqft / 34,998 sqm</td></tr><tr><td>容积率</td><td class="num">2.8</td></tr><tr><td>土地性质</td><td class="num">99 年地契（2018-07-12 起）</td></tr><tr><td>TOP</td><td class="num">2022-12-30</td></tr><tr><td>建筑师</td><td class="num">P&T Consultants</td></tr><tr><td>总包</td><td class="num">China Construction (S. Pacific)</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>🏢 楼栋与户型</h3>
+      <table>
+        <tr><td>楼栋</td><td class="num">9 栋（18 层）</td></tr><tr><td>户型</td><td class="num">1房 420 sqft 起 ~ 5房 1,604 sqft（另 5 间商铺）</td></tr><tr><td>车位</td><td class="num">1,122 + 9 无障碍</td></tr>
+        <tr><td>3房 (1000-1350sqft)</td><td class="num">68 笔 (14%)</td></tr>
+<tr><td>2房 (700-1000sqft)</td><td class="num">222 笔 (45%)</td></tr>
+<tr><td>1房 (~<700sqft)</td><td class="num">200 笔 (40%)</td></tr>
+<tr><td>4房+ (>1350sqft)</td><td class="num">7 笔 (1%)</td></tr>
+      </table>
+      <p style="font-size:11px;color:var(--text3);margin-top:6px">户型分布按成交面积分桶估算，仅供参考。</p>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px">
+    <h3>🎪 配套设施</h3>
+    <div class="fac-tags"><span class="ok">50m 标准泳池 + 360° 环形泻湖</span><span class="ok">网球场 + 多功能球场</span><span class="ok">室内健身房 + 户外健身角</span><span class="ok">会所 + 多功能室</span><span class="ok">BBQ 凉亭 + 吊床园</span><span class="ok">儿童乐园 + 戏水区 + 宠物乐园</span><span class="miss">无桑拿/蒸汽房/KTV 房</span></div>
+    <p style="margin-top:12px;font-size:13px;color:var(--text2)">设施走的是实用主义路线——三个主题园林（Grand/East/West Parc）加 200 米水景轴，但刻意砍掉了桑拿、KTV 等花哨配置，换来全岛大盘里最低档的物业费（1房 $170、2-3房 $190、4-5房 $230/月）。代价是健身房偏小、多功能室仅一间，周末预订要靠抢。</p>
+  </div>
+
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🚇 交通与通勤</h3>
+      <table><tr><td>Eunos MRT (EW7)</td><td class="num">步行 ~178m（大部分有遮蔽）</td></tr><tr><td>Paya Lebar 换乘 (EW/CC)</td><td class="num">1 站</td></tr><tr><td>CBD (Raffles Place)</td><td class="num">MRT 约 15 分钟</td></tr><tr><td>PIE / ECP / KPE</td><td class="num">2-4 分钟车程</td></tr><tr><td>樟宜机场</td><td class="num">ECP 约 15 分钟</td></tr></table>
+    </div>
+    <div class="card">
+      <h3>🏫 教育（1km 内 5 所）</h3>
+      <table><tr><td>Haig Girls' School</td><td class="num">1km 内</td></tr><tr><td>Eunos Primary</td><td class="num">~900m</td></tr><tr><td>Maha Bodhi School</td><td class="num">1-2km</td></tr><tr><td>Tao Nan School</td><td class="num">1-2km</td></tr><tr><td>CHIJ (Katong) Primary</td><td class="num">1-2km</td></tr></table>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📊 七维评分</h2>
+  <div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.00</div>
+      <div>
+        <div class="dim-title">🗺️ 地段 Location <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>RCR 基础 7 分 + MRT 178m（≤400m +1）= 8 分。Eunos 是东区成熟生活区：巴刹、咖啡店、Joo Chiat 美食带步行可达，一站到 Paya Lebar 区域中心（PLQ 商圈+办公）。按同区同分规则（与 Sims Urban Oasis 同属 D14 且 MRT 距离差 228m≤250m），两盘地段统一取 8 分。1km 内小学仅 Haig Girls' 一所，学校加成有限。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">3.80</div>
+      <div>
+        <div class="dim-title">💰 租金回报 Rental Yield <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★½☆☆☆☆☆☆</div>
+      </div>
+    </div>
+    <p>分户型加权毛回报约 2.82%（URA 2026-07 租约 × 近12个月转售中位价）：1房 3.31%（中位价 $1.05M / 月租 $2,900）、2房 2.68%、3房 2.15%。按锚点公式 3+(2.82-2.0)=3.8 分。注意 D14 租金含大量老旧存量，本盘新净实际租值略高（第三方口径约 3.3%），但 2-3 房总价段回报率被买入价明显摊薄。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">7.00</div>
+      <div>
+        <div class="dim-title">📈 资本增值 Appreciation <span style="font-size:12px;color:var(--text3)">(权重 20%)</span></div>
+        <div class="stars">★★★★★★★☆☆☆</div>
+      </div>
+    </div>
+    <p>2021→2026 均价从 $1,982 升至 $2,307 psf，年化约 3.1% → 锚点 7 分（2-4% 档）。年度节奏稳（2022 +3.4%、2023 +3.4%、2024 +5.5%、2025 +2.4%），无暴涨暴跌。前瞻无重大新增基建（Paya Lebar 利好已部分兑现），不加减。99 年地契 2018 年起算，剩余约 91 年，衰减压力尚远。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">7.50</div>
+      <div>
+        <div class="dim-title">🏗️ 开发商信誉 Developer <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★★½☆☆</div>
+      </div>
+    </div>
+    <p>MCL Land 属老牌知名档（7-8 分），新加坡交付记录稳健（The Poiz、Sky Vue 等），背靠香港置地/怡和体系资金链可靠。本项目交付后未见系统性质量投诉，住户对浴室等精装细节评价偏高（酒店风），取中值 7.5 分。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">9.00</div>
+      <div>
+        <div class="dim-title">💵 持有成本 Holding Cost <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★★★★☆</div>
+      </div>
+    </div>
+    <p>MCST 月费 1房 $170 / 2-3房 $190 / 4-5房 $230，全线低于 $300 → 锚点 9 分。1,399 户摊薄 + 开发商刻意不做高维护设施，是全市大盘里持有成本最低的一档，对长线自住和收租都极为友好。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">9.00</div>
+      <div>
+        <div class="dim-title">🔄 退出流动性 Exit Liquidity <span style="font-size:12px;color:var(--text3)">(权重 15%)</span></div>
+        <div class="stars">★★★★★★★★★☆</div>
+      </div>
+    </div>
+    <p>近 12 个月转售 110 笔（>50 → 锚点 9 分），是 D14 非新盘成交王。1-2 房占比高（成交画像中 <1,000sqft 占 85%），总价门槛 $1.0-1.8M 正对组屋升级者与投资者主力预算带，成交周期短。需留意的是同盘挂牌竞争同样激烈，定价需贴市价。</p>
+  </div>
+<div class="dim">
+    <div class="dim-head">
+      <div class="dim-score">8.00</div>
+      <div>
+        <div class="dim-title">🛡️ 风险控制 Risk <span style="font-size:12px;color:var(--text3)">(权重 10%)</span></div>
+        <div class="stars">★★★★★★★★☆☆</div>
+      </div>
+    </div>
+    <p>二手现楼、无任何政策窗口未过（买家 ABSD 属普适规则）→ 锚点 8-9 档取 8。地契剩约 91 年无衰减问题；TDSR/LTV 属标准敞口。投资视角唯一要注意的是高总价 3 房以上户型的退出纵深较浅（近1年 4房+ 仅 3 笔成交）。</p>
+  </div>
+</div>
+
+<div class="section">
+  <h2>📈 价格走势与区域对比</h2>
+  <div class="card"><table><thead><tr><th>年份</th><th>成交数</th><th>均价 PSF</th><th>同比</th></tr></thead><tbody><tr><td>2021</td><td class="num">7</td><td class="num">$1,982</td><td class="num">—</td></tr>
+<tr><td>2022</td><td class="num">73</td><td class="num">$2,050</td><td class="num pct-up">+3.4%</td></tr>
+<tr><td>2023</td><td class="num">110</td><td class="num">$2,119</td><td class="num pct-up">+3.4%</td></tr>
+<tr><td>2024</td><td class="num">107</td><td class="num">$2,235</td><td class="num pct-up">+5.5%</td></tr>
+<tr><td>2025</td><td class="num">127</td><td class="num">$2,289</td><td class="num pct-up">+2.4%</td></tr>
+<tr><td>2026 (至8月)</td><td class="num">73</td><td class="num">$2,307</td><td class="num pct-up">+0.8%</td></tr></tbody></table>
+  <p style="font-size:12px;color:var(--text3)">数据源：URA PMI_Resi_Transaction（经自有 dashboard 交叉验证）</p></div>
+  <div class="grid2" style="margin-top:16px">
+    <div class="card">
+      <h3>🏙️ D14 同区可比项目（近1年均价）</h3>
+      <table><thead><tr><th>项目</th><th>地契</th><th>均价 PSF</th></tr></thead><tbody><tr><td><b>Parc Esta（本盘）</b></td><td>99年 (2018)</td><td class="num" style="color:var(--gold)"><b>$2,317</b></td></tr>
+<tr><td>Park Place Residences @ PLQ</td><td>99年</td><td class="num">$2,262</td></tr>
+<tr><td>Penrose</td><td>99年</td><td class="num">$2,154</td></tr>
+<tr><td>Waterbank at Dakota</td><td>99年</td><td class="num">$2,092</td></tr>
+<tr><td>Mori</td><td>永久</td><td class="num">$1,847</td></tr></tbody></table>
+      <p style="font-size:12px;color:var(--text3);margin-top:8px">本盘定价立于 D14 第一梯队——比 PLQ 上盖还贵，买的是地铁口 + 新净 + 低物业费组合；同区永久地契 Mori 反而便宜 20%，说明 D14 买家更愿意为通勤便利付费。数据源：URA（自有 dashboard 交叉验证）。</p>
+    </div>
+    <div class="card">
+    <h3>🧾 交易画像</h3>
+    <table>
+      <tbody>
+        <tr><td>总成交</td><td class="num">497 笔 (Sep 2021 - Aug 2026)</td></tr>
+        <tr><td>现楼转售</td><td class="num">324 笔 (65.2%)</td></tr><tr><td>楼花转售</td><td class="num">169 笔 (34%)</td></tr><tr><td>新售</td><td class="num">4 笔 (0.8%)</td></tr>
+        <tr><td>历史最高价</td><td class="num">$3.60M ($2680 psf)</td></tr>
+        <tr><td>历史最低价</td><td class="num">$830K ($1760 psf)</td></tr>
+        <tr><td>最高成交</td><td class="num">$3.60M · 1399 sqft · Mar 2026</td></tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+</div>
+
+<div class="section">
+  <h2>🏡 真实居住体验</h2>
+  <div class="quote"><b>"尽管是超大型项目，泳池即便周末也不会特别拥挤。楼栋排成两列、间距很大，设施位于中轴，整体感觉开阔而不逼仄。"</b><span class="src">👍 Stacked Homes 住户实住 4 个月评测, 2023</span></div>
+<div class="quote"><b>"维护费相当低，紧凑型三房每月不到 $200。浴室配套像酒店，每次使用都有度假感。小区里有 7-11、FairPrice Express 和牙科诊所。"</b><span class="src">👍 Stacked Homes 住户实住评测, 2023</span></div>
+<div class="quote"><b>"Sims Avenue 和 Changi Road 都是繁忙主干道，需要能接受车流声——好在关上窗后噪音降到最低，夜里睡觉几乎听不见。"</b><span class="src">👎 Stacked Homes 住户实住评测, 2023</span></div>
+<div class="quote"><b>"健身房有点小，高峰时段会拥挤；全盘只有一个多功能室，周末/公共假期很难预订。"</b><span class="src">⚠️ Stacked Homes 住户实住评测, 2023</span></div>
+  <div class="highlight-box" style="margin-top:16px">
+    <b>居住体验综合评级：★★★★☆ (4.0/5)</b><br>
+    实住反馈整体正面：低物业费、开阔楼距、地铁口便利性是被反复提及的三大优点；短板集中在临路噪音、健身房/多功能室等共享设施在高峰时段的供给不足。社区活跃度高（住户群参与度高），自助管理氛围好。适合看重通勤与日常便利的自住家庭；对设施丰富度要求高的买家会觉得「够用但不豪华」。
+  </div>
+</div>
+
+<div class="section">
+  <h2>⚠️ 风险提示</h2>
+  <div class="risk-warn"><b>重点风险：</b>
+    <ol style="margin:10px 0 0 18px;font-size:14px"><li>租金回报偏低（加权约 2.8%），高总价 3 房以上户型收租性价比差，投资只建议 1-2 房</li><li>1,399 户体量 → 转售与出租市场内部竞争长期存在，溢价空间受同盘挂牌压制</li><li>Sims Avenue / Changi Road 沿线路噪，低楼层临路单元需在看房时实测</li><li>D14 供应管线充裕（Penrose 等新盘持续进入二手市场），片区价格天花板互相牵制</li><li>利率高位环境下，2.8% 毛回报对杠杆买家现金流为负，需自有资金缓冲</li></ol>
+  </div>
+  <div class="highlight-box" style="margin-top:16px">
+    <b>📋 购买合规（2026 现行）：</b><br>
+    ABSD —— SC 首套 0% / 第二套 20% / 第三套+ 30%；PR 首套 5% / 第二套 30%；外国人 60%（实体/信托 65%）。
+    <br>贷款 —— 银行首套 LTV 75%（第三套+ 55%）；TDSR 全部债务月供 ≤ 月收入 55%。
+    <br>SSD —— 私人住宅持有 ≤3 年出售按 12%/8%/4% 征收，满 3 年 0%。
+  </div>
+</div>
+
+<div class="section">
+  <h2>🎯 最终结论</h2>
+  <div class="verdict-box">
+    <h3>综合评分：7.37 / 10 — ✅ 可考虑 — 地铁口 + 低物业费的自住友好型大盘</h3>
+    <p>Parc Esta 是「用合理性取胜」的盘：没有名校、没有无敌景观，但地铁 178 米 + 全岛最低档物业费 + D14 最强流动性，构成了极难被替代的自住基本面。五年年化 3.1% 的增值谈不上惊艳但足够稳健，且每一年的成交分布都健康（非单点拉高）。综合评分 7.37 落于「可考虑」区间上沿——自住买家可以果断一些，纯投资买家请把预期调到「保本 + 微赚 + 高流动性」档位。</p>
+    <div class="fit">
+    <div class="fit-yes"><b>✅ 适合：</b><br>CBD/东部通勤的自住家庭（地铁口是硬刚需）<br>预算 $1.0-1.8M 的组屋升级者<br>重视低持有成本的长线业主<br>需要高流动性退出的稳健型投资者（限 1-2 房）<br></div>
+    <div class="fit-no"><b>❌ 不适合：</b><br>追求 4%+ 毛回报的收租型投资者<br>对名校学区有硬性要求的家庭（1km 仅 1 所小学）<br>对路噪敏感且不愿住高层的买家<br>追求小体量私密性的买家<br></div>
+  </div>
+    <p style="margin-top:16px;font-size:14px;color:var(--text2)"><b style="color:var(--gold)">买入建议：</b>优先 1-2 房（成交占比 85%、租售流动性最好）；选房避开 Sims Avenue 正向临路单元，中高楼层朝内园景为佳；出价贴同户型近 3 个月成交价，本盘成交密集、议价空间透明，无需追高。</p>
+  </div>
+</div>
+
+<div class="disclaimer">
+  <b>免责声明：</b>本报告基于公开数据（URA、EdgeProp、99.co、PropertyGuru、BCA 等）与自有 dashboard 交叉验证整理，仅供投资参考，不构成买卖建议。房地产市场受政策、利率、宏观经济影响波动较大，请结合自身财务状况独立决策。数据截至 Aug 2026。
+</div>
+
+</div>
+</body>
+</html>
