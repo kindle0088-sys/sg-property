@@ -7,6 +7,9 @@
  *   node scripts/generate-reports-index.mjs
  * 字段：name(短名) title(原标题) href(相对路径) icon(2字母) date(YYYY-MM-DD)
  *       type(condo|ec|hdb) district(Dxx) score(0-10) color(图标底色)
+ *
+ * tenure/top：由 ../data/report-meta.json（slug -> {tenure, top}）合并而来，
+ *      新增研报需同时在 report-meta.json 补该 slug 的地契与 TOP 年份。
  */
 import { readFileSync, writeFileSync } from 'fs';
 import { fileURLToPath } from 'url';
@@ -14,6 +17,7 @@ import { dirname, join } from 'path';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const OUT = join(__dirname, '..', 'reports', 'index.html');
+const META = join(__dirname, '..', 'data', 'report-meta.json');
 
 // 种子数据：从旧 index.html 解析（仅首次迁移用）
 const LEGACY = join(__dirname, '..', 'reports', 'index.html');
@@ -50,6 +54,23 @@ if (dataM) {
   REPORTS = parseLegacy(existing);
   console.log('parsed', REPORTS.length, 'from legacy layout');
 }
+
+// 合并 report-meta.json 的 tenure/top（按 href slug 匹配，meta 为权威源）
+const meta = JSON.parse(readFileSync(META, 'utf8')).projects;
+let metaHit = 0, metaMiss = [];
+for (const r of REPORTS) {
+  const slug = r.href.split('/')[0];
+  const m = meta[slug];
+  if (m && m.tenure != null && m.top != null) {
+    r.tenure = m.tenure;
+    r.top = m.top;
+    metaHit++;
+  } else {
+    metaMiss.push(`${slug}(${r.name})`);
+  }
+}
+console.log(`meta merged ${metaHit}/${REPORTS.length}`);
+if (metaMiss.length) console.log('meta MISS:', metaMiss.join(', '));
 
 // 安全网：解析结果为空时禁止覆写 index.html（防止误清空线上卡片）
 if (!REPORTS.length) {
@@ -172,6 +193,8 @@ select:focus{border-color:#fbbf24}
 .badge-condo{background:rgba(59,130,246,.14);color:#60a5fa;border:1px solid rgba(59,130,246,.38)}
 .badge-hdb{background:rgba(34,197,94,.14);color:#22c55e;border:1px solid rgba(34,197,94,.38)}
 .badge-dist{background:rgba(148,163,184,.1);color:#94a3b8;border:1px solid rgba(148,163,184,.3)}
+.badge-tenure{background:rgba(167,139,250,.1);color:#c4b5fd;border:1px solid rgba(167,139,250,.3)}
+.badge-top{background:rgba(45,212,191,.1);color:#5eead4;border:1px solid rgba(45,212,191,.3)}
 .card .desc{font-size:12px;color:#94a3b8;flex:1;margin-bottom:10px;display:-webkit-box;-webkit-line-clamp:2;line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
 .card .date{font-size:11px;color:#64748b;border-top:1px dashed #334155;padding-top:9px}
 .empty{text-align:center;color:#64748b;padding:48px 0;font-size:14px}
@@ -287,6 +310,8 @@ function render() {
       <div class="badges">
         <span class="badge \${TYPE_CLASS[r.type]}">\${TYPE_LABEL[r.type]}</span>
         \${r.district ? \`<span class="badge badge-dist">\${esc(r.district)}</span>\` : ''}
+        \${r.tenure ? \`<span class="badge badge-tenure">\${esc(r.tenure)}</span>\` : ''}
+        \${r.top ? \`<span class="badge badge-top">TOP \${esc(r.top)}</span>\` : ''}
       </div>
       <div class="desc">\${esc(desc)}</div>
       <div class="date">📅 \${esc(r.date)}</div>

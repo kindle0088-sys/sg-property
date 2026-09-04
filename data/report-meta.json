@@ -1,0 +1,314 @@
+{
+ "generated": "2026-09-04",
+ "note": "tenure: 99年/Freehold; top: TOP 年份(期房为预计)或区间(Bidadari 2015-2025)",
+ "projects": {
+  "whistler-grand": {
+   "tenure": "99年",
+   "top": "2021"
+  },
+  "riverfront-residences": {
+   "tenure": "99年",
+   "top": "2023"
+  },
+  "parc-esta": {
+   "tenure": "99年",
+   "top": "2022"
+  },
+  "sims-urban-oasis": {
+   "tenure": "99年",
+   "top": "2017"
+  },
+  "jadescape": {
+   "tenure": "99年",
+   "top": "2023"
+  },
+  "archipelago": {
+   "tenure": "99年",
+   "top": "2015"
+  },
+  "jden": {
+   "tenure": "99年",
+   "top": "2028"
+  },
+  "the-watergardens-at-canberra": {
+   "tenure": "99年",
+   "top": "2026"
+  },
+  "the-quartz": {
+   "tenure": "99年",
+   "top": "2009"
+  },
+  "lentor-central": {
+   "tenure": "99年",
+   "top": "2028"
+  },
+  "dunearn-house": {
+   "tenure": "99年",
+   "top": "2030"
+  },
+  "skye-at-holland": {
+   "tenure": "99年",
+   "top": "2029"
+  },
+  "stirling-residences": {
+   "tenure": "99年",
+   "top": "2022"
+  },
+  "yishun-emerald": {
+   "tenure": "99年",
+   "top": "2002"
+  },
+  "parc-clematis": {
+   "tenure": "99年",
+   "top": "2023"
+  },
+  "normanton-park": {
+   "tenure": "99年",
+   "top": "2023"
+  },
+  "grand-dunman": {
+   "tenure": "99年",
+   "top": "2028"
+  },
+  "treasure-at-tampines": {
+   "tenure": "99年",
+   "top": "2023"
+  },
+  "chuan-park": {
+   "tenure": "99年",
+   "top": "2028"
+  },
+  "the-florence-residences": {
+   "tenure": "99年",
+   "top": "2023"
+  },
+  "canninghill-piers": {
+   "tenure": "99年",
+   "top": "2024"
+  },
+  "the-continuum": {
+   "tenure": "Freehold",
+   "top": "2027"
+  },
+  "affinity-at-serangoon": {
+   "tenure": "99年",
+   "top": "2024"
+  },
+  "emerald-of-katong": {
+   "tenure": "99年",
+   "top": "2029"
+  },
+  "westmere": {
+   "tenure": "99年",
+   "top": "2009"
+  },
+  "citylife-tampines": {
+   "tenure": "99年",
+   "top": "2016"
+  },
+  "prive": {
+   "tenure": "99年",
+   "top": "2014"
+  },
+  "westwood-residences": {
+   "tenure": "99年",
+   "top": "2017"
+  },
+  "the-amore": {
+   "tenure": "99年",
+   "top": "2017"
+  },
+  "lake-life": {
+   "tenure": "99年",
+   "top": "2016"
+  },
+  "forestville": {
+   "tenure": "99年",
+   "top": "2016"
+  },
+  "arc-at-tampines": {
+   "tenure": "99年",
+   "top": "2014"
+  },
+  "austville-residences": {
+   "tenure": "99年",
+   "top": "2014"
+  },
+  "heron-bay": {
+   "tenure": "99年",
+   "top": "2015"
+  },
+  "provence-residence": {
+   "tenure": "99年",
+   "top": "2025"
+  },
+  "altura": {
+   "tenure": "99年",
+   "top": "2027"
+  },
+  "bellewaters": {
+   "tenure": "99年",
+   "top": "2017"
+  },
+  "the-topiary": {
+   "tenure": "99年",
+   "top": "2016"
+  },
+  "the-brownstone": {
+   "tenure": "99年",
+   "top": "2017"
+  },
+  "the-vales": {
+   "tenure": "99年",
+   "top": "2018"
+  },
+  "the-criterion": {
+   "tenure": "99年",
+   "top": "2018"
+  },
+  "ecopolitan": {
+   "tenure": "99年",
+   "top": "2016"
+  },
+  "the-tampines-trilliant": {
+   "tenure": "99年",
+   "top": "2015"
+  },
+  "signature-at-yishun": {
+   "tenure": "99年",
+   "top": "2018"
+  },
+  "bellewoods": {
+   "tenure": "99年",
+   "top": "2017"
+  },
+  "sol-acres": {
+   "tenure": "99年",
+   "top": "2019"
+  },
+  "rivelle-tampines": {
+   "tenure": "99年",
+   "top": "2029"
+  },
+  "lumina-grand": {
+   "tenure": "99年",
+   "top": "2027"
+  },
+  "novo-place": {
+   "tenure": "99年",
+   "top": "2026"
+  },
+  "parc-greenwich": {
+   "tenure": "99年",
+   "top": "2026"
+  },
+  "copen-grand": {
+   "tenure": "99年",
+   "top": "2025"
+  },
+  "tenet": {
+   "tenure": "99年",
+   "top": "2026"
+  },
+  "coastal-cabana": {
+   "tenure": "99年",
+   "top": "2029"
+  },
+  "north-gaia": {
+   "tenure": "99年",
+   "top": "2027"
+  },
+  "otto-place": {
+   "tenure": "99年",
+   "top": "2028"
+  },
+  "bishan-loft": {
+   "tenure": "99年",
+   "top": "2003"
+  },
+  "parc-life": {
+   "tenure": "99年",
+   "top": "2018"
+  },
+  "the-visionaire": {
+   "tenure": "99年",
+   "top": "2018"
+  },
+  "one-canberra": {
+   "tenure": "99年",
+   "top": "2015"
+  },
+  "skypark-residences": {
+   "tenure": "99年",
+   "top": "2016"
+  },
+  "aurelle-tampines": {
+   "tenure": "99年",
+   "top": "2028"
+  },
+  "the-floravale": {
+   "tenure": "99年",
+   "top": "2000"
+  },
+  "twin-waterfalls": {
+   "tenure": "99年",
+   "top": "2015"
+  },
+  "the-terrace": {
+   "tenure": "99年",
+   "top": "2018"
+  },
+  "hundred-palms-residences": {
+   "tenure": "99年",
+   "top": "2020"
+  },
+  "esparina-residences": {
+   "tenure": "99年",
+   "top": "2013"
+  },
+  "treasure-crest": {
+   "tenure": "99年",
+   "top": "2019"
+  },
+  "northwave": {
+   "tenure": "99年",
+   "top": "2019"
+  },
+  "piermont-grand": {
+   "tenure": "99年",
+   "top": "2023"
+  },
+  "senja-close-ec": {
+   "tenure": "99年",
+   "top": "2030"
+  },
+  "woodlands-ec-plot-a": {
+   "tenure": "99年",
+   "top": "2030"
+  },
+  "woodlands-ec-plot-b": {
+   "tenure": "99年",
+   "top": "2031"
+  },
+  "sembawang-road-ec": {
+   "tenure": "99年",
+   "top": "2030"
+  },
+  "ola": {
+   "tenure": "99年",
+   "top": "2023"
+  },
+  "the-pinnacle-at-duxton": {
+   "tenure": "99年",
+   "top": "2009"
+  },
+  "clementi-crescent": {
+   "tenure": "99年",
+   "top": "2020"
+  },
+  "bidadari-estate": {
+   "tenure": "99年",
+   "top": "2015-2025"
+  }
+ }
+}
