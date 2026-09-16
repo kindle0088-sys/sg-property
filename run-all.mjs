@@ -27,7 +27,30 @@ const BUILD_OUT = path.join(LOGS, 'build-output.log');
 const ERROR_LOG = path.join(LOGS, 'build-error.log');
 
 // 计划任务环境 PATH 不可靠，全部用绝对路径
-const NODE = 'C:/Users/jiali/.workbuddy/binaries/node/versions/22.22.2-2/node.exe';
+// ⚠️ 2026-09-16 事故：WorkBuddy 于 9/12 把托管 node 从 22.22.2-2 升级到 22.22.2-3，
+//    旧版本目录被删除 → 本文件与计划任务的硬编码路径双双失效
+//    （任务返回 0x80070002 ERROR_FILE_NOT_FOUND，日志零记录）。
+//    修复：不再硬编码版本号，优先使用当前解释器 process.execPath，
+//    并用 versions/current + 目录扫描兜底，node 再升级也不会断。
+function resolveNode() {
+  const versionsDir = 'C:/Users/jiali/.workbuddy/binaries/node/versions';
+  const candidates = [process.execPath];
+  try {
+    const cur = fs.readFileSync(path.join(versionsDir, 'current'), 'utf8').trim();
+    if (cur) candidates.push(path.join(versionsDir, cur, 'node.exe'));
+  } catch (e) { /* current 文件不存在或不可读，走目录扫描 */ }
+  try {
+    for (const d of fs.readdirSync(versionsDir).sort().reverse()) {
+      if (/^\d/.test(d)) candidates.push(path.join(versionsDir, d, 'node.exe'));
+    }
+  } catch (e) { /* 目录不可读，退回 process.execPath */ }
+  for (const c of candidates) {
+    if (c && fs.existsSync(c)) return c.replace(/\\/g, '/');
+  }
+  return process.execPath;
+}
+const NODE = resolveNode();
+
 const GIT = 'C:/Users/jiali/.workbuddy/binaries/PortableGit/versions/1.2.0/mingw64/bin/git.exe';
 const GH = 'C:/Program Files/GitHub CLI/gh.exe';
 const GIT_BIN_DIR = path.dirname(GIT);
@@ -95,7 +118,8 @@ function writeStatus(status, commit, pushed) {
 
 // ---------- 依赖自愈：node_modules 缺失/不完整时自动 npm ci ----------
 // 2026-08-16：月更构建曾因 scripts/node_modules 丢失（proj4 不可解析）而 BUILD FAILED。
-const NPM_CLI = 'C:/Users/jiali/.workbuddy/binaries/node/versions/22.22.2-2/node_modules/npm/bin/npm-cli.js';
+// 2026-09-16：npm 路径同样改为跟随 NODE，不再写死版本号
+const NPM_CLI = path.join(path.dirname(NODE), 'node_modules', 'npm', 'bin', 'npm-cli.js').replace(/\\/g, '/');
 
 // 需要存在的关键依赖（node_modules 完整性的最小探针）
 const REQUIRED_DEPS = ['proj4', 'node-fetch', 'acorn', 'csv-parse'];
@@ -120,13 +144,33 @@ function ensureDeps() {
 }
 
 // ---------- fetch 带重试 ----------
+// ⚠️ 2026-09-16 事故（第二个，更隐蔽）：必须用显式 refspec `fetch origin main`。
+//    `git fetch origin`（无 refspec）会把 FETCH_HEAD 写成 `not-for-merge` 标记：
+//        <sha>\tnot-for-merge\tbranch 'main' of https://...
+//    此时 `git merge --ff-only FETCH_HEAD` **解析为空提交列表**，直接输出
+//    "Already up to date." 并 exit 0 —— 对齐步骤变成静默 no-op。
+//    后果：构建基于陈旧 HEAD 提交 → push 被拒（non-ff）→ 或长期落后远程而不自知。
+//    带 refspec 时 FETCH_HEAD 无该标记，merge 正常快进。
 async function fetchWithRetry() {
-  if (git(['fetch', 'origin']) === 0) return true;
+  if (git(['fetch', 'origin', 'main']) === 0) return true;
   log('WARN: git fetch failed, waiting 60s before retry');
   await sleep(60000);
-  if (git(['fetch', 'origin']) === 0) return true;
+  if (git(['fetch', 'origin', 'main']) === 0) return true;
   log('ERROR: git fetch failed twice, aborting');
-  appendError('FETCH FAILED: git fetch origin failed twice (likely network)');
+  appendError('FETCH FAILED: git fetch origin main failed twice (likely network)');
+  return false;
+}
+
+// 对齐结果校验：merge 后 HEAD 必须等于 FETCH_HEAD，否则说明对齐静默失败
+function assertAligned() {
+  const head = gitOut(['rev-parse', 'HEAD']);
+  const target = gitOut(['rev-parse', 'FETCH_HEAD']);
+  if (head && target && head === target) {
+    log(`aligned at ${head.slice(0, 9)}`);
+    return true;
+  }
+  log(`CRITICAL: HEAD ${head.slice(0, 9)} != FETCH_HEAD ${target.slice(0, 9)} — align silently failed`);
+  appendError(`ALIGN FAILED: HEAD=${head} FETCH_HEAD=${target}`);
   return false;
 }
 
@@ -152,6 +196,17 @@ async function main() {
   fs.mkdirSync(LOGS, { recursive: true });
   log('===== monthly URA build start =====');
 
+  // --- 环境自检（2026-09-16 新增）：把外部依赖缺失暴露在日志里，不再静默失败 ---
+  log(`env: node=${NODE} (${process.version})`);
+  const missing = [['node', NODE], ['git', GIT], ['gh', GH], ['npm-cli', NPM_CLI]]
+    .filter(([, p]) => !fs.existsSync(p));
+  if (missing.length) {
+    const msg = `CRITICAL: missing binaries: ${missing.map(([n, p]) => `${n}=${p}`).join(', ')}`;
+    log(msg);
+    appendError(msg);
+    process.exit(1);
+  }
+
   // --- pre-fetch checks（2026-08-02 事故：auto-gc 并发导致对象丢失）---
   git(['config', 'gc.auto', '0']);
   // --- 2026-08-06 事故预防：残留 rebase 状态会让构建在 detached HEAD 上 commit ---
@@ -174,6 +229,7 @@ async function main() {
     }
   }
   log('Step: aligned with remote');
+  if (!assertAligned()) process.exit(1);
 
   // HEAD_SHA 初始化（skip commit 时状态文件也能记录当前 HEAD）
   let headSha = gitOut(['rev-parse', 'HEAD']);
