@@ -8,14 +8,20 @@
 //   原 cmd 版在计划任务环境有三坑——PATH 无 git、stdout 管道阻塞、
 //   cmd 语法笨拙。node 版用绝对路径 + spawnSync 捕获输出，全部绕开。
 //
-// 职责：git 对齐 → build.js → commit/push → gc/fsck → 状态上报
+// 职责：月度门闸 → git 对齐 → build.js → commit/push → gc/fsck → 状态上报
 // 失败处理：fetch 重试 / 开 GitHub issue 兜底
+//
+// 月度门闸（2026-10-13 新增，配合「每天 09:00」触发器）：
+//   任务原为「每月 16 日 09:00」单次触发 —— 当天机器不可用就整月漏跑
+//   （实证：2026-09-16 09:00 无任何运行痕迹，靠 09-17 00:10 补跑）。
+//   现改为每天 09:00 触发，本文件内的门闸保证「每月只真正构建一次 + 漏跑自愈」。
+//   --force 跳过门闸（手动执行 / 调试用）。
 // ============================================================
 
 import { spawnSync } from 'child_process';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
+import { fileURLToPath, pathToFileURL } from 'url';
 
 // ---------- 路径常量 ----------
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)));
@@ -63,8 +69,62 @@ const LOOSE_THRESHOLD = 6700;
 // ---------- 小工具 ----------
 const now = () => new Date().toLocaleString('sv-SE', { hour12: false });
 const log = (msg) => fs.appendFileSync(LOG_FILE, `[${now()}] ${msg}\n`);
-const appendError = (msg) => fs.appendFileSync(ERROR_LOG, `[${now()}] ${msg}\n`);
+const appendError = (msg) => fs.appendFileSync(ERROR_FILE, `[${now()}] ${msg}\n`);
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// ---------- 月度门闸 ----------
+// 任务由「每月 16 日」改为「每天 09:00」触发，靠门闸实现每月一次 + 漏跑自愈。
+const FORCE = process.argv.includes('--force');
+const RETRY_DAYS = 5;   // 本月试过但 URA 尚无新数据 → 隔几天再试
+const STALE_DAYS = 40;  // 距上次成功超过这么多天 → 不管日期强制补跑（说明整个月都漏了）
+
+/** 按新加坡时区分解日期（构建固定 09:00 SGT 跑，但用 SGT 判断月份最稳妥） */
+function sgtNow(d = new Date()) {
+  const iso = new Date(d.getTime() + 8 * 3600 * 1000).toISOString();
+  return { date: iso.slice(0, 10), ym: iso.slice(0, 7), day: Number(iso.slice(8, 10)) };
+}
+
+/**
+ * 门闸决策（纯函数，便于单测）
+ * @param {object}  n       sgtNow() 的返回值
+ * @param {object?} last    归一化的上次构建记录 {date, status, changed, ym, daysSince}；无记录传 null
+ * @param {boolean} force   是否 --force
+ * @returns {{run:boolean, why:string}}
+ */
+export function decideRun(n, last, force) {
+  if (force) return { run: true, why: '--force 指定，跳过节流' };
+  if (!last || !last.status) return { run: true, why: '无历史构建记录，首次运行' };
+  if (last.status !== 'ok') return { run: true, why: `上次状态 ${last.status}，重试` };
+  if (last.ym === n.ym) {
+    if (last.changed === false) {
+      // 本月跑过但 URA 未发布新数据 —— 隔 RETRY_DAYS 再试，直到数据真的动了
+      if (last.daysSince < RETRY_DAYS) {
+        return { run: false, why: `本月已尝试（${last.date}，URA 暂无新数据），${(RETRY_DAYS - last.daysSince).toFixed(1)} 天后再试` };
+      }
+      return { run: true, why: `本月已尝试但 URA 仍无新数据（上次 ${last.daysSince.toFixed(1)} 天前），再试一次` };
+    }
+    return { run: false, why: `本月已完成（${last.date}）` };
+  }
+  if (last.daysSince >= STALE_DAYS) {
+    return { run: true, why: `距上次成功 ${last.daysSince.toFixed(1)} 天（≥${STALE_DAYS}），强制补跑` };
+  }
+  if (n.day < 16) return { run: false, why: `未到 16 日（今天 ${n.day} 号），URA 发布窗口在月中` };
+  return { run: true, why: `本月尚未构建（上次 ${last.date}）` };
+}
+
+/** 读取并归一化 logs/last-build.json */
+function readLastBuild() {
+  let raw = null;
+  try { raw = JSON.parse(fs.readFileSync(path.join(LOGS, 'last-build.json'), 'utf8')); } catch { return null; }
+  const checked = raw.checkedAt ? new Date(raw.checkedAt) : null;
+  return {
+    date: raw.date || null,
+    status: raw.status || null,
+    changed: raw.changed === undefined ? null : raw.changed,
+    ym: checked ? sgtNow(checked).ym : null,
+    daysSince: checked ? (Date.now() - checked.getTime()) / 86400000 : Infinity,
+  };
+}
 
 function makeEnv() {
   // git 子命令（credential helper / ssh 等）需要 PortableGit bin 在 PATH
@@ -109,10 +169,12 @@ function openIssue(title, body) {
 }
 
 // ---------- 状态写入 ----------
-function writeStatus(status, commit, pushed) {
+// changed: 本次构建是否产生实质数据变更（false 时门闸会在几天后重试）
+function writeStatus(status, commit, pushed, changed = null) {
   const args = [path.join(SCRIPTS, 'write-status.js'), status];
   if (commit) args.push(commit);
   if (pushed) args.push(pushed);
+  if (changed !== null) args.push(String(changed));
   run(NODE, args, { cwd: SCRIPTS });
 }
 
@@ -195,6 +257,16 @@ function summaryChangedBeyondBuildTime() {
 async function main() {
   fs.mkdirSync(LOGS, { recursive: true });
   log('===== monthly URA build start =====');
+
+  // --- 月度门闸：每天 09:00 触发，但每月只真正构建一次；漏跑自动补 ---
+  const nSGT = sgtNow();
+  const lastBuild = readLastBuild();
+  const gate = decideRun(nSGT, lastBuild, FORCE);
+  log(`gate: today=${nSGT.date}(${nSGT.day}号) last=${lastBuild ? `${lastBuild.date}/${lastBuild.status}` : '无'} → ${gate.run ? 'RUN' : 'SKIP'}：${gate.why}`);
+  if (!gate.run) {
+    log('===== skipped: monthly job already satisfied =====');
+    return;
+  }
 
   // --- 环境自检（2026-09-16 新增）：把外部依赖缺失暴露在日志里，不再静默失败 ---
   log(`env: node=${NODE} (${process.version})`);
@@ -326,11 +398,16 @@ async function main() {
   }
 
   // --- 状态上报 ---
-  writeStatus('ok', headSha, 'true');
-  log('Done.');
+  writeStatus('ok', headSha, 'true', hasDataChange);
+  log(`Done.（数据实质变更=${hasDataChange}${skipPush ? '，本次无新数据' : ''}）`);
 }
 
-main().catch((e) => {
-  log(`FATAL: ${e.message}`);
-  process.exit(1);
-});
+export { sgtNow, readLastBuild };
+
+// 仅在被直接执行时自运行；被 import 时（如单测 decideRun）不触发
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  main().catch((e) => {
+    log(`FATAL: ${e.message}`);
+    process.exit(1);
+  });
+}

@@ -40,8 +40,10 @@ if not defined NODE (
   exit /b 1
 )
 
+rem %* is forwarded to the script so "run-all.cmd --force" can bypass the
+rem monthly gate (task triggers daily at 09:00; the gate keeps it monthly).
 echo [%date% %time%] launcher start: node=%NODE% >> "%LOG%"
-"%NODE%" "%REPO%\run-all.mjs" >> "%LOG%" 2>&1
+"%NODE%" "%REPO%\run-all.mjs" %* >> "%LOG%" 2>&1
 set "RC=%ERRORLEVEL%"
 echo [%date% %time%] launcher done: exit=%RC% >> "%LOG%"
 exit /b %RC%

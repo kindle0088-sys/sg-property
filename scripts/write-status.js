@@ -1,15 +1,16 @@
-// write-status.js — 将每日构建结果落盘到 logs/last-build.json
+// write-status.js — 将月度构建结果落盘到 logs/last-build.json
 // Usage:
-//   node write-status.js ok <commit-sha> true
+//   node write-status.js ok <commit-sha> true <changed true|false>
 //   node write-status.js build_failed
 //   node write-status.js push_failed <commit-sha>
-// 除 status/commit/pushed 外的字段（项目数、交易数、耗时）自动从 data/build-meta.json 读取。
+// 除 status/commit/pushed/changed 外的字段（项目数、交易数、耗时）自动从 data/build-meta.json 读取。
+// changed 供 run-all.mjs 的月度门闸判断「本月是否已真正产出新数据」。
 'use strict';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const [status, commit, pushed] = process.argv.slice(2);
+const [status, commit, pushed, changed] = process.argv.slice(2);
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 let meta = {};
@@ -25,6 +26,7 @@ const rec = {
   status: status || 'unknown',
   commit: commit || null,
   pushed: pushed === 'true',
+  changed: changed === undefined ? null : changed === 'true',
   projects: meta.projects != null ? meta.projects : null,
   transactions: meta.transactions != null ? meta.transactions : null,
   rentals: meta.rentals != null ? meta.rentals : null,
