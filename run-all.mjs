@@ -57,7 +57,28 @@ function resolveNode() {
 }
 const NODE = resolveNode();
 
-const GIT = 'C:/Users/jiali/.workbuddy/binaries/PortableGit/versions/1.2.0/mingw64/bin/git.exe';
+// git 可执行文件：⚠️ PortableGit 版本轮换会**删除旧版本目录**（1.2.0 → 1.3.0，2026-10-27）
+// → 绝不能硬编码版本号。读 versions/current 指针 → 扫目录取最高 → 退 Program Files → 最后 PATH。
+function resolveGit() {
+  const base = 'C:/Users/jiali/.workbuddy/binaries/PortableGit/versions';
+  const sufs = ['cmd/git.exe', 'mingw64/bin/git.exe'];
+  const cands = [];
+  try {
+    const ver = fs.readFileSync(path.join(base, 'current'), 'utf8').trim();
+    if (ver) for (const s of sufs) cands.push(`${base}/${ver}/${s}`);
+  } catch (e) { /* 指针缺失 → 走扫描 */ }
+  try {
+    const vers = fs.readdirSync(base, { withFileTypes: true })
+      .filter((d) => d.isDirectory() && /^\d+(\.\d+)+$/.test(d.name))
+      .map((d) => d.name)
+      .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
+    for (const v of vers) for (const s of sufs) cands.push(`${base}/${v}/${s}`);
+  } catch (e) { /* 目录不可读 */ }
+  cands.push('C:/Program Files/Git/cmd/git.exe');
+  for (const c of cands) if (fs.existsSync(c)) return c;
+  return 'git';
+}
+const GIT = resolveGit();
 const GH = 'C:/Program Files/GitHub CLI/gh.exe';
 const GIT_BIN_DIR = path.dirname(GIT);
 
