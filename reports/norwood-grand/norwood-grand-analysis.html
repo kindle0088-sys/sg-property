@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Norwood Grand — 新加坡私宅投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+.note{color:#94a3b8;font-size:13px;margin-top:10px}
+.warn-box{background:#3f1d1d;border-left:4px solid #ef4444;border-radius:0 12px 12px 0;padding:16px 20px;margin:16px 0;font-size:14px;color:#fecaca}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">Condo · Private · D25 Woodlands · OCR</div>
+  <h1>Norwood Grand</h1>
+  <div class="address">2, 6, 8, 10 Champions Way · Woodlands · 99-Year Leasehold（2023-12-18 起）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">6.23</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$2,078</div><div class="lbl">累计均价 psf</div></div>
+    <div class="kpi"><div class="val">$2,068</div><div class="lbl">近 1 年均价 psf</div></div>
+    <div class="kpi"><div class="val">330</div><div class="lbl">累计交易（URA）</div></div>
+    <div class="kpi"><div class="val">348</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>Woodlands 隔 12 年来的第一个私人公寓，也是 CDL 在北部唯一的独资旗舰盘。</strong>地块为 2023 年 9 月 Champions Way GLS，CDL 以 $294.889M（<strong>$904 psf ppr</strong>）击败 5 家对手拿下，比第二高出价高 8.3%——同年非 EC 地块竞标人数最多的一幅。项目 2024 年 10 月 19 日开盘，截至 2026 年 9 月 <strong>330 笔 URA 成交、去化约 95%</strong>，均价 $2,078 psf。真正的看点是区位逻辑：步行 4–5 分钟到 TE3 Woodlands South，1 站到 Woodlands 综合交通枢纽，2 站到 RTS Link（2027 年 1 月通车），背后是规划 100 公顷、最高 10 万岗位的 Woodlands Regional Centre。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>Norwood Grand 是一个<strong>产品与区位都过硬、但价格已被充分定价</strong>的北部标杆盘。开盘两年来成交均价从 $2,080 微降至 $2,067 psf（<span class="num-green">-0.6%</span>），说明开发商没有继续抬价、而是以价换量清盘；与此同时租金回报仅 2.2%–3.1%（毛），在当下 3.75%–4.00% 的政策利率环境里，<strong>现金流为负</strong>。适合<span style="color:#fbbf24;font-weight:600">看好北部走廊、以自住或长持为主</span>的买家，不适合追求租金收益或 3 年内短炒的资金。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">CDL 城市发展（CDL Stellar Pte Ltd 独资，无合资方）</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">348 套 · 4 栋 11 层（另有独立 2 层幼教中心）</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年 · 自 2023-12-18 起（剩余约 96 年）</div></div>
+    <div class="spec-card"><div class="spec-label">土地成本</div><div class="spec-value">$294.889M · $904 psf ppr（6 标最高，高出次标 8.3%）</div></div>
+    <div class="spec-card"><div class="spec-label">TOP 预计</div><div class="spec-value">2028 年（部分渠道标 2026/2027，属营销口径，以 2028 为基准）</div></div>
+    <div class="spec-card"><div class="spec-label">地块 / 容积率</div><div class="spec-value">14,433.5 sqm（155,351 sqft）· Plot Ratio 2.1</div></div>
+    <div class="spec-card"><div class="spec-label">建筑认证</div><div class="spec-value">BCA Green Mark Platinum Super Low Energy（SLE）</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">348 个 · 1:1 配比 + 地下自行车停放</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型分布与成交定价</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>成交笔数</th><th>中位 psf</th><th>中位总价</th></tr>
+    <tr><td>1 Bedroom + Study</td><td>495</td><td>31</td><td>$2,141</td><td>$1.06M</td></tr>
+    <tr><td>2 Bedroom</td><td>624</td><td>77</td><td>$2,119</td><td>$1.32M</td></tr>
+    <tr><td>2 Bedroom + Ensuite Study</td><td>667</td><td>11</td><td>$2,068</td><td>$1.38M</td></tr>
+    <tr><td>2 Bedroom + Study</td><td>710</td><td>43</td><td>$2,130</td><td>$1.51M</td></tr>
+    <tr><td>3 Bedroom Deluxe</td><td>872 – 883</td><td>33</td><td>$2,061</td><td>$1.81M</td></tr>
+    <tr><td>3 Bedroom + Study</td><td>904</td><td>22</td><td>$2,076</td><td>$1.88M</td></tr>
+    <tr><td>3 Bedroom Premium + Study</td><td>1,044</td><td>33</td><td>$2,019</td><td>$2.11M</td></tr>
+    <tr><td>4 Bedroom Deluxe + Study</td><td>1,173</td><td>22</td><td>$2,001</td><td>$2.35M</td></tr>
+    <tr><td>4 Bedroom Premium + Study</td><td>1,313 – 1,335</td><td>58</td><td>$2,061</td><td>$2.71M</td></tr>
+  </table>
+  <p class="note">▶ 结构特征：<strong>小户型单价更高</strong>（1BR $2,141 vs 4BR $2,001 psf，价差 7%），3BR 及以下占成交的 75%——典型的"总价驱动"定价，主力客群是 upgraders 与小家庭。<strong>注意 1–2 房占比不高</strong>（2 房及以下 162 笔 / 49%），租金供给端不会形成恶性竞争。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 50m 标准泳池 + 儿童池</div>
+    <div class="facility-tag"><span class="icon">🏛️</span> Grand Club 会所（2 层）</div>
+    <div class="facility-tag"><span class="icon">💪</span> 健身房 + 舞蹈室</div>
+    <div class="facility-tag"><span class="icon">🧖</span> 更衣室含蒸汽房</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场</div>
+    <div class="facility-tag"><span class="icon">🌳</span> Treetop Walk 树冠步道</div>
+    <div class="facility-tag"><span class="icon">🍢</span> BBQ Pavilion ×2（东/西）</div>
+    <div class="facility-tag"><span class="icon">👶</span> 2 层独立幼教中心（ECDC）</div>
+    <div class="facility-tag"><span class="icon">🌿</span> Cabana Garden / 瑜伽草坪</div>
+    <div class="facility-tag"><span class="icon">🎠</span> Treehouse 主题游乐场</div>
+  </div>
+  <p class="note">※ 无篮球场 / 羽毛球场 / 壁球室——设施走"精品低密度"路线（每单位均摊约 444 sqft 土地），而非大盘全配套。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>TE3 Woodlands South 约 338m / 4–5 分钟步行</strong>；1 站到 Woodlands 综合交通枢纽（TEL + NSL + 巴士转换站）；2 站到 Woodlands North（<strong>RTS Link，2027 年 1 月通车</strong>）</td></tr>
+    <tr><td>🚗 快速路</td><td>SLE / BKE 接入；North-South Corridor 北段高架 <strong>2029</strong> 通车、南段隧道延至 <strong>2031</strong>（较原计划推迟 2 年）</td></tr>
+    <tr><td>🏫 小学（1km）</td><td><strong>Innova Primary 就在隔壁（约 108m）</strong>、Woodlands Ring Primary（约 1.0km）、Woodgrove / Si Ling / Woodlands Primary</td></tr>
+    <tr><td>🎓 中学 / 大专</td><td>Christ Church Secondary、Woodgrove Secondary、Singapore Sports School；Republic Polytechnic 2 站；Yishun Innova JC 预计 2028 年落成</td></tr>
+    <tr><td>🏥 医疗</td><td>Woodlands Health Campus（2023-12 启用，约 1,000 张急症与社区病床）步行/2 站巴士</td></tr>
+    <tr><td>🛍️ 商业</td><td>Causeway Point / Woods Square 1 站；Woodlands Regional Centre 规划 100 公顷、最高 10 万岗位</td></tr>
+    <tr><td>🌳 自然</td><td>Woodlands Town Garden、Admiralty Park</td></tr>
+  </table>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">7.00 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:70%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 20% · TE3 步行 4–5 分钟 + RTS 2027 通车 + Regional Centre 10 万岗位，但到 CBD 仍需约 40 分钟</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">4.00 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:40%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 15% · 毛回报仅 2.2%–3.1%（D25 实测租金 ÷ 成交价），低于 3.5% 及格线</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">6.00 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:60%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 20% · 开盘至今两年名义 <span class="num-green">-0.6%</span>，但 RTS / NSC / Regional Centre 三大利好尚未兑现</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">8.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:85%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 10% · CDL 独资（无合资博弈）+ BCA Band 1 + Green Mark Platinum SLE</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">6.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 10% · 无 ABSD（SC 首套）+ 节能认证省水电，但 99 年地契折耗 + 管理费与投资物业税不低</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">6.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:65%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 15% · 330 笔成交、去化 95%，2km 内 3,247 户 4R/5R/EC 满 MOP 的升级需求池</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">5.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:55%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 10% · 邻近 Wynwood Grand EC（0.41km）与约 4,000 户 BTO 供给、RTS/NSC 工期、加息周期</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：6.23 / 10</strong> —— 加权计算：（7.00×20%）+（4.00×15%）+（6.00×20%）+（8.50×10%）+（6.50×10%）+（6.50×15%）+（5.50×10%）= 1.40 + 0.60 + 1.20 + 0.85 + 0.65 + 0.975 + 0.55 = <strong>6.23</strong>。开发商与地段托住下限，租金回报与风险维度压住上限——这是一份"好房子、不便宜"的典型评分结构。
+  </div>
+</section>
+
+<!-- 价格走势 -->
+<section>
+  <div class="section-title">📈 价格走势与区域对比</div>
+  <table>
+    <tr><th>期间</th><th>成交笔数</th><th>均价 psf</th><th>区间 psf</th><th>环比</th></tr>
+    <tr><td>2024（10 月开盘起）</td><td>292</td><td>$2,080</td><td>$1,895 – $2,252</td><td>—</td></tr>
+    <tr><td>2025</td><td>12</td><td>$2,064</td><td>$2,024 – $2,112</td><td class="num-green">-0.8%</td></tr>
+    <tr><td>2026（1–9 月）</td><td>26</td><td>$2,067</td><td>$2,003 – $2,122</td><td class="num-red">+0.1%</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>解读：这是一条"平线"，而不是常见的新盘上升曲线。</strong>2024 年开盘周末均价约 $2,067 psf（EdgeProp 口径），两年后仍停在 $2,067——CDL 用"守住价格、放慢节奏"的方式清掉了 95% 库存（剩约 17 套）。对买家是好事（没有追高溢价），但也说明<strong>短期内没有明显的账面增值</strong>：真正的价值兑现要等 RTS（2027-01）与 Regional Centre 逐步落地。
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">D25 区域价格梯度（近 1 年成交均价 psf）</h3>
+  <table>
+    <tr><th>项目</th><th>类型</th><th>近 1 年均价 psf</th><th>相对 Norwood Grand</th></tr>
+    <tr><td><strong>Norwood Grand</strong></td><td>新盘私宅（2024 起）</td><td>$2,068</td><td>基准</td></tr>
+    <tr><td>Century Woods</td><td>转售私宅（2000 年代）</td><td>$1,487</td><td>低 28%</td></tr>
+    <tr><td>Woodhaven</td><td>转售私宅</td><td>$1,400</td><td>低 32%</td></tr>
+    <tr><td>Bellewoods</td><td>转售 EC（已私有化）</td><td>$1,345</td><td>低 35%</td></tr>
+    <tr><td>Twin Fountains</td><td>转售 EC（已私有化）</td><td>$1,324</td><td>低 36%</td></tr>
+    <tr><td>Northwave</td><td>EC（2019 落成）</td><td>$1,276</td><td>低 38%</td></tr>
+    <tr><td>Parc Rosewood</td><td>转售私宅（2014 落成）</td><td>$1,255</td><td>低 39%</td></tr>
+    <tr><td>Woodgrove Condominium</td><td>转售私宅（1990 年代）</td><td>$1,031</td><td>低 50%</td></tr>
+  </table>
+  <p class="note">▶ 区域溢价要分层看：对<strong>最新的转售私宅</strong>（Century Woods / Parc Rosewood）溢价约 39%–65%，对<strong>同区 EC</strong>（Northwave）溢价约 62%。这已是"新盘 + 地契新鲜 + 紧邻 MRT"能支撑的合理上限，再往上就需要 Regional Centre 兑现来接力。D25 全区转售中位数约 $1,200 psf（含大量 1990 年代盘），因此"较区域中位高 72%"这个数字具有误导性，不宜直接引用。</p>
+</section>
+
+<!-- 购买与持有合规 -->
+<section>
+  <div class="section-title">📋 购买与持有合规（私宅，非 EC）</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2023-09-12</div><div class="tl-detail">Champions Way GLS 截标，CDL 以 $294.889M（$904 psf ppr）中标</div></div>
+    <div class="tl-item"><div class="tl-year">2023-12-18</div><div class="tl-detail">99 年地契起算</div></div>
+    <div class="tl-item"><div class="tl-year">2024-10-19</div><div class="tl-detail">正式开盘，起价 $988,000（$1,996 psf，1 房）</div></div>
+    <div class="tl-item"><div class="tl-year">2028（预计）</div><div class="tl-detail">TOP 取得临时入伙证 → 交付、可入住 / 出租（无 MOP 限制）</div></div>
+    <div class="tl-item"><div class="tl-year">2093 前后</div><div class="tl-detail">30 年后剩余地契跌破 70 年，CPF 使用与部分买家贷款开始受限</div></div>
+  </div>
+  <table>
+    <tr><th>项目</th><th>规则（2026 现行）</th></tr>
+    <tr><td>ABSD</td><td>SC 首套 <strong>0%</strong>；SC 二套 20%；PR 首套 5%；外国人 60%</td></tr>
+    <tr><td>BSD</td><td>累进 1%–6%；以 $1.88M 的 3 房为例约 <strong>$63,600（约 3.4%）</strong></td></tr>
+    <tr><td>贷款</td><td>TDSR 55% 总偿债率（无 MSR）；LTV 上限 75%（首套银行贷）</td></tr>
+    <tr><td>卖方印花税 SSD</td><td>持有 ≤1 年 12%、2 年 8%、3 年 4%（第 4 年起免）</td></tr>
+    <tr><td>物业税</td><td>自住累进 0%–32%；出租按非自住累进 <strong>12%–36%</strong>（2024 起）</td></tr>
+    <tr><td>管理费（估）</td><td>2 房约 $320–380/月、3 房约 $420–480/月（348 户中小型项目，人均分摊偏高）</td></tr>
+  </table>
+  <p class="note">※ 私宅无 MOP，TOP 后即可整间出租或转售——这是与 EC 最本质的差别，也是本项目流动性优于同区 EC 的原因。</p>
+</section>
+
+<!-- 真实居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="warn-box">
+    <strong>数据可得性声明：</strong>Norwood Grand 预计 2028 年才取得 TOP，<strong>目前无任何住户入住，因此不存在真实居住评价</strong>。以下内容基于 ① 项目公开的图纸/设施清单/开发商交付记录；② 同一开发商与同一区域已交付项目（Parc Rosewood、Northwave、Bellewoods）的住户反馈外推；③ 2026 年市场与中介实地反馈。凡属推断均已标注，请勿当作实测结论。
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面（产品设计，来源：公开图纸与测评）</div>
+    <div class="review-quote">"四栋 11 层、348 户落在 155,351 sqft 地块上，容积率 2.1、约 72% 面积为景观与设施，<strong>每单位均摊土地约 444 sqft</strong>——在 OCR 新盘里属于'低密度感'明显的一档，不是 600+ 户大 crowding 盘。Treetop Walk 架在二层、而不是常规裙楼平台，是 CDL 这轮较有辨识度的做法。"</div>
+    <div class="review-source">— 项目公开平面图 + CondoWatch 2026 十项审计（48/50）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面（家庭配套，来源：学校/医疗实测距离）</div>
+    <div class="review-quote">"Innova Primary 就在项目隔壁（约 108m），Phase 2C 常年无需抽签；楼下自带 2 层独立幼教中心，Woodlands Health Campus 步行可达——对有 0–12 岁孩子的家庭，这套配套组合在 OCR 里属于第一梯队。"</div>
+    <div class="review-source">— 学校距离与 2026 年小一报名数据（CondoWatch / MOE）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面（区域环境，来源：邻近盘住户长期反馈）</div>
+    <div class="review-quote">"Champions Way 周边仍在持续施工（RTS、NSC 北段、Woodlands North 约 4,000 户 BTO）。参考北wave / Parc Rosewood 住户多年反馈，<strong>2026–2029 年这一带会有明显的施工噪音与粉尘</strong>，且 Woodlands 到 CBD 通勤单程约 40 分钟，TEL 沿线早高峰较拥挤。"</div>
+    <div class="review-source">— 邻近已交付项目住户讨论汇总（Reddit r/SingaporeRaw、PropertyGuru 评论）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性（租赁与交付，来源：市场推演）</div>
+    <div class="review-quote">"TOP 后租金能否兑现是关键未知：D25 新盘租金目前约 $3.0–4.2 psf/月（1300 sqft 大户型仅 ~$4,200/月），而项目本身以 3–4 房为主，租客池偏窄——<strong>大户型出租周期可能拉长到 2–3 个月</strong>。交付质量需观察 CDL 近年在同类盘（如 Tembusu Grand）的 defect 处理记录。"</div>
+    <div class="review-source">— 基于 2026 年 D25 共 268 笔实租数据推演</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.0/5，含推演成分）</strong> —— 硬件与家庭配套确实强（学区 + 医院 + 低密度 + 地铁 4 分钟），扣分项集中在"2029 年前是工地"和"通勤距离硬伤"。自住体验的兑现程度，很大程度取决于买家对北部走廊的耐心。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>区域供给放量</td><td class="num-red">高</td><td>0.41km 外 Wynwood Grand EC（2025-08 中标，$782 psf ppr）+ Woodlands North 约 4,000 户 BTO，2028–2032 年集中交付，转售与租赁同时面临分流</td></tr>
+    <tr><td>租金回报偏低</td><td class="num-red">中高</td><td>毛回报 2.2%–3.1%，扣管理费与 12%–36% 投资物业税后净回报约 1.5%–2.4%，低于当前 3.75%–4.00% 的无风险利率</td></tr>
+    <tr><td>利好兑现节奏</td><td style="color:#eab308;font-weight:600">中</td><td>RTS 目标 2027-01 通车（工程已过 90%），但 NSC 北段延至 2029、隧道段 2031；Regional Centre 是 15 年长周期</td></tr>
+    <tr><td>价格已充分定价</td><td style="color:#eab308;font-weight:600">中</td><td>对最新转售私宅溢价 39%–65%、对同区 EC 溢价 62%，开盘两年名义零增长</td></tr>
+    <tr><td>99 年地契折耗</td><td style="color:#eab308;font-weight:600">中</td><td>剩余约 96 年，短期无影响；但 2040 年后买家贷款年限与 CPF 使用开始受剩余地契约束</td></tr>
+    <tr><td>利率与政策</td><td style="color:#eab308;font-weight:600">中</td><td>2026 年 9 月已加息 25bp 至 3.75%–4.00%，市场定价 12 月再加息概率约 85%；ABSD/TDSR 若再收紧将直接压缩买家池</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>预算 $1.3M–$2.1M 的升级家庭，若工作地点在北部（Woodlands / Sembawang / Senoko / JB 通勤）或可接受 TEL 40 分钟到 CBD，这是当前 OCR 里"学区 + 医院 + 地铁 + 低密度"组合最完整的选择之一。建议优先 3 房 872–904 sqft（中位 $1.81M–$1.88M），<strong>避开 4 房大户型</strong>——单价低但流动性最差。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（有条件推荐）：</strong>只在你认可"RTS 2027 + Regional Centre 15 年"这条主线、且能承受 2028–2030 年负现金流的条件下考虑。合理预期是 <strong>2027–2030 年年化 3%–5%</strong>（RTS 通车 + TOP 转售溢价），而非两位数回报。以 2 房 $1.32M 计，年租金约 $34.8k（毛），扣管理费与税后约 $22k–24k，净回报 1.7%–1.8%。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>追求当期租金现金流者、3 年内需要变现者（SSD 12%/8%/4% + 交易成本约 3.4% BSD 会吃掉全部涨幅）、以及无法接受"2029 年前周边是工地"的买家。
+  </div>
+  <div class="highlight-box">
+    <strong>与同类盘的一句话对比：</strong>如果你在 Norwood Grand 和同区 EC（如 Wynwood Grand）之间犹豫——EC 入手价低 30%+ 但锁 5 年 MOP（新规 10 年）且要等私有化；Norwood Grand 贵、却能 TOP 后随时出租转售。<strong>要现金流弹性选私宅，要总价低选 EC</strong>，两者不是同一类工具。
+  </div>
+</section>
+
+<footer>
+  Norwood Grand Investment Analysis · 基于 URA 逐笔成交（330 笔，2024-10 至 2026-09）+ URA 租赁（D25，2026 年 268 笔）+ 公开市场信息 · 生成于 2026-10-30
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。价格数据来自 URA caveats（新盘销售），租金为同区实测推演值而非本项目实际租约；TOP 年份各渠道存在 2026/2028 差异，本报告以 2028 为基准。配色说明：本报告颜色仅用于表示数值涨跌（红=涨、绿=跌），不代表好坏评价。</div>
+</footer>
+
+</div>
+</body>
+</html>
