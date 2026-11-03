@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thomson Reserve — 新加坡私宅投资研报</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;background:#0b1120;color:#e2e8f0;line-height:1.75;min-height:100vh}
+.container{max-width:880px;margin:0 auto;padding:48px 24px 80px}
+a{text-decoration:none;color:#60a5fa}
+.hero{text-align:center;padding:48px 0 40px;border-bottom:1px solid #1e293b;margin-bottom:40px}
+.hero-badge{display:inline-block;background:#1e293b;color:#fbbf24;font-size:12px;font-weight:600;padding:4px 14px;border-radius:20px;margin-bottom:16px;letter-spacing:.5px}
+.hero h1{font-size:36px;font-weight:800;color:#fff;margin-bottom:8px}
+.hero .address{color:#94a3b8;font-size:15px;margin-bottom:20px}
+.kpi-row{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;margin-top:20px}
+.kpi{background:#1e293b;border-radius:12px;padding:16px 24px;text-align:center;min-width:140px}
+.kpi .val{font-size:26px;font-weight:700;color:#fbbf24}
+.kpi .lbl{font-size:12px;color:#94a3b8;margin-top:4px}
+section{margin-bottom:48px}
+.section-title{font-size:22px;font-weight:700;color:#fbbf24;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.highlight-box{background:linear-gradient(135deg,#1e293b 0%,#0f172a 100%);border-left:4px solid #fbbf24;border-radius:0 12px 12px 0;padding:20px 24px;margin:20px 0}
+.verdict{background:linear-gradient(135deg,#7c2d12 0%,#662410 100%);border-radius:12px;padding:24px 28px;margin:24px 0}
+.summary-box{background:#1e293b;border-radius:12px;padding:24px 28px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:16px 0}
+th,td{padding:10px 14px;text-align:left;border-bottom:1px solid #1e293b;font-size:14px}
+th{color:#fbbf24;font-weight:600;background:#0f172a}
+td{color:#cbd5e1}
+.num-green{color:#22c55e;font-weight:600}
+.num-red{color:#ef4444;font-weight:600}
+.score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
+.score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
+.score-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.score-name{font-weight:600;font-size:15px;color:#f1f5f9}
+.score-badge{font-size:20px;font-weight:700;color:#fbbf24}
+.score-bar-bg{height:8px;background:#334155;border-radius:4px;margin-top:8px;overflow:hidden}
+.score-bar{height:100%;border-radius:4px}
+.bar-high{background:linear-gradient(90deg,#22c55e,#4ade80)}
+.bar-mid{background:linear-gradient(90deg,#eab308,#facc15)}
+.bar-low{background:linear-gradient(90deg,#ef4444,#f87171)}
+.timeline{position:relative;padding-left:24px;margin:20px 0}
+.timeline::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:#334155}
+.tl-item{position:relative;padding:12px 0 12px 20px}
+.tl-item::before{content:'';position:absolute;left:-20px;top:16px;width:10px;height:10px;border-radius:50%;background:#fbbf24;border:2px solid #0b1120}
+.tl-year{font-weight:700;color:#fbbf24;font-size:15px}
+.tl-detail{color:#94a3b8;font-size:13px;margin-top:2px}
+footer{text-align:center;color:#475569;font-size:12px;padding:32px 0 0;border-top:1px solid #1e293b;margin-top:40px;line-height:1.8}
+.disclaimer{font-style:italic;color:#64748b;font-size:12px;text-align:center;margin:24px 0 0;padding:16px;background:#1e293b;border-radius:8px}
+ul.check-list{list-style:none;padding:0}
+ul.check-list li{padding:4px 0;font-size:14px;color:#cbd5e1}
+ul.check-list li::before{content:'✓ ';color:#22c55e;font-weight:700}
+ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
+.spec-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.spec-card{background:#1e293b;border-radius:12px;padding:16px 18px;border-left:3px solid #60a5fa}
+.spec-card.full{grid-column:1/-1}
+.spec-label{font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.spec-value{font-size:15px;color:#e2e8f0;font-weight:600}
+.facility-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin:16px 0}
+.facility-tag{background:#1e293b;border-radius:8px;padding:10px 14px;font-size:13px;display:flex;align-items:center;gap:8px}
+.facility-tag .icon{font-size:16px}
+.review-item{background:#1e293b;border-radius:12px;padding:16px 20px;margin:12px 0}
+.review-dimension{font-weight:700;color:#fbbf24;font-size:14px;margin-bottom:6px}
+.review-quote{color:#cbd5e1;font-size:14px;line-height:1.7;margin-bottom:6px}
+.review-source{font-size:12px;color:#64748b;font-style:italic}
+.star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
+.note{color:#94a3b8;font-size:13px;margin-top:10px}
+.warn-box{background:#3f1d1d;border-left:4px solid #ef4444;border-radius:0 12px 12px 0;padding:16px 20px;margin:16px 0;font-size:14px;color:#fecaca}
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Hero -->
+<div class="hero">
+  <div class="hero-badge">New Launch · 99-Year Leasehold · D20 Upper Thomson · RCR</div>
+  <h1>Thomson Reserve</h1>
+  <div class="address">1, 3, 5, 7, 9, 11 Bright Hill Drive · Upper Thomson · 99 年期（2026-07-14 起）</div>
+  <div class="kpi-row">
+    <div class="kpi"><div class="val">5.65</div><div class="lbl">七维综合评分</div></div>
+    <div class="kpi"><div class="val">$2,900</div><div class="lbl">首周末成交均价 psf</div></div>
+    <div class="kpi"><div class="val">$2,608</div><div class="lbl">起步 psf</div></div>
+    <div class="kpi"><div class="val">90%</div><div class="lbl">首周末去化（1,143/1,268）</div></div>
+    <div class="kpi"><div class="val">1,268</div><div class="lbl">总单位数</div></div>
+  </div>
+</div>
+
+<!-- 执行摘要 -->
+<section>
+  <div class="section-title">📌 执行摘要</div>
+  <div class="highlight-box">
+    <strong>2026 年最大的一盘，也是卖得最快的一盘——但"卖得快"和"值得投"是两个问题。</strong>
+    2026 年 10 月 31 日开盘，首周末 <strong>1,268 套中卖出 1,143 套（90%）</strong>，成交均价 <strong>$2,900 psf</strong>；此前两周预览吸引 <strong>32,000 人次</strong>、收到 <strong>3,300+ 支票</strong>（认购倍数 2.6 倍），双双创下 2026 年新高。
+    项目底子是真好：<strong>5.16 公顷</strong>地块（前身 Thomson View 集体出售，$810M 拿下）、<strong>6 栋（4×21 层 + 2×30 层）</strong>、<strong>88% 土地留作绿化与设施</strong>、8 个泳池、80+ 项设施、<strong>有盖走廊直达 TE8 Upper Thomson 地铁站</strong>、正对面 Thomson Plaza、步行可达 Ai Tong School。开发商是 <strong>UOL 40% + CapitaLand Development 50% + SingLand 10%</strong> 的顶级组合。
+  </div>
+  <div class="summary-box">
+    <strong>一句话结论：</strong>七维综合评分 <strong>5.65 / 10</strong>，落在"观望 / 需折价"区间。这是一个<strong>产品一流、价格也已充分反映其一流</strong>的项目：开盘均价 $2,900 psf 比同区最好的二手（AMO Residence $2,527）高 <strong>15%</strong>、比 JadeScape（$2,338）高 24%、比 D20 区中位（$1,954）高 <strong>48%</strong>。代价直接体现在现金流上——<strong>毛租金回报仅 1.35%–2.41%（加权 2.14%）</strong>，是近年新盘里最低的一档。
+    <br><br>
+    但要注意一个关键信号：Huttons 估算买家 <strong>约 90% 是自住客</strong>、私宅与组屋地址比例 70:30。这说明市场是把它当"家"买的，而不是当"资产"买的。<strong>自住客买对的东西，投资客不一定买对。</strong>适合<span style="color:#fbbf24;font-weight:600">预算 $1.5M–$3.4M、要 TEL 通勤 + 名校 + 大盘设施的自住家庭</span>；不适合任何以租金现金流或 5 年内资本增值为目标的资金。
+  </div>
+</section>
+
+<!-- 项目核心参数 -->
+<section>
+  <div class="section-title">🏗️ 项目核心参数</div>
+  <div class="spec-grid">
+    <div class="spec-card"><div class="spec-label">开发商</div><div class="spec-value">Tamarind Development · CapitaLand Dev 50% + UOL 40% + SingLand 10%</div></div>
+    <div class="spec-card"><div class="spec-label">总单位数</div><div class="spec-value">1,268 套 · 6 栋（4×21 层 + 2×30 层）</div></div>
+    <div class="spec-card"><div class="spec-label">地契</div><div class="spec-value">99 年 · 自 2026-07-14 起（补地价后全新起算，剩约 99 年）</div></div>
+    <div class="spec-card"><div class="spec-label">土地成本</div><div class="spec-value">$810M 集体出售 + 补地价/增值费 → 约 $1,247.6M · <strong>$1,178 psf ppr</strong></div></div>
+    <div class="spec-card"><div class="spec-label">地块 / 容积率</div><div class="spec-value">51,567 sqm（5.16 公顷 / 555,060 sqft）· GPR 2.1</div></div>
+    <div class="spec-card"><div class="spec-label">TOP / 交付</div><div class="spec-value">2H2030 · 空置交付 <strong>2031-02-28</strong> · 法定完工 2034-02-28</div></div>
+    <div class="spec-card"><div class="spec-label">建筑设计</div><div class="spec-value">P&amp;T Consultants · 住宅塔楼仅占用地 12%，88% 为绿化/水景/设施</div></div>
+    <div class="spec-card"><div class="spec-label">车位</div><div class="spec-value">1,021 个（含 31 个 EV 充电位、7 个无障碍位）</div></div>
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">户型、面积与首周末定价（均价 $2,900 psf 口径）</h3>
+  <table>
+    <tr><th>户型</th><th>面积 (sqft)</th><th>套数</th><th>起步价</th><th>估租金 / 月</th><th>毛回报</th><th>首周末</th></tr>
+    <tr><td>2 Bedroom</td><td>592</td><td>716</td><td>$1.544M（$2,608 psf）</td><td>$3,400 – $3,900</td><td>2.38% – 2.73%</td><td style="color:#eab308;font-weight:600">仍有大量存货</td></tr>
+    <tr><td>2 Bedroom Premium</td><td>678</td><td>—</td><td>—</td><td>$3,900</td><td>2.38%</td><td style="color:#eab308;font-weight:600">仍有存货</td></tr>
+    <tr><td>3 Bedroom</td><td>947</td><td>350</td><td>$2.503M（$2,643 psf）</td><td>$4,250</td><td>1.86%</td><td>基本售罄</td></tr>
+    <tr><td>3 Bedroom Premium</td><td>1,055</td><td>—</td><td>$2.829M（L5）</td><td>$4,250</td><td>1.67%</td><td class="num-red">最快售罄之一</td></tr>
+    <tr><td>3 Bedroom Prem + Study</td><td>1,152</td><td>—</td><td>$3.348M（L16）</td><td>$4,600</td><td>1.65%</td><td>基本售罄</td></tr>
+    <tr><td>4 Bedroom</td><td>1,238</td><td>174</td><td>$3.388M（$2,736 psf）</td><td>$5,200</td><td>1.74%</td><td>基本售罄</td></tr>
+    <tr><td>4 Bedroom Premium（私梯）</td><td>1,367</td><td>56</td><td>约 $3.77M（$2,758 psf）</td><td>$5,600</td><td>1.70%</td><td class="num-red">56 套 VIP 日全部售罄</td></tr>
+    <tr><td>4 Bedroom Prem + Study（私梯）</td><td>1,485</td><td>28</td><td>—</td><td>$5,900</td><td>1.64%</td><td class="num-red">28 套 VIP 日全部售罄</td></tr>
+    <tr><td>5 Bedroom Suite（私梯）</td><td>1,808</td><td>28</td><td>$5.08M（L3）– $5.98M（L30）</td><td>$5,900</td><td>1.35%</td><td style="color:#eab308;font-weight:600">仅剩 2 套（#03-19 / #04-19）</td></tr>
+  </table>
+  <p class="note">▶ 三个结构性发现：①<strong>私梯户型最先抢光</strong>——4BR Premium、4BR Premium+Study 全部、5BR 28 套中的 26 套都在 VIP 日（10/30）成交，110 套私梯单位合计约 $505M、均价约 $3,060 psf；②<strong>小户型反而剩最多</strong>——716 套 2 房在 VIP 日后仍剩 696 套，20 个 2 房堆栈一套未售；③<strong>单价与面积负相关被打破</strong>：2BR 起步 $2,608 psf 最低，但均价被高层大单位拉到 $2,900，说明价差主要来自楼层与朝向，不是户型大小。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">配套设施（80+ 项，3 个会所）</h3>
+  <div class="facility-grid">
+    <div class="facility-tag"><span class="icon">🏊</span> 8 个泳池（含 2 个 50m 标准池）</div>
+    <div class="facility-tag"><span class="icon">🌊</span> Island Pool / 无边泳池</div>
+    <div class="facility-tag"><span class="icon">🛁</span> Hydro Spa Pool + 水疗舱</div>
+    <div class="facility-tag"><span class="icon">💪</span> 212 sqm 主健身房</div>
+    <div class="facility-tag"><span class="icon">🏛️</span> 3 个会所 Clubhouse</div>
+    <div class="facility-tag"><span class="icon">🎾</span> 网球场 + 2 个多功能球场</div>
+    <div class="facility-tag"><span class="icon">⛳</span> 高尔夫模拟器</div>
+    <div class="facility-tag"><span class="icon">👶</span> 儿童泳池 + 游乐场</div>
+    <div class="facility-tag"><span class="icon">🌳</span> 森林带 / 景观花园</div>
+    <div class="facility-tag"><span class="icon">🚶</span> 有盖走廊直达 TE8 地铁站</div>
+  </div>
+  <p class="note">※ 这是全岛近年少见"设施密度"项目：住宅塔楼只占用地 12%，其余 88%（约 4.5 公顷）全给绿化、水景与设施；6 栋楼错位排布，官方称 <strong>80% 以上单位朝绿化或景观</strong>。代价是管理费——1,268 户分摊 80+ 项设施，3 房预估 $500–650/月量级。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">交通与教育（这是本项目最强的部分）</h3>
+  <table>
+    <tr><th>项目</th><th>详情</th></tr>
+    <tr><td>🚇 地铁</td><td><strong>TE8 Upper Thomson 有盖走廊直达（步行 1–2 分钟）</strong>；1 站到 Bright Hill（未来 <strong>跨岛线 CRL 换乘站</strong>）；TEL 直通 Marina Bay / Shenton Way，无需换乘</td></tr>
+    <tr><td>🚗 快速路</td><td><strong>North-South Corridor 2029 起分段通车</strong>（南北走廊含高速巴士道与自行车干道）；CTE / SLE 接入</td></tr>
+    <tr><td>🏫 小学</td><td><strong>Ai Tong School（爱同小学，步行可达，位于 Bright Hill 一带）</strong>；1–2km 内还有 CHIJ St. Nicholas Girls'、Raffles Institution（中学/初院）</td></tr>
+    <tr><td>🛍️ 商业</td><td><strong>Thomson Plaza 就在正对面</strong>，经地铁站地下通道连接；Upper Thomson Road 餐饮带步行 5 分钟（知名食肆密集）</td></tr>
+    <tr><td>🌳 自然</td><td>Windsor Nature Park 步行 5 分钟；南接 <strong>3,000+ 公顷中央集水区自然保护区</strong>；MacRitchie Reservoir、Bukit Timah 视野</td></tr>
+    <tr><td>⛳ 休闲</td><td>Singapore Island Country Club（SICC）相邻；Lower/Upper Peirce 水库</td></tr>
+    <tr><td>🏥 医疗</td><td>最近的综合医院需前往 Novena / Bishan 一带（车程 10–15 分钟）</td></tr>
+  </table>
+  <p class="note">⚠️ 区域归属小提醒：URA 的 RCR / OCR 边界正好切过 D20，本项目按 Huttons 口径属 <strong>RCR</strong>（并被称为"RCR 最畅销盘"），而相邻的 AMO Residence 在本库被标为 OCR。本报告按 RCR 计分（地段基础 7 分 + 地铁 +1 = 8）。若按 OCR 计，地段分会是 7.0，综合分会降至约 5.45。</p>
+</section>
+
+<!-- 七维评分 -->
+<section>
+  <div class="section-title">⭐ 七维评分</div>
+  <div class="score-grid">
+    <div class="score-card"><div class="score-header"><div class="score-name">地段 Location</div><div class="score-badge">8.00 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:80%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 20% · RCR 基础 7 分 + 地铁 ≤400m（有盖走廊直达）+1；Ai Tong 名校步行可达，但 1km 内不足 2 所小学，不加分。全报告最高分项</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">租金回报 Rental Yield</div><div class="score-badge">3.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:35%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 15% · 加权毛回报 <strong>2.14%</strong>（D20 同面积实租 ÷ 均价）→ 锚点 3+(2.14−2.0)=3.14 分；新盘硬件与地铁门口微调 +0.36。5 房仅 1.35%</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">资本增值 Appreciation</div><div class="score-badge">4.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:45%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 20% · 期房无历史涨幅，改用"开盘价 vs 同区可比转售"：比最好的二手 AMO 高 15% → 隐含初始溢价为负，基准 4 分；区域二手年涨 3.8%–4.2% + NSC 2029 微调 +0.5</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">开发商信誉 Developer</div><div class="score-badge">9.00 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-high" style="width:90%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 10% · CapitaLand Dev 50% + UOL 40% + SingLand 10%，全为顶级上市开发商；同组合前作 ParkTown（87% 首日去化、现 98% 售罄）、Skye at Holland（99% 首日、已清盘）</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">持有成本 Holding Cost</div><div class="score-badge">5.00 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:50%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 10% · 管理费估 $500–650/月（80+ 项设施，1,268 户分摊，锚点 5 分）；自住税负轻 +0.5 与 99 年地契年折耗 −0.5 相抵</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">退出流动性 Exit Liquidity</div><div class="score-badge">4.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-low" style="width:45%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 15% · D20 非有地年均约 <strong>573 笔</strong>二手、深买家池（+），但期房期间 <strong>4.5 年零流动性</strong>、2031 年后 1,268 户集中解禁（−）；按"期房打折 + 大盘减分"取 4.5</p></div>
+    <div class="score-card"><div class="score-header"><div class="score-name">风险控制 Risk</div><div class="score-badge">5.50 / 10</div></div><div class="score-bar-bg"><div class="score-bar bar-mid" style="width:55%"></div></div><p style="color:#94a3b8;font-size:13px;margin-top:8px">权重 10% · SC 首套无 ABSD、SSD 4 年在交付（2031）前已过（+）；但入场价处 D20 最高档、政策与加息周期敏感、1,268 户供给集中（−）</p></div>
+  </div>
+
+  <div class="verdict">
+    <strong>综合评分：5.65 / 10</strong> —— 加权计算：（8.00×20%）+（3.50×15%）+（4.50×20%）+（9.00×10%）+（5.00×10%）+（4.50×15%）+（5.50×10%）= 1.60 + 0.525 + 0.90 + 0.90 + 0.50 + 0.675 + 0.55 = <strong>5.65</strong>。
+    <br><br>
+    <strong>这个分数要读对：低分不是因为项目差，而是因为"好项目"的价格已经把好项目定价进去了。</strong>地段 8.0、开发商 9.0 都是顶级；把总分压下来的是租金（3.5）、增值（4.5）、流动性（4.5）——三项恰好都是"你付了多少钱"的函数，而不是"房子有多好"的函数。地段与开发商决定了它能住得多好，价格决定了它能赚多少。
+  </div>
+</section>
+
+<!-- 开盘去化与价格对比 -->
+<section>
+  <div class="section-title">📈 开盘去化与价格对比</div>
+  <table>
+    <tr><th>节点</th><th>数据</th><th>说明</th></tr>
+    <tr><td>预览（10/17–10/18 首周末）</td><td>11,800 人次</td><td>2026 年最高；超过 ParkTown 的 10,000</td></tr>
+    <tr><td>预览（两周累计）</td><td>32,000 人次</td><td>UOL / CLD 联合项目史上最高</td></tr>
+    <tr><td>支票（10/28 前）</td><td>约 3,200 – 3,300 张</td><td>认购倍数 <strong>2.5–2.6 倍</strong></td></tr>
+    <tr><td>VIP 日（10/30）</td><td>242 套（19%）</td><td>私梯户型（1,367 / 1,485 / 1,808 sqft）几乎清空</td></tr>
+    <tr><td><strong>开盘首周末（10/31– ）</strong></td><td><strong>1,143 套 / 90%</strong></td><td><strong>成交均价 $2,900 psf</strong>；其中 215 套为"多套购买"</td></tr>
+    <tr><td>剩余存货</td><td>125 套</td><td>主要为 2 房、2 房 Premium，以及 2 套 1,808 sqft 五房</td></tr>
+  </table>
+  <div class="highlight-box">
+    <strong>怎么读"90%"这个数字？</strong>这是 2026 年最成功的开盘，但它回答的是"<strong>住得值不值</strong>"，不是"<strong>投资划不划算</strong>"。三条证据：① Huttons 估算买家私宅:组屋地址 = <strong>70:30</strong>、<strong>约 90% 自住</strong>；② 最先卖光的是<strong>私梯四房/五房</strong>（$3.77M–$5.98M，均价约 $3,060 psf）——这是"换房自住"的典型选择，不是收益率驱动的选择；③ 单价最低、最好出租的 <strong>2 房反而剩 696 套</strong>——如果买盘是投资客，2 房会先被扫光。
+    <br><br>
+    换句话说：<strong>投资客在这盘里是少数派，而这盘的价格也不是为投资客设的。</strong>你可以跟着自住客的逻辑买（住得好、长期抗跌），但不能跟着他们的逻辑算回报。
+  </div>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">D20 区域价格梯度（2026 年成交均价 psf）</h3>
+  <table>
+    <tr><th>项目</th><th>类型</th><th>2026 均价 psf</th><th>相对 Thomson Reserve（$2,900）</th></tr>
+    <tr><td><strong>Thomson Reserve</strong></td><td>新盘（2026-10 开盘）</td><td><strong>$2,900</strong></td><td>基准</td></tr>
+    <tr><td>AMO Residence</td><td>新盘转售（2022 TOP，紧邻）</td><td>$2,527</td><td class="num-green">低 13%</td></tr>
+    <tr><td>Lentor Gardens Residences</td><td>新盘（2026，Lentor）</td><td>$2,359</td><td class="num-green">低 19%</td></tr>
+    <tr><td>JadeScape</td><td>转售（2018 TOP，Shunfu）</td><td>$2,338</td><td class="num-green">低 19%</td></tr>
+    <tr><td>Sky Vue</td><td>转售（2017 TOP，Bishan）</td><td>$2,243</td><td class="num-green">低 23%</td></tr>
+    <tr><td>Springleaf Residence</td><td>新盘（2025 开盘，D26）</td><td>$2,226</td><td class="num-green">低 23%</td></tr>
+    <tr><td>The Panorama</td><td>转售（2017 TOP，AMK）</td><td>$2,112</td><td class="num-green">低 27%</td></tr>
+    <tr><td>Thomson Three</td><td>转售（2016 TOP，Upper Thomson）</td><td>$2,070</td><td class="num-green">低 29%</td></tr>
+    <tr><td>Adana @ Thomson</td><td>转售（2016 TOP）</td><td>$1,946</td><td class="num-green">低 33%</td></tr>
+    <tr><td>D20 全区中位（75 个非有地项目）</td><td>—</td><td>$1,954</td><td class="num-green">低 33% / 溢价 48%</td></tr>
+  </table>
+  <p class="note">▶ 两个必须同时说的结论：① 对<strong>最好的同区二手</strong>（AMO）溢价 14.8%，对 JadeScape 溢价 24%，这在"新盘 + 地铁门口 + 5 公顷大盘"里属于<strong>可以解释</strong>的溢价；② 但"我们的起步价比 Springleaf 高 20%""比 JadeScape 转售还贵"这类话术要看清口径——$2,608 是<strong>起步价</strong>（最低楼层最小户型），实际均价是 <strong>$2,900</strong>，溢价其实是 24%–30%，不是 20%。</p>
+
+  <h3 style="color:#f1f5f9;margin:20px 0 10px">同区可比项目的涨价轨迹（YOY 是否支撑新盘溢价）</h3>
+  <table>
+    <tr><th>项目</th><th>2024</th><th>2025</th><th>2026</th><th>年化</th></tr>
+    <tr><td>AMO Residence</td><td>$2,329</td><td>$2,480</td><td>$2,527</td><td class="num-red">+4.2%</td></tr>
+    <tr><td>JadeScape</td><td>$2,172</td><td>$2,289</td><td>$2,338</td><td class="num-red">+3.8%</td></tr>
+    <tr><td>Sky Vue</td><td>$2,123</td><td>$2,182</td><td>$2,243</td><td class="num-red">+2.8%</td></tr>
+    <tr><td>Thomson Three</td><td>$1,993</td><td>$2,042</td><td>$2,070</td><td class="num-red">+1.9%</td></tr>
+  </table>
+  <p class="note">▶ 区域二手年涨 2%–4%。若这个速度延续，AMO 到 2031 年约 $3,070–3,100 psf——也就是 Thomson Reserve 到交付时<strong>才刚刚追平当前买入价 +15% 的溢价</strong>。结论：以 $2,900 入场，5 年内合理预期是<strong>接近零到 +10% 的名义涨幅</strong>，年化 0%–2%，而不是两位数。</p>
+</section>
+
+<!-- 购买与持有合规 -->
+<section>
+  <div class="section-title">📋 购买与持有合规（私宅期房）</div>
+  <div class="timeline">
+    <div class="tl-item"><div class="tl-year">2026-07-14</div><div class="tl-detail">99 年地契起算（集体出售 + 补地价后的全新租期）</div></div>
+    <div class="tl-item"><div class="tl-year">2026-10-17 / 10-30 / 10-31</div><div class="tl-detail">预览 → VIP 认购 → 正式开盘（首周末售出 90%）</div></div>
+    <div class="tl-item"><div class="tl-year">2026-10-31 → 2030</div><div class="tl-detail">进度付款（Progressive Payment）：签约 5% + 后续按工程节点分 8 期，地基/框架/砌体/机电/TOP 各阶段付款</div></div>
+    <div class="tl-item"><div class="tl-year">2H2030</div><div class="tl-detail">TOP 取得临时入伙证</div></div>
+    <div class="tl-item"><div class="tl-year">2031-02-28</div><div class="tl-detail">空置交付（Vacant Possession）→ 可入住 / 出租（私宅无 MOP）</div></div>
+    <div class="tl-item"><div class="tl-year">约 2030-10</div><div class="tl-detail"><strong>SSD 4 年窗口在交付前结束</strong>——拿到钥匙时卖方印花税已归零，这是期房的结构性优势</div></div>
+    <div class="tl-item"><div class="tl-year">2034-02-28</div><div class="tl-detail">法定完工（Legal Completion），CSC 后满 3 年</div></div>
+    <div class="tl-item"><div class="tl-year">约 2125</div><div class="tl-detail">地契到期</div></div>
+  </div>
+  <table>
+    <tr><th>项目</th><th>规则（2026 现行）</th></tr>
+    <tr><td>ABSD</td><td>SC 首套 <strong>0%</strong>；SC 二套 20%；PR 首套 5%；<strong>外国人 60%</strong></td></tr>
+    <tr><td>BSD</td><td>累进 1%–6%；以 $2.75M 的 3 房计约 <strong>$107,100（约 3.9%）</strong></td></tr>
+    <tr><td>贷款</td><td>TDSR 55% 总偿债率（无 MSR）；<strong>期房 LTV 上限 75%</strong>；进度付款阶段利息按已付工程进度计</td></tr>
+    <tr><td>卖方印花税 SSD</td><td>持有 ≤1 年 12%、2 年 8%、3 年 4%、第 4 年起免——<strong>本项目交付时 SSD 已归零</strong></td></tr>
+    <tr><td>物业税</td><td>自住累进 0%–32%；出租按非自住 <strong>12%–36%</strong></td></tr>
+    <tr><td>管理费（估）</td><td>2 房约 $420–480、3 房约 $500–650、4 房约 $700–850/月（80+ 项设施、8 个泳池）</td></tr>
+    <tr><td>期房特殊风险</td><td>发展商须开 <strong>Project Account</strong> 专户并按进度支取；买家付款受《房屋发展商法》规管，但<strong>交付延期、规格变更、缺陷责任（12 个月）</strong>仍须自行关注</td></tr>
+  </table>
+  <p class="note">※ 期房真正的成本不只是房价，还有 <strong>4.5 年的资金占用</strong>：进度付款意味着你在 2030 年前就付掉大部分房款，但这段时间没有租金收入。以 3 房 $2.75M 计，工期内的资金成本（按 3.75%–4.00% 计）每年约 $60k–80k，这是"毛回报 1.86%"之外的第二层成本。</p>
+</section>
+
+<!-- 真实居住体验 -->
+<section>
+  <div class="section-title">💬 真实居住体验</div>
+  <div class="warn-box">
+    <strong>数据可得性声明：</strong>Thomson Reserve 是 2026 年 10 月才开盘的期房，<strong>2030 年才 TOP，目前零住户、零真实居住评价</strong>。以下内容基于：① 项目公开图纸、设施清单与开发商发布；② 同一联合开发商（UOL + CLD）已交付项目（ParkTown Residence、Skye at Holland 等）的住户反馈与交付记录；③ 同区已交付项目的实际居住体验。凡属推断均已标注。
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面（产品密度与朝景，来源：公开图纸）</div>
+    <div class="review-quote">"住宅塔楼只占用地 12%，88%（约 4.5 公顷）给了绿化、水景和设施——在 1,268 户的体量下，<strong>每户均摊的土地约 438 sqft</strong>，但因为有 8 个泳池和 3 个会所分散布局，实际体感不像一个千户大盘。6 栋楼错位排布、官方称 80% 以上单位朝绿化或景观，30 层塔楼的低层单位被抬高约 3 层，避开了 Upper Thomson Road 的视线与噪音。"</div>
+    <div class="review-source">— UOL / CapitaLand 2026-10-15 项目发布 + 项目平面图</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👍 正面（通勤与生活，来源：实测距离与交通规划）</div>
+    <div class="review-quote">"<strong>有盖走廊直接进 TE8</strong>，这是全岛新盘里通勤体验最好的一档——不是'步行 5 分钟'而是'下雨也不用打伞'。TEL 一线直达 Marina Bay / Shenton Way，中途不用换乘；正对面 Thomson Plaza 经地铁站地下通道连通，超市、餐饮、诊所都在 5 分钟内。Upper Thomson Road 的餐饮带是本地公认的'食街'，这一点对日常生活的加分比任何会所都实在。"</div>
+    <div class="review-source">— TEL 线路图 + 项目位置实测（Thomson Plaza 正对面）</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">👎 负面（施工期与环境，来源：同区已交付项目与工程时序）</div>
+    <div class="review-quote">"Bright Hill Drive 一带 2026–2030 年会是<strong>持续工地</strong>：本项目 6 栋楼同步施工，叠加 <strong>North-South Corridor（2029 起分段通车）</strong>的隧道与高架工程。参考同区 The Panorama、Thomson Three 住户对周边工程的长期反馈，施工噪音、粉尘与重型车辆通行是这五年最现实的减分项。<strong>2029 年 NSC 通车后 Upper Thomson Road 的车流也会重新组织</strong>，短期阵痛、长期改善。"</div>
+    <div class="review-source">— 同区已交付项目住户讨论汇总 + LTA North-South Corridor 工期</div>
+  </div>
+  <div class="review-item">
+    <div class="review-dimension">⚠️ 中性（交付品质与管理费，来源：开发商过往项目）</div>
+    <div class="review-quote">"UOL 与 CapitaLand 的交付记录在新加坡属于第一梯队（ParkTown 87% 首日去化、Skye at Holland 99% 并已清盘），没有系统性 defect 集体投诉。但两个真实变量要盯：① <strong>80+ 项设施 + 8 个泳池的维护成本</strong>——1,268 户分摊虽能稀释，但这类高设施密度项目的管理费上调压力通常大于普通盘；② <strong>1,268 户的社区规模</strong>意味着电梯高峰、泳池周末拥挤、访客停车都需要实际体验才能判断，千户大盘的'设施够不够用'和'设施多不多'是两件事。"</div>
+    <div class="review-source">— 开发商已交付项目公开记录；本项目评价为零，此段为外推</div>
+  </div>
+  <div class="summary-box">
+    <strong>居住体验综合评级：★★★★☆（4.2/5，高度依赖外推）</strong> —— 单看"住"，这可能是 2026 年综合体验最好的新盘：地铁门口 + 名校步行 + 5 公顷绿化 + 80 项设施 + 双顶级开发商，五个维度里没有一个明显短板。<strong>扣分全部落在"时间"上</strong>——2031 年才拿钥匙，而 2026–2030 年这一带是工地。<br><br>
+    换句话说：这是一份"<strong>2026 年买、2031 年享受</strong>"的合约。买它的人要接受四年半的等待，而这四年半既没有租金，也没有居住。
+  </div>
+</section>
+
+<!-- 风险提示 -->
+<section>
+  <div class="section-title">⚠️ 风险提示</div>
+  <table>
+    <tr><th>风险</th><th>等级</th><th>说明</th></tr>
+    <tr><td>入场价处 D20 最高档</td><td class="num-red">高</td><td>均价 $2,900 psf 比紧邻的 AMO（$2,527）高 15%、比 D20 中位（$1,954）高 48%。同区二手年涨 2%–4%，<strong>要 4–5 年才追平这个溢价</strong>，意味着短期几乎没有账面增值</td></tr>
+    <tr><td>租金回报为近年新盘最低档</td><td class="num-red">高</td><td>加权毛回报 <strong>2.14%</strong>（5 房仅 1.35%），扣管理费（$500–850/月）与非自住物业税（12%–36%）后净回报约 <strong>1.3%–1.8%</strong>；而政策利率已是 3.75%–4.00%，<strong>持有即负现金流</strong></td></tr>
+    <tr><td>期房 4.5 年零流动性</td><td class="num-red">中高</td><td>2026-10 买入、2031-02 才交付。这期间不可住、不可租、转售只能靠"楼花转让"（需开发商同意且市场极薄）。资金占用成本以 3 房 $2.75M 计约 $60k–80k/年</td></tr>
+    <tr><td>1,268 户集中解禁</td><td style="color:#eab308;font-weight:600">中高</td><td>2031 年后同一时间点有 1,268 户可售，而 D20 全区非有地二手年成交约 573 笔。<strong>缓解因素</strong>：90% 自住客意味着解禁后抛压小于投资盘</td></tr>
+    <tr><td>市场正在降温</td><td style="color:#eab308;font-weight:600">中</td><td>2026 年 Q3 新私宅销量 <strong>1,082 套，环比 −49.5%</strong>；CBRE 全年预测 7,500–8,500 套，低于五年均值 8,766。本项目是 2026 年最后一个大型新盘，之后新盘档期进入空档</td></tr>
+    <tr><td>利率与政策</td><td style="color:#eab308;font-weight:600">中</td><td>2026 年 9 月已加息至 3.75%–4.00%，市场对 12-09 再加息的定价从 79% 回落到 70%（10/30）；期房进度付款对利率敏感，且 ABSD/TDSR 若再收紧会直接压缩买家池</td></tr>
+    <tr><td>交付与规格（单独披露，不扣风险分）</td><td style="color:#eab308;font-weight:600">中</td><td>TOP 2H2030、空置交付 2031-02-28。工期风险、规格变更、12 个月缺陷责任期属期房固有属性，按框架规则<strong>单独披露而不计入风险维度</strong>——但买家必须知道自己承担了 4.5 年的开发商信用风险（尽管对手方是 UOL + CapitaLand，行业最高信用）</td></tr>
+    <tr><td>区域归属口径差异</td><td style="color:#94a3b8;font-weight:600">低</td><td>RCR / OCR 边界切过 D20：Huttons 称本项目属 RCR，相邻 AMO 在本库标为 OCR。若按 OCR 计，综合分降至约 5.45——结论方向不变</td></tr>
+  </table>
+</section>
+
+<!-- 最终结论 -->
+<section>
+  <div class="section-title">🎯 最终结论</div>
+  <div class="summary-box">
+    <strong>🏠 自住（推荐）：</strong>这是 2026 年"住得好"这件事上最完整的一盘——<strong>有盖走廊进地铁、Ai Tong 步行、Thomson Plaza 正对面、5 公顷绿化、80 项设施、双顶级开发商</strong>，五个维度没有短板。预算 $1.5M–$3.4M 的家庭（首次置业、HDB 升级、多代同堂）买它是对的。选房建议：<strong>3 房 947 sqft（$2.50M 起）是性价比甜点</strong>，卡在 $3M 以下、最受本地升级家庭欢迎、也最容易转手；<strong>避开 5 房 $5M+</strong>（总价天花板 + 1.35% 回报）。楼层选"价格台阶下方一层"（L7 / L11 / L17）能用同样的景观省下 1–2 个百分点的总价。
+  </div>
+  <div class="summary-box">
+    <strong>💼 投资（不推荐，除非你买的是"抗跌"而不是"回报"）：</strong>把账算清楚——3 房 $2.75M，月租约 $4,250，毛回报 <strong>1.86%</strong>；扣管理费（约 $6,600/年）与非自住物业税（约 $8,280/年）后净回报 <strong>约 1.31%</strong>。即便你相信区域二手每年涨 4%、5 年后卖掉，年化总回报也只有 <strong>3%–4%</strong>，而这还没扣 BSD 3.9% 与 4.5 年的资金成本。<strong>这不是一个收益型资产，是一个高信用、抗跌、形态稀缺的自住资产。</strong>
+    如果你一定要投，唯一的合理理由是"用 $2.9M 锁定一个 2026 年不可能再复制的区位"——那是价值储藏，不是投资回报。
+  </div>
+  <div class="summary-box">
+    <strong>🚫 不推荐：</strong>① 要当期现金流者（净回报 1.3%–1.8%，负现金流）；② <strong>5 年内需要变现者</strong>（期房期间无流动性，且入场价已含 15%+ 溢价）；③ 需要立即入住者（2031 年才交付）；④ 指望"新盘首日 90% 去化 = 价格会涨"的人——<strong>去化率衡量的是需求强度，不是回报率</strong>；同一开发商前作 ParkTown 开盘 $2,360、20 个月后 $2,356，就是最直接的对照。
+  </div>
+  <div class="highlight-box">
+    <strong>一句话对比：</strong>如果你在 <strong>Thomson Reserve（$2,900 psf、2031 交付、地铁门口）</strong> 和 <strong>AMO Residence（$2,527 psf、现房、紧邻同区）</strong> 之间犹豫——多付 15% 买到的是"全新 + 5 公顷大盘 + 8 个泳池 + 99 年新地契"，牺牲的是 4.5 年时间与 0.5 个百分点的现金流。<strong>要现房和现金流选 AMO，要产品和地契新鲜度选 Thomson Reserve</strong>。这两个都不是错的选择，但它们是两种不同的买家。
+    <br><br>
+    <strong>关于这个 5.65 分：</strong>它低于 Norwood Grand（6.23）、低于 Whistler Grand（7.55），不是因为 Thomson Reserve 的产品更差——恰恰相反，它可能是这一批里产品最好的。<strong>低分来自"价格已经把好产品定价进去了"</strong>：地段 8.0 和开发商 9.0 这两个顶级分项，被 2.14% 的租金和 15% 的入场溢价完全抵消。用巴菲特的话说：<em>这是一家好公司，但不是一个好价格。</em>
+  </div>
+</section>
+
+<footer>
+  Thomson Reserve Investment Analysis · 基于 URA 逐笔成交（D20 全区 53 个非有地项目、近 5 年 2,867 笔）+ URA 租赁（D20 2026 年 625 笔）+ UOL / CapitaLand 官方发布 + The Edge / EdgeProp / Huttons 开盘数据 · 生成于 2026-11-03
+  <div class="disclaimer">本报告仅供参考，不构成投资建议。房产投资有风险，决策需谨慎。本项目为 2026-10 开盘期房，<strong>URA caveats 尚未入本地库，成交与去化数据引自开发商公告及 The Edge / EdgeProp 报道</strong>；均价 $2,900 psf 为首周末成交均价，非全项目最终均价。租金为 D20 同面积段 2026 年实测中位值，非本项目实际租约（期房无租约）。管理费、净回报、5 年后价格均为估算。区域归属（RCR/OCR）存在口径差异，已在正文注明。配色说明：本报告颜色仅用于表示数值涨跌（红=涨、绿=跌），不代表好坏评价。</div>
+</footer>
+
+</div>
+</body>
+</html>

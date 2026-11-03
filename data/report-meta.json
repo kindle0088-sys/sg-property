@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-02T02:18:22.436Z",
+  "generated": "2026-11-03T11:51:21.077Z",
   "note": "tenure: 99年/Freehold; top: TOP 年份(期房为预计)或区间(Bidadari 2015-2025)",
   "projects": {
     "whistler-grand": {
@@ -317,6 +317,10 @@
     "marina-collection": {
       "tenure": "99年",
       "top": "2011"
+    },
+    "thomson-reserve": {
+      "tenure": "99年",
+      "top": "2030"
     }
   }
 }
