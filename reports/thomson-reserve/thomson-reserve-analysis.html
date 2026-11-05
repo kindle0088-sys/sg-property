@@ -28,6 +28,7 @@ th{color:#fbbf24;font-weight:600;background:#0f172a}
 td{color:#cbd5e1}
 .num-green{color:#22c55e;font-weight:600}
 .num-red{color:#ef4444;font-weight:600}
+.label-neutral{color:#cbd5e1;font-weight:600}
 .score-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;margin:20px 0}
 .score-card{background:#1e293b;border-radius:12px;padding:20px;position:relative;overflow:hidden}
 .score-card::before{content:'';position:absolute;top:0;left:0;width:4px;height:100%;background:#fbbf24}
@@ -66,6 +67,11 @@ ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
 .star-rating{color:#fbbf24;font-size:18px;letter-spacing:2px}
 .note{color:#94a3b8;font-size:13px;margin-top:10px}
 .warn-box{background:#3f1d1d;border-left:4px solid #ef4444;border-radius:0 12px 12px 0;padding:16px 20px;margin:16px 0;font-size:14px;color:#fecaca}
+.num-red{color:#ef4444!important}
+.num-green{color:#22c55e!important}
+.red{color:#ef4444!important}
+.green{color:#22c55e!important}
+.label-neutral{font-weight:600}
 </style>
 </head>
 <body>
@@ -120,11 +126,11 @@ ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
     <tr><td>2 Bedroom</td><td>592</td><td>716</td><td>$1.544M（$2,608 psf）</td><td>$3,400 – $3,900</td><td>2.38% – 2.73%</td><td style="color:#eab308;font-weight:600">仍有大量存货</td></tr>
     <tr><td>2 Bedroom Premium</td><td>678</td><td>—</td><td>—</td><td>$3,900</td><td>2.38%</td><td style="color:#eab308;font-weight:600">仍有存货</td></tr>
     <tr><td>3 Bedroom</td><td>947</td><td>350</td><td>$2.503M（$2,643 psf）</td><td>$4,250</td><td>1.86%</td><td>基本售罄</td></tr>
-    <tr><td>3 Bedroom Premium</td><td>1,055</td><td>—</td><td>$2.829M（L5）</td><td>$4,250</td><td>1.67%</td><td class="num-red">最快售罄之一</td></tr>
+    <tr><td>3 Bedroom Premium</td><td>1,055</td><td>—</td><td>$2.829M（L5）</td><td>$4,250</td><td>1.67%</td><td class="label-neutral">最快售罄之一</td></tr>
     <tr><td>3 Bedroom Prem + Study</td><td>1,152</td><td>—</td><td>$3.348M（L16）</td><td>$4,600</td><td>1.65%</td><td>基本售罄</td></tr>
     <tr><td>4 Bedroom</td><td>1,238</td><td>174</td><td>$3.388M（$2,736 psf）</td><td>$5,200</td><td>1.74%</td><td>基本售罄</td></tr>
-    <tr><td>4 Bedroom Premium（私梯）</td><td>1,367</td><td>56</td><td>约 $3.77M（$2,758 psf）</td><td>$5,600</td><td>1.70%</td><td class="num-red">56 套 VIP 日全部售罄</td></tr>
-    <tr><td>4 Bedroom Prem + Study（私梯）</td><td>1,485</td><td>28</td><td>—</td><td>$5,900</td><td>1.64%</td><td class="num-red">28 套 VIP 日全部售罄</td></tr>
+    <tr><td>4 Bedroom Premium（私梯）</td><td>1,367</td><td>56</td><td>约 $3.77M（$2,758 psf）</td><td>$5,600</td><td>1.70%</td><td class="label-neutral">56 套 VIP 日全部售罄</td></tr>
+    <tr><td>4 Bedroom Prem + Study（私梯）</td><td>1,485</td><td>28</td><td>—</td><td>$5,900</td><td>1.64%</td><td class="label-neutral">28 套 VIP 日全部售罄</td></tr>
     <tr><td>5 Bedroom Suite（私梯）</td><td>1,808</td><td>28</td><td>$5.08M（L3）– $5.98M（L30）</td><td>$5,900</td><td>1.35%</td><td style="color:#eab308;font-weight:600">仅剩 2 套（#03-19 / #04-19）</td></tr>
   </table>
   <p class="note">▶ 三个结构性发现：①<strong>私梯户型最先抢光</strong>——4BR Premium、4BR Premium+Study 全部、5BR 28 套中的 26 套都在 VIP 日（10/30）成交，110 套私梯单位合计约 $505M、均价约 $3,060 psf；②<strong>小户型反而剩最多</strong>——716 套 2 房在 VIP 日后仍剩 696 套，20 个 2 房堆栈一套未售；③<strong>单价与面积负相关被打破</strong>：2BR 起步 $2,608 psf 最低，但均价被高层大单位拉到 $2,900，说明价差主要来自楼层与朝向，不是户型大小。</p>
@@ -200,15 +206,15 @@ ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
   <table>
     <tr><th>项目</th><th>类型</th><th>2026 均价 psf</th><th>相对 Thomson Reserve（$2,900）</th></tr>
     <tr><td><strong>Thomson Reserve</strong></td><td>新盘（2026-10 开盘）</td><td><strong>$2,900</strong></td><td>基准</td></tr>
-    <tr><td>AMO Residence</td><td>新盘转售（2022 TOP，紧邻）</td><td>$2,527</td><td class="num-green">低 13%</td></tr>
-    <tr><td>Lentor Gardens Residences</td><td>新盘（2026，Lentor）</td><td>$2,359</td><td class="num-green">低 19%</td></tr>
-    <tr><td>JadeScape</td><td>转售（2018 TOP，Shunfu）</td><td>$2,338</td><td class="num-green">低 19%</td></tr>
-    <tr><td>Sky Vue</td><td>转售（2017 TOP，Bishan）</td><td>$2,243</td><td class="num-green">低 23%</td></tr>
-    <tr><td>Springleaf Residence</td><td>新盘（2025 开盘，D26）</td><td>$2,226</td><td class="num-green">低 23%</td></tr>
-    <tr><td>The Panorama</td><td>转售（2017 TOP，AMK）</td><td>$2,112</td><td class="num-green">低 27%</td></tr>
-    <tr><td>Thomson Three</td><td>转售（2016 TOP，Upper Thomson）</td><td>$2,070</td><td class="num-green">低 29%</td></tr>
-    <tr><td>Adana @ Thomson</td><td>转售（2016 TOP）</td><td>$1,946</td><td class="num-green">低 33%</td></tr>
-    <tr><td>D20 全区中位（75 个非有地项目）</td><td>—</td><td>$1,954</td><td class="num-green">低 33% / 溢价 48%</td></tr>
+    <tr><td>AMO Residence</td><td>新盘转售（2022 TOP，紧邻）</td><td>$2,527</td><td class="label-neutral">低 13%</td></tr>
+    <tr><td>Lentor Gardens Residences</td><td>新盘（2026，Lentor）</td><td>$2,359</td><td class="label-neutral">低 19%</td></tr>
+    <tr><td>JadeScape</td><td>转售（2018 TOP，Shunfu）</td><td>$2,338</td><td class="label-neutral">低 19%</td></tr>
+    <tr><td>Sky Vue</td><td>转售（2017 TOP，Bishan）</td><td>$2,243</td><td class="label-neutral">低 23%</td></tr>
+    <tr><td>Springleaf Residence</td><td>新盘（2025 开盘，D26）</td><td>$2,226</td><td class="label-neutral">低 23%</td></tr>
+    <tr><td>The Panorama</td><td>转售（2017 TOP，AMK）</td><td>$2,112</td><td class="label-neutral">低 27%</td></tr>
+    <tr><td>Thomson Three</td><td>转售（2016 TOP，Upper Thomson）</td><td>$2,070</td><td class="label-neutral">低 29%</td></tr>
+    <tr><td>Adana @ Thomson</td><td>转售（2016 TOP）</td><td>$1,946</td><td class="label-neutral">低 33%</td></tr>
+    <tr><td>D20 全区中位（75 个非有地项目）</td><td>—</td><td>$1,954</td><td class="num-red">低 33% / 溢价 48%</td></tr>
   </table>
   <p class="note">▶ 两个必须同时说的结论：① 对<strong>最好的同区二手</strong>（AMO）溢价 14.8%，对 JadeScape 溢价 24%，这在"新盘 + 地铁门口 + 5 公顷大盘"里属于<strong>可以解释</strong>的溢价；② 但"我们的起步价比 Springleaf 高 20%""比 JadeScape 转售还贵"这类话术要看清口径——$2,608 是<strong>起步价</strong>（最低楼层最小户型），实际均价是 <strong>$2,900</strong>，溢价其实是 24%–30%，不是 20%。</p>
 
@@ -286,9 +292,9 @@ ul.check-list li.nag::before{content:'✗ ';color:#ef4444}
   <div class="section-title">⚠️ 风险提示</div>
   <table>
     <tr><th>风险</th><th>等级</th><th>说明</th></tr>
-    <tr><td>入场价处 D20 最高档</td><td class="num-red">高</td><td>均价 $2,900 psf 比紧邻的 AMO（$2,527）高 15%、比 D20 中位（$1,954）高 48%。同区二手年涨 2%–4%，<strong>要 4–5 年才追平这个溢价</strong>，意味着短期几乎没有账面增值</td></tr>
-    <tr><td>租金回报为近年新盘最低档</td><td class="num-red">高</td><td>加权毛回报 <strong>2.14%</strong>（5 房仅 1.35%），扣管理费（$500–850/月）与非自住物业税（12%–36%）后净回报约 <strong>1.3%–1.8%</strong>；而政策利率已是 3.75%–4.00%，<strong>持有即负现金流</strong></td></tr>
-    <tr><td>期房 4.5 年零流动性</td><td class="num-red">中高</td><td>2026-10 买入、2031-02 才交付。这期间不可住、不可租、转售只能靠"楼花转让"（需开发商同意且市场极薄）。资金占用成本以 3 房 $2.75M 计约 $60k–80k/年</td></tr>
+    <tr><td>入场价处 D20 最高档</td><td class="label-neutral">高</td><td>均价 $2,900 psf 比紧邻的 AMO（$2,527）高 15%、比 D20 中位（$1,954）高 48%。同区二手年涨 2%–4%，<strong>要 4–5 年才追平这个溢价</strong>，意味着短期几乎没有账面增值</td></tr>
+    <tr><td>租金回报为近年新盘最低档</td><td class="label-neutral">高</td><td>加权毛回报 <strong>2.14%</strong>（5 房仅 1.35%），扣管理费（$500–850/月）与非自住物业税（12%–36%）后净回报约 <strong>1.3%–1.8%</strong>；而政策利率已是 3.75%–4.00%，<strong>持有即负现金流</strong></td></tr>
+    <tr><td>期房 4.5 年零流动性</td><td class="label-neutral">中高</td><td>2026-10 买入、2031-02 才交付。这期间不可住、不可租、转售只能靠"楼花转让"（需开发商同意且市场极薄）。资金占用成本以 3 房 $2.75M 计约 $60k–80k/年</td></tr>
     <tr><td>1,268 户集中解禁</td><td style="color:#eab308;font-weight:600">中高</td><td>2031 年后同一时间点有 1,268 户可售，而 D20 全区非有地二手年成交约 573 笔。<strong>缓解因素</strong>：90% 自住客意味着解禁后抛压小于投资盘</td></tr>
     <tr><td>市场正在降温</td><td style="color:#eab308;font-weight:600">中</td><td>2026 年 Q3 新私宅销量 <strong>1,082 套，环比 −49.5%</strong>；CBRE 全年预测 7,500–8,500 套，低于五年均值 8,766。本项目是 2026 年最后一个大型新盘，之后新盘档期进入空档</td></tr>
     <tr><td>利率与政策</td><td style="color:#eab308;font-weight:600">中</td><td>2026 年 9 月已加息至 3.75%–4.00%，市场对 12-09 再加息的定价从 79% 回落到 70%（10/30）；期房进度付款对利率敏感，且 ABSD/TDSR 若再收紧会直接压缩买家池</td></tr>
