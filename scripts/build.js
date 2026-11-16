@@ -18,6 +18,7 @@ import { fileURLToPath } from 'url';
 import { getToken, fetchAllTransactions, fetchTransactions, fetchRentals, processTransactions, processRentals } from './ura-fetcher.js';
 import { fetchHdbData, processHdbData } from './hdb-fetcher.js';
 import { toSortableDate, computeAvg1y } from './lib/txstats.js';
+import { resolveHdbRaw } from './lib/build-meta.js';
 
 // ── Amenities (MRT stations + schools) for proximity enrichment ──
 let MRT_STATIONS = [];
@@ -460,13 +461,22 @@ async function main() {
 
   // 5j. Build meta
   const secs = ((Date.now() - t0) / 1000).toFixed(1);
+  /* hdbRawRecords 只有「本次真抓了 HDB」时才可信。--skip-hdb（URA 专属构建）下
+     hdbRaw 是空数组，旧代码直接写 hdbRaw.length=0，导致「99 万笔成交 / 0 条原始记录」
+     这种自相矛盾的元数据（2026-11-16 实际发生过）。改为没抓就沿用上一次的值，
+     并用 hdbRawSource 标明来源，见 scripts/lib/build-meta.js。 */
+  const prevMeta = (() => {
+    try { return JSON.parse(readFileSync(join(DATA, 'build-meta.json'), 'utf-8')); } catch { return null; }
+  })();
+  const hdbRawMeta = resolveHdbRaw({ rawLen: hdbRaw.length, prev: prevMeta });
   writeJSON(join(DATA, 'build-meta.json'), {
     buildTime: new Date().toISOString(), elapsed: secs,
     projects: projects.length,
     transactions: projects.reduce((s, p) => s + p.transactions.length, 0),
     hdbBlocks: hdbProjects.length,
     hdbTransactions: hdbTxns,
-    hdbRawRecords: hdbRaw.length,
+    hdbRawRecords: hdbRawMeta.records,
+    hdbRawSource: hdbRawMeta.source,
     rentals: rentals.length, demo
   });
   console.log('  build-meta.json');
